@@ -1,12 +1,12 @@
+// src/index.js
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
-
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { ThemeProvider } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
+import { theme } from "./theme/themeOptions";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -19,12 +19,18 @@ const firebaseConfig = {
   appId: "1:197284313526:web:4188ad03e366c745d9a917",
 };
 
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
+    <ThemeProvider theme={theme}>
+      <CssBaseline /> {/* Global reset for consistent styling */}
+      <App />
+    </ThemeProvider>
   </React.StrictMode>
 );
