@@ -4,7 +4,7 @@ function HomePage() {
   return (
     <>
       <Navbar />
-      <div>Home Page</div>
+      <div className="text-green-200">Home Page</div>
     </>
   );
 }

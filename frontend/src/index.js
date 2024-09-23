@@ -1,12 +1,8 @@
 // src/index.js
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.css";
 import App from "./App";
 import { initializeApp } from "firebase/app";
-import { ThemeProvider } from "@mui/material/styles";
-import CssBaseline from "@mui/material/CssBaseline";
-import { theme } from "./theme/themeOptions";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -28,9 +24,6 @@ const app = initializeApp(firebaseConfig);
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      <CssBaseline /> {/* Global reset for consistent styling */}
-      <App />
-    </ThemeProvider>
+    <App />
   </React.StrictMode>
 );

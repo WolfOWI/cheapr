@@ -6,7 +6,6 @@ function App() {
   return (
     <Router>
       <Routes>
-        {/* Login & Sign up */}
         <Route path="/" element={<HomePage />} />
       </Routes>
     </Router>
