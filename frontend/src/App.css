@@ -15,3 +15,7 @@ h1 {
 h2 {
   @apply text-[32px] font-semibold;
 }
+
+h3 {
+  @apply text-[24px] font-semibold;
+}
