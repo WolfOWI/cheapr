@@ -1,8 +1,9 @@
 // IMPORT
 // -----------------------------------------------------------
 // Styling
-import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
+import "@fontsource-variable/inter";
 
 // React & Hooks
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";

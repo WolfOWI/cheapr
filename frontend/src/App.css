@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Global Default Stylings */
+body {
+  @apply font-inter;
+}
+
+/* TODO Apply default stylings */
+h1 {
+  @apply text-[128px];
+}
