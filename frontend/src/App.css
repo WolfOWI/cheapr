@@ -9,5 +9,9 @@ body {
 
 /* TODO Apply default stylings */
 h1 {
-  @apply text-[128px];
+  @apply text-[72px] font-bold;
+}
+
+h2 {
+  @apply text-[32px] font-semibold;
 }

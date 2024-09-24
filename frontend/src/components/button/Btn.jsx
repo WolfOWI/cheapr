@@ -20,6 +20,7 @@ import Button from "react-bootstrap/esm/Button";
 // -----------------------------------------------------------
 
 const Btn = ({
+  className,
   children,
   variant = "primary",
   icon = null,
@@ -42,7 +43,7 @@ const Btn = ({
   const iconClass = icon && !circular ? "mr-2" : "";
 
   // Combine all Tailwind classes
-  const combinedClassName = `inline-flex items-center justify-center ${variantClass} ${circularClass} transition duration-300 ease-in-out`;
+  const combinedClassName = `${variantClass} ${circularClass} ${className} transition duration-300 ease-in-out`;
 
   return (
     <button className={combinedClassName} onClick={onClick} {...rest}>

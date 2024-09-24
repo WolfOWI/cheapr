@@ -26,10 +26,10 @@ import logoColor from "../../assets/logos/logo_color.svg";
 function NavigationBar() {
   return (
     <>
-      <Navbar expand="lg" className="bg-body-tertiary">
+      <Navbar expand="lg" className="shadow-md py-4">
         <Container>
           <Navbar.Brand as={Link} to="/">
-            <img src={logoColor} alt="logo" />
+            <img src={logoColor} alt="logo" className="max-h-8" />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
