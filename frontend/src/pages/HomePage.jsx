@@ -1,9 +1,8 @@
-import Navbar from "../components/navigation/Navbar";
-
+import NavigationBar from "../components/navigation/NavigationBar";
 function HomePage() {
   return (
     <>
-      <Navbar />
+      <NavigationBar />
       <div className="text-green-200">Home Page</div>
     </>
   );
