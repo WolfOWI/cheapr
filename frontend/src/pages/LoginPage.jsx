@@ -10,13 +10,12 @@
 // -
 
 // Third-Party Components
-import Button from "react-bootstrap/Button";
+import { Container } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 
 // Internal Components
 import NavigationBar from "../components/navigation/NavigationBar";
 import Btn from "../components/button/Btn";
-import { Container } from "react-bootstrap";
 
 // Imagery
 // -
@@ -40,13 +39,12 @@ function LoginPage() {
                   className="h-12 rounded-xl"
                 />
               </Form.Group>
-
               <Form.Group className="mb-4" controlId="formBasicPassword">
                 <Form.Label className="font-semibold">Password</Form.Label>
                 <Form.Control type="password" placeholder="Password" className="h-12 rounded-xl" />
               </Form.Group>
               <Form.Group className="mb-3" controlId="formBasicCheckbox">
-                <Form.Check type="checkbox" label="I am an admin" />
+                <Form.Check type="checkbox" label="I'm an admin" />
               </Form.Group>
               <Btn variant="primary" className="w-full" type="submit">
                 Login
