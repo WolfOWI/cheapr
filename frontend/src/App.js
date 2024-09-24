@@ -12,7 +12,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
-import GroceriesPage from "./pages/GroceriesPages";
+import GroceriesPage from "./pages/GroceriesPage";
 import ProductPage from "./pages/ProductPage";
 import CartPlannerPage from "./pages/CartPlannerPage";
 import AddProductPage from "./pages/AddProductPage";

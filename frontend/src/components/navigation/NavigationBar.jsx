@@ -40,15 +40,17 @@ function NavigationBar() {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link>
+              <Stack direction="horizontal" gap={4}>
                 <Link to="/login">Login</Link>
-              </Nav.Link>
-              <Nav.Link>
                 <Link to="/signup">Sign Up</Link>
-              </Nav.Link>
-              <Nav.Link>
                 <Link to="/groceries">All Groceries</Link>
-              </Nav.Link>
+
+                <Link to="/product">Individual</Link>
+                <Link to="/admin">Admin All</Link>
+                <Link to="/edit">Admin Edit</Link>
+                <Link to="/newproducts">New</Link>
+                <Link to="/flagged">Flagged</Link>
+              </Stack>
               {/* TODO Add product filtering functionality */}
               {/* <NavDropdown title="Food" id="basic-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
@@ -71,21 +73,6 @@ function NavigationBar() {
                 <NavDropdown.Divider />
                 <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
               </NavDropdown> */}
-              <Nav.Link>
-                <Link to="/product">Individual</Link>
-              </Nav.Link>
-              <Nav.Link>
-                <Link to="/admin">Admin All</Link>
-              </Nav.Link>
-              <Nav.Link>
-                <Link to="/edit">Admin Edit</Link>
-              </Nav.Link>
-              <Nav.Link>
-                <Link to="/newproducts">New</Link>
-              </Nav.Link>
-              <Nav.Link>
-                <Link to="/flagged">Flagged</Link>
-              </Nav.Link>
             </Nav>
             <Stack direction="horizontal" gap={2}>
               <IconBtn variant="dark" iconType="add" onClick={() => navigate("/add")} />

@@ -38,6 +38,11 @@ const Btn = ({ className = "", children, variant = "primary", onClick, ...rest }
         "h-14 rounded-xl px-6 bg-neutral-700 text-white font-bold border-none hover:bg-neutral-500";
       break;
 
+    case "dark-outline":
+      variantClass =
+        "h-14 rounded-xl px-6 bg-transparent text-neutral-700 font-bold border-neutral-700 border-2 hover:bg-neutral-500 hover:border-neutral-500 hover:text-white";
+      break;
+
     default:
       variantClass =
         "h-14 rounded-xl px-6 bg-primary text-white font-bold border-none hover:bg-priP1";
