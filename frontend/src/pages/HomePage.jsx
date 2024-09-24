@@ -16,14 +16,12 @@ import { Stack, Col, Row, Container } from "react-bootstrap";
 import Btn from "../components/button/Btn";
 import NavigationBar from "../components/navigation/NavigationBar";
 import ExplainerBlock from "../components/page-specific/homeComps/ExplainerBlock";
+import StoreLogo from "../components/building-blocks/StoreLogo";
 
 // Imagery
 import shoppingBags from "../assets/images/shoppingBags.png";
 import logoBlocked from "../assets/logos/logo _blocked.svg";
-import braaiIcon from "../assets/icons/braai.svg";
-import chartIcon from "../assets/icons/chart.svg";
-import carryIcon from "../assets/icons/people_carry.svg";
-import piggyIcon from "../assets/icons/piggy_bank.svg";
+import happyShopWoman from "../assets/images/happyShopWoman.png";
 
 // -----------------------------------------------------------
 function HomePage() {
@@ -47,11 +45,12 @@ function HomePage() {
           </div>
         </div>
       </div>
+      {/* Why Cheaper? Section */}
       <Container className="my-24">
         <Row>
           <Stack direction="horizontal" gap={2}>
             <h2>Why</h2>
-            <img src={logoBlocked} alt="cheapo" className="h-10" />
+            <img src={logoBlocked} alt="cheapo" className="h-12" />
             <h2>?</h2>
           </Stack>
         </Row>
@@ -93,22 +92,37 @@ function HomePage() {
         </Row>
       </Container>
 
-      {/* Page Content */}
-      {/* <div>
-        <Button className="h-14 px-6 bg-transparent text-primary font-bold border-primary border-2 rounded-xl ">
-          Testing
-        </Button>
-        <Btn variant="primary">Primary</Btn>
-        <Btn variant="secondary">Secondary</Btn>
-        <Btn variant="primary" size="lg">
-          Primary Lrg
-        </Btn>
-        <Btn variant="secondary" size="lg">
-          Secondary Lrg
-        </Btn>
-        <Btn circular size="sm" icon={<i className="fa fa-user" />} />
-        <Btn circular size="md" icon={<i className="fa fa-user" />} />
-      </div> */}
+      {/* Our Store Partners */}
+      <Container className="my-24">
+        <Row>
+          <h2>Our Store Partners</h2>
+        </Row>
+        <Row className="mt-8">
+          <Col className="flex items-center justify-center">
+            <StoreLogo store="pnp" type="grey" className="h-8 w-auto" />
+          </Col>
+          <Col className="flex items-center justify-center">
+            <StoreLogo store="woolworths" type="grey" className="h-8 w-auto" />
+          </Col>
+          <Col className="flex items-center justify-center">
+            <StoreLogo store="spar" type="grey" className="h-8 w-auto" />
+          </Col>
+          <Col className="flex items-center justify-center">
+            <StoreLogo store="checkers" type="grey" className="h-8 w-auto" />
+          </Col>
+        </Row>
+      </Container>
+
+      {/* Call To Action */}
+      <div className="flex items-center justify-center py-8 my-24 bg-priM1">
+        <img src={happyShopWoman} alt="happy shop woman" className="max-h-64 w-auto" />
+        <div className="ml-8">
+          <h2 className="text-white mb-[-16px]">Join Us & Start Saving Today</h2>
+          <Btn className="mt-8" onClick={() => navigate("/groceries")}>
+            Create An Account
+          </Btn>
+        </div>
+      </div>
     </>
   );
 }
