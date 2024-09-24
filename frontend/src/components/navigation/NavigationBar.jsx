@@ -35,7 +35,7 @@ function NavigationBar() {
       <Navbar expand="lg" className="shadow-md py-4">
         <Container>
           <Navbar.Brand as={Link} to="/">
-            <img src={logoColor} alt="logo" className="max-h-8" />
+            <img src={logoColor} alt="logo" className="max-h-10" />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">

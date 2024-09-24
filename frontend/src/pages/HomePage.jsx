@@ -22,6 +22,7 @@ import StoreLogo from "../components/building-blocks/StoreLogo";
 import shoppingBags from "../assets/images/shoppingBags.png";
 import logoBlocked from "../assets/logos/logo _blocked.svg";
 import happyShopWoman from "../assets/images/happyShopWoman.png";
+import Footer from "../components/navigation/Footer";
 
 // -----------------------------------------------------------
 function HomePage() {
@@ -97,7 +98,7 @@ function HomePage() {
         <Row>
           <h2>Our Store Partners</h2>
         </Row>
-        <Row className="mt-8">
+        <Row className="mt-16">
           <Col className="flex items-center justify-center">
             <StoreLogo store="pnp" type="grey" className="h-8 w-auto" />
           </Col>
@@ -114,15 +115,18 @@ function HomePage() {
       </Container>
 
       {/* Call To Action */}
-      <div className="flex items-center justify-center py-8 my-24 bg-priM1">
+      <div className="flex items-center justify-center py-8 mt-24 bg-priM1">
         <img src={happyShopWoman} alt="happy shop woman" className="max-h-64 w-auto" />
         <div className="ml-8">
           <h2 className="text-white mb-[-16px]">Join Us & Start Saving Today</h2>
-          <Btn className="mt-8" onClick={() => navigate("/groceries")}>
+          <Btn className="mt-8" onClick={() => navigate("/signup")}>
             Create An Account
           </Btn>
         </div>
       </div>
+
+      {/* Footer */}
+      <Footer type="standard" />
     </>
   );
 }

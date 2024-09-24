@@ -15,6 +15,15 @@ module.exports = {
       fontFamily: {
         inter: ["Inter Variable", "sans-serif"],
       },
+      // Match Bootstrap's breakpoints
+      screens: {
+        xs: "0px",
+        sm: "576px",
+        md: "768px",
+        lg: "992px",
+        xl: "1200px",
+        xxl: "1400px",
+      },
     },
   },
   plugins: [require("@tailwindcss/typography")],
