@@ -1,7 +1,7 @@
 // IMPORT
 // -----------------------------------------------------------
 // React & Hooks
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 // Services
 // -
@@ -15,15 +15,21 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Button from "react-bootstrap/Button";
+import { Stack } from "react-bootstrap";
 
 // Internal Components
-// -
+import Btn from "../button/Btn";
+import IconBtn from "../button/IconBtn";
+import Icon from "../building-blocks/Icon";
 
 // Imagery
 import logoColor from "../../assets/logos/logo_color.svg";
+import addIcon from "../../assets/icons/add.svg";
 // -----------------------------------------------------------
 
 function NavigationBar() {
+  const navigate = useNavigate();
+
   return (
     <>
       <Navbar expand="lg" className="shadow-md py-4">
@@ -81,15 +87,17 @@ function NavigationBar() {
                 <Link to="/flagged">Flagged</Link>
               </Nav.Link>
             </Nav>
-            <div>
-              <Button variant="dark" as={Link} to="/add">
-                Add
-              </Button>
-              <Button variant="danger" as={Link} to="/planner">
-                Planner
-              </Button>
-              <Button variant="outline-danger">Log Out</Button>{" "}
-            </div>
+            <Stack direction="horizontal" gap={2}>
+              <IconBtn variant="dark" iconType="add" onClick={() => navigate("/add")} />
+              <IconBtn
+                variant="primary"
+                iconType="cart_empty"
+                onClick={() => navigate("/planner")}
+              />
+              <Btn variant="secondary" className="w-32">
+                Log Out
+              </Btn>
+            </Stack>
           </Navbar.Collapse>
         </Container>
       </Navbar>
