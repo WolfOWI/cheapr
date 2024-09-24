@@ -19,13 +19,13 @@ import NavigationBar from "../components/navigation/NavigationBar";
 // -
 
 // -----------------------------------------------------------
-function HomePage() {
+function AdminFlaggedDash() {
   return (
     <>
       <NavigationBar />
-      <div className="text-green-200">Home Page</div>
+      <div className="">AdminFlaggedDash</div>
     </>
   );
 }
 
-export default HomePage;
+export default AdminFlaggedDash;

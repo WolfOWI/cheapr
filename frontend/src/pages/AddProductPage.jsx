@@ -19,13 +19,14 @@ import NavigationBar from "../components/navigation/NavigationBar";
 // -
 
 // -----------------------------------------------------------
-function HomePage() {
+
+function AddProductPage() {
   return (
     <>
       <NavigationBar />
-      <div className="text-green-200">Home Page</div>
+      <div className="">AddProductPage</div>
     </>
   );
 }
 
-export default HomePage;
+export default AddProductPage;
