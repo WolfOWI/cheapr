@@ -51,6 +51,32 @@ function GroceriesPage() {
         onSpecial: false,
       },
     },
+    {
+      name: "Juicy Mangos",
+      image: "mango.jpg",
+      amount: "2",
+      unit: "kg",
+      pnp: {
+        price: 57.99,
+        updated: "19/09/2024",
+        onSpecial: false,
+      },
+      woolworths: {
+        price: 56.99,
+        updated: "19/09/2024",
+        onSpecial: false,
+      },
+      checkers: {
+        price: 67.95,
+        updated: "19/09/2024",
+        onSpecial: false,
+      },
+      spar: {
+        price: 59.86,
+        updated: "19/09/2024",
+        onSpecial: false,
+      },
+    },
   ];
 
   return (
