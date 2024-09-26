@@ -33,6 +33,11 @@ const IconBtn = ({ className = "", variant = "primary", onClick, iconType }) => 
       iconVariantClass = "text-primary group-hover:text-white";
       break;
 
+    case "tertiary":
+      variantClass = "border-none bg-transparent hover:bg-primary hover:text-white";
+      iconVariantClass = "text-primary group-hover:text-white";
+      break;
+
     case "dark":
       variantClass = "bg-neutral-700 border-none hover:bg-neutral-500";
       iconVariantClass = "text-white";
