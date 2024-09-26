@@ -27,29 +27,25 @@ function SignUpPage() {
       <NavigationBar />
       <div className="w-full h-dvh bg-neutral-600 flex">
         <Container className="flex justify-end">
-          <div className="bg-neutral-50 w-[500px] rounded-2xl p-10 h-fit mt-24">
+          <div className="bg-white w-[500px] rounded-2xl p-10 h-fit mt-24">
             <h2>Join Us Today</h2>
             <h4>Sign up and start saving time & money!</h4>
             <Form>
               <Form.Group className="mt-8 mb-4" controlId="formBasicFirstName">
                 <Form.Label className="font-semibold">First Name</Form.Label>
-                <Form.Control type="text" placeholder="Name" className="h-12 rounded-xl" />
+                <Form.Control type="text" placeholder="Name" className="input-style" />
               </Form.Group>
               <Form.Group className="mb-4" controlId="formBasicLastName">
                 <Form.Label className="font-semibold">Last Name</Form.Label>
-                <Form.Control type="text" placeholder="Name" className="h-12 rounded-xl" />
+                <Form.Control type="text" placeholder="Name" className="input-style" />
               </Form.Group>
               <Form.Group className="mb-4" controlId="formBasicEmail">
                 <Form.Label className="font-semibold">Email address</Form.Label>
-                <Form.Control
-                  type="email"
-                  placeholder="hello@gmail.com"
-                  className="h-12 rounded-xl"
-                />
+                <Form.Control type="email" placeholder="hello@gmail.com" className="input-style" />
               </Form.Group>
               <Form.Group className="mb-4" controlId="formBasicPassword">
                 <Form.Label className="font-semibold">Password</Form.Label>
-                <Form.Control type="password" placeholder="Password" className="h-12 rounded-xl" />
+                <Form.Control type="password" placeholder="Password" className="input-style" />
               </Form.Group>
               <Form.Group className="mb-3" controlId="formBasicCheckbox">
                 <Form.Check type="checkbox" label="I'm an admin." />

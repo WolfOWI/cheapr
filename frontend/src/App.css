@@ -2,12 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Global Default Stylings */
+/* GLOBAL DEFAULT STYLINGS */
+
+/* TEXT & HEADINGS */
+/* -------------------------------------- */
 body {
   @apply font-inter;
 }
 
-/* TODO Apply default stylings */
 h1 {
   @apply text-[72px] font-bold;
 }
@@ -23,3 +25,25 @@ h3 {
 h4 {
   @apply text-[20px];
 }
+/* -------------------------------------- */
+
+/* INPUTS */
+/* -------------------------------------- */
+/* Custom Input Styling */
+.input-style {
+  @apply h-12 rounded-xl border-none bg-neutral-100 text-neutral-800;
+}
+.input-style ~ label::after {
+  background: transparent !important;
+}
+
+/* No Arrows (No up & down arrows on numerical input */
+.no-arrows::-webkit-outer-spin-button,
+.no-arrows::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.no-arrows[type="number"] {
+  -moz-appearance: textfield;
+}
+/* -------------------------------------- */

@@ -18,6 +18,7 @@ import NavigationBar from "../components/navigation/NavigationBar";
 import Btn from "../components/button/Btn";
 import StoreLogo from "../components/building-blocks/StoreLogo";
 import ProductItem from "../components/listItems/ProductItem";
+import Footer from "../components/navigation/Footer";
 
 // Imagery
 // -
@@ -82,18 +83,18 @@ function GroceriesPage() {
   return (
     <>
       <NavigationBar />
-      <Container className="pt-6">
-        <Breadcrumb>
-          <Breadcrumb.Item href="">Food</Breadcrumb.Item>
-          <Breadcrumb.Item href="">Fruit & Vegetables</Breadcrumb.Item>
-          <Breadcrumb.Item active>Fresh Fuit</Breadcrumb.Item>
-        </Breadcrumb>
-        <div className="flex w-full justify-between">
-          <h2>Fresh Fruit</h2>
-          <Btn variant="dark-outline">Sort by</Btn>
-        </div>
-      </Container>
-      <>
+      <div className="mb-32">
+        <Container className="pt-6">
+          <Breadcrumb>
+            <Breadcrumb.Item href="">Food</Breadcrumb.Item>
+            <Breadcrumb.Item href="">Fruit & Vegetables</Breadcrumb.Item>
+            <Breadcrumb.Item active>Fresh Fuit</Breadcrumb.Item>
+          </Breadcrumb>
+          <div className="flex w-full justify-between">
+            <h2>Fresh Fruit</h2>
+            <Btn variant="dark-outline">Sort by</Btn>
+          </div>
+        </Container>
         {/* Header */}
         <div className="bg-neutral-700 py-8 w-100 mt-4">
           <Container>
@@ -124,7 +125,8 @@ function GroceriesPage() {
             <ProductItem product={product} key={index} />
           ))}
         </Container>
-      </>
+      </div>
+      <Footer />
     </>
   );
 }
