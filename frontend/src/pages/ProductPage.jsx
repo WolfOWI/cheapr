@@ -37,7 +37,7 @@ function ProductPage() {
         <Breadcrumb>
           <Breadcrumb.Item href="">Food</Breadcrumb.Item>
           <Breadcrumb.Item href="">Fruit & Vegetables</Breadcrumb.Item>
-          <Breadcrumb.Item href="">Fresh Fuit</Breadcrumb.Item>
+          <Breadcrumb.Item href="">Fresh Fruit</Breadcrumb.Item>
           <Breadcrumb.Item active>Top Red Apples</Breadcrumb.Item>
         </Breadcrumb>
         {/* Product Content */}
