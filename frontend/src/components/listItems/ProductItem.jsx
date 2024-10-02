@@ -74,7 +74,7 @@ const ProductItem = ({ product }) => {
           isCheapest={product.spar.price === cheapestPrice}
         />
         <Col xs={1}>
-          <IconBtn iconType={"cart_add"} className="hidden group-hover:block " />
+          <IconBtn iconType={"cart_add"} className="hidden group-hover:flex " />
         </Col>
       </Row>
     </>
