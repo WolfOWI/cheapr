@@ -10,19 +10,19 @@
 import { getCheapestPrice } from "../../utils/priceUtils";
 
 // Third-Party Components
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Stack } from "react-bootstrap";
 
 // Internal Components
-// -
+import PriceBlock from "../building-blocks/PriceBlock";
+import IconBtn from "../button/IconBtn";
+import Btn from "../button/Btn";
 
 // Imagery
 import appleTopRedImg from "../../assets/images/grocery-images/Apples_TopRed.png";
-import PriceBlock from "../building-blocks/PriceBlock";
-import IconBtn from "../button/IconBtn";
 
 // -----------------------------------------------------------
 
-const ProductItem = ({ product }) => {
+const ProductItem = ({ product, admin }) => {
   // Array of prices from different stores
   const prices = [
     { store: "pnp", price: product.pnp.price },
@@ -40,7 +40,7 @@ const ProductItem = ({ product }) => {
       <Row className="align-items-center group cursor-pointer ">
         {/* Product Information */}
         <Col xs={3} className="flex items-center">
-          <img src={appleTopRedImg} alt={product.name} className="h-24" />
+          <img src={appleTopRedImg} alt={product.name} className="h-20" />
           <div>
             <h4 className="font-bold">{product.name}</h4>
             <h4 className="text-neutral-500">
@@ -74,7 +74,26 @@ const ProductItem = ({ product }) => {
           isCheapest={product.spar.price === cheapestPrice}
         />
         <Col xs={1}>
-          <IconBtn iconType={"cart_add"} className="hidden group-hover:flex " />
+          {admin ? (
+            <Stack direction="horizontal" gap={2}>
+              <IconBtn
+                iconType={"edit"}
+                size="md"
+                className="opacity-0 group-hover:opacity-100 transition-all duration-150"
+              />
+              <IconBtn
+                iconType={"delete"}
+                size="md"
+                variant="dark"
+                className="opacity-0 group-hover:opacity-100 transition-all duration-150"
+              />
+            </Stack>
+          ) : (
+            <IconBtn
+              iconType={"cart_add"}
+              className="opacity-0 group-hover:opacity-100 transition-all duration-150"
+            />
+          )}
         </Col>
       </Row>
     </>

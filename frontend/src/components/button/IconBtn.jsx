@@ -59,9 +59,12 @@ const IconBtn = ({ className = "", variant = "primary", onClick, iconType, size 
   if (size === "sm") {
     btnSize = "w-8 h-8";
     iconSize = "w-5 h-5";
+  } else if (size === "md") {
+    btnSize = "w-10 h-10";
+    iconSize = "w-5 h-5";
   } else {
-    btnSize = "w-14 h-14";
-    iconSize = "w-8 h-8";
+    btnSize = "w-12 h-12";
+    iconSize = "w-6 h-6";
   }
 
   // Combine all Tailwind classes

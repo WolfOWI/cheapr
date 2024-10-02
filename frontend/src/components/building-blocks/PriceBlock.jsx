@@ -25,7 +25,7 @@ const PriceBlock = ({ price, updated, onSpecial, isCheapest }) => {
     <>
       <Col xs={2} className="px-1">
         <div
-          className={`flex flex-col justify-center items-center h-24 my-1 w-full text-center rounded-xl group-hover:bg-highlight group-hover:text-black ${
+          className={`flex flex-col justify-center items-center h-20 my-1 w-full text-center rounded-xl group-hover:bg-highlight group-hover:text-black ${
             isCheapest ? "bg-primary text-white" : "bg-neutral-100 text-black"
           }`}
         >

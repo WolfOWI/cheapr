@@ -13,7 +13,7 @@
 // -
 
 // Internal Components
-import StoreLogo from "../../building-blocks/StoreLogo";
+import StoreLogo from "./StoreLogo";
 
 // Imagery
 // -

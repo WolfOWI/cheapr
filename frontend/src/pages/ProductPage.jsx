@@ -13,7 +13,6 @@
 import { Container, Row, Col } from "react-bootstrap";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
 import Stack from "react-bootstrap/Stack";
-import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 
@@ -22,7 +21,7 @@ import NavigationBar from "../components/navigation/NavigationBar";
 import Btn from "../components/button/Btn";
 import StoreLogo from "../components/building-blocks/StoreLogo";
 import IconBtn from "../components/button/IconBtn";
-import MiniStorePriceBlock from "../components/page-specific/productComps/MiniStorePriceBlock";
+import MiniStorePriceBlock from "../components/building-blocks/MiniStorePriceBlock";
 import Footer from "../components/navigation/Footer";
 
 // Imagery
