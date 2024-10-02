@@ -18,7 +18,7 @@ import Icon from "../building-blocks/Icon";
 // Imagery
 // -
 // -----------------------------------------------------------
-const IconBtn = ({ className = "", variant = "primary", onClick, iconType }) => {
+const IconBtn = ({ className = "", variant = "primary", onClick, iconType, size }) => {
   let variantClass;
   let iconVariantClass;
 
@@ -38,6 +38,11 @@ const IconBtn = ({ className = "", variant = "primary", onClick, iconType }) => 
       iconVariantClass = "text-primary group-hover:text-white";
       break;
 
+    case "tertiary-special":
+      variantClass = "border-none bg-transparent hover:bg-priP1";
+      iconVariantClass = "text-primary";
+      break;
+
     case "dark":
       variantClass = "bg-neutral-700 border-none hover:bg-neutral-500";
       iconVariantClass = "text-white";
@@ -49,13 +54,23 @@ const IconBtn = ({ className = "", variant = "primary", onClick, iconType }) => 
       break;
   }
 
+  let btnSize = "";
+  let iconSize = "";
+  if (size === "sm") {
+    btnSize = "w-8 h-8";
+    iconSize = "w-5 h-5";
+  } else {
+    btnSize = "w-14 h-14";
+    iconSize = "w-8 h-8";
+  }
+
   // Combine all Tailwind classes
-  const combinedClassName = `${variantClass} ${className} flex justify-center items-center rounded-full w-14 h-14 transition-transform duration-300 ease-in-out transform hover:scale-110 group`;
+  const combinedClassName = `${variantClass} ${className} ${btnSize} cursor-pointer flex justify-center items-center rounded-full transition-transform duration-300 ease-in-out transform hover:scale-110 group`;
 
   return (
-    <Button className={combinedClassName} onClick={onClick}>
+    <Button className={`${combinedClassName} p-0`} onClick={onClick}>
       {/* Use the Icon component, passing the icon type */}
-      <Icon type={iconType} className={`h-8 w-8 ${iconVariantClass}`} />
+      <Icon type={iconType} className={`${iconSize} ${iconVariantClass}`} />
     </Button>
   );
 };
