@@ -72,6 +72,34 @@ function AddProductPage() {
                     </Form.Select>
                   </FloatingLabel>
                 </Form.Floating>
+                <Form.Floating>
+                  <FloatingLabel controlId="floatingInput" label="Category" className="mb-4">
+                    <Form.Select aria-label="Floating label select example" className="input-style">
+                      <option value="food">Food</option>
+                      <option value="drinks">Drinks</option>
+                      <option value="household">Household</option>
+                    </Form.Select>
+                  </FloatingLabel>
+                </Form.Floating>
+                <Form.Floating>
+                  <FloatingLabel controlId="floatingInput" label="Subcategory" className="mb-4">
+                    <Form.Select aria-label="Floating label select example" className="input-style">
+                      {/* TODO Dynamically Populate from breadcrumbs */}
+                      <option value="fruit&vegetables">Fruit & Vegetables</option>
+                      <option value="meat,poultry&fish">Meat, Poultry & Fish</option>
+                    </Form.Select>
+                  </FloatingLabel>
+                </Form.Floating>
+                <Form.Floating>
+                  <FloatingLabel controlId="floatingInput" label="Type" className="mb-4">
+                    <Form.Select aria-label="Floating label select example" className="input-style">
+                      {/* TODO Dynamically Populate from breadcrumbs */}
+                      <option value="freshFruit">Fresh Fruit</option>
+                      <option value="freshVegetables">Fresh Vegetables</option>
+                      <option value="frozenVegetables">Frozen Vegetables</option>
+                    </Form.Select>
+                  </FloatingLabel>
+                </Form.Floating>
                 <div className="bg-neutral-100 rounded-xl h-32 flex items-center justify-center">
                   Image Upload (To Do)
                 </div>
@@ -81,12 +109,15 @@ function AddProductPage() {
                 {/* TODO Transform into components */}
                 {/* Pick n Pay Section */}
                 <div className="mb-16">
+                  <Form.Label>
+                    <div className="flex items-center">
+                      <StoreLogo store="pnp" className="h-4" />
+                      <p className="ml-2">Price</p>
+                    </div>
+                  </Form.Label>
                   <InputGroup className="mb-2 h-[58px]">
                     <InputGroup.Text className="input-style h-[58px]">
-                      <div className="flex items-center">
-                        <StoreLogo store="pnp" className="h-4" />
-                        <p className="ml-2">Price</p>
-                      </div>
+                      <p className="font-bold">R</p>
                     </InputGroup.Text>
                     <Form.Control type="number" className="input-style h-[58px]" />
                   </InputGroup>
@@ -100,13 +131,16 @@ function AddProductPage() {
                   </Form.Floating>
                 </div>
                 {/* Checkers Section */}
-                <div>
+                <div className="mb-16">
+                  <Form.Label>
+                    <div className="flex items-center">
+                      <StoreLogo store="checkers" className="h-4" />
+                      <p className="ml-2">Price</p>
+                    </div>
+                  </Form.Label>
                   <InputGroup className="mb-2 h-[58px]">
                     <InputGroup.Text className="input-style h-[58px]">
-                      <div className="flex items-center">
-                        <StoreLogo store="checkers" className="h-4" />
-                        <p className="ml-2">Price</p>
-                      </div>
+                      <p className="font-bold">R</p>
                     </InputGroup.Text>
                     <Form.Control type="number" className="input-style h-[58px]" />
                   </InputGroup>
@@ -124,12 +158,15 @@ function AddProductPage() {
               <div className="w-full p-8">
                 {/* Spar Section */}
                 <div className="mb-16">
+                  <Form.Label>
+                    <div className="flex items-center">
+                      <StoreLogo store="spar" className="h-4" />
+                      <p className="ml-2">Price</p>
+                    </div>
+                  </Form.Label>
                   <InputGroup className="mb-2 h-[58px]">
                     <InputGroup.Text className="input-style h-[58px]">
-                      <div className="flex items-center">
-                        <StoreLogo store="spar" className="h-4" />
-                        <p className="ml-2">Price</p>
-                      </div>
+                      <p className="font-bold">R</p>
                     </InputGroup.Text>
                     <Form.Control type="number" className="input-style h-[58px]" />
                   </InputGroup>
@@ -143,13 +180,16 @@ function AddProductPage() {
                   </Form.Floating>
                 </div>
                 {/* Woolworths Section */}
-                <div>
+                <div className="mb-16">
+                  <Form.Label>
+                    <div className="flex items-center">
+                      <StoreLogo store="woolworths" className="h-4" />
+                      <p className="ml-2">Price</p>
+                    </div>
+                  </Form.Label>
                   <InputGroup className="mb-2 h-[58px]">
                     <InputGroup.Text className="input-style h-[58px]">
-                      <div className="flex items-center">
-                        <StoreLogo store="woolworths" className="h-4" />
-                        <p className="ml-2">Price</p>
-                      </div>
+                      <p className="font-bold">R</p>
                     </InputGroup.Text>
                     <Form.Control type="number" className="input-style h-[58px]" />
                   </InputGroup>
