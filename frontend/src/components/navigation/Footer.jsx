@@ -27,7 +27,7 @@ import logoCol from "../../assets/logos/logo_color.svg";
 
 // -----------------------------------------------------------
 
-const Footer = ({ type }) => {
+const Footer = ({ admin }) => {
   return (
     <>
       <Container fluid className="bg-neutral-100 pb-8">

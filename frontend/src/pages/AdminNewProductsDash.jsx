@@ -80,7 +80,7 @@ function AdminNewProductsDash() {
 
   return (
     <>
-      <NavigationBar />
+      <NavigationBar admin />
       <div className="mb-32">
         <Container className="pt-6">
           <div className="flex w-full justify-between">

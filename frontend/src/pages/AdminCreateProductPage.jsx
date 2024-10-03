@@ -11,6 +11,7 @@
 
 // Third-Party Components
 import { Container, Row, Col } from "react-bootstrap";
+import Breadcrumb from "react-bootstrap/Breadcrumb";
 import Stack from "react-bootstrap/Stack";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
@@ -20,22 +21,24 @@ import FloatingLabel from "react-bootstrap/FloatingLabel";
 import NavigationBar from "../components/navigation/NavigationBar";
 import Btn from "../components/button/Btn";
 import StoreLogo from "../components/building-blocks/StoreLogo";
+import ProductItem from "../components/listItems/ProductItem";
 import Footer from "../components/navigation/Footer";
 
 // Imagery
 // -
 
 // -----------------------------------------------------------
-function AdminEditDash() {
+
+const AdminCreateProductPage = () => {
   return (
     <>
-      <NavigationBar admin />
+      <NavigationBar />
       <Container className="mb-32">
         <div className="flex w-full justify-between pt-6">
-          <h2>Edit Product</h2>
+          <h2>Create a Product</h2>
           <Stack direction="horizontal" gap={2}>
             <Btn variant="secondary">Cancel</Btn>
-            <Btn variant="primary">Save Changes</Btn>
+            <Btn variant="primary">Create</Btn>
           </Stack>
         </div>
         <div>
@@ -207,6 +210,6 @@ function AdminEditDash() {
       <Footer />
     </>
   );
-}
+};
 
-export default AdminEditDash;
+export default AdminCreateProductPage;

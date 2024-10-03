@@ -14,21 +14,20 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
-import Button from "react-bootstrap/Button";
 import { Stack } from "react-bootstrap";
 
 // Internal Components
 import Btn from "../button/Btn";
 import IconBtn from "../button/IconBtn";
-import Icon from "../building-blocks/Icon";
 
 // Imagery
 import logoColor from "../../assets/logos/logo_color.svg";
-import addIcon from "../../assets/icons/add.svg";
 // -----------------------------------------------------------
 
-function NavigationBar() {
+function NavigationBar({ admin }) {
   const navigate = useNavigate();
+
+  // TODO Change navbar based on user type (admin/customer)
 
   return (
     <>
