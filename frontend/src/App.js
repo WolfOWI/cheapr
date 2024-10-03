@@ -17,6 +17,7 @@ import ProductPage from "./pages/ProductPage";
 import CartPlannerPage from "./pages/CartPlannerPage";
 import AddProductPage from "./pages/AddProductPage";
 import AdminDash from "./pages/AdminDash";
+import AdminCreateMenuPage from "./pages/AdminCreateMenuPage";
 import AdminCreateProductPage from "./pages/AdminCreateProductPage";
 import AdminNewProductsDash from "./pages/AdminNewProductsDash";
 import AdminEditDash from "./pages/AdminEditDash";
@@ -36,7 +37,8 @@ function App() {
         <Route path="/planner" element={<CartPlannerPage />} />
         <Route path="/add" element={<AddProductPage />} />
         <Route path="/admin" element={<AdminDash />} />
-        <Route path="/create" element={<AdminCreateProductPage />} />
+        <Route path="/create" element={<AdminCreateMenuPage />} />
+        <Route path="/createproduct" element={<AdminCreateProductPage />} />
         <Route path="/newproducts" element={<AdminNewProductsDash />} />
         <Route path="/edit" element={<AdminEditDash />} />
         <Route path="/flagged" element={<AdminFlaggedDash />} />
