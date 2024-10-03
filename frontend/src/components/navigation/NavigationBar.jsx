@@ -43,7 +43,6 @@ function NavigationBar({ admin }) {
                 <Link to="/login">Login</Link>
                 <Link to="/signup">Sign Up</Link>
                 <Link to="/groceries">All Groceries</Link>
-
                 <Link to="/product">Individual</Link>
                 <Link to="/admin">Admin All</Link>
                 <Link to="/edit">Admin Edit</Link>
@@ -73,17 +72,27 @@ function NavigationBar({ admin }) {
                 <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
               </NavDropdown> */}
             </Nav>
-            <Stack direction="horizontal" gap={2}>
-              <IconBtn variant="dark" iconType="add" onClick={() => navigate("/add")} />
-              <IconBtn
-                variant="primary"
-                iconType="cart_empty"
-                onClick={() => navigate("/planner")}
-              />
-              <Btn variant="secondary" className="w-32">
-                Log Out
-              </Btn>
-            </Stack>
+            {admin ? (
+              <Stack direction="horizontal" gap={2}>
+                <IconBtn iconType="add" onClick={() => navigate("/create")} />
+
+                <Btn variant="secondary" className="w-32">
+                  Log Out
+                </Btn>
+              </Stack>
+            ) : (
+              <Stack direction="horizontal" gap={2}>
+                <IconBtn variant="dark" iconType="add" onClick={() => navigate("/add")} />
+                <IconBtn
+                  variant="primary"
+                  iconType="cart_empty"
+                  onClick={() => navigate("/planner")}
+                />
+                <Btn variant="secondary" className="w-32">
+                  Log Out
+                </Btn>
+              </Stack>
+            )}
           </Navbar.Collapse>
         </Container>
       </Navbar>

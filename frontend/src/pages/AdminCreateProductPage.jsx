@@ -32,7 +32,7 @@ import Footer from "../components/navigation/Footer";
 const AdminCreateProductPage = () => {
   return (
     <>
-      <NavigationBar />
+      <NavigationBar admin />
       <Container className="mb-32">
         <div className="flex w-full justify-between pt-6">
           <h2>Create a Product</h2>
