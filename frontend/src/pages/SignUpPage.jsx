@@ -18,15 +18,15 @@ import NavigationBar from "../components/navigation/NavigationBar";
 import Btn from "../components/button/Btn";
 
 // Imagery
-// -
+import supermarketBlurryImg from "../assets/images/supermarketBlurry.jpg";
 
 // -----------------------------------------------------------
 function SignUpPage() {
   return (
     <>
       <NavigationBar />
-      <div className="w-full h-dvh bg-neutral-600 flex">
-        <Container className="flex justify-end">
+      <div className="w-full flex relative bg-neutral-200 overflow-hidden">
+        <Container className="flex justify-center z-10 mb-32">
           <div className="bg-white w-[500px] rounded-2xl p-10 h-fit mt-24">
             <h2>Join Us Today</h2>
             <h4>Sign up and start saving time & money!</h4>
@@ -56,6 +56,11 @@ function SignUpPage() {
             </Form>
           </div>
         </Container>
+        <img
+          src={supermarketBlurryImg}
+          alt=""
+          className="absolute z-0 object-cover brightness-50"
+        />
       </div>
     </>
   );
