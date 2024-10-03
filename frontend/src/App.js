@@ -18,6 +18,8 @@ import CartPlannerPage from "./pages/CartPlannerPage";
 import AddProductPage from "./pages/AddProductPage";
 import AdminDash from "./pages/AdminDash";
 import AdminCreateMenuPage from "./pages/AdminCreateMenuPage";
+import AdminCreateSubcatPage from "./pages/AdminCreateSubcatPage";
+import AdminCreatePTypePage from "./pages/AdminCreatePTypePage";
 import AdminCreateProductPage from "./pages/AdminCreateProductPage";
 import AdminNewProductsDash from "./pages/AdminNewProductsDash";
 import AdminEditDash from "./pages/AdminEditDash";
@@ -38,6 +40,8 @@ function App() {
         <Route path="/add" element={<AddProductPage />} />
         <Route path="/admin" element={<AdminDash />} />
         <Route path="/create" element={<AdminCreateMenuPage />} />
+        <Route path="/createsubcat" element={<AdminCreateSubcatPage />} />
+        <Route path="/createptype" element={<AdminCreatePTypePage />} />
         <Route path="/createproduct" element={<AdminCreateProductPage />} />
         <Route path="/newproducts" element={<AdminNewProductsDash />} />
         <Route path="/edit" element={<AdminEditDash />} />

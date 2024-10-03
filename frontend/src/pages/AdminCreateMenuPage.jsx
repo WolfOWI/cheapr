@@ -32,10 +32,10 @@ const AdminCreateMenuPage = () => {
       <div className="mb-32">
         <Container className="pt-6">
           <div className="flex flex-col w-full">
-            <h2>Create</h2>
+            <h2>Create a New</h2>
             <Stack direction="horizontal" gap={4} className="mt-8">
-              <MenuBtn type="subcategory" />
-              <MenuBtn type="type" />
+              <MenuBtn type="subcategory" onClick={() => navigate("/createsubcat")} />
+              <MenuBtn type="type" onClick={() => navigate("/createptype")} />
               <MenuBtn type="product" onClick={() => navigate("/createproduct")} />
             </Stack>
           </div>

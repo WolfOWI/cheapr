@@ -1,7 +1,7 @@
 // IMPORT
 // -----------------------------------------------------------
 // React & Hooks
-// -
+import { Navigate, useNavigate } from "react-router-dom";
 
 // Services
 // -
@@ -30,6 +30,8 @@ import Footer from "../components/navigation/Footer";
 // -----------------------------------------------------------
 
 const AdminCreateProductPage = () => {
+  const navigate = useNavigate();
+
   return (
     <>
       <NavigationBar admin />
@@ -37,7 +39,9 @@ const AdminCreateProductPage = () => {
         <div className="flex w-full justify-between pt-6">
           <h2>Create a Product</h2>
           <Stack direction="horizontal" gap={2}>
-            <Btn variant="secondary">Cancel</Btn>
+            <Btn variant="secondary" onClick={() => navigate("/create")}>
+              Cancel
+            </Btn>
             <Btn variant="primary">Create</Btn>
           </Stack>
         </div>
