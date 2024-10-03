@@ -18,15 +18,15 @@ import NavigationBar from "../components/navigation/NavigationBar";
 import Btn from "../components/button/Btn";
 
 // Imagery
-// -
+import produceBlurryImg from "../assets/images/produceBlurry.jpg";
 
 // -----------------------------------------------------------
 function LoginPage() {
   return (
     <>
       <NavigationBar />
-      <div className="w-full h-dvh bg-neutral-600 flex">
-        <Container>
+      <div className="w-full flex relative bg-neutral-200 h-svh">
+        <Container className="flex justify-center z-10 mb-64">
           <div className="bg-white w-[500px] rounded-2xl p-10 h-fit mt-24">
             <h2>Welcome</h2>
             <h4>Please enter your login details below.</h4>
@@ -48,6 +48,11 @@ function LoginPage() {
             </Form>
           </div>
         </Container>
+        <img
+          src={produceBlurryImg}
+          alt="produce background"
+          className="absolute z-0 object-cover brightness-50 w-full h-full"
+        />
       </div>
     </>
   );

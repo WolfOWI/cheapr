@@ -25,7 +25,7 @@ function SignUpPage() {
   return (
     <>
       <NavigationBar />
-      <div className="w-full flex relative bg-neutral-200 overflow-hidden">
+      <div className="w-full flex relative bg-neutral-200 h-svh">
         <Container className="flex justify-center z-10 mb-32">
           <div className="bg-white w-[500px] rounded-2xl p-10 h-fit mt-24">
             <h2>Join Us Today</h2>
@@ -58,8 +58,8 @@ function SignUpPage() {
         </Container>
         <img
           src={supermarketBlurryImg}
-          alt=""
-          className="absolute z-0 object-cover brightness-50"
+          alt="supermarket background"
+          className="absolute z-0 object-cover brightness-50 w-full h-full"
         />
       </div>
     </>
