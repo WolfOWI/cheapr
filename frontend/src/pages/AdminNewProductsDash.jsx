@@ -15,7 +15,6 @@ import { Container, Row, Col } from "react-bootstrap";
 // Internal Components
 import NavigationBar from "../components/navigation/NavigationBar";
 import Btn from "../components/button/Btn";
-import StoreLogo from "../components/building-blocks/StoreLogo";
 import AdminProductItem from "../components/listItems/AdminProductItem";
 import Footer from "../components/navigation/Footer";
 
