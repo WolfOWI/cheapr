@@ -1,196 +1,257 @@
 {
-  "food": {
+  "10000": {
+    "name": "food",
     "subcategories": {
-      "fruit_and_vegetables": {
+      "10001": {
+        "name": "fruit_and_vegetables",
         "types": {
-          "fresh_fruit": {
+          "10002": {
+            "name": "fresh_fruit",
             "productIds": ["placeholder"]
           },
-          "fresh_vegetables": {
+          "10003": {
+            "name": "fresh_vegetables",
             "productIds": ["placeholder"]
           },
-          "frozen_vegetables": {
+          "10004": {
+            "name": "frozen_vegetables",
             "productIds": ["placeholder"]
           }
         }
       },
-      "meat_poultry_fish": {
+      "10005": {
+        "name": "meat_poultry_fish",
         "types": {
-          "fresh_meat": {
+          "10006": {
+            "name": "fresh_meat",
             "productIds": ["placeholder"]
           },
-          "fish_seafood": {
+          "10007": {
+            "name": "fish_seafood",
             "productIds": ["placeholder"]
           },
-          "frozen_meat": {
+          "10008": {
+            "name": "frozen_meat",
             "productIds": ["placeholder"]
           },
-          "cured_processed_meats": {
+          "10009": {
+            "name": "cured_processed_meats",
             "productIds": ["placeholder"]
           }
         }
       },
-      "dairy_eggs": {
+      "10010": {
+        "name": "dairy_eggs",
         "types": {
-          "milk_cream": {
+          "10011": {
+            "name": "milk_cream",
             "productIds": ["placeholder"]
           },
-          "cheese": {
+          "10012": {
+            "name": "cheese",
             "productIds": ["placeholder"]
           },
-          "yoghurt": {
+          "10013": {
+            "name": "yoghurt",
             "productIds": ["placeholder"]
           },
-          "eggs": {
+          "10014": {
+            "name": "eggs",
             "productIds": ["placeholder"]
           },
-          "alternatives": {
+          "10015": {
+            "name": "alternatives",
             "productIds": ["placeholder"]
           }
         }
       },
-      "baked_goods": {
+      "10016": {
+        "name": "baked_goods",
         "types": {
-          "fresh_bread": {
+          "10017": {
+            "name": "fresh_bread",
             "productIds": ["placeholder"]
           },
-          "pastries": {
+          "10018": {
+            "name": "pastries",
             "productIds": ["placeholder"]
           },
-          "cakes_pies": {
+          "10019": {
+            "name": "cakes_pies",
             "productIds": ["placeholder"]
           }
         }
       },
-      "pantry": {
+      "10020": {
+        "name": "pantry",
         "types": {
-          "pasta_noodles": {
+          "10021": {
+            "name": "pasta_noodles",
             "productIds": ["placeholder"]
           },
-          "rice_grains": {
+          "10022": {
+            "name": "rice_grains",
             "productIds": ["placeholder"]
           },
-          "canned_goods": {
+          "10023": {
+            "name": "canned_goods",
             "productIds": ["placeholder"]
           }
         }
       },
-      "snacks": {
+      "10024": {
+        "name": "snacks",
         "types": {
-          "chips": {
+          "10025": {
+            "name": "chips",
             "productIds": ["placeholder"]
           },
-          "nuts_seeds": {
+          "10026": {
+            "name": "nuts_seeds",
             "productIds": ["placeholder"]
           },
-          "cookies": {
+          "10027": {
+            "name": "cookies",
             "productIds": ["placeholder"]
           },
-          "chocolates": {
+          "10028": {
+            "name": "chocolates",
             "productIds": ["placeholder"]
           },
-          "sweets": {
+          "10029": {
+            "name": "sweets",
             "productIds": ["placeholder"]
           }
         }
       }
     }
   },
-  "drinks": {
+  "20000": {
+    "name": "drinks",
     "subcategories": {
-      "non_alcoholic": {
+      "20001": {
+        "name": "non_alcoholic",
         "types": {
-          "water": {
+          "20002": {
+            "name": "water",
             "productIds": ["placeholder"]
           },
-          "soft_drinks": {
+          "20003": {
+            "name": "soft_drinks",
             "productIds": ["placeholder"]
           },
-          "juices": {
+          "20004": {
+            "name": "juices",
             "productIds": ["placeholder"]
           },
-          "teas_coffee": {
+          "20005": {
+            "name": "teas_coffee",
             "productIds": ["placeholder"]
           }
         }
       },
-      "wine": {
+      "20006": {
+        "name": "wine",
         "types": {
-          "red_wine": {
+          "20007": {
+            "name": "red_wine",
             "productIds": ["placeholder"]
           },
-          "white_wine": {
+          "20008": {
+            "name": "white_wine",
             "productIds": ["placeholder"]
           },
-          "rose": {
+          "20009": {
+            "name": "rose",
             "productIds": ["placeholder"]
           },
-          "sparkling_wine": {
+          "20010": {
+            "name": "sparkling_wine",
             "productIds": ["placeholder"]
           }
         }
       },
-      "spirits": {
+      "20011": {
+        "name": "spirits",
         "types": {
-          "vodka": {
+          "20012": {
+            "name": "vodka",
             "productIds": ["placeholder"]
           },
-          "whiskey": {
+          "20013": {
+            "name": "whiskey",
             "productIds": ["placeholder"]
           },
-          "gin": {
+          "20014": {
+            "name": "gin",
             "productIds": ["placeholder"]
           },
-          "tequila": {
+          "20015": {
+            "name": "tequila",
             "productIds": ["placeholder"]
           }
         }
       }
     }
   },
-  "household": {
+  "30000": {
+    "name": "household",
     "subcategories": {
-      "cleaning_supplies": {
+      "30001": {
+        "name": "cleaning_supplies",
         "types": {
-          "cleaners": {
+          "30002": {
+            "name": "cleaners",
             "productIds": ["placeholder"]
           },
-          "laundry": {
+          "30003": {
+            "name": "laundry",
             "productIds": ["placeholder"]
           },
-          "dishwashing": {
+          "30004": {
+            "name": "dishwashing",
             "productIds": ["placeholder"]
           },
-          "trash": {
+          "30005": {
+            "name": "trash",
             "productIds": ["placeholder"]
           }
         }
       },
-      "kitchen": {
+      "30006": {
+        "name": "kitchen",
         "types": {
-          "foils_wrapping": {
+          "30007": {
+            "name": "foils_wrapping",
             "productIds": ["placeholder"]
           },
-          "disposable": {
+          "30008": {
+            "name": "disposable",
             "productIds": ["placeholder"]
           },
-          "utensils": {
+          "30009": {
+            "name": "utensils",
             "productIds": ["placeholder"]
           },
-          "paper_products": {
+          "30010": {
+            "name": "paper_products",
             "productIds": ["placeholder"]
           }
         }
       },
-      "bathroom": {
+      "30011": {
+        "name": "bathroom",
         "types": {
-          "cleaning": {
+          "30012": {
+            "name": "cleaning",
             "productIds": ["placeholder"]
           },
-          "toilet_paper": {
+          "30013": {
+            "name": "toilet_paper",
             "productIds": ["placeholder"]
           },
-          "personal_care": {
+          "30014": {
+            "name": "personal_care",
             "productIds": ["placeholder"]
           }
         }

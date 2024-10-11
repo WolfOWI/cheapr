@@ -3,8 +3,11 @@ import cors from "cors";
 import admin from "firebase-admin";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
+
+// Import Routes
 import productRoutes from "./routes/productRoutes.js";
-import categoryRoutes from "./routes/categoryRoutes.js";
+import categoryOperationsRoutes from "./routes/categoryOperationsRoutes.js";
+import breadcrumbRoutes from "./routes/breadcrumbRoutes.js";
 
 // Load .env variables in
 dotenv.config();
@@ -32,7 +35,10 @@ app.get("/", (req, res) => {
 // ROUTES
 // -----------------------------------------------------
 // Category Routes
-app.use("/categories", categoryRoutes);
+app.use("/categories", categoryOperationsRoutes);
+
+// Breadcrumb Routes
+app.use("/breadcrumb", breadcrumbRoutes);
 
 // Product Routes
 app.use("/products", productRoutes);
