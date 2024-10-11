@@ -1,0 +1,200 @@
+{
+  "food": {
+    "subcategories": {
+      "fruit_and_vegetables": {
+        "types": {
+          "fresh_fruit": {
+            "productIds": ["placeholder"]
+          },
+          "fresh_vegetables": {
+            "productIds": ["placeholder"]
+          },
+          "frozen_vegetables": {
+            "productIds": ["placeholder"]
+          }
+        }
+      },
+      "meat_poultry_fish": {
+        "types": {
+          "fresh_meat": {
+            "productIds": ["placeholder"]
+          },
+          "fish_seafood": {
+            "productIds": ["placeholder"]
+          },
+          "frozen_meat": {
+            "productIds": ["placeholder"]
+          },
+          "cured_processed_meats": {
+            "productIds": ["placeholder"]
+          }
+        }
+      },
+      "dairy_eggs": {
+        "types": {
+          "milk_cream": {
+            "productIds": ["placeholder"]
+          },
+          "cheese": {
+            "productIds": ["placeholder"]
+          },
+          "yoghurt": {
+            "productIds": ["placeholder"]
+          },
+          "eggs": {
+            "productIds": ["placeholder"]
+          },
+          "alternatives": {
+            "productIds": ["placeholder"]
+          }
+        }
+      },
+      "baked_goods": {
+        "types": {
+          "fresh_bread": {
+            "productIds": ["placeholder"]
+          },
+          "pastries": {
+            "productIds": ["placeholder"]
+          },
+          "cakes_pies": {
+            "productIds": ["placeholder"]
+          }
+        }
+      },
+      "pantry": {
+        "types": {
+          "pasta_noodles": {
+            "productIds": ["placeholder"]
+          },
+          "rice_grains": {
+            "productIds": ["placeholder"]
+          },
+          "canned_goods": {
+            "productIds": ["placeholder"]
+          }
+        }
+      },
+      "snacks": {
+        "types": {
+          "chips": {
+            "productIds": ["placeholder"]
+          },
+          "nuts_seeds": {
+            "productIds": ["placeholder"]
+          },
+          "cookies": {
+            "productIds": ["placeholder"]
+          },
+          "chocolates": {
+            "productIds": ["placeholder"]
+          },
+          "sweets": {
+            "productIds": ["placeholder"]
+          }
+        }
+      }
+    }
+  },
+  "drinks": {
+    "subcategories": {
+      "non_alcoholic": {
+        "types": {
+          "water": {
+            "productIds": ["placeholder"]
+          },
+          "soft_drinks": {
+            "productIds": ["placeholder"]
+          },
+          "juices": {
+            "productIds": ["placeholder"]
+          },
+          "teas_coffee": {
+            "productIds": ["placeholder"]
+          }
+        }
+      },
+      "wine": {
+        "types": {
+          "red_wine": {
+            "productIds": ["placeholder"]
+          },
+          "white_wine": {
+            "productIds": ["placeholder"]
+          },
+          "rose": {
+            "productIds": ["placeholder"]
+          },
+          "sparkling_wine": {
+            "productIds": ["placeholder"]
+          }
+        }
+      },
+      "spirits": {
+        "types": {
+          "vodka": {
+            "productIds": ["placeholder"]
+          },
+          "whiskey": {
+            "productIds": ["placeholder"]
+          },
+          "gin": {
+            "productIds": ["placeholder"]
+          },
+          "tequila": {
+            "productIds": ["placeholder"]
+          }
+        }
+      }
+    }
+  },
+  "household": {
+    "subcategories": {
+      "cleaning_supplies": {
+        "types": {
+          "cleaners": {
+            "productIds": ["placeholder"]
+          },
+          "laundry": {
+            "productIds": ["placeholder"]
+          },
+          "dishwashing": {
+            "productIds": ["placeholder"]
+          },
+          "trash": {
+            "productIds": ["placeholder"]
+          }
+        }
+      },
+      "kitchen": {
+        "types": {
+          "foils_wrapping": {
+            "productIds": ["placeholder"]
+          },
+          "disposable": {
+            "productIds": ["placeholder"]
+          },
+          "utensils": {
+            "productIds": ["placeholder"]
+          },
+          "paper_products": {
+            "productIds": ["placeholder"]
+          }
+        }
+      },
+      "bathroom": {
+        "types": {
+          "cleaning": {
+            "productIds": ["placeholder"]
+          },
+          "toilet_paper": {
+            "productIds": ["placeholder"]
+          },
+          "personal_care": {
+            "productIds": ["placeholder"]
+          }
+        }
+      }
+    }
+  }
+}

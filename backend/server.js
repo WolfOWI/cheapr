@@ -4,6 +4,7 @@ import admin from "firebase-admin";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import productRoutes from "./routes/productRoutes.js";
+import categoryRoutes from "./routes/categoryRoutes.js";
 
 // Load .env variables in
 dotenv.config();
@@ -28,8 +29,14 @@ app.get("/", (req, res) => {
   res.send("Backend is working!");
 });
 
+// ROUTES
+// -----------------------------------------------------
+// Category Routes
+app.use("/categories", categoryRoutes);
+
 // Product Routes
 app.use("/products", productRoutes);
+// -----------------------------------------------------
 
 // Start the server
 const PORT = process.env.PORT || 3001;

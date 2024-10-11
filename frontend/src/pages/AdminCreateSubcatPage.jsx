@@ -20,7 +20,6 @@ import FloatingLabel from "react-bootstrap/FloatingLabel";
 // Internal Components
 import NavigationBar from "../components/navigation/NavigationBar";
 import Btn from "../components/button/Btn";
-import StoreLogo from "../components/building-blocks/StoreLogo";
 import ProductItem from "../components/listItems/ProductItem";
 import Footer from "../components/navigation/Footer";
 
