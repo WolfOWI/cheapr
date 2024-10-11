@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 // Services
 import { getSubcategoriesByCategory } from "../services/subcategoryService";
-import { createProductType } from "../services/productTypeService";
+import { createProductType, getProductTypeBySubcategory } from "../services/productTypeService";
 
 // Utility Functions
 // -
@@ -27,10 +27,11 @@ import Footer from "../components/navigation/Footer";
 const AdminCreatePTypePage = () => {
   const navigate = useNavigate();
 
-  // State to track category, subcategory, product type input
+  // State to track category, subcategory, and product type input
   const [categoryId, setCategoryId] = useState("10000"); // Default is "Food"
   const [subcategoryId, setSubcategoryId] = useState("");
   const [subcategories, setSubcategories] = useState([]);
+  const [productTypes, setProductTypes] = useState([]);
   const [productTypeName, setProductTypeName] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -52,6 +53,22 @@ const AdminCreatePTypePage = () => {
 
     fetchSubcategories();
   }, [categoryId]);
+
+  // Fetch product types when subcategory changes
+  useEffect(() => {
+    if (!subcategoryId) return;
+    const fetchProductTypes = async () => {
+      try {
+        const data = await getProductTypeBySubcategory(categoryId, subcategoryId);
+        setProductTypes(Object.entries(data));
+      } catch (err) {
+        console.error("Error fetching product types:", err);
+        // setError("Failed to fetch product types.");
+      }
+    };
+
+    fetchProductTypes();
+  }, [subcategoryId, categoryId, productTypes]);
 
   // Handle form submission
   const handleCreateProductType = async () => {
@@ -134,7 +151,21 @@ const AdminCreatePTypePage = () => {
             </FloatingLabel>
           </Form.Floating>
 
-          {error && <p className="text-red-600">{error}</p>}
+          <h5>Existing Product Types</h5>
+          <div className="flex flex-wrap gap-2 w-full my-2">
+            {productTypes.length > 0 ? (
+              productTypes.map(([typeId, productType]) => (
+                <small
+                  key={typeId}
+                  className="bg-highlight text-neutral-700 px-2 py-1 rounded-md text-center"
+                >
+                  {productType.name}
+                </small>
+              ))
+            ) : (
+              <p>No product types listed</p>
+            )}
+          </div>
 
           <Stack direction="horizontal" gap={2} className="w-full">
             <Btn variant="secondary" onClick={() => navigate("/create")}>
@@ -149,6 +180,7 @@ const AdminCreatePTypePage = () => {
               {isLoading ? "Creating..." : "Create"}
             </Btn>
           </Stack>
+          {error && <p className="text-blue-500 mt-2">{error}</p>}
         </Form>
       </Container>
       <Footer />

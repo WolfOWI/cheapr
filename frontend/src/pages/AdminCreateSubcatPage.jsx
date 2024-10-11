@@ -1,11 +1,11 @@
 // IMPORT
 // -----------------------------------------------------------
 // React & Hooks
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 // Services
-import { createSubcategory } from "../services/subcategoryService";
+import { createSubcategory, getSubcategoriesByCategory } from "../services/subcategoryService";
 
 // Utility Functions
 // -
@@ -29,8 +29,24 @@ const AdminCreateSubcatPage = () => {
   // State to track the form inputs
   const [categoryId, setCategoryId] = useState("10000"); // Default is "Food"
   const [subcategoryName, setSubcategoryName] = useState("");
+  const [subcategories, setSubcategories] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+
+  // Fetch subcategories when category changes
+  useEffect(() => {
+    const fetchSubcategories = async () => {
+      try {
+        const data = await getSubcategoriesByCategory(categoryId);
+        setSubcategories(Object.entries(data)); // Convert object to array of key-value pairs
+      } catch (err) {
+        console.error("Error fetching subcategories:", err);
+        // setError("Failed to fetch subcategories.");
+      }
+    };
+
+    fetchSubcategories();
+  }, [categoryId]);
 
   // Handle form submission
   const handleCreateSubcategory = async () => {
@@ -96,6 +112,21 @@ const AdminCreateSubcatPage = () => {
                 />
               </FloatingLabel>
             </Form.Floating>
+            <h5>Existing Subcategories</h5>
+            <div className="flex flex-wrap gap-2 w-full my-2">
+              {subcategories.length > 0 ? (
+                subcategories.map(([subId, subcategory]) => (
+                  <small
+                    key={subId}
+                    className="bg-highlight text-neutral-700 px-2 py-1 rounded-md text-center"
+                  >
+                    {subcategory.name}
+                  </small>
+                ))
+              ) : (
+                <p>No subcategories listed</p>
+              )}
+            </div>
 
             <Stack direction="horizontal" gap={2} className="w-full">
               <Btn variant="secondary" onClick={() => navigate("/create")}>
@@ -110,6 +141,7 @@ const AdminCreateSubcatPage = () => {
                 {isLoading ? "Creating..." : "Create"}
               </Btn>
             </Stack>
+            {error && <p className="text-blue-500 mt-2">{error}</p>}
           </div>
         </Form>
       </Container>

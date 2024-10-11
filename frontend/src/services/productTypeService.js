@@ -20,3 +20,18 @@ export const createProductType = async (categoryId, subcategoryId, productTypeNa
   }
 };
 // -----------------------------------------------------
+
+// GET
+// -----------------------------------------------------
+// Fetch product types based on subcategory
+export const getProductTypeBySubcategory = async (categoryId, subcategoryId) => {
+  try {
+    const response = await axios.get(
+      `${API_URL}/category/${categoryId}/subcategory/${subcategoryId}/types`
+    );
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+// -----------------------------------------------------

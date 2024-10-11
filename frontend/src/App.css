@@ -25,6 +25,10 @@ h3 {
 h4 {
   @apply text-[20px] font-bold;
 }
+
+h5 {
+  @apply text-[16px] font-bold;
+}
 /* -------------------------------------- */
 
 /* INPUTS */
