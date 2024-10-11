@@ -17,3 +17,16 @@ export const createSubcategory = async (categoryId, subcategoryName) => {
   }
 };
 // -----------------------------------------------------
+
+// GET
+// -----------------------------------------------------
+// Fetch subcategories based on category
+export const getSubcategoriesByCategory = async (categoryId) => {
+  try {
+    const response = await axios.get(`${API_URL}/category/${categoryId}/subcategories`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+// -----------------------------------------------------
