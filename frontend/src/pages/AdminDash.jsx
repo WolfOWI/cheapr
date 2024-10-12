@@ -10,7 +10,7 @@ import { getAllApprovedProducts } from "../services/productService";
 import { sortProducts } from "../utils/productSortUtils";
 
 // Third-Party Components
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Dropdown } from "react-bootstrap";
 
 // Internal Components
 import NavigationBar from "../components/navigation/NavigationBar";
@@ -18,6 +18,7 @@ import Btn from "../components/button/Btn";
 import StoreLogo from "../components/building-blocks/StoreLogo";
 import ProductItem from "../components/listItems/ProductItem";
 import Footer from "../components/navigation/Footer";
+import Drpdwn from "../components/input/Drpdwn";
 
 // Imagery
 // -
@@ -26,23 +27,71 @@ import Footer from "../components/navigation/Footer";
 
 function AdminDash() {
   const [products, setProducts] = useState({});
-
   const [isLoading, setIsLoading] = useState(true);
+  const [sortSelection, setSortSelection] = useState("Newest Approved"); // Dropdown Selection
+  const [sortDropLabel, setSortDropLabel] = useState("Most Recently Approved"); // Dropdown Label
 
+  // On Page Mount
   useEffect(() => {
     const fetchProducts = async () => {
       const data = await getAllApprovedProducts();
-      setProducts(data);
+      const sortedData = sortProducts(data, "NewestApproved");
+      setProducts(sortedData);
     };
 
     fetchProducts();
   }, []);
 
+  // Loading of products
   useEffect(() => {
     if (Object.keys(products).length > 0) {
       setIsLoading(false);
     }
   }, [products]);
+
+  // Handle sort dropdown select
+  const handleSelect = (eventKey) => {
+    setSortSelection(eventKey);
+    console.log(`Selected sort option: ${eventKey}`);
+
+    switch (eventKey) {
+      case "AtoZ":
+        setSortDropLabel("Alfabetical (A to Z)");
+        setProducts(sortProducts(products, "AtoZ"));
+        break;
+      case "ZtoA":
+        setSortDropLabel("Alfabetical (Z to A)");
+        setProducts(sortProducts(products, "ZtoA"));
+        break;
+      case "NewestApproved":
+        setSortDropLabel("Most Recently Approved");
+        setProducts(sortProducts(products, "NewestApproved"));
+        break;
+      case "OldestApproved":
+        setSortDropLabel("Oldest Approval");
+        setProducts(sortProducts(products, "OldestApproved"));
+        break;
+      case "NewestCreated":
+        setSortDropLabel("Most Recently Created");
+        setProducts(sortProducts(products, "NewestCreated"));
+        break;
+      case "OldestCreated":
+        setSortDropLabel("Oldest Creation");
+        setProducts(sortProducts(products, "OldestCreated"));
+        break;
+      case "Cheapest":
+        setSortDropLabel("Lowest Price");
+        setProducts(sortProducts(products, "Cheapest"));
+        break;
+      case "Expensive":
+        setSortDropLabel("Highest Price");
+        setProducts(sortProducts(products, "Expensive"));
+        break;
+
+      default:
+        break;
+    }
+  };
 
   return (
     <>
@@ -51,7 +100,16 @@ function AdminDash() {
         <Container className="pt-6">
           <div className="flex w-full justify-between">
             <h2>All Listed Products</h2>
-            <Btn variant="dark-outline">Sort by</Btn>
+            <Drpdwn title={`Sort: ${sortDropLabel}`} variant="dark-outline" onSelect={handleSelect}>
+              <Dropdown.Item eventKey="AtoZ">Alfabetical (A to Z)</Dropdown.Item>
+              <Dropdown.Item eventKey="ZtoA">Alfabetical (Z to A)</Dropdown.Item>
+              <Dropdown.Item eventKey="NewestApproved">Most Recently Approved</Dropdown.Item>
+              <Dropdown.Item eventKey="OldestApproved">Oldest Approval</Dropdown.Item>
+              <Dropdown.Item eventKey="NewestCreated">Most Recently Created</Dropdown.Item>
+              <Dropdown.Item eventKey="OldestCreated">Oldest Creation</Dropdown.Item>
+              <Dropdown.Item eventKey="Cheapest">Lowest Price</Dropdown.Item>
+              <Dropdown.Item eventKey="Expensive">Highest Price</Dropdown.Item>
+            </Drpdwn>
           </div>
         </Container>
         {/* Header */}

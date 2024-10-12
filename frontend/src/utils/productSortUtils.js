@@ -8,13 +8,13 @@ export const sortProducts = (products, sortBy) => {
         return productA.name.localeCompare(productB.name);
       case "ZtoA":
         return productB.name.localeCompare(productA.name);
-      case "Newest Approved":
+      case "NewestApproved":
         return new Date(productB.adminDecisionDate) - new Date(productA.adminDecisionDate);
-      case "Oldest Approved":
+      case "OldestApproved":
         return new Date(productA.adminDecisionDate) - new Date(productB.adminDecisionDate);
-      case "Newest Created":
+      case "NewestCreated":
         return new Date(productB.created) - new Date(productA.created);
-      case "Oldest Created":
+      case "OldestCreated":
         return new Date(productA.created) - new Date(productB.created);
       case "Cheapest":
         // Get cheapest price for each product and sort ascending
@@ -33,7 +33,7 @@ export const sortProducts = (products, sortBy) => {
         ]).cheapestPrice;
 
         return priceA - priceB;
-      case "Most Expensive":
+      case "Expensive":
         // Get the most expensive price for each product and sort descending
         const maxPriceA = Math.max(
           productA.pnp.price,
