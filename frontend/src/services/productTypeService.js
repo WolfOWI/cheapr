@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // URL for your backend API
-const API_URL = process.env.API_URL || "http://localhost:3001/categories";
+const API_URL = process.env.API_URL || "http://localhost:3001";
 
 // CREATE
 // -----------------------------------------------------
@@ -9,7 +9,7 @@ const API_URL = process.env.API_URL || "http://localhost:3001/categories";
 export const createProductType = async (categoryId, subcategoryId, productTypeName) => {
   try {
     const response = await axios.post(
-      `${API_URL}/category/${categoryId}/subcategory/${subcategoryId}/type`,
+      `${API_URL}/categories/category/${categoryId}/subcategory/${subcategoryId}/type`,
       {
         name: productTypeName,
       }
@@ -27,7 +27,7 @@ export const createProductType = async (categoryId, subcategoryId, productTypeNa
 export const getProductTypeBySubcategory = async (categoryId, subcategoryId) => {
   try {
     const response = await axios.get(
-      `${API_URL}/category/${categoryId}/subcategory/${subcategoryId}/types`
+      `${API_URL}/categories/category/${categoryId}/subcategory/${subcategoryId}/types`
     );
     return response.data;
   } catch (error) {
