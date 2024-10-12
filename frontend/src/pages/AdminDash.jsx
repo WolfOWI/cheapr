@@ -28,7 +28,6 @@ import Drpdwn from "../components/input/Drpdwn";
 function AdminDash() {
   const [products, setProducts] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-  const [sortSelection, setSortSelection] = useState("Newest Approved"); // Dropdown Selection
   const [sortDropLabel, setSortDropLabel] = useState("Most Recently Approved"); // Dropdown Label
 
   // On Page Mount
@@ -51,7 +50,6 @@ function AdminDash() {
 
   // Handle sort dropdown select
   const handleSelect = (eventKey) => {
-    setSortSelection(eventKey);
     console.log(`Selected sort option: ${eventKey}`);
 
     switch (eventKey) {
@@ -89,6 +87,8 @@ function AdminDash() {
         break;
 
       default:
+        setSortDropLabel("Most Recently Approved");
+        setProducts(sortProducts(products, "NewestApproved"));
         break;
     }
   };

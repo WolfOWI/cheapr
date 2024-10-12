@@ -40,7 +40,7 @@ const PriceBlock = ({ price, updated, onSpecial, isCheapest }) => {
       ) : (
         <Col xs={2} className="px-1">
           <div className="flex flex-col justify-center items-center h-20 my-1 w-full text-center rounded-xl bg-neutral-100 group-hover:bg-highlight ">
-            <p className="hidden group-hover:flex">No Info</p>
+            <small className="hidden group-hover:flex">No Data</small>
             <Icon type="question" className="h-10 text-neutral-400 group-hover:hidden" />
           </div>
         </Col>
