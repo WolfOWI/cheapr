@@ -1,0 +1,26 @@
+{
+  "name": "Top Red Apples",
+  "image": "",
+  "amount": "1.5",
+  "unit": "kg",
+  "pnp": {
+    "price": 32.99,
+    "updated": "12/10/2024",
+    "special": null
+  },
+  "woolworths": {
+    "price": 42.99,
+    "updated": "05/10/2024",
+    "special": "01/11/2024"
+  },
+  "checkers": {
+    "price": 35.99,
+    "updated": "09/09/2024",
+    "special": null
+  },
+  "spar": {
+    "price": 0.0,
+    "updated": null,
+    "special": null
+  }
+}

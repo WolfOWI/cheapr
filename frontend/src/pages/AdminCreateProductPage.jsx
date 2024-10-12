@@ -1,28 +1,26 @@
 // IMPORT
 // -----------------------------------------------------------
 // React & Hooks
-import { Navigate, useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 // Services
-// -
+import { getSubcategoriesByCategory } from "../services/subcategoryService";
+import { getProductTypeBySubcategory } from "../services/productTypeService";
+import { createApprovedProduct } from "../services/productService";
 
 // Utility Functions
-// -
+import { getCurrentDate } from "../utils/dateUtils";
 
 // Third-Party Components
-import { Container, Row, Col } from "react-bootstrap";
-import Breadcrumb from "react-bootstrap/Breadcrumb";
-import Stack from "react-bootstrap/Stack";
-import Form from "react-bootstrap/Form";
-import InputGroup from "react-bootstrap/InputGroup";
-import FloatingLabel from "react-bootstrap/FloatingLabel";
+import { Container, Form, Stack, FloatingLabel, InputGroup } from "react-bootstrap";
 
 // Internal Components
 import NavigationBar from "../components/navigation/NavigationBar";
 import Btn from "../components/button/Btn";
 import StoreLogo from "../components/building-blocks/StoreLogo";
-import ProductItem from "../components/listItems/ProductItem";
 import Footer from "../components/navigation/Footer";
+import StorePricingSpecialInput from "../components/input/StorePricingSpecialInput";
 
 // Imagery
 // -
@@ -31,6 +29,120 @@ import Footer from "../components/navigation/Footer";
 
 const AdminCreateProductPage = () => {
   const navigate = useNavigate();
+
+  const [categoryId, setCategoryId] = useState("10000"); // Default is "Food"
+  const [subcategoryId, setSubcategoryId] = useState("");
+  const [typeId, setTypeId] = useState("");
+  const [subcategories, setSubcategories] = useState([]);
+  const [productTypes, setProductTypes] = useState([]);
+  const [productName, setProductName] = useState("");
+  const [amount, setAmount] = useState("");
+  const [unit, setUnit] = useState("kg");
+
+  // Price and Special fields for different stores
+  const [pnpPrice, setPnpPrice] = useState("");
+  const [pnpSpecial, setPnpSpecial] = useState(false);
+  const [pnpSpecialDate, setPnpSpecialDate] = useState("");
+
+  const [woolworthsPrice, setWoolworthsPrice] = useState("");
+  const [woolworthsSpecial, setWoolworthsSpecial] = useState(false);
+  const [woolworthsSpecialDate, setWoolworthsSpecialDate] = useState("");
+
+  const [checkersPrice, setCheckersPrice] = useState("");
+  const [checkersSpecial, setCheckersSpecial] = useState(false);
+  const [checkersSpecialDate, setCheckersSpecialDate] = useState("");
+
+  const [sparPrice, setSparPrice] = useState("");
+  const [sparSpecial, setSparSpecial] = useState(false);
+  const [sparSpecialDate, setSparSpecialDate] = useState("");
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  // Fetch subcategories when category changes
+  useEffect(() => {
+    const fetchSubcategories = async () => {
+      try {
+        const data = await getSubcategoriesByCategory(categoryId);
+        setSubcategories(Object.entries(data));
+        if (data && Object.keys(data).length > 0) {
+          setSubcategoryId(Object.keys(data)[0]);
+        }
+      } catch (err) {
+        console.error("Error fetching subcategories:", err);
+        setError("Failed to fetch subcategories.");
+      }
+    };
+
+    fetchSubcategories();
+  }, [categoryId]);
+
+  // Fetch product types when subcategory changes
+  useEffect(() => {
+    if (!subcategoryId) return;
+    const fetchProductTypes = async () => {
+      try {
+        const data = await getProductTypeBySubcategory(categoryId, subcategoryId);
+        setProductTypes(Object.entries(data));
+        if (data && Object.keys(data).length > 0) {
+          setTypeId(Object.keys(data)[0]);
+        }
+      } catch (err) {
+        console.error("Error fetching product types:", err);
+        setError("Failed to fetch product types.");
+      }
+    };
+
+    fetchProductTypes();
+  }, [categoryId, subcategoryId]);
+
+  // Handle form submission
+  const handleCreateProduct = async () => {
+    if (!productName || !amount || !unit || !categoryId || !subcategoryId || !typeId) {
+      setError("Please fill in all required fields.");
+      return;
+    }
+
+    setIsLoading(true);
+    setError(null);
+
+    const productData = {
+      name: productName,
+      amount,
+      unit,
+      pnp: {
+        price: pnpPrice || 0,
+        updated: pnpPrice ? getCurrentDate() : null,
+        special: pnpSpecial ? pnpSpecialDate : null,
+      },
+      woolworths: {
+        price: woolworthsPrice || 0,
+        updated: woolworthsPrice ? getCurrentDate() : null,
+        special: woolworthsSpecial ? woolworthsSpecialDate : null,
+      },
+      checkers: {
+        price: checkersPrice || 0,
+        updated: checkersPrice ? getCurrentDate() : null,
+        special: checkersSpecial ? checkersSpecialDate : null,
+      },
+      spar: {
+        price: sparPrice || 0,
+        updated: sparPrice ? getCurrentDate() : null,
+        special: sparSpecial ? sparSpecialDate : null,
+      },
+    };
+
+    try {
+      const response = await createApprovedProduct(productData, categoryId, subcategoryId, typeId);
+      console.log("Product created:", response);
+      navigate("/admin");
+    } catch (err) {
+      console.error("Failed to create product:", err);
+      setError("Failed to create product. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <>
@@ -42,7 +154,9 @@ const AdminCreateProductPage = () => {
             <Btn variant="secondary" onClick={() => navigate("/create")}>
               Cancel
             </Btn>
-            <Btn variant="primary">Create</Btn>
+            <Btn variant="primary" onClick={handleCreateProduct} disabled={isLoading}>
+              {isLoading ? "Creating..." : "Create"}
+            </Btn>
           </Stack>
         </div>
         <div>
@@ -51,7 +165,13 @@ const AdminCreateProductPage = () => {
               <div className="w-full p-8">
                 <Form.Floating>
                   <FloatingLabel controlId="floatingInput" label="Product Name" className="mb-4">
-                    <Form.Control type="text" placeholder="" className="input-style" />
+                    <Form.Control
+                      type="text"
+                      placeholder=""
+                      value={productName}
+                      onChange={(e) => setProductName(e.target.value)}
+                      className="input-style"
+                    />
                   </FloatingLabel>
                 </Form.Floating>
                 <Form.Floating>
@@ -60,12 +180,23 @@ const AdminCreateProductPage = () => {
                     label="Measurement Amount"
                     className="mb-4"
                   >
-                    <Form.Control type="number" placeholder="" className="input-style" />
+                    <Form.Control
+                      type="number"
+                      placeholder=""
+                      value={amount}
+                      onChange={(e) => setAmount(e.target.value)}
+                      className="input-style"
+                    />
                   </FloatingLabel>
                 </Form.Floating>
                 <Form.Floating>
                   <FloatingLabel controlId="floatingInput" label="Unit" className="mb-4">
-                    <Form.Select aria-label="Floating label select example" className="input-style">
+                    <Form.Select
+                      aria-label="Floating label select example"
+                      value={unit}
+                      onChange={(e) => setUnit(e.target.value)}
+                      className="input-style"
+                    >
                       <option value="mg">Miligrams</option>
                       <option value="g">Grams</option>
                       <option value="kg">Kilograms</option>
@@ -78,29 +209,47 @@ const AdminCreateProductPage = () => {
                 </Form.Floating>
                 <Form.Floating>
                   <FloatingLabel controlId="floatingInput" label="Category" className="mb-4">
-                    <Form.Select aria-label="Floating label select example" className="input-style">
-                      <option value="food">Food</option>
-                      <option value="drinks">Drinks</option>
-                      <option value="household">Household</option>
+                    <Form.Select
+                      aria-label="Floating label select example"
+                      value={categoryId}
+                      onChange={(e) => setCategoryId(e.target.value)}
+                      className="input-style"
+                    >
+                      <option value="10000">Food</option>
+                      <option value="20000">Drinks</option>
+                      <option value="30000">Household</option>
                     </Form.Select>
                   </FloatingLabel>
                 </Form.Floating>
                 <Form.Floating>
                   <FloatingLabel controlId="floatingInput" label="Subcategory" className="mb-4">
-                    <Form.Select aria-label="Floating label select example" className="input-style">
-                      {/* TODO Dynamically Populate from breadcrumbs */}
-                      <option value="fruit&vegetables">Fruit & Vegetables</option>
-                      <option value="meat,poultry&fish">Meat, Poultry & Fish</option>
+                    <Form.Select
+                      aria-label="Floating label select example"
+                      value={subcategoryId}
+                      onChange={(e) => setSubcategoryId(e.target.value)}
+                      className="input-style"
+                    >
+                      {subcategories.map(([subId, subcategory]) => (
+                        <option key={subId} value={subId}>
+                          {subcategory.name}
+                        </option>
+                      ))}
                     </Form.Select>
                   </FloatingLabel>
                 </Form.Floating>
                 <Form.Floating>
                   <FloatingLabel controlId="floatingInput" label="Type" className="mb-4">
-                    <Form.Select aria-label="Floating label select example" className="input-style">
-                      {/* TODO Dynamically Populate from breadcrumbs */}
-                      <option value="freshFruit">Fresh Fruit</option>
-                      <option value="freshVegetables">Fresh Vegetables</option>
-                      <option value="frozenVegetables">Frozen Vegetables</option>
+                    <Form.Select
+                      aria-label="Floating label select example"
+                      value={typeId}
+                      onChange={(e) => setTypeId(e.target.value)}
+                      className="input-style"
+                    >
+                      {productTypes.map(([typeId, productType]) => (
+                        <option key={typeId} value={typeId}>
+                          {productType.name}
+                        </option>
+                      ))}
                     </Form.Select>
                   </FloatingLabel>
                 </Form.Floating>
@@ -110,102 +259,53 @@ const AdminCreateProductPage = () => {
               </div>
 
               <div className="w-full p-8">
-                {/* TODO Transform into components */}
-                {/* Pick n Pay Section */}
-                <div className="mb-16">
-                  <Form.Label>
-                    <div className="flex items-center">
-                      <StoreLogo store="pnp" className="h-4" />
-                      <p className="ml-2">Price</p>
-                    </div>
-                  </Form.Label>
-                  <InputGroup className="mb-2 h-[58px]">
-                    <InputGroup.Text className="input-style h-[58px]">
-                      <p className="font-bold">R</p>
-                    </InputGroup.Text>
-                    <Form.Control type="number" className="input-style h-[58px]" />
-                  </InputGroup>
-                  <Form.Group className="mb-2" controlId="formBasicCheckbox">
-                    <Form.Check type="checkbox" label="On Special" />
-                  </Form.Group>
-                  <Form.Floating>
-                    <FloatingLabel controlId="floatingInput" label="Until" className="mb-4">
-                      <Form.Control type="date" placeholder="" className="input-style" />
-                    </FloatingLabel>
-                  </Form.Floating>
-                </div>
-                {/* Checkers Section */}
-                <div className="mb-16">
-                  <Form.Label>
-                    <div className="flex items-center">
-                      <StoreLogo store="checkers" className="h-4" />
-                      <p className="ml-2">Price</p>
-                    </div>
-                  </Form.Label>
-                  <InputGroup className="mb-2 h-[58px]">
-                    <InputGroup.Text className="input-style h-[58px]">
-                      <p className="font-bold">R</p>
-                    </InputGroup.Text>
-                    <Form.Control type="number" className="input-style h-[58px]" />
-                  </InputGroup>
-                  <Form.Group className="mb-2" controlId="formBasicCheckbox">
-                    <Form.Check type="checkbox" label="On Special" />
-                  </Form.Group>
-                  <Form.Floating>
-                    <FloatingLabel controlId="floatingInput" label="Until" className="mb-4">
-                      <Form.Control type="date" placeholder="" className="input-style" />
-                    </FloatingLabel>
-                  </Form.Floating>
-                </div>
+                {/* Pick n Pay Pricing */}
+                <StorePricingSpecialInput
+                  storeName="Pick n Pay"
+                  storeKey="pnp"
+                  storePrice={pnpPrice}
+                  setStorePrice={setPnpPrice}
+                  storeSpecial={pnpSpecial}
+                  setStoreSpecial={setPnpSpecial}
+                  storeSpecialDate={pnpSpecialDate}
+                  setStoreSpecialDate={setPnpSpecialDate}
+                />
+                {/* Woolworths Section */}
+                <StorePricingSpecialInput
+                  storeName="Woolworths"
+                  storeKey="woolworths"
+                  storePrice={woolworthsPrice}
+                  setStorePrice={setWoolworthsPrice}
+                  storeSpecial={woolworthsSpecial}
+                  setStoreSpecial={setWoolworthsSpecial}
+                  storeSpecialDate={woolworthsSpecialDate}
+                  setStoreSpecialDate={setWoolworthsSpecialDate}
+                />
               </div>
 
               <div className="w-full p-8">
+                {/* Checkers Section */}
+                <StorePricingSpecialInput
+                  storeName="Checkers"
+                  storeKey="checkers"
+                  storePrice={checkersPrice}
+                  setStorePrice={setCheckersPrice}
+                  storeSpecial={checkersSpecial}
+                  setStoreSpecial={setCheckersSpecial}
+                  storeSpecialDate={checkersSpecialDate}
+                  setStoreSpecialDate={setCheckersSpecialDate}
+                />
                 {/* Spar Section */}
-                <div className="mb-16">
-                  <Form.Label>
-                    <div className="flex items-center">
-                      <StoreLogo store="spar" className="h-4" />
-                      <p className="ml-2">Price</p>
-                    </div>
-                  </Form.Label>
-                  <InputGroup className="mb-2 h-[58px]">
-                    <InputGroup.Text className="input-style h-[58px]">
-                      <p className="font-bold">R</p>
-                    </InputGroup.Text>
-                    <Form.Control type="number" className="input-style h-[58px]" />
-                  </InputGroup>
-                  <Form.Group className="mb-2" controlId="formBasicCheckbox">
-                    <Form.Check type="checkbox" label="On Special" />
-                  </Form.Group>
-                  <Form.Floating>
-                    <FloatingLabel controlId="floatingInput" label="Until" className="mb-4">
-                      <Form.Control type="date" placeholder="" className="input-style" />
-                    </FloatingLabel>
-                  </Form.Floating>
-                </div>
-                {/* Woolworths Section */}
-                <div className="mb-16">
-                  <Form.Label>
-                    <div className="flex items-center">
-                      <StoreLogo store="woolworths" className="h-4" />
-                      <p className="ml-2">Price</p>
-                    </div>
-                  </Form.Label>
-                  <InputGroup className="mb-2 h-[58px]">
-                    <InputGroup.Text className="input-style h-[58px]">
-                      <p className="font-bold">R</p>
-                    </InputGroup.Text>
-                    <Form.Control type="number" className="input-style h-[58px]" />
-                  </InputGroup>
-                  <Form.Group className="mb-2" controlId="formBasicCheckbox">
-                    <Form.Check type="checkbox" label="On Special" />
-                  </Form.Group>
-                  <Form.Floating>
-                    <FloatingLabel controlId="floatingInput" label="Until" className="mb-4">
-                      <Form.Control type="date" placeholder="" className="input-style" />
-                    </FloatingLabel>
-                  </Form.Floating>
-                </div>
+                <StorePricingSpecialInput
+                  storeName="Spar"
+                  storeKey="spar"
+                  storePrice={sparPrice}
+                  setStorePrice={setSparPrice}
+                  storeSpecial={sparSpecial}
+                  setStoreSpecial={setSparSpecial}
+                  storeSpecialDate={sparSpecialDate}
+                  setStoreSpecialDate={setSparSpecialDate}
+                />
               </div>
             </div>
           </Form>

@@ -5,14 +5,28 @@ const router = express.Router();
 
 // CREATE
 // -----------------------------------------------------
-// Create a new product
-router.post("/", async (req, res) => {
+// Create a APPROVED product
+router.post("/approved", async (req, res) => {
   try {
-    const productData = req.body;
-    const ref = admin.database().ref("products").push();
-    await ref.set(productData);
+    const { productData, categoryId, subcategoryId, typeId } = req.body;
 
-    res.status(200).json({ id: ref.key, message: "Product added successfully!" });
+    // Add product to the "approved" node
+    const ref = admin.database().ref("products/approved").push();
+    const productId = ref.key; // Get generated ID
+    await ref.set(productData); // Save product data
+
+    // Add the productId underneath category, subcategory, and type
+    const typeRef = admin
+      .database()
+      .ref(`categories/${categoryId}/subcategories/${subcategoryId}/types/${typeId}/productIds`);
+    const typeSnapshot = await typeRef.once("value");
+
+    const productIds = typeSnapshot.val() || [];
+    productIds.push(productId); // Add new product ID to the list
+
+    await typeRef.set(productIds); // Save updated list
+
+    res.status(200).json({ id: productId, message: "Product added successfully!" });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

@@ -62,6 +62,7 @@ const AdminCreatePTypePage = () => {
         const data = await getProductTypeBySubcategory(categoryId, subcategoryId);
         setProductTypes(Object.entries(data));
       } catch (err) {
+        setProductTypes([]);
         console.error("Error fetching product types:", err);
         // setError("Failed to fetch product types.");
       }
