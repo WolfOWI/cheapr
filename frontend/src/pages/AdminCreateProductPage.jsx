@@ -38,6 +38,7 @@ const AdminCreateProductPage = () => {
   const [productName, setProductName] = useState("");
   const [amount, setAmount] = useState("");
   const [unit, setUnit] = useState("kg");
+  const [imageFile, setImageFile] = useState(null);
 
   // Price and Special fields for different stores
   const [pnpPrice, setPnpPrice] = useState("");
@@ -106,6 +107,8 @@ const AdminCreateProductPage = () => {
     setIsLoading(true);
     setError(null);
 
+    const formData = new FormData();
+
     const productData = {
       name: productName,
       amount,
@@ -134,8 +137,14 @@ const AdminCreateProductPage = () => {
       },
     };
 
+    // Append product data and image file to FormData
+    formData.append("productData", JSON.stringify(productData));
+    if (imageFile) {
+      formData.append("image", imageFile); // Append the image file
+    }
+
     try {
-      const response = await createApprovedProduct(productData, categoryId, subcategoryId, typeId);
+      const response = await createApprovedProduct(formData, categoryId, subcategoryId, typeId);
       console.log("Product created:", response);
       navigate("/admin");
     } catch (err) {
@@ -256,7 +265,16 @@ const AdminCreateProductPage = () => {
                   </FloatingLabel>
                 </Form.Floating>
                 <div className="bg-neutral-100 rounded-xl h-32 flex items-center justify-center">
-                  Image Upload (To Do)
+                  <Form.Floating>
+                    <FloatingLabel controlId="imageUpload" label="Product Image" className="mb-4">
+                      <Form.Control
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) => setImageFile(e.target.files[0])}
+                        className="input-style"
+                      />
+                    </FloatingLabel>
+                  </Form.Floating>
                 </div>
               </div>
 

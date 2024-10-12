@@ -6,13 +6,10 @@ const API_URL = process.env.API_URL || "http://localhost:3001/products";
 // CREATE
 // -----------------------------------------------------
 // Create APPROVED product
-export const createApprovedProduct = async (productData, categoryId, subcategoryId, typeId) => {
+export const createApprovedProduct = async (formData) => {
   try {
-    const response = await axios.post(`${API_URL}/approved`, {
-      productData,
-      categoryId,
-      subcategoryId,
-      typeId,
+    const response = await axios.post(`${API_URL}/approved`, formData, {
+      headers: { "Content-Type": "multipart/form-data" },
     });
     return response.data;
   } catch (error) {

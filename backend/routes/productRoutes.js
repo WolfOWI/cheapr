@@ -1,19 +1,51 @@
 import express from "express";
 import admin from "firebase-admin";
+import multer from "multer";
 
 const router = express.Router();
+
+// Initialize multer for file uploads
+const storage = multer.memoryStorage(); // Store the image in memory temporarily
+const upload = multer({ storage: storage });
 
 // CREATE
 // -----------------------------------------------------
 // Create a APPROVED product
-router.post("/approved", async (req, res) => {
+router.post("/approved", upload.single("image"), async (req, res) => {
   try {
     const { productData, categoryId, subcategoryId, typeId } = req.body;
+    const file = req.file; // Uploaded image
+
+    let imageUrl = "";
+    if (file) {
+      const bucket = admin.storage().bucket();
+      const fileName = `product_images/${Date.now()}_${file.originalname}`;
+      const fileUpload = bucket.file(fileName);
+
+      // Upload the image to Firebase Storage
+      await fileUpload.save(file.buffer);
+
+      // Get the image URL
+      const [url] = await fileUpload.getSignedUrl({
+        action: "read",
+        expires: "12-31-2025",
+      });
+
+      imageUrl = url;
+    }
+
+    // Add the image URL to the product data
+    const newProductData = {
+      ...JSON.parse(productData),
+      image: imageUrl, // Add image URL to the product
+      created: new Date().toISOString(),
+      adminDecisionDate: new Date().toISOString(),
+    };
 
     // Add product to the "approved" node
     const ref = admin.database().ref("products/approved").push();
     const productId = ref.key; // Get generated ID
-    await ref.set(productData); // Save product data
+    await ref.set(newProductData); // Save product data
 
     // Add the productId underneath category, subcategory, and type
     const typeRef = admin

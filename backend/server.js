@@ -20,6 +20,7 @@ admin.initializeApp({
     clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
   }),
   databaseURL: process.env.FIREBASE_DATABASE_URL,
+  storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
 });
 
 const app = express();
