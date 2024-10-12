@@ -40,10 +40,10 @@ const ProductItem = ({ product, admin }) => {
       <Row className="align-items-center group cursor-pointer ">
         {/* Product Information */}
         <Col xs={3} className="flex items-center">
-          <img src={appleTopRedImg} alt={product.name} className="h-20" />
+          <img src={product.image} alt={product.name} className="h-20" />
           <div>
-            <h4 className="font-bold">{product.name}</h4>
-            <h4 className="text-neutral-500">
+            <h4>{product.name}</h4>
+            <h4 className="text-neutral-500 font-normal">
               {product.amount}
               {product.unit}
             </h4>
@@ -53,25 +53,25 @@ const ProductItem = ({ product, admin }) => {
           price={product.pnp.price}
           updated={product.pnp.updated}
           onSpecial={product.pnp.onSpecial}
-          isCheapest={product.pnp.price === cheapestPrice}
+          isCheapest={parseInt(product.pnp.price) === cheapestPrice}
         />
         <PriceBlock
           price={product.woolworths.price}
           updated={product.woolworths.updated}
           onSpecial={product.woolworths.onSpecial}
-          isCheapest={product.woolworths.price === cheapestPrice}
+          isCheapest={parseInt(product.woolworths.price) === cheapestPrice}
         />
         <PriceBlock
           price={product.checkers.price}
           updated={product.checkers.updated}
           onSpecial={product.checkers.onSpecial}
-          isCheapest={product.checkers.price === cheapestPrice}
+          isCheapest={parseInt(product.checkers.price) === cheapestPrice}
         />
         <PriceBlock
           price={product.spar.price}
           updated={product.spar.updated}
           onSpecial={product.spar.onSpecial}
-          isCheapest={product.spar.price === cheapestPrice}
+          isCheapest={parseInt(product.spar.price) === cheapestPrice}
         />
         <Col xs={1}>
           {admin ? (

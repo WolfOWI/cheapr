@@ -1,10 +1,10 @@
 // IMPORT
 // -----------------------------------------------------------
 // React & Hooks
-// -
+import { useState, useEffect } from "react";
 
 // Services
-// -
+import { getAllApprovedProducts } from "../services/productService";
 
 // Utility Functions
 // -
@@ -25,60 +25,26 @@ import Footer from "../components/navigation/Footer";
 // -----------------------------------------------------------
 
 function AdminDash() {
-  const products = [
-    {
-      name: "Top Red Apples",
-      image: "apple.jpg",
-      amount: "1.5",
-      unit: "kg",
-      pnp: {
-        price: 36.99,
-        updated: "19/09/2024",
-        onSpecial: false,
-      },
-      woolworths: {
-        price: 42.99,
-        updated: "19/09/2024",
-        onSpecial: false,
-      },
-      checkers: {
-        price: 40.95,
-        updated: "19/09/2024",
-        onSpecial: true,
-      },
-      spar: {
-        price: 38.86,
-        updated: "19/09/2024",
-        onSpecial: false,
-      },
-    },
-    {
-      name: "Juicy Mangos",
-      image: "mango.jpg",
-      amount: "2",
-      unit: "kg",
-      pnp: {
-        price: 57.99,
-        updated: "19/09/2024",
-        onSpecial: false,
-      },
-      woolworths: {
-        price: 56.99,
-        updated: "19/09/2024",
-        onSpecial: false,
-      },
-      checkers: {
-        price: 67.95,
-        updated: "19/09/2024",
-        onSpecial: false,
-      },
-      spar: {
-        price: 59.86,
-        updated: "19/09/2024",
-        onSpecial: false,
-      },
-    },
-  ];
+  const [products, setProducts] = useState({});
+
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const data = await getAllApprovedProducts();
+      setProducts(data);
+    };
+
+    fetchProducts();
+  }, []);
+
+  useEffect(() => {
+    if (Object.keys(products).length > 0) {
+      setIsLoading(false);
+    }
+    console.log("products:");
+    console.log(products);
+  }, [products]);
 
   return (
     <>
@@ -86,7 +52,7 @@ function AdminDash() {
       <div className="mb-32">
         <Container className="pt-6">
           <div className="flex w-full justify-between">
-            <h2>All Products</h2>
+            <h2>All Listed Products</h2>
             <Btn variant="dark-outline">Sort by</Btn>
           </div>
         </Container>
@@ -116,9 +82,15 @@ function AdminDash() {
         {/* Product List Container */}
         <Container className="my-4">
           {/* Product Rows */}
-          {products.map((product, index) => (
-            <ProductItem product={product} key={index} admin />
-          ))}
+          {isLoading ? (
+            <p>Loading Products</p>
+          ) : (
+            <>
+              {Object.values(products).map((product, index) => (
+                <ProductItem key={index} product={product} admin />
+              ))}
+            </>
+          )}
         </Container>
       </div>
       <Footer />
