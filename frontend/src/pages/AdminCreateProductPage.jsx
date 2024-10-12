@@ -10,7 +10,7 @@ import { getProductTypeBySubcategory } from "../services/productTypeService";
 import { createApprovedProduct } from "../services/productService";
 
 // Utility Functions
-import { getCurrentDate } from "../utils/dateUtils";
+import { getCurrentDate, getCurrentTimeStamp } from "../utils/dateUtils";
 
 // Third-Party Components
 import { Container, Form, Stack, FloatingLabel, InputGroup } from "react-bootstrap";
@@ -110,6 +110,8 @@ const AdminCreateProductPage = () => {
       name: productName,
       amount,
       unit,
+      created: getCurrentTimeStamp(),
+      adminDecisionDate: getCurrentTimeStamp(),
       pnp: {
         price: pnpPrice || 0,
         updated: pnpPrice ? getCurrentDate() : null,

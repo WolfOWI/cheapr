@@ -3,6 +3,8 @@
   "image": "",
   "amount": "1.5",
   "unit": "kg",
+  "created": "",
+  "adminDecisionDate": "",
   "pnp": {
     "price": 32.99,
     "updated": "12/10/2024",
