@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 import { getAllApprovedProducts } from "../services/productService";
 
 // Utility Functions
-// -
+import { sortProducts } from "../utils/productSortUtils";
 
 // Third-Party Components
 import { Container, Row, Col } from "react-bootstrap";
@@ -42,8 +42,6 @@ function AdminDash() {
     if (Object.keys(products).length > 0) {
       setIsLoading(false);
     }
-    console.log("products:");
-    console.log(products);
   }, [products]);
 
   return (

@@ -109,12 +109,14 @@ const AdminCreateProductPage = () => {
 
     const formData = new FormData();
 
+    let createdAt = getCurrentTimeStamp();
+
     const productData = {
       name: productName,
       amount,
       unit,
-      created: getCurrentTimeStamp(),
-      adminDecisionDate: getCurrentTimeStamp(),
+      created: createdAt,
+      adminDecisionDate: createdAt,
       pnp: {
         price: pnpPrice || 0,
         updated: pnpPrice ? getCurrentDate() : null,

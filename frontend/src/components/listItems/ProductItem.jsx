@@ -33,7 +33,7 @@ const ProductItem = ({ product, admin }) => {
 
   // Get the cheapest price
   const cheapestPrice = getCheapestPrice(prices).cheapestPrice;
-  console.log(cheapestPrice);
+  // console.log(cheapestPrice);
 
   return (
     <>
