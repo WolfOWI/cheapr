@@ -99,7 +99,19 @@ const AdminCreateProductPage = () => {
 
   // Handle form submission
   const handleCreateProduct = async () => {
-    if (!productName || !amount || !unit || !categoryId || !subcategoryId || !typeId) {
+    console.log("categoryId:", categoryId);
+    console.log("subcategoryId:", subcategoryId);
+    console.log("typeId:", typeId);
+
+    if (
+      !productName ||
+      !amount ||
+      !unit ||
+      !categoryId ||
+      !subcategoryId ||
+      !typeId ||
+      !imageFile
+    ) {
       setError("Please fill in all required fields.");
       return;
     }
@@ -141,6 +153,9 @@ const AdminCreateProductPage = () => {
 
     // Append product data and image file to FormData
     formData.append("productData", JSON.stringify(productData));
+    formData.append("categoryId", categoryId);
+    formData.append("subcategoryId", subcategoryId);
+    formData.append("typeId", typeId);
     if (imageFile) {
       formData.append("image", imageFile); // Append the image file
     }
