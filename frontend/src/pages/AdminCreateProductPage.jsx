@@ -42,19 +42,19 @@ const AdminCreateProductPage = () => {
 
   // Price and Special fields for different stores
   const [pnpPrice, setPnpPrice] = useState("");
-  const [pnpSpecial, setPnpSpecial] = useState(false);
+  const [pnpOnSpecial, setPnpOnSpecial] = useState(false);
   const [pnpSpecialDate, setPnpSpecialDate] = useState("");
 
   const [woolworthsPrice, setWoolworthsPrice] = useState("");
-  const [woolworthsSpecial, setWoolworthsSpecial] = useState(false);
+  const [woolworthsOnSpecial, setWoolworthsOnSpecial] = useState(false);
   const [woolworthsSpecialDate, setWoolworthsSpecialDate] = useState("");
 
   const [checkersPrice, setCheckersPrice] = useState("");
-  const [checkersSpecial, setCheckersSpecial] = useState(false);
+  const [checkersOnSpecial, setCheckersOnSpecial] = useState(false);
   const [checkersSpecialDate, setCheckersSpecialDate] = useState("");
 
   const [sparPrice, setSparPrice] = useState("");
-  const [sparSpecial, setSparSpecial] = useState(false);
+  const [sparOnSpecial, setSparOnSpecial] = useState(false);
   const [sparSpecialDate, setSparSpecialDate] = useState("");
 
   const [isLoading, setIsLoading] = useState(false);
@@ -132,22 +132,22 @@ const AdminCreateProductPage = () => {
       pnp: {
         price: pnpPrice || 0,
         updated: pnpPrice ? getCurrentDate() : null,
-        special: pnpSpecial ? pnpSpecialDate : null,
+        special: pnpOnSpecial ? pnpSpecialDate : null,
       },
       woolworths: {
         price: woolworthsPrice || 0,
         updated: woolworthsPrice ? getCurrentDate() : null,
-        special: woolworthsSpecial ? woolworthsSpecialDate : null,
+        special: woolworthsOnSpecial ? woolworthsSpecialDate : null,
       },
       checkers: {
         price: checkersPrice || 0,
         updated: checkersPrice ? getCurrentDate() : null,
-        special: checkersSpecial ? checkersSpecialDate : null,
+        special: checkersOnSpecial ? checkersSpecialDate : null,
       },
       spar: {
         price: sparPrice || 0,
         updated: sparPrice ? getCurrentDate() : null,
-        special: sparSpecial ? sparSpecialDate : null,
+        special: sparOnSpecial ? sparSpecialDate : null,
       },
     };
 
@@ -159,6 +159,8 @@ const AdminCreateProductPage = () => {
     if (imageFile) {
       formData.append("image", imageFile); // Append the image file
     }
+
+    console.log("formData", formData);
 
     try {
       const response = await createApprovedProduct(formData);
@@ -281,40 +283,49 @@ const AdminCreateProductPage = () => {
                     </Form.Select>
                   </FloatingLabel>
                 </Form.Floating>
-                <div className="bg-neutral-100 rounded-xl h-32 flex items-center justify-center">
-                  <Form.Floating>
-                    <FloatingLabel controlId="imageUpload" label="Product Image" className="mb-4">
-                      <Form.Control
-                        type="file"
-                        accept="image/*"
-                        onChange={(e) => setImageFile(e.target.files[0])}
-                        className="input-style"
+                <div
+                  className="bg-neutral-100 rounded-xl h-64 flex flex-col items-center justify-center cursor-pointer pt-2 pb-8"
+                  onClick={() => document.getElementById("imageUpload").click()}
+                >
+                  {imageFile ? (
+                    <>
+                      <small className="text-gray-500 w-full pl-4 mb-4">New Product Image</small>
+                      <img
+                        src={URL.createObjectURL(imageFile)}
+                        alt="New Product"
+                        className="object-contain h-full w-full rounded-xl"
                       />
-                    </FloatingLabel>
-                  </Form.Floating>
+                    </>
+                  ) : (
+                    <p className="text-gray-500">Click to upload a product image</p>
+                  )}
+                  <Form.Control
+                    type="file"
+                    id="imageUpload"
+                    onChange={(e) => setImageFile(e.target.files[0])}
+                    className="d-none"
+                  />
                 </div>
               </div>
 
               <div className="w-full p-8">
                 {/* Pick n Pay Pricing */}
                 <StorePricingSpecialInput
-                  storeName="Pick n Pay"
                   storeKey="pnp"
                   storePrice={pnpPrice}
                   setStorePrice={setPnpPrice}
-                  storeSpecial={pnpSpecial}
-                  setStoreSpecial={setPnpSpecial}
+                  onSpecial={pnpOnSpecial}
+                  setOnSpecial={setPnpOnSpecial}
                   storeSpecialDate={pnpSpecialDate}
                   setStoreSpecialDate={setPnpSpecialDate}
                 />
                 {/* Woolworths Section */}
                 <StorePricingSpecialInput
-                  storeName="Woolworths"
                   storeKey="woolworths"
                   storePrice={woolworthsPrice}
                   setStorePrice={setWoolworthsPrice}
-                  storeSpecial={woolworthsSpecial}
-                  setStoreSpecial={setWoolworthsSpecial}
+                  onSpecial={woolworthsOnSpecial}
+                  setOnSpecial={setWoolworthsOnSpecial}
                   storeSpecialDate={woolworthsSpecialDate}
                   setStoreSpecialDate={setWoolworthsSpecialDate}
                 />
@@ -323,23 +334,21 @@ const AdminCreateProductPage = () => {
               <div className="w-full p-8">
                 {/* Checkers Section */}
                 <StorePricingSpecialInput
-                  storeName="Checkers"
                   storeKey="checkers"
                   storePrice={checkersPrice}
                   setStorePrice={setCheckersPrice}
-                  storeSpecial={checkersSpecial}
-                  setStoreSpecial={setCheckersSpecial}
+                  onSpecial={checkersOnSpecial}
+                  setOnSpecial={setCheckersOnSpecial}
                   storeSpecialDate={checkersSpecialDate}
                   setStoreSpecialDate={setCheckersSpecialDate}
                 />
                 {/* Spar Section */}
                 <StorePricingSpecialInput
-                  storeName="Spar"
                   storeKey="spar"
                   storePrice={sparPrice}
                   setStorePrice={setSparPrice}
-                  storeSpecial={sparSpecial}
-                  setStoreSpecial={setSparSpecial}
+                  onSpecial={sparOnSpecial}
+                  setOnSpecial={setSparOnSpecial}
                   storeSpecialDate={sparSpecialDate}
                   setStoreSpecialDate={setSparSpecialDate}
                 />
