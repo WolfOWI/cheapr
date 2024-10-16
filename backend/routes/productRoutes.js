@@ -280,17 +280,84 @@ router.delete("/:id", async (req, res) => {
     const rejectedSnapshot = await admin.database().ref(`products/rejected/${id}`).once("value");
 
     let productRef;
-    if (approvedSnapshot.exists()) productRef = admin.database().ref(`products/approved/${id}`);
-    if (pendingSnapshot.exists()) productRef = admin.database().ref(`products/pending/${id}`);
-    if (rejectedSnapshot.exists()) productRef = admin.database().ref(`products/rejected/${id}`);
+    let productData;
+
+    if (approvedSnapshot.exists()) {
+      productRef = admin.database().ref(`products/approved/${id}`);
+      productData = approvedSnapshot.val();
+    }
+    if (pendingSnapshot.exists()) {
+      productRef = admin.database().ref(`products/pending/${id}`);
+      productData = pendingSnapshot.val();
+    }
+    if (rejectedSnapshot.exists()) {
+      productRef = admin.database().ref(`products/rejected/${id}`);
+      productData = rejectedSnapshot.val();
+    }
 
     if (productRef) {
+      let found = false;
+      let categoryId = "";
+      let subcategoryId = "";
+      let typeId = "";
+
+      // Fetch all categories
+      const categoriesSnapshot = await admin.database().ref("categories").once("value");
+      const categories = categoriesSnapshot.val();
+
+      // Iterate through categories to find the one containing the product ID
+      for (const [catId, category] of Object.entries(categories)) {
+        for (const [subId, subcategory] of Object.entries(category.subcategories || {})) {
+          for (const [typeIdKey, type] of Object.entries(subcategory.types || {})) {
+            if (type.productIds && type.productIds.includes(id)) {
+              categoryId = catId;
+              subcategoryId = subId;
+              typeId = typeIdKey;
+              found = true;
+              break;
+            }
+          }
+          if (found) break;
+        }
+        if (found) break;
+      }
+
+      if (!found) {
+        console.log("Category, Subcategory, or Type not found for Product ID:", id);
+        return res.status(404).json({ message: "Category path not found for the product" });
+      }
+
+      const path = `categories/${categoryId}/subcategories/${subcategoryId}/types/${typeId}/productIds`;
+      console.log("Deleting product ID from category path:", path);
+
+      // Remove the product ID from the category, subcategory, and type
+      await admin
+        .database()
+        .ref(path)
+        .transaction((productIds) => {
+          console.log("Current product IDs before deletion:", productIds);
+          if (productIds) {
+            const index = productIds.indexOf(id);
+            if (index !== -1) {
+              productIds.splice(index, 1);
+              console.log("Removed product ID from category path.");
+            }
+          }
+          console.log("Product IDs after deletion:", productIds);
+          return productIds;
+        });
+
+      // Remove the product data
       await productRef.remove();
+      console.log("Product data removed successfully from path:", productRef.path);
+
       res.status(200).json({ message: "Product deleted successfully!" });
     } else {
+      console.log("Product not found for ID:", id);
       res.status(404).json({ message: "Product not found" });
     }
   } catch (error) {
+    console.error("Error deleting product:", error.message);
     res.status(500).json({ error: error.message });
   }
 });

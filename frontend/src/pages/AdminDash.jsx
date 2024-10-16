@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 // Services
-import { getAllApprovedProducts } from "../services/productService";
+import { getAllApprovedProducts, deleteProductById } from "../services/productService";
 
 // Utility Functions
 import { sortProducts } from "../utils/productSortUtils";
@@ -102,6 +102,21 @@ function AdminDash() {
     navigate(`/edit/${productId}`);
   };
 
+  // Handle Product Delete Click
+  const handleDeleteClick = async (productId) => {
+    try {
+      await deleteProductById(productId);
+      // Remove the deleted product from the local state
+      setProducts((prevProducts) => {
+        const updatedProducts = { ...prevProducts };
+        delete updatedProducts[productId];
+        return updatedProducts;
+      });
+    } catch (error) {
+      console.error("Failed to delete product:", error);
+    }
+  };
+
   return (
     <>
       <NavigationBar admin />
@@ -157,6 +172,7 @@ function AdminDash() {
                   key={index}
                   product={products[productId]}
                   onEditClick={() => handleEditClick(productId)}
+                  onDeleteClick={() => handleDeleteClick(productId)}
                 />
               ))}
             </>

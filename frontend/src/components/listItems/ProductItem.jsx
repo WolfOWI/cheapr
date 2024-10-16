@@ -22,7 +22,7 @@ import Btn from "../button/Btn";
 
 // -----------------------------------------------------------
 
-const ProductItem = ({ product, admin, onEditClick }) => {
+const ProductItem = ({ product, admin, onEditClick, onDeleteClick }) => {
   // Array of prices from different stores
   const prices = [
     { store: "pnp", price: product.pnp.price },
@@ -87,6 +87,7 @@ const ProductItem = ({ product, admin, onEditClick }) => {
                 size="md"
                 variant="dark"
                 className="opacity-0 group-hover:opacity-100 transition-all duration-150"
+                onClick={onDeleteClick}
               />
             </Stack>
           ) : (
