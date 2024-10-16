@@ -10,10 +10,12 @@ const upload = multer({ storage: storage });
 
 // CREATE
 // -----------------------------------------------------
-// Create a APPROVED product
+// Create an APPROVED product
 router.post("/approved", upload.single("image"), async (req, res) => {
   try {
-    const { productData, categoryId, subcategoryId, typeId } = req.body;
+    // Extract data directly from req.body
+    const { categoryId, subcategoryId, typeId } = req.body;
+    const productData = JSON.parse(req.body.productData); // Parse the stringified productData
     const file = req.file; // Uploaded image
 
     let imageUrl = "";
@@ -36,10 +38,8 @@ router.post("/approved", upload.single("image"), async (req, res) => {
 
     // Add the image URL to the product data
     const newProductData = {
-      ...JSON.parse(productData),
-      image: imageUrl, // Add image URL to the product
-      created: new Date().toISOString(),
-      adminDecisionDate: new Date().toISOString(),
+      ...productData,
+      image: imageUrl, // Add image URL to the product data
     };
 
     // Add product to the "approved" node
@@ -51,18 +51,20 @@ router.post("/approved", upload.single("image"), async (req, res) => {
     const typeRef = admin
       .database()
       .ref(`categories/${categoryId}/subcategories/${subcategoryId}/types/${typeId}/productIds`);
-    const typeSnapshot = await typeRef.once("value");
-
-    const productIds = typeSnapshot.val() || [];
-    productIds.push(productId); // Add new product ID to the list
-
-    await typeRef.set(productIds); // Save updated list
+    await typeRef.transaction((productIds = []) => {
+      if (!productIds.includes(productId)) {
+        productIds.push(productId); // Add the new product ID to the array
+      }
+      return productIds;
+    });
 
     res.status(200).json({ id: productId, message: "Product added successfully!" });
   } catch (error) {
+    console.error("Error creating product:", error.message); // Log error message for better debugging
     res.status(500).json({ error: error.message });
   }
 });
+
 // -----------------------------------------------------
 
 // READ / GET
@@ -114,7 +116,13 @@ router.get("/:id", async (req, res) => {
 router.put("/:id", upload.single("image"), async (req, res) => {
   try {
     const { id } = req.params; // Extract the product ID from the URL
-    const { productData } = req.body;
+    console.log("req.body", req.body);
+
+    const { categoryId, subcategoryId, typeId } = req.body;
+    console.log({ categoryId, subcategoryId, typeId });
+    const productData = JSON.parse(req.body.productData); // Parse the stringified productData
+    console.log("productData", JSON.parse(req.body.productData));
+
     const file = req.file; // Uploaded image
 
     let imageUrl = "";
@@ -136,9 +144,8 @@ router.put("/:id", upload.single("image"), async (req, res) => {
     }
 
     const updatedProductData = {
-      ...JSON.parse(productData),
+      ...productData, // Spread the parsed product data
       ...(imageUrl && { image: imageUrl }), // Only update image if a new one was uploaded
-      adminDecisionDate: new Date().toISOString(), // Update the decision date
     };
 
     // Find the product in approved, pending, or rejected
@@ -152,7 +159,46 @@ router.put("/:id", upload.single("image"), async (req, res) => {
     if (rejectedSnapshot.exists()) productRef = admin.database().ref(`products/rejected/${id}`);
 
     if (productRef) {
+      // Remove the product from the old category, subcategory, and type
+      const oldData = approvedSnapshot.val() || pendingSnapshot.val() || rejectedSnapshot.val();
+      const oldCategoryId = oldData.categoryId;
+      const oldSubcategoryId = oldData.subcategoryId;
+      const oldTypeId = oldData.typeId;
+
+      const oldPath = `categories/${oldCategoryId}/subcategories/${oldSubcategoryId}/types/${oldTypeId}/productIds`;
+      await admin
+        .database()
+        .ref(oldPath)
+        .transaction((productIds) => {
+          if (productIds) {
+            // Remove productId from array
+            const index = productIds.indexOf(id);
+            if (index !== -1) {
+              productIds.splice(index, 1);
+            }
+          }
+          return productIds;
+        });
+
+      // Update product details in the relevant path (approved, pending, rejected)
       await productRef.update(updatedProductData);
+
+      // Add the product to the new category, subcategory, and type
+      const newCategoryId = categoryId;
+      const newSubcategoryId = subcategoryId;
+      const newTypeId = typeId;
+
+      const newPath = `categories/${newCategoryId}/subcategories/${newSubcategoryId}/types/${newTypeId}/productIds`;
+      await admin
+        .database()
+        .ref(newPath)
+        .transaction((productIds = []) => {
+          if (!productIds.includes(id)) {
+            productIds.push(id); // Add product ID to array
+          }
+          return productIds;
+        });
+
       res.status(200).json({ message: "Product updated successfully!" });
     } else {
       res.status(404).json({ message: "Product not found" });
@@ -161,6 +207,7 @@ router.put("/:id", upload.single("image"), async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+
 // -----------------------------------------------------
 
 // DELETE

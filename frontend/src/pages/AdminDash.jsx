@@ -2,6 +2,7 @@
 // -----------------------------------------------------------
 // React & Hooks
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 // Services
 import { getAllApprovedProducts } from "../services/productService";
@@ -29,6 +30,8 @@ function AdminDash() {
   const [products, setProducts] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [sortDropLabel, setSortDropLabel] = useState("Most Recently Approved"); // Dropdown Label
+
+  const navigate = useNavigate();
 
   // On Page Mount
   useEffect(() => {
@@ -93,6 +96,12 @@ function AdminDash() {
     }
   };
 
+  // Handle Product Edit Click
+  const handleEditClick = (productId) => {
+    // console.log("Edit clicked for", productId);
+    navigate(`/edit/${productId}`);
+  };
+
   return (
     <>
       <NavigationBar admin />
@@ -142,8 +151,13 @@ function AdminDash() {
             <p>Loading Products</p>
           ) : (
             <>
-              {Object.values(products).map((product, index) => (
-                <ProductItem key={index} product={product} admin />
+              {Object.keys(products).map((productId, index) => (
+                <ProductItem
+                  admin
+                  key={index}
+                  product={products[productId]}
+                  onEditClick={() => handleEditClick(productId)}
+                />
               ))}
             </>
           )}

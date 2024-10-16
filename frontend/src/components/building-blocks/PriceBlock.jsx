@@ -31,7 +31,7 @@ const PriceBlock = ({ price, updated, onSpecial, isCheapest }) => {
             }`}
           >
             <div className="flex items-center">
-              {onSpecial && <Icon type="special" className="h-6" />}
+              {onSpecial && <Icon type="special" className="h-6 text-priP1" />}
               <p className="ml-1 font-bold">R{price}</p>
             </div>
             {price && <small>{updated}</small>}

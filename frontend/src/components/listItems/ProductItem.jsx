@@ -18,11 +18,11 @@ import IconBtn from "../button/IconBtn";
 import Btn from "../button/Btn";
 
 // Imagery
-import appleTopRedImg from "../../assets/images/grocery-images/Apples_TopRed.png";
+// -
 
 // -----------------------------------------------------------
 
-const ProductItem = ({ product, admin }) => {
+const ProductItem = ({ product, admin, onEditClick }) => {
   // Array of prices from different stores
   const prices = [
     { store: "pnp", price: product.pnp.price },
@@ -52,25 +52,25 @@ const ProductItem = ({ product, admin }) => {
         <PriceBlock
           price={product.pnp.price}
           updated={product.pnp.updated}
-          onSpecial={product.pnp.onSpecial}
+          onSpecial={!!product.pnp.special}
           isCheapest={parseInt(product.pnp.price) === cheapestPrice}
         />
         <PriceBlock
           price={product.woolworths.price}
           updated={product.woolworths.updated}
-          onSpecial={product.woolworths.onSpecial}
+          onSpecial={!!product.woolworths.special}
           isCheapest={parseInt(product.woolworths.price) === cheapestPrice}
         />
         <PriceBlock
           price={product.checkers.price}
           updated={product.checkers.updated}
-          onSpecial={product.checkers.onSpecial}
+          onSpecial={!!product.checkers.special}
           isCheapest={parseInt(product.checkers.price) === cheapestPrice}
         />
         <PriceBlock
           price={product.spar.price}
           updated={product.spar.updated}
-          onSpecial={product.spar.onSpecial}
+          onSpecial={!!product.spar.special}
           isCheapest={parseInt(product.spar.price) === cheapestPrice}
         />
         <Col xs={1}>
@@ -80,6 +80,7 @@ const ProductItem = ({ product, admin }) => {
                 iconType={"edit"}
                 size="md"
                 className="opacity-0 group-hover:opacity-100 transition-all duration-150"
+                onClick={onEditClick}
               />
               <IconBtn
                 iconType={"delete"}

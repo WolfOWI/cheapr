@@ -21,15 +21,24 @@ import StoreLogo from "../building-blocks/StoreLogo";
 // -----------------------------------------------------------
 
 const StorePricingSpecialInput = ({
-  storeName,
   storeKey,
   storePrice,
   setStorePrice,
-  storeSpecial,
-  setStoreSpecial,
+  onSpecial,
+  setOnSpecial,
   storeSpecialDate,
   setStoreSpecialDate,
 }) => {
+  // console.log("props", {
+  //   storeKey,
+  //   storePrice,
+  //   setStorePrice,
+  //   storeSpecial,
+  //   setStoreSpecial,
+  //   storeSpecialDate,
+  //   setStoreSpecialDate,
+  // });
+  // console.log("storeSpecialDate", storeSpecialDate);
   return (
     <div className="mb-16">
       <Form.Label>
@@ -51,11 +60,11 @@ const StorePricingSpecialInput = ({
         <Form.Check
           type="checkbox"
           label="On Special"
-          checked={storeSpecial}
-          onChange={() => setStoreSpecial(!storeSpecial)}
+          checked={onSpecial}
+          onChange={() => setOnSpecial(!onSpecial)}
         />
       </Form.Group>
-      {storeSpecial && (
+      {onSpecial && (
         <Form.Floating>
           <FloatingLabel controlId={`floatingInput-${storeKey}`} label="Until" className="mb-4">
             <Form.Control

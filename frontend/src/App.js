@@ -44,7 +44,7 @@ function App() {
         <Route path="/createptype" element={<AdminCreatePTypePage />} />
         <Route path="/createproduct" element={<AdminCreateProductPage />} />
         <Route path="/newproducts" element={<AdminNewProductsDash />} />
-        <Route path="/edit" element={<AdminEditDash />} />
+        <Route path="/edit/:productId" element={<AdminEditDash />} />
         <Route path="/flagged" element={<AdminFlaggedDash />} />
       </Routes>
     </Router>

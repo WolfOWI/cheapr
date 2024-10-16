@@ -27,9 +27,12 @@ router.get("/product/:productId", async (req, res) => {
 
               if (productType.productIds && productType.productIds.includes(productId)) {
                 breadcrumb = {
-                  category: category.name,
-                  subcategory: subcategory.name,
-                  type: productType.name,
+                  categoryId: catKey, // Category ID (key)
+                  category: category.name, // Category name
+                  subcategoryId: subKey, // Subcategory ID (key)
+                  subcategory: subcategory.name, // Subcategory name
+                  typeId: typeKey, // Product type ID (key)
+                  type: productType.name, // Product type name
                 };
                 foundProduct = true;
                 break;
@@ -69,8 +72,9 @@ router.get("/subcategory/:subcatId", async (req, res) => {
       if (category.subcategories && category.subcategories[subcatId]) {
         const subcategory = category.subcategories[subcatId];
         breadcrumb = {
-          category: category.name,
-          subcategory: subcategory.name,
+          categoryId: catKey, // Category ID (key)
+          category: category.name, // Category name
+          subcategory: subcategory.name, // Subcategory name
         };
         foundSubcategory = true;
         break;
@@ -108,8 +112,10 @@ router.get("/type/:typeId", async (req, res) => {
           if (subcategory.types && subcategory.types[typeId]) {
             const productType = subcategory.types[typeId];
             breadcrumb = {
-              category: category.name,
-              subcategory: subcategory.name,
+              categoryId: catKey, // Category ID (key)
+              category: category.name, // Category name
+              subcategoryId: subKey, // Subcategory ID (key)
+              subcategory: subcategory.name, // Subcategory name
               type: productType.name,
             };
             foundType = true;

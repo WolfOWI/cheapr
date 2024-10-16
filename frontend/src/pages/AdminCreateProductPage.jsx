@@ -36,8 +36,8 @@ const AdminCreateProductPage = () => {
   const [subcategories, setSubcategories] = useState([]);
   const [productTypes, setProductTypes] = useState([]);
   const [productName, setProductName] = useState("");
-  const [amount, setAmount] = useState("");
-  const [unit, setUnit] = useState("kg");
+  const [productAmount, setProductAmount] = useState("");
+  const [productUnit, setProductUnit] = useState("kg");
   const [imageFile, setImageFile] = useState(null);
 
   // Price and Special fields for different stores
@@ -99,14 +99,14 @@ const AdminCreateProductPage = () => {
 
   // Handle form submission
   const handleCreateProduct = async () => {
-    console.log("categoryId:", categoryId);
-    console.log("subcategoryId:", subcategoryId);
-    console.log("typeId:", typeId);
+    // console.log("categoryId:", categoryId);
+    // console.log("subcategoryId:", subcategoryId);
+    // console.log("typeId:", typeId);
 
     if (
       !productName ||
-      !amount ||
-      !unit ||
+      !productAmount ||
+      !productUnit ||
       !categoryId ||
       !subcategoryId ||
       !typeId ||
@@ -125,8 +125,8 @@ const AdminCreateProductPage = () => {
 
     const productData = {
       name: productName,
-      amount,
-      unit,
+      amount: productAmount,
+      unit: productUnit,
       created: createdAt,
       adminDecisionDate: createdAt,
       pnp: {
@@ -161,7 +161,7 @@ const AdminCreateProductPage = () => {
     }
 
     try {
-      const response = await createApprovedProduct(formData, categoryId, subcategoryId, typeId);
+      const response = await createApprovedProduct(formData);
       console.log("Product created:", response);
       navigate("/admin");
     } catch (err) {
@@ -211,8 +211,8 @@ const AdminCreateProductPage = () => {
                     <Form.Control
                       type="number"
                       placeholder=""
-                      value={amount}
-                      onChange={(e) => setAmount(e.target.value)}
+                      value={productAmount}
+                      onChange={(e) => setProductAmount(e.target.value)}
                       className="input-style"
                     />
                   </FloatingLabel>
@@ -221,8 +221,8 @@ const AdminCreateProductPage = () => {
                   <FloatingLabel controlId="floatingInput" label="Unit" className="mb-4">
                     <Form.Select
                       aria-label="Floating label select example"
-                      value={unit}
-                      onChange={(e) => setUnit(e.target.value)}
+                      value={productUnit}
+                      onChange={(e) => setProductUnit(e.target.value)}
                       className="input-style"
                     >
                       <option value="mg">Miligrams</option>
