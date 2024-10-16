@@ -37,9 +37,12 @@ function AdminEditDash() {
   const [breadcrumb, setBreadcrumb] = useState({}); // For category, subcategory, type
   const [subcategories, setSubcategories] = useState([]);
   const [productTypes, setProductTypes] = useState([]);
-  const [categoryId, setCategoryId] = useState("");
-  const [subcategoryId, setSubcategoryId] = useState("");
-  const [typeId, setTypeId] = useState("");
+  const [newCategoryId, setNewCategoryId] = useState("");
+  const [newSubcategoryId, setNewSubcategoryId] = useState("");
+  const [newTypeId, setNewTypeId] = useState("");
+  const [oldCategoryId, setOldCategoryId] = useState("");
+  const [oldSubcategoryId, setOldSubcategoryId] = useState("");
+  const [oldTypeId, setOldTypeId] = useState("");
   // TODO Show Image
   const [imageFile, setImageFile] = useState(null);
 
@@ -66,6 +69,9 @@ function AdminEditDash() {
 
   const [isChanged, setIsChanged] = useState(false);
 
+  // GET
+  // ----------------------------------------------
+
   // Fetch product details and breadcrumb when page loads
   useEffect(() => {
     const fetchProductDetails = async () => {
@@ -79,9 +85,12 @@ function AdminEditDash() {
 
         // Set the category, subcategory, and type IDs based on breadcrumb
         if (breadcrumbData) {
-          setCategoryId(breadcrumbData.categoryId);
-          setSubcategoryId(breadcrumbData.subcategoryId);
-          setTypeId(breadcrumbData.typeId);
+          setOldCategoryId(breadcrumbData.categoryId);
+          setOldSubcategoryId(breadcrumbData.subcategoryId);
+          setOldTypeId(breadcrumbData.typeId);
+          setNewCategoryId(breadcrumbData.categoryId);
+          setNewSubcategoryId(breadcrumbData.subcategoryId);
+          setNewTypeId(breadcrumbData.typeId);
         }
       } catch (error) {
         console.error("Failed to fetch product or breadcrumb data", error);
@@ -91,12 +100,6 @@ function AdminEditDash() {
     fetchProductDetails();
   }, [productId]);
 
-  useEffect(() => {
-    console.log("Product Changed:", product);
-  }, [product]);
-
-  // GET
-  // ----------------------------------------------
   // Populate store prices on product data load
   useEffect(() => {
     if (product.pnp) {
@@ -148,12 +151,12 @@ function AdminEditDash() {
   // Fetch subcategories when category changes
   useEffect(() => {
     const fetchSubcategories = async () => {
-      if (!categoryId) return;
+      if (!newCategoryId) return;
       try {
-        const data = await getSubcategoriesByCategory(categoryId);
+        const data = await getSubcategoriesByCategory(newCategoryId);
         setSubcategories(Object.entries(data));
         if (data && Object.keys(data).length > 0) {
-          setSubcategoryId(Object.keys(data)[0]); // Set default subcategory ID
+          setNewSubcategoryId(Object.keys(data)[0]); // Set default subcategory ID
         }
       } catch (error) {
         console.error("Failed to fetch subcategories", error);
@@ -161,17 +164,17 @@ function AdminEditDash() {
     };
 
     fetchSubcategories();
-  }, [categoryId]);
+  }, [newCategoryId]);
 
   // Fetch product types when subcategory changes
   useEffect(() => {
     const fetchProductTypes = async () => {
-      if (!subcategoryId) return;
+      if (!newSubcategoryId) return;
       try {
-        const data = await getProductTypeBySubcategory(categoryId, subcategoryId);
+        const data = await getProductTypeBySubcategory(newCategoryId, newSubcategoryId);
         setProductTypes(Object.entries(data));
         if (data && Object.keys(data).length > 0) {
-          setTypeId(Object.keys(data)[0]); // Set default product type ID
+          setNewTypeId(Object.keys(data)[0]); // Set default product type ID
         }
       } catch (error) {
         console.error("Failed to fetch product types", error);
@@ -179,7 +182,7 @@ function AdminEditDash() {
     };
 
     fetchProductTypes();
-  }, [categoryId, subcategoryId]);
+  }, [newCategoryId, newSubcategoryId]);
   // ----------------------------------------------
 
   // INPUTS
@@ -195,6 +198,7 @@ function AdminEditDash() {
       }));
       setImageFile(value.target.files[0]); // Save the image file
     } else if (field.includes("price") || field.includes("special")) {
+      // Changing price or special input fields
       const storeKey = field.split(".")[0]; // Get the store key (e.g., "pnp", "woolworths")
 
       setProduct((prevProduct) => ({
@@ -206,6 +210,7 @@ function AdminEditDash() {
         },
       }));
     } else if (field.includes("onSpecial")) {
+      // Changing checkbox (onSpecial)
       const storeKey = field.split(".")[0];
       setProduct((prevProduct) => ({
         ...prevProduct,
@@ -226,18 +231,33 @@ function AdminEditDash() {
   // On changing category, subcategory, or type dropdowns
   const handleCategoryChange = (e) => {
     setIsChanged(true); // Mark form as changed
-    setCategoryId(e.target.value);
+    setNewCategoryId(e.target.value);
   };
 
   const handleSubcategoryChange = (e) => {
     setIsChanged(true); // Mark form as changed
-    setSubcategoryId(e.target.value);
+    setNewSubcategoryId(e.target.value);
   };
 
   const handleTypeChange = (e) => {
     setIsChanged(true); // Mark form as changed
-    setTypeId(e.target.value);
+    setNewTypeId(e.target.value);
   };
+
+  // useEffect(() => {
+  //   console.log("Category change:", categoryId);
+  // }, [categoryId]);
+  // useEffect(() => {
+  //   console.log("Subcat change:", subcategoryId);
+  // }, [subcategoryId]);
+  // useEffect(() => {
+  //   console.log("PType change:", typeId);
+  // }, [typeId]);
+  // useEffect(() => {
+  //   console.log("Category:", categoryId);
+  //   console.log("Subcat:", subcategoryId);
+  //   console.log("PType:", typeId);
+  // }, [categoryId, subcategoryId, typeId]);
 
   const handleSaveChanges = async () => {
     try {
@@ -276,9 +296,12 @@ function AdminEditDash() {
       );
 
       // Append product data and image file to FormData
-      formData.append("categoryId", categoryId);
-      formData.append("subcategoryId", subcategoryId);
-      formData.append("typeId", typeId);
+      formData.append("categoryId", newCategoryId);
+      formData.append("subcategoryId", newSubcategoryId);
+      formData.append("typeId", newTypeId);
+      formData.append("oldCategoryId", oldCategoryId);
+      formData.append("oldSubcategoryId", oldSubcategoryId);
+      formData.append("oldTypeId", oldTypeId);
       if (imageFile) {
         formData.append("image", imageFile); // Append the image file
       }
@@ -365,7 +388,7 @@ function AdminEditDash() {
                   <FloatingLabel controlId="floatingInput" label="Category" className="mb-4">
                     <Form.Select
                       aria-label="Floating label select example"
-                      value={categoryId || ""}
+                      value={newCategoryId || ""}
                       className="input-style"
                       onChange={handleCategoryChange}
                     >
@@ -379,8 +402,8 @@ function AdminEditDash() {
                 <Form.Floating>
                   <FloatingLabel controlId="floatingInput" label="Subcategory" className="mb-4">
                     <Form.Select
-                      aria-label="Floating label select example"
-                      value={subcategoryId || ""}
+                      aria-label="Floating label select"
+                      value={newSubcategoryId || ""}
                       className="input-style"
                       onChange={handleSubcategoryChange}
                     >
@@ -396,8 +419,8 @@ function AdminEditDash() {
                 <Form.Floating>
                   <FloatingLabel controlId="floatingInput" label="Type" className="mb-4">
                     <Form.Select
-                      aria-label="Floating label select example"
-                      value={typeId || ""}
+                      aria-label="Floating label select"
+                      value={newTypeId || ""}
                       className="input-style"
                       onChange={handleTypeChange}
                     >
@@ -410,18 +433,38 @@ function AdminEditDash() {
                   </FloatingLabel>
                 </Form.Floating>
 
-                <div className="bg-neutral-100 rounded-xl h-32 flex items-center justify-center">
-                  {product.image && !imageFile && (
-                    <img
-                      src={product.image}
-                      alt="Product"
-                      className="w-full h-full object-cover rounded-xl"
-                    />
+                <div
+                  className="bg-neutral-100 rounded-xl h-64 flex flex-col items-center justify-center cursor-pointer pt-2 pb-8"
+                  onClick={() => document.getElementById("imageUpload").click()}
+                >
+                  {imageFile ? (
+                    <>
+                      <small className="text-gray-500 w-full pl-4 mb-4">New Product Image</small>
+                      <img
+                        src={URL.createObjectURL(imageFile)}
+                        alt="New Product"
+                        className="object-contain h-full w-full rounded-xl"
+                      />
+                    </>
+                  ) : product.image ? (
+                    <>
+                      <small className="text-gray-500 w-full pl-4 mb-4">
+                        Current Product Image
+                      </small>
+                      <img
+                        src={product.image}
+                        alt="Product"
+                        className="object-contain h-full w-full rounded-xl"
+                      />
+                    </>
+                  ) : (
+                    <p className="text-gray-500">Click to upload an product image</p>
                   )}
                   <Form.Control
                     type="file"
+                    id="imageUpload"
                     onChange={(e) => handleInputChange("image", e)}
-                    className="input-style"
+                    className="d-none" // Hide the input element visually
                   />
                 </div>
               </div>

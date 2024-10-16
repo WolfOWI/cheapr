@@ -116,12 +116,18 @@ router.get("/:id", async (req, res) => {
 router.put("/:id", upload.single("image"), async (req, res) => {
   try {
     const { id } = req.params; // Extract the product ID from the URL
-    console.log("req.body", req.body);
 
-    const { categoryId, subcategoryId, typeId } = req.body;
-    console.log({ categoryId, subcategoryId, typeId });
+    // The New & Old Categories, Subcategories and Product Types
+    const { categoryId, oldCategoryId, subcategoryId, oldSubcategoryId, typeId, oldTypeId } =
+      req.body;
+    console.log("New CategoryId:", categoryId);
+    console.log("Old CategoryId:", oldCategoryId);
+    console.log("New SubcategoryId:", subcategoryId);
+    console.log("Old SubcategoryId:", oldSubcategoryId);
+    console.log("New TypeId:", typeId);
+    console.log("Old TypeId:", oldTypeId);
+
     const productData = JSON.parse(req.body.productData); // Parse the stringified productData
-    console.log("productData", JSON.parse(req.body.productData));
 
     const file = req.file; // Uploaded image
 
@@ -144,7 +150,7 @@ router.put("/:id", upload.single("image"), async (req, res) => {
     }
 
     const updatedProductData = {
-      ...productData, // Spread the parsed product data
+      ...productData,
       ...(imageUrl && { image: imageUrl }), // Only update image if a new one was uploaded
     };
 
@@ -154,56 +160,80 @@ router.put("/:id", upload.single("image"), async (req, res) => {
     const rejectedSnapshot = await admin.database().ref(`products/rejected/${id}`).once("value");
 
     let productRef;
-    if (approvedSnapshot.exists()) productRef = admin.database().ref(`products/approved/${id}`);
-    if (pendingSnapshot.exists()) productRef = admin.database().ref(`products/pending/${id}`);
-    if (rejectedSnapshot.exists()) productRef = admin.database().ref(`products/rejected/${id}`);
+    if (approvedSnapshot.exists()) {
+      productRef = admin.database().ref(`products/approved/${id}`);
+    }
+    if (pendingSnapshot.exists()) {
+      productRef = admin.database().ref(`products/pending/${id}`);
+    }
+    if (rejectedSnapshot.exists()) {
+      productRef = admin.database().ref(`products/rejected/${id}`);
+    }
 
     if (productRef) {
-      // Remove the product from the old category, subcategory, and type
-      const oldData = approvedSnapshot.val() || pendingSnapshot.val() || rejectedSnapshot.val();
-      const oldCategoryId = oldData.categoryId;
-      const oldSubcategoryId = oldData.subcategoryId;
-      const oldTypeId = oldData.typeId;
+      if (
+        oldCategoryId !== categoryId ||
+        oldSubcategoryId !== subcategoryId ||
+        oldTypeId !== typeId
+      ) {
+        const oldPath = `categories/${oldCategoryId}/subcategories/${oldSubcategoryId}/types/${oldTypeId}/productIds`;
+        console.log("Removing product ID from old path:", oldPath);
 
-      const oldPath = `categories/${oldCategoryId}/subcategories/${oldSubcategoryId}/types/${oldTypeId}/productIds`;
-      await admin
-        .database()
-        .ref(oldPath)
-        .transaction((productIds) => {
-          if (productIds) {
-            // Remove productId from array
-            const index = productIds.indexOf(id);
-            if (index !== -1) {
-              productIds.splice(index, 1);
+        await admin
+          .database()
+          .ref(oldPath)
+          .transaction((productIds) => {
+            console.log("Current product IDs at old path before removal:", productIds);
+            if (productIds) {
+              const index = productIds.indexOf(id);
+              if (index !== -1) {
+                productIds.splice(index, 1);
+                console.log("Removed product ID from old path.");
+              }
             }
-          }
-          return productIds;
-        });
+            console.log("Product IDs at old path after removal:", productIds);
+            return productIds;
+          });
+      }
 
       // Update product details in the relevant path (approved, pending, rejected)
+      console.log("Updating product details at path:", productRef.path);
       await productRef.update(updatedProductData);
 
-      // Add the product to the new category, subcategory, and type
-      const newCategoryId = categoryId;
-      const newSubcategoryId = subcategoryId;
-      const newTypeId = typeId;
+      // Add the product to the new category, subcategory, and type if it has changed
+      const newPath = `categories/${categoryId}/subcategories/${subcategoryId}/types/${typeId}/productIds`;
+      console.log("Adding product ID to new path:", newPath);
 
-      const newPath = `categories/${newCategoryId}/subcategories/${newSubcategoryId}/types/${newTypeId}/productIds`;
       await admin
         .database()
         .ref(newPath)
         .transaction((productIds = []) => {
-          if (!productIds.includes(id)) {
-            productIds.push(id); // Add product ID to array
+          console.log("Current product IDs at new path before addition:", productIds);
+
+          // Ensure productIds is an array if it is null or undefined
+          if (!Array.isArray(productIds)) {
+            productIds = [];
           }
+
+          if (!productIds.includes(id)) {
+            productIds.push(id);
+            console.log("Added product ID to new path.");
+          } else {
+            console.log("Product ID already exists in the new path.");
+          }
+
+          console.log("Product IDs at new path after addition:", productIds);
           return productIds;
         });
 
+      console.log("Product updated successfully with ID:", id);
       res.status(200).json({ message: "Product updated successfully!" });
     } else {
+      console.log("Product not found for ID:", id);
       res.status(404).json({ message: "Product not found" });
     }
   } catch (error) {
+    console.error("Error updating product:", error); // Log the error for better debugging
     res.status(500).json({ error: error.message });
   }
 });
