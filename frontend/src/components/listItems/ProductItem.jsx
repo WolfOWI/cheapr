@@ -40,7 +40,7 @@ const ProductItem = ({ product, admin, onEditClick }) => {
       <Row className="align-items-center group cursor-pointer ">
         {/* Product Information */}
         <Col xs={3} className="flex items-center">
-          <img src={product.image} alt={product.name} className="h-20" />
+          <img src={product.image} alt={product.name} className="h-20 w-20 object-contain" />
           <div>
             <h4>{product.name}</h4>
             <h4 className="text-neutral-500 font-normal">

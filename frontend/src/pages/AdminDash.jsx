@@ -126,7 +126,7 @@ function AdminDash() {
           <Container>
             <Row>
               <Col xs={3}>
-                <h4 className="text-white font-bold">172 Products</h4>
+                <h4 className="text-white font-bold">{Object.keys(products).length} Products</h4>
               </Col>
               <Col xs={2} className="flex items-center justify-center">
                 <StoreLogo store="pnp" type="white" className="h-4" />
