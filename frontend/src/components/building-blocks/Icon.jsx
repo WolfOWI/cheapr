@@ -525,8 +525,8 @@ const Icon = ({ type, className = "" }) => {
             gradientUnits="userSpaceOnUse"
             gradientTransform="translate(38.67 1.44083) rotate(90) scale(27.011 58.8569)"
           >
-            <stop offset="0.386" stop-color="#FAC470" />
-            <stop offset="0.767" stop-color="#ED9C2C" />
+            <stop offset="0.386" stopColor="#FAC470" />
+            <stop offset="0.767" stopColor="#ED9C2C" />
           </radialGradient>
         </defs>
       </svg>

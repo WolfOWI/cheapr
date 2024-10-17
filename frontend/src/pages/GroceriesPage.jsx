@@ -88,6 +88,10 @@ function GroceriesPage() {
     }
   };
 
+  const handleOnViewClick = (productId) => {
+    navigate(`/product/${productId}`);
+  };
+
   return (
     <>
       <NavigationBar />
@@ -144,7 +148,11 @@ function GroceriesPage() {
           ) : (
             <>
               {Object.keys(products).map((productId, index) => (
-                <ProductItem key={index} product={products[productId]} />
+                <ProductItem
+                  key={index}
+                  product={products[productId]}
+                  onViewClick={() => handleOnViewClick(productId)}
+                />
               ))}
             </>
           )}

@@ -22,7 +22,7 @@ import Btn from "../button/Btn";
 
 // -----------------------------------------------------------
 
-const ProductItem = ({ product, admin, onEditClick, onDeleteClick }) => {
+const ProductItem = ({ product, admin, onViewClick, onEditClick, onDeleteClick, onCartClick }) => {
   // Array of prices from different stores
   const prices = [
     { store: "pnp", price: product.pnp.price },
@@ -37,7 +37,10 @@ const ProductItem = ({ product, admin, onEditClick, onDeleteClick }) => {
 
   return (
     <>
-      <Row className="align-items-center group cursor-pointer ">
+      <Row
+        className={`align-items-center group ${!admin && "cursor-pointer"}`}
+        onClick={onViewClick}
+      >
         {/* Product Information */}
         <Col xs={3} className="flex items-center">
           <img src={product.image} alt={product.name} className="h-20 w-20 object-contain" />
