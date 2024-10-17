@@ -107,6 +107,102 @@ router.get("/approved", async (req, res) => {
   }
 });
 
+// Get all APPROVED products by ID of section (category, subcategory, or type)
+router.get("/approved/group/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // Fetch the category node to check if the ID corresponds to a category
+    const categorySnapshot = await admin.database().ref(`categories/${id}`).once("value");
+    const categoryData = categorySnapshot.val();
+
+    if (categoryData) {
+      // If ID is a category, gather all product IDs from all subcategories and types
+      const productIds = [];
+      Object.values(categoryData.subcategories || {}).forEach((subcategory) => {
+        Object.values(subcategory.types || {}).forEach((type) => {
+          if (type.productIds) {
+            productIds.push(...type.productIds);
+          }
+        });
+      });
+
+      if (productIds.length > 0) {
+        const productPromises = productIds.map((productId) =>
+          admin.database().ref(`products/approved/${productId}`).once("value")
+        );
+        const productSnapshots = await Promise.all(productPromises);
+        const products = productSnapshots.map((snapshot) => snapshot.val()).filter(Boolean);
+        return res.status(200).json(products);
+      }
+    }
+
+    // Attempt to find the ID in subcategories
+    const subcategorySnapshot = await admin.database().ref(`categories`).once("value");
+    const categories = subcategorySnapshot.val();
+
+    if (categories) {
+      const productIds = [];
+      Object.values(categories).forEach((category) => {
+        const subcategory = category.subcategories && category.subcategories[id];
+        if (subcategory) {
+          Object.values(subcategory.types || {}).forEach((type) => {
+            if (type.productIds) {
+              productIds.push(...type.productIds);
+            }
+          });
+        }
+      });
+
+      if (productIds.length > 0) {
+        const productPromises = productIds.map((productId) =>
+          admin.database().ref(`products/approved/${productId}`).once("value")
+        );
+        const productSnapshots = await Promise.all(productPromises);
+        const products = productSnapshots.map((snapshot) => snapshot.val()).filter(Boolean);
+        return res.status(200).json(products);
+      }
+    }
+
+    // Attempt to find the ID in types
+    const typeSnapshot = await admin.database().ref(`categories`).once("value");
+    const categoriesForTypes = typeSnapshot.val();
+
+    if (categoriesForTypes) {
+      const productIds = [];
+
+      // Iterate through all categories and subcategories to find the type
+      Object.values(categoriesForTypes).forEach((category) => {
+        Object.values(category.subcategories || {}).forEach((subcategory) => {
+          const type = subcategory.types && subcategory.types[id];
+          if (type && type.productIds) {
+            productIds.push(...type.productIds);
+          }
+        });
+      });
+
+      if (productIds.length > 0) {
+        const productPromises = productIds.map((productId) =>
+          admin.database().ref(`products/approved/${productId}`).once("value")
+        );
+
+        const productSnapshots = await Promise.all(productPromises);
+        const products = productSnapshots
+          .map((snapshot) => snapshot.val())
+          .filter((product) => product);
+
+        return res.status(200).json(products);
+      }
+    }
+
+    // If ID does not match any category, subcategory, or type, return not found
+    return res.status(404).json({ message: "No products found for the provided ID" });
+  } catch (error) {
+    console.error("Error fetching products by ID:", error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
 // Get Any Product by ID (approved, pending, or rejected)
 router.get("/:id", async (req, res) => {
   try {

@@ -69,7 +69,7 @@ function GroceriesPage() {
         setProducts(sortProducts(products, "NewestApproved"));
         break;
       case "OldestApproved":
-        setSortDropLabel("Oldest Approval");
+        setSortDropLabel("Oldest");
         setProducts(sortProducts(products, "OldestApproved"));
         break;
       case "Cheapest":

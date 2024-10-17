@@ -39,6 +39,17 @@ export const getAllApprovedProducts = async () => {
     throw error;
   }
 };
+
+// Get All APPROVED products under a specific group (category / subcategory / product)
+export const getProductsByGroupId = async (id) => {
+  try {
+    const response = await axios.get(`${API_URL}/products/approved/group/${id}`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 // -----------------------------------------------------
 
 // UPDATE
