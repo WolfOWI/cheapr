@@ -64,7 +64,6 @@ const Drpdwn = ({
   return (
     <Dropdown {...rest} onSelect={onSelect}>
       <Dropdown.Toggle className={combinedClassName}>{title}</Dropdown.Toggle>
-
       <Dropdown.Menu>{children}</Dropdown.Menu>
     </Dropdown>
   );
@@ -77,13 +76,6 @@ Drpdwn.propTypes = {
   variant: PropTypes.oneOf(["primary", "secondary", "dark", "dark-outline"]),
   onSelect: PropTypes.func,
   children: PropTypes.node.isRequired,
-};
-
-// Default props
-Drpdwn.defaultProps = {
-  className: "",
-  title: "Dropdown",
-  variant: "primary",
 };
 
 export default Drpdwn;

@@ -1,13 +1,11 @@
 // IMPORT
 // -----------------------------------------------------------
 // React & Hooks
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { Col, Container, Row } from "react-bootstrap";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
-import Button from "react-bootstrap/Button";
 import { Stack } from "react-bootstrap";
 
 // Services
@@ -35,20 +33,20 @@ const Footer = ({ admin }) => {
           <Col>
             <Navbar expand="lg" className="py-4 flex items-center justify-center">
               <Nav className="flex items-center">
-                <Nav.Link>
-                  <Link to="/">Home</Link>
+                <Nav.Link as={Link} to="/">
+                  Home
                 </Nav.Link>
                 <p className="mx-8 text-primary font-bold hidden lg:block">|</p>
-                <Nav.Link>
-                  <Link to="/groceries">Groceries</Link>
+                <Nav.Link as={Link} to="/groceries">
+                  Groceries
                 </Nav.Link>
                 <p className="mx-8 text-primary font-bold hidden lg:block">|</p>
-                <Nav.Link>
-                  <Link to="/add">Add a Product</Link>
+                <Nav.Link as={Link} to="/add">
+                  Add a Product
                 </Nav.Link>
                 <p className="mx-8 text-primary font-bold hidden lg:block">|</p>
-                <Nav.Link>
-                  <Link to="/planner">Shopping Planner</Link>
+                <Nav.Link as={Link} to="/planner">
+                  Shopping Planner
                 </Nav.Link>
               </Nav>
             </Navbar>

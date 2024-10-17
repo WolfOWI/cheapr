@@ -1,16 +1,17 @@
 // IMPORT
 // -----------------------------------------------------------
 // React & Hooks
-// -
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 // Services
-// -
+import { getAllApprovedProducts } from "../services/productService";
 
 // Utility Functions
-// -
+import { sortProducts } from "../utils/productSortUtils";
 
 // Third-Party Components
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Dropdown } from "react-bootstrap";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
 
 // Internal Components
@@ -19,66 +20,73 @@ import Btn from "../components/button/Btn";
 import StoreLogo from "../components/building-blocks/StoreLogo";
 import ProductItem from "../components/listItems/ProductItem";
 import Footer from "../components/navigation/Footer";
+import Drpdwn from "../components/input/Drpdwn";
 
 // Imagery
 // -
 
 // -----------------------------------------------------------
 function GroceriesPage() {
-  const products = [
-    {
-      name: "Top Red Apples",
-      image: "apple.jpg",
-      amount: "1.5",
-      unit: "kg",
-      pnp: {
-        price: 36.99,
-        updated: "19/09/2024",
-        onSpecial: false,
-      },
-      woolworths: {
-        price: 42.99,
-        updated: "19/09/2024",
-        onSpecial: false,
-      },
-      checkers: {
-        price: 40.95,
-        updated: "19/09/2024",
-        onSpecial: true,
-      },
-      spar: {
-        price: 38.86,
-        updated: "19/09/2024",
-        onSpecial: false,
-      },
-    },
-    {
-      name: "Juicy Mangos",
-      image: "mango.jpg",
-      amount: "2",
-      unit: "kg",
-      pnp: {
-        price: 57.99,
-        updated: "19/09/2024",
-        onSpecial: false,
-      },
-      woolworths: {
-        price: 56.99,
-        updated: "19/09/2024",
-        onSpecial: false,
-      },
-      checkers: {
-        price: 67.95,
-        updated: "19/09/2024",
-        onSpecial: false,
-      },
-      spar: {
-        price: 59.86,
-        updated: "19/09/2024",
-        onSpecial: false,
-      },
-    },
-  ];
+  const [products, setProducts] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
+  const [sortDropLabel, setSortDropLabel] = useState("Most Recent"); // Dropdown Label
+
+  const navigate = useNavigate();
+
+  // On Page Mount
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const data = await getAllApprovedProducts();
+      const sortedData = sortProducts(data, "NewestApproved");
+      setProducts(sortedData);
+    };
+
+    fetchProducts();
+  }, []);
+
+  // Loading of products
+  useEffect(() => {
+    if (Object.keys(products).length > 0) {
+      setIsLoading(false);
+    }
+  }, [products]);
+
+  // Handle sort dropdown select
+  const handleSelect = (eventKey) => {
+    console.log(`Selected sort option: ${eventKey}`);
+
+    switch (eventKey) {
+      case "AtoZ":
+        setSortDropLabel("Alfabetical (A to Z)");
+        setProducts(sortProducts(products, "AtoZ"));
+        break;
+      case "ZtoA":
+        setSortDropLabel("Alfabetical (Z to A)");
+        setProducts(sortProducts(products, "ZtoA"));
+        break;
+      case "NewestApproved":
+        setSortDropLabel("Most Recent");
+        setProducts(sortProducts(products, "NewestApproved"));
+        break;
+      case "OldestApproved":
+        setSortDropLabel("Oldest Approval");
+        setProducts(sortProducts(products, "OldestApproved"));
+        break;
+      case "Cheapest":
+        setSortDropLabel("Lowest Price");
+        setProducts(sortProducts(products, "Cheapest"));
+        break;
+      case "Expensive":
+        setSortDropLabel("Highest Price");
+        setProducts(sortProducts(products, "Expensive"));
+        break;
+
+      default:
+        setSortDropLabel("Most Recent");
+        setProducts(sortProducts(products, "NewestApproved"));
+        break;
+    }
+  };
 
   return (
     <>
@@ -91,8 +99,15 @@ function GroceriesPage() {
             <Breadcrumb.Item active>Fresh Fuit</Breadcrumb.Item>
           </Breadcrumb>
           <div className="flex w-full justify-between">
-            <h2>Fresh Fruit</h2>
-            <Btn variant="dark-outline">Sort by</Btn>
+            <h2>All Groceries</h2>
+            <Drpdwn title={`Sort: ${sortDropLabel}`} variant="dark-outline" onSelect={handleSelect}>
+              <Dropdown.Item eventKey="AtoZ">Alfabetical (A to Z)</Dropdown.Item>
+              <Dropdown.Item eventKey="ZtoA">Alfabetical (Z to A)</Dropdown.Item>
+              <Dropdown.Item eventKey="NewestApproved">Most Recent</Dropdown.Item>
+              <Dropdown.Item eventKey="OldestApproved">Oldest</Dropdown.Item>
+              <Dropdown.Item eventKey="Cheapest">Lowest Price</Dropdown.Item>
+              <Dropdown.Item eventKey="Expensive">Highest Price</Dropdown.Item>
+            </Drpdwn>
           </div>
         </Container>
         {/* Header */}
@@ -121,9 +136,15 @@ function GroceriesPage() {
         {/* Product List Container */}
         <Container className="my-4">
           {/* Product Rows */}
-          {products.map((product, index) => (
-            <ProductItem product={product} key={index} />
-          ))}
+          {isLoading ? (
+            <p>Loading Products</p>
+          ) : (
+            <>
+              {Object.keys(products).map((productId, index) => (
+                <ProductItem admin key={index} product={products[productId]} />
+              ))}
+            </>
+          )}
         </Container>
       </div>
       <Footer />

@@ -45,7 +45,6 @@ function NavigationBar({ admin }) {
                 <Link to="/groceries">All Groceries</Link>
                 <Link to="/product">Individual</Link>
                 <Link to="/admin">Admin All</Link>
-                <Link to="/edit">Admin Edit</Link>
                 <Link to="/newproducts">New</Link>
                 <Link to="/flagged">Flagged</Link>
               </Stack>
