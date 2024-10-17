@@ -115,7 +115,10 @@ function GroceriesPage() {
           <Container>
             <Row>
               <Col xs={3}>
-                <h4 className="text-white font-bold">5 Products</h4>
+                <h4 className="text-white font-bold">
+                  {Object.keys(products).length} Product
+                  {Object.keys(products).length === 1 ? "" : "s"}
+                </h4>
               </Col>
               <Col xs={2} className="flex items-center justify-center">
                 <StoreLogo store="pnp" type="white" className="h-4" />
@@ -141,7 +144,7 @@ function GroceriesPage() {
           ) : (
             <>
               {Object.keys(products).map((productId, index) => (
-                <ProductItem admin key={index} product={products[productId]} />
+                <ProductItem key={index} product={products[productId]} />
               ))}
             </>
           )}
