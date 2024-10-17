@@ -3,6 +3,76 @@ import admin from "firebase-admin";
 
 const router = express.Router();
 
+// Get breadcrumb by Group ID (can be category, subcategory, or product type)
+router.get("/group/:groupId", async (req, res) => {
+  try {
+    const { groupId } = req.params;
+    let breadcrumb = null;
+    let found = false;
+
+    const categoriesSnapshot = await admin.database().ref("categories").once("value");
+    const categories = categoriesSnapshot.val();
+
+    // Traverse through categories, subcategories, and product types
+    for (const catKey in categories) {
+      const category = categories[catKey];
+
+      // If the groupId matches the category ID, create the breadcrumb
+      if (catKey === groupId) {
+        breadcrumb = {
+          categoryId: catKey,
+          category: category.name,
+        };
+        found = true;
+        break;
+      }
+
+      // Traverse subcategories if they exist
+      if (category.subcategories) {
+        for (const subKey in category.subcategories) {
+          const subcategory = category.subcategories[subKey];
+
+          // If the groupId matches the subcategory ID, create the breadcrumb
+          if (subKey === groupId) {
+            breadcrumb = {
+              categoryId: catKey,
+              category: category.name,
+              subcategoryId: subKey,
+              subcategory: subcategory.name,
+            };
+            found = true;
+            break;
+          }
+
+          // Traverse types within the subcategory if they exist
+          if (subcategory.types && subcategory.types[groupId]) {
+            const productType = subcategory.types[groupId];
+            breadcrumb = {
+              categoryId: catKey,
+              category: category.name,
+              subcategoryId: subKey,
+              subcategory: subcategory.name,
+              typeId: groupId,
+              type: productType.name,
+            };
+            found = true;
+            break;
+          }
+        }
+      }
+      if (found) break;
+    }
+
+    if (breadcrumb) {
+      res.status(200).json(breadcrumb);
+    } else {
+      res.status(404).json({ message: "Group not found in any category" });
+    }
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 // Get breadcrumb by Product ID
 router.get("/product/:productId", async (req, res) => {
   try {

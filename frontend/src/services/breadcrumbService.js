@@ -12,6 +12,16 @@ export const getBreadcrumbByProductId = async (productId) => {
   }
 };
 
+// Get breadcrumb by Group ID (category, subcategory, or product type)
+export const getBreadcrumbByGroupId = async (groupId) => {
+  try {
+    const response = await axios.get(`${API_URL}/breadcrumb/group/${groupId}`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
 // Get breadcrumb by Subcategory ID
 export const getBreadcrumbBySubcategoryId = async (subcatId) => {
   try {

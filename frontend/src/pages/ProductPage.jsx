@@ -149,6 +149,7 @@ function ProductPage() {
           <>
             {formattedBreadcrumbArr && (
               <Breadcrumb>
+                <Breadcrumb.Item href="/groceries">Groceries</Breadcrumb.Item>
                 {formattedBreadcrumbArr.map((bread, index) => (
                   <Breadcrumb.Item key={index} href="">
                     {bread}

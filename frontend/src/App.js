@@ -34,7 +34,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
-        <Route path="/groceries" element={<GroceriesPage />} />
+        <Route path="/groceries/:groupId?" element={<GroceriesPage />} />
         <Route path="/product/:productId" element={<ProductPage />} />
         <Route path="/planner" element={<CartPlannerPage />} />
         <Route path="/add" element={<AddProductPage />} />

@@ -2,13 +2,15 @@
 // -----------------------------------------------------------
 // React & Hooks
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 // Services
-import { getAllApprovedProducts } from "../services/productService";
+import { getAllApprovedProducts, getProductsByGroupId } from "../services/productService";
+import { getBreadcrumbByGroupId } from "../services/breadcrumbService";
 
 // Utility Functions
 import { sortProducts } from "../utils/productSortUtils";
+import { formatName } from "../utils/wordFormatUtils";
 
 // Third-Party Components
 import { Container, Row, Col, Dropdown } from "react-bootstrap";
@@ -27,29 +29,83 @@ import Drpdwn from "../components/input/Drpdwn";
 
 // -----------------------------------------------------------
 function GroceriesPage() {
+  const { groupId } = useParams();
+
   const [products, setProducts] = useState({});
+  const [breadcrumb, setBreadcrumb] = useState({});
+  const [formattedBreadcrumbArr, setFormattedBreadcrumbArr] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [sortDropLabel, setSortDropLabel] = useState("Most Recent"); // Dropdown Label
 
   const navigate = useNavigate();
 
-  // On Page Mount
+  // On Page Mount or when groupId changes
   useEffect(() => {
     const fetchProducts = async () => {
-      const data = await getAllApprovedProducts();
-      const sortedData = sortProducts(data, "NewestApproved");
-      setProducts(sortedData);
+      try {
+        let data;
+        if (groupId) {
+          data = await getProductsByGroupId(groupId);
+        } else {
+          data = await getAllApprovedProducts();
+        }
+        const sortedData = sortProducts(data, "NewestApproved");
+        setProducts(sortedData);
+      } catch (error) {
+        console.error("Failed to fetch products:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    const fetchBreadcrumb = async () => {
+      try {
+        let breads;
+        if (groupId) {
+          breads = await getBreadcrumbByGroupId(groupId);
+        }
+        setBreadcrumb(breads);
+      } catch (error) {
+        console.error("Failed to fetch breadcrumb data:", error);
+      }
     };
 
     fetchProducts();
-  }, []);
+    fetchBreadcrumb();
+  }, [groupId]);
 
-  // Loading of products
+  // Format Breadcrumb
   useEffect(() => {
-    if (Object.keys(products).length > 0) {
-      setIsLoading(false);
+    if (breadcrumb) {
+      const formattedArray = [];
+
+      // Conditionally add each part to the array only if it exists
+      if (breadcrumb["category"]) {
+        formattedArray.push({
+          name: formatName(breadcrumb["category"]),
+          id: breadcrumb["categoryId"],
+        });
+      }
+      if (breadcrumb["subcategory"]) {
+        formattedArray.push({
+          name: formatName(breadcrumb["subcategory"]),
+          id: breadcrumb["subcategoryId"],
+        });
+      }
+      if (breadcrumb["type"]) {
+        formattedArray.push({ name: formatName(breadcrumb["type"]), id: breadcrumb["typeId"] });
+      }
+
+      setFormattedBreadcrumbArr(formattedArray);
     }
-  }, [products]);
+  }, [breadcrumb]);
+
+  // useEffect(() => {
+  //   if (breadcrumb && formattedBreadcrumbArr) {
+  //     console.log("breadcrumb", breadcrumb);
+  //     console.log("formattedBreadcrumbArr", formattedBreadcrumbArr);
+  //   }
+  // }, [breadcrumb, formattedBreadcrumbArr]);
 
   // Handle sort dropdown select
   const handleSelect = (eventKey) => {
@@ -92,15 +148,22 @@ function GroceriesPage() {
     navigate(`/product/${productId}`);
   };
 
+  const handleBreadcrumbClick = (id) => {
+    navigate(`/groceries/${id}`);
+  };
+
   return (
     <>
       <NavigationBar />
       <div className="mb-32">
         <Container className="pt-6">
           <Breadcrumb>
-            <Breadcrumb.Item href="">Food</Breadcrumb.Item>
-            <Breadcrumb.Item href="">Fruit & Vegetables</Breadcrumb.Item>
-            <Breadcrumb.Item active>Fresh Fuit</Breadcrumb.Item>
+            <Breadcrumb.Item href="/groceries">Groceries</Breadcrumb.Item>
+            {formattedBreadcrumbArr.map((bread, index) => (
+              <Breadcrumb.Item key={index} onClick={() => handleBreadcrumbClick(bread.id)}>
+                {bread.name}
+              </Breadcrumb.Item>
+            ))}
           </Breadcrumb>
           <div className="flex w-full justify-between">
             <h2>All Groceries</h2>
