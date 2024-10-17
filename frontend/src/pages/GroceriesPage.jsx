@@ -100,12 +100,12 @@ function GroceriesPage() {
     }
   }, [breadcrumb]);
 
-  // useEffect(() => {
-  //   if (breadcrumb && formattedBreadcrumbArr) {
-  //     console.log("breadcrumb", breadcrumb);
-  //     console.log("formattedBreadcrumbArr", formattedBreadcrumbArr);
-  //   }
-  // }, [breadcrumb, formattedBreadcrumbArr]);
+  useEffect(() => {
+    if (breadcrumb && formattedBreadcrumbArr) {
+      console.log("breadcrumb", breadcrumb);
+      console.log("formattedBreadcrumbArr", formattedBreadcrumbArr);
+    }
+  }, [breadcrumb, formattedBreadcrumbArr]);
 
   // Handle sort dropdown select
   const handleSelect = (eventKey) => {
@@ -166,11 +166,15 @@ function GroceriesPage() {
             ))}
           </Breadcrumb>
           <div className="flex w-full justify-between">
-            <h2>
-              {groupId
-                ? formattedBreadcrumbArr[formattedBreadcrumbArr.length - 1].name
-                : "All Groceries"}
-            </h2>
+            {
+              <h2>
+                {groupId
+                  ? formattedBreadcrumbArr.length > 0 &&
+                    formattedBreadcrumbArr[formattedBreadcrumbArr.length - 1].name
+                  : "All Groceries"}
+              </h2>
+            }
+
             <Drpdwn title={`Sort: ${sortDropLabel}`} variant="dark-outline" onSelect={handleSelect}>
               <Dropdown.Item eventKey="AtoZ">Alfabetical (A to Z)</Dropdown.Item>
               <Dropdown.Item eventKey="ZtoA">Alfabetical (Z to A)</Dropdown.Item>

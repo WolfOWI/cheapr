@@ -1,10 +1,12 @@
 // IMPORT
 // -----------------------------------------------------------
 // React & Hooks
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 // Services
-// -
+import { getSubcategoriesByCategory } from "../../services/subcategoryService";
+import { getProductTypeBySubcategory } from "../../services/productTypeService";
 
 // Utility Functions
 // -
@@ -27,6 +29,62 @@ import logoColor from "../../assets/logos/logo_color.svg";
 function NavigationBar({ admin }) {
   const navigate = useNavigate();
 
+  // State for each category's subcategories and product types
+  const [foodSubcategories, setFoodSubcategories] = useState([]);
+  const [drinksSubcategories, setDrinksSubcategories] = useState([]);
+  const [householdSubcategories, setHouseholdSubcategories] = useState([]);
+
+  const [foodProductTypes, setFoodProductTypes] = useState({});
+  const [drinksProductTypes, setDrinksProductTypes] = useState({});
+  const [householdProductTypes, setHouseholdProductTypes] = useState({});
+
+  // Function to fetch subcategories and product types for a category
+  const fetchSubcategoriesAndTypes = async (categoryId, setSubcategories, setProductTypes) => {
+    try {
+      const subcategories = await getSubcategoriesByCategory(categoryId);
+      setSubcategories(Object.entries(subcategories));
+      const allProductTypes = {};
+      for (const [subcatId] of Object.entries(subcategories)) {
+        const productTypes = await getProductTypeBySubcategory(categoryId, subcatId);
+        allProductTypes[subcatId] = Object.entries(productTypes);
+      }
+      setProductTypes(allProductTypes);
+    } catch (error) {
+      console.error(`Failed to fetch data for category ${categoryId}:`, error);
+    }
+  };
+
+  // Fetch data for each category on component mount
+  useEffect(() => {
+    fetchSubcategoriesAndTypes("10000", setFoodSubcategories, setFoodProductTypes);
+    fetchSubcategoriesAndTypes("20000", setDrinksSubcategories, setDrinksProductTypes);
+    fetchSubcategoriesAndTypes("30000", setHouseholdSubcategories, setHouseholdProductTypes);
+  }, []);
+
+  // Helper function to render dropdown for a given category
+  const renderCategoryDropdown = (title, subcategories, productTypes) => (
+    <NavDropdown title={title} id={`${title.toLowerCase()}-nav-dropdown`}>
+      {subcategories.map(([subcatId, subcategory]) => (
+        <NavDropdown
+          title={subcategory.name}
+          key={subcatId}
+          id={`subcategory-${subcatId}`}
+          drop="end"
+        >
+          {productTypes[subcatId] ? (
+            productTypes[subcatId].map(([typeId, productType]) => (
+              <NavDropdown.Item key={typeId} onClick={() => navigate(`/groceries/${typeId}`)}>
+                {productType.name}
+              </NavDropdown.Item>
+            ))
+          ) : (
+            <NavDropdown.Item>No product types found</NavDropdown.Item>
+          )}
+        </NavDropdown>
+      ))}
+    </NavDropdown>
+  );
+
   // TODO Change navbar based on user type (admin/customer)
 
   return (
@@ -46,29 +104,11 @@ function NavigationBar({ admin }) {
                 <Link to="/admin">Admin</Link>
                 <Link to="/newproducts">New</Link>
                 <Link to="/flagged">Flagged</Link>
+                {/* Dropdowns for each category */}
+                {renderCategoryDropdown("Food", foodSubcategories, foodProductTypes)}
+                {renderCategoryDropdown("Drinks", drinksSubcategories, drinksProductTypes)}
+                {renderCategoryDropdown("Household", householdSubcategories, householdProductTypes)}
               </Stack>
-              {/* TODO Add product filtering functionality */}
-              {/* <NavDropdown title="Food" id="basic-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-              </NavDropdown>
-              <NavDropdown title="Drinks" id="basic-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-              </NavDropdown>
-              <NavDropdown title="Household" id="basic-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-              </NavDropdown> */}
             </Nav>
             {admin ? (
               <Stack direction="horizontal" gap={2}>
