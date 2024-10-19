@@ -100,13 +100,6 @@ function GroceriesPage() {
     }
   }, [breadcrumb]);
 
-  useEffect(() => {
-    if (breadcrumb && formattedBreadcrumbArr) {
-      console.log("breadcrumb", breadcrumb);
-      console.log("formattedBreadcrumbArr", formattedBreadcrumbArr);
-    }
-  }, [breadcrumb, formattedBreadcrumbArr]);
-
   // Handle sort dropdown select
   const handleSelect = (eventKey) => {
     console.log(`Selected sort option: ${eventKey}`);
@@ -218,13 +211,23 @@ function GroceriesPage() {
             <p>Loading Products</p>
           ) : (
             <>
-              {Object.keys(products).map((productId, index) => (
-                <ProductItem
-                  key={index}
-                  product={products[productId]}
-                  onViewClick={() => handleOnViewClick(productId)}
-                />
-              ))}
+              {Object.keys(products).length > 0 ? (
+                Object.keys(products).map((productId, index) => (
+                  <ProductItem
+                    key={index}
+                    product={products[productId]}
+                    onViewClick={() => handleOnViewClick(productId)}
+                  />
+                ))
+              ) : (
+                <div className="w-full pt-8 pb-32">
+                  <h3>No Products Listed</h3>
+                  <p className="mt-2">There are no products in this category right now.</p>
+                  <Btn className="mt-8" onClick={() => navigate("/groceries/")}>
+                    Show All Groceries
+                  </Btn>
+                </div>
+              )}
             </>
           )}
         </Container>

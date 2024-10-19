@@ -9,7 +9,7 @@ import { getSubcategoriesByCategory } from "../../services/subcategoryService";
 import { getProductTypeBySubcategory } from "../../services/productTypeService";
 
 // Utility Functions
-// -
+import { formatName } from "../../utils/wordFormatUtils";
 
 // Third-Party Components
 import Container from "react-bootstrap/Container";
@@ -62,19 +62,30 @@ function NavigationBar({ admin }) {
   }, []);
 
   // Helper function to render dropdown for a given category
-  const renderCategoryDropdown = (title, subcategories, productTypes) => (
-    <NavDropdown title={title} id={`${title.toLowerCase()}-nav-dropdown`}>
+  // Helper function to render dropdown for a given category
+  const renderCategoryDropdown = (title, categoryId, subcategories, productTypes) => (
+    <NavDropdown title={title} id={`${title}-nav-dropdown`}>
+      {/* "All {Category}" option */}
+      <NavDropdown.Item onClick={() => navigate(`/groceries/${categoryId}`)}>
+        All {title}
+      </NavDropdown.Item>
+
       {subcategories.map(([subcatId, subcategory]) => (
         <NavDropdown
-          title={subcategory.name}
+          title={formatName(subcategory.name)}
           key={subcatId}
           id={`subcategory-${subcatId}`}
           drop="end"
         >
+          {/* "All {Subcategory}" option */}
+          <NavDropdown.Item onClick={() => navigate(`/groceries/${subcatId}`)}>
+            All {formatName(subcategory.name)}
+          </NavDropdown.Item>
+
           {productTypes[subcatId] ? (
             productTypes[subcatId].map(([typeId, productType]) => (
               <NavDropdown.Item key={typeId} onClick={() => navigate(`/groceries/${typeId}`)}>
-                {productType.name}
+                {formatName(productType.name)}
               </NavDropdown.Item>
             ))
           ) : (
@@ -105,9 +116,14 @@ function NavigationBar({ admin }) {
                 <Link to="/newproducts">New</Link>
                 <Link to="/flagged">Flagged</Link>
                 {/* Dropdowns for each category */}
-                {renderCategoryDropdown("Food", foodSubcategories, foodProductTypes)}
-                {renderCategoryDropdown("Drinks", drinksSubcategories, drinksProductTypes)}
-                {renderCategoryDropdown("Household", householdSubcategories, householdProductTypes)}
+                {renderCategoryDropdown("Food", "10000", foodSubcategories, foodProductTypes)}
+                {renderCategoryDropdown("Drinks", "20000", drinksSubcategories, drinksProductTypes)}
+                {renderCategoryDropdown(
+                  "Household",
+                  "30000",
+                  householdSubcategories,
+                  householdProductTypes
+                )}
               </Stack>
             </Nav>
             {admin ? (
