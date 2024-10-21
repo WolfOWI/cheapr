@@ -5,10 +5,9 @@ import { useState, useEffect } from "react";
 
 // Services
 import {
-  getAllPendingProducts,
+  getAllRejectedProducts,
   deleteProductById,
-  approveProductById,
-  rejectProductById,
+  superApproveProductById,
 } from "../services/productService";
 
 // Utility Functions
@@ -37,7 +36,7 @@ function AdminRejectedProductsDash() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const data = await getAllPendingProducts();
+        const data = await getAllRejectedProducts();
         console.log("data", data);
         if (data) {
           const sortedData = sortProducts(data, "NewestCreated");
@@ -56,48 +55,11 @@ function AdminRejectedProductsDash() {
     console.log(products);
   }, [products]);
 
-  // Handle sort dropdown select
-  const handleSelect = (eventKey) => {
-    console.log(`Selected sort option: ${eventKey}`);
-
-    switch (eventKey) {
-      case "AtoZ":
-        setSortDropLabel("Alfabetical (A to Z)");
-        setProducts(sortProducts(products, "AtoZ"));
-        break;
-      case "ZtoA":
-        setSortDropLabel("Alfabetical (Z to A)");
-        setProducts(sortProducts(products, "ZtoA"));
-        break;
-      case "NewestCreated":
-        setSortDropLabel("Most Recently Created");
-        setProducts(sortProducts(products, "NewestCreated"));
-        break;
-      case "OldestCreated":
-        setSortDropLabel("Oldest Creation");
-        setProducts(sortProducts(products, "OldestCreated"));
-        break;
-      case "Cheapest":
-        setSortDropLabel("Lowest Price");
-        setProducts(sortProducts(products, "Cheapest"));
-        break;
-      case "Expensive":
-        setSortDropLabel("Highest Price");
-        setProducts(sortProducts(products, "Expensive"));
-        break;
-
-      default:
-        setSortDropLabel("Most Recently Created");
-        setProducts(sortProducts(products, "NewestCreated"));
-        break;
-    }
-  };
-
-  // Handle Product Reject
-  const handleProductReject = async (productId) => {
-    console.log("Product Reject Click:", productId);
+  // Handle Product Delete
+  const handleProductDelete = async (productId) => {
+    console.log("Product Delete Click:", productId);
     try {
-      await rejectProductById(productId);
+      await deleteProductById(productId);
       // Remove the rejected product from the local state
       setProducts((prevProducts) => {
         const updatedProducts = { ...prevProducts };
@@ -105,34 +67,23 @@ function AdminRejectedProductsDash() {
         return updatedProducts;
       });
     } catch (error) {
-      console.error("Failed to reject the product:", error);
+      console.error("Failed to delete product:", error);
     }
-    // try {
-    //   await deleteProductById(productId);
-    //   // Remove the rejected product from the local state
-    //   setProducts((prevProducts) => {
-    //     const updatedProducts = { ...prevProducts };
-    //     delete updatedProducts[productId];
-    //     return updatedProducts;
-    //   });
-    // } catch (error) {
-    //   console.error("Failed to delete product:", error);
-    // }
   };
 
   // Handle Product Approve
   const handleProductApprove = async (productId) => {
     console.log("Approve Click:", productId);
     try {
-      await approveProductById(productId);
-      // Remove the approved product from the local state
+      await superApproveProductById(productId);
+      // Remove the super-approved product from the local state
       setProducts((prevProducts) => {
         const updatedProducts = { ...prevProducts };
         delete updatedProducts[productId];
         return updatedProducts;
       });
     } catch (error) {
-      console.error("Failed to approve product:", error);
+      console.error("Failed to super-approve product:", error);
     }
   };
 
@@ -162,15 +113,15 @@ function AdminRejectedProductsDash() {
                     productId={productId}
                     product={products[productId]}
                     key={index}
-                    type="approveDeny"
-                    onReject={handleProductReject}
+                    type="approveDelete"
+                    onDelete={handleProductDelete}
                     onApprove={handleProductApprove}
                   />
                 ))
               ) : (
                 <>
                   {/* Empty Message */}
-                  <h3 className="text-neutral-600 font-normal mt-10">No Pending Products.</h3>
+                  <h3 className="text-neutral-600 font-normal mt-10">No Rejected Products.</h3>
                 </>
               )}
             </>

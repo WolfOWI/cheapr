@@ -505,6 +505,40 @@ router.put("/:id", upload.single("image"), async (req, res) => {
 });
 // - - - - - - - - - - - - - - - - - - - -
 
+// SUPER Approve a product by ID (rejected -> approved)
+// - - - - - - - - - - - - - - - - - - - -
+router.put("/superapprove/:id", async (req, res) => {
+  try {
+    const { id } = req.params; // Extract the product ID from the URL
+
+    // Fetch the product from the rejected node
+    const rejectedSnapshot = await admin.database().ref(`products/rejected/${id}`).once("value");
+
+    if (!rejectedSnapshot.exists()) {
+      return res.status(404).json({ message: "Product not found in rejected" });
+    }
+
+    const productData = rejectedSnapshot.val(); // The product data in rejected
+
+    // Copy the product data to the approved node
+    const approvedRef = admin.database().ref(`products/approved/${id}`);
+    await approvedRef.set(productData); // Save the product in the approved node
+
+    console.log("Product moved to approved node.");
+
+    // Remove the product from the rejected node
+    await admin.database().ref(`products/rejected/${id}`).remove();
+
+    console.log("Product removed from rejected node.");
+
+    res.status(200).json({ message: "Product super-approved successfully!" });
+  } catch (error) {
+    console.error("Error super-approving product:", error.message);
+    res.status(500).json({ error: error.message });
+  }
+});
+// - - - - - - - - - - - - - - - - - - - -
+
 // Approve a product by ID (pending -> approved)
 // - - - - - - - - - - - - - - - - - - - -
 router.put("/approve/:id", async (req, res) => {
@@ -576,7 +610,7 @@ router.put("/reject/:id", async (req, res) => {
 
 // DELETE
 // -----------------------------------------------------
-// Delete a product by ID (works for approved, pending, or rejected)
+// Delete a product by ID (approved, pending, or rejected)
 router.delete("/:id", async (req, res) => {
   try {
     const { id } = req.params; // Extract the product ID from the URL

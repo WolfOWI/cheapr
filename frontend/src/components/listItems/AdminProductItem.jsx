@@ -22,7 +22,7 @@ import MiniStorePriceBlock from "../building-blocks/MiniStorePriceBlock";
 
 // -----------------------------------------------------------
 
-const AdminProductItem = ({ productId, product, type, onReject, onApprove }) => {
+const AdminProductItem = ({ productId, product, type, onReject, onApprove, onDelete }) => {
   const [breadcrumb, setBreadcrumb] = useState({});
 
   // Get breadcrumb data when productId is received/changes
@@ -42,6 +42,7 @@ const AdminProductItem = ({ productId, product, type, onReject, onApprove }) => 
 
   // console.log("productId:", productId);
   // console.log("product:", product);
+
   return (
     <>
       <div className="flex justify-between group my-4 w-full">
@@ -84,6 +85,7 @@ const AdminProductItem = ({ productId, product, type, onReject, onApprove }) => 
             </Stack>
           </div>
         </div>
+        {/* Type: Approve & Reject */}
         {type === "approveDeny" ? (
           <Stack direction="horizontal" gap={2}>
             <IconBtn
@@ -91,6 +93,21 @@ const AdminProductItem = ({ productId, product, type, onReject, onApprove }) => 
               variant="dark"
               className="opacity-30 group-hover:opacity-100 transition-all duration-150"
               onClick={() => onReject(productId)}
+            />
+            <Btn
+              className="opacity-30 group-hover:opacity-100 transition-all duration-150"
+              onClick={() => onApprove(productId)}
+            >
+              Approve
+            </Btn>
+          </Stack>
+        ) : type === "approveDelete" ? (
+          <Stack direction="horizontal" gap={2}>
+            <IconBtn
+              iconType={"delete"}
+              variant="dark"
+              className="opacity-30 group-hover:opacity-100 transition-all duration-150"
+              onClick={() => onDelete(productId)}
             />
             <Btn
               className="opacity-30 group-hover:opacity-100 transition-all duration-150"

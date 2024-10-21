@@ -73,6 +73,18 @@ export const getAllPendingProducts = async () => {
 };
 // - - - - - - - - - - - - - - - - - - - -
 
+// GET All REJECTED Products
+// - - - - - - - - - - - - - - - - - - - -
+export const getAllRejectedProducts = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/products/rejected`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+// - - - - - - - - - - - - - - - - - - - -
+
 // Get Any Product by ID
 // - - - - - - - - - - - - - - - - - - - -
 export const getProductById = async (productId) => {
@@ -101,8 +113,23 @@ export const updateProductById = async (productId, formData) => {
   }
 };
 
-// Approve Product (Move from pending to approved)
+// STATUS
 // - - - - - - - - - - - - - - - - - - - -
+// Super Approve Product (Move from pending to approved)
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+export const superApproveProductById = async (productId) => {
+  try {
+    const response = await axios.put(`${API_URL}/products/superapprove/${productId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error super-approving product:", error);
+    throw error;
+  }
+};
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+// Approve Product (Move from pending to approved)
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 export const approveProductById = async (productId) => {
   try {
     const response = await axios.put(`${API_URL}/products/approve/${productId}`);
@@ -112,9 +139,10 @@ export const approveProductById = async (productId) => {
     throw error;
   }
 };
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 // Reject Product (Move from pending to rejected)
-// - - - - - - - - - - - - - - - - - - - -
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 export const rejectProductById = async (productId) => {
   try {
     const response = await axios.put(`${API_URL}/products/reject/${productId}`);
@@ -124,6 +152,7 @@ export const rejectProductById = async (productId) => {
     throw error;
   }
 };
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 // - - - - - - - - - - - - - - - - - - - -
 
