@@ -173,11 +173,13 @@ function ProductPage() {
     }
   }, [prices]);
 
+  // Handle Product Flagging
   const handleFlagProduct = async () => {
     try {
       await flagProductById(productId, flagMessage); // Pass the flagMessage to the service function
-      console.log("You flagged the product:", productId);
+      // console.log("You flagged the product:", productId);
       handleFlagModalClose();
+      navigate("/groceries");
     } catch (error) {
       console.error("Error flagging product:", error);
     }

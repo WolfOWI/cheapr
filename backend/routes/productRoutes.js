@@ -356,7 +356,7 @@ router.get("/flagged", async (req, res) => {
 });
 // - - - - - - - - - - - - - - - - - - - -
 
-// Get Any Product by ID (approved, pending, or rejected)
+// Get Any Product by ID (approved, pending, rejected or flagged)
 // - - - - - - - - - - - - - - - - - - - -
 router.get("/:id", async (req, res) => {
   try {
@@ -366,17 +366,15 @@ router.get("/:id", async (req, res) => {
     const approvedSnapshot = await admin.database().ref(`products/approved/${id}`).once("value");
     const pendingSnapshot = await admin.database().ref(`products/pending/${id}`).once("value");
     const rejectedSnapshot = await admin.database().ref(`products/rejected/${id}`).once("value");
+    const flaggedSnapshot = await admin.database().ref(`products/flagged/${id}`).once("value");
 
-    let product = approvedSnapshot.val() || pendingSnapshot.val() || rejectedSnapshot.val();
+    let product =
+      approvedSnapshot.val() ||
+      pendingSnapshot.val() ||
+      rejectedSnapshot.val() ||
+      flaggedSnapshot.val();
 
     if (product) {
-      // Add the status (approved, pending, or rejected) to the product data
-      product.status = approvedSnapshot.exists()
-        ? "approved"
-        : pendingSnapshot.exists()
-        ? "pending"
-        : "rejected";
-
       res.status(200).json(product);
     } else {
       res.status(404).json({ message: "Product not found" });
@@ -390,7 +388,7 @@ router.get("/:id", async (req, res) => {
 
 // UPDATE
 // -----------------------------------------------------
-// Update a product's details by ID (approved, pending, or rejected)
+// Update a product's details by ID (approved, pending, rejected or flagged)
 // - - - - - - - - - - - - - - - - - - - -
 router.put("/:id", upload.single("image"), async (req, res) => {
   try {
@@ -433,10 +431,11 @@ router.put("/:id", upload.single("image"), async (req, res) => {
       ...(imageUrl && { image: imageUrl }), // Only update image if a new one was uploaded
     };
 
-    // Find the product in approved, pending, or rejected
+    // Find the product in approved, pending, rejected or flagged
     const approvedSnapshot = await admin.database().ref(`products/approved/${id}`).once("value");
     const pendingSnapshot = await admin.database().ref(`products/pending/${id}`).once("value");
     const rejectedSnapshot = await admin.database().ref(`products/rejected/${id}`).once("value");
+    const flaggedSnapshot = await admin.database().ref(`products/flagged/${id}`).once("value");
 
     let productRef;
     if (approvedSnapshot.exists()) {
@@ -447,6 +446,9 @@ router.put("/:id", upload.single("image"), async (req, res) => {
     }
     if (rejectedSnapshot.exists()) {
       productRef = admin.database().ref(`products/rejected/${id}`);
+    }
+    if (flaggedSnapshot.exists()) {
+      productRef = admin.database().ref(`products/flagged/${id}`);
     }
 
     if (productRef) {
@@ -512,7 +514,7 @@ router.put("/:id", upload.single("image"), async (req, res) => {
       res.status(404).json({ message: "Product not found" });
     }
   } catch (error) {
-    console.error("Error updating product:", error); // Log the error for better debugging
+    console.error("Error updating product:", error);
     res.status(500).json({ error: error.message });
   }
 });

@@ -2,6 +2,7 @@
 // -----------------------------------------------------------
 // React & Hooks
 import { useState, useEffect } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 
 // Services
 import { getAllFlaggedProducts, unflagProductById } from "../services/productService";
@@ -24,6 +25,8 @@ import Drpdwn from "../components/input/Drpdwn";
 
 // -----------------------------------------------------------
 function AdminFlaggedDash() {
+  const navigate = useNavigate();
+
   const [products, setProducts] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 
@@ -49,21 +52,12 @@ function AdminFlaggedDash() {
   //   console.log(products);
   // }, [products]);
 
-  // Handle Product Delete
-  // const handleProductDelete = async (productId) => {
-  //   console.log("Product Delete Click:", productId);
-  //   try {
-  //     await deleteProductById(productId);
-  //     // Remove the rejected product from the local state
-  //     setProducts((prevProducts) => {
-  //       const updatedProducts = { ...prevProducts };
-  //       delete updatedProducts[productId];
-  //       return updatedProducts;
-  //     });
-  //   } catch (error) {
-  //     console.error("Failed to delete product:", error);
-  //   }
-  // };
+  // Handle Product Edit
+  const handleProductEdit = (productId) => {
+    navigate(`/edit/${productId}`, {
+      state: { from: "/flagged" }, // Pass the previous page (flagged dashboard)
+    });
+  };
 
   // Handle Product Re-Approve
   const handleProductReApprove = async (productId) => {
@@ -108,7 +102,7 @@ function AdminFlaggedDash() {
                     product={products[productId]}
                     key={index}
                     type="flagging"
-                    onEdit={""}
+                    onEdit={handleProductEdit}
                     onReApprove={handleProductReApprove}
                   />
                 ))

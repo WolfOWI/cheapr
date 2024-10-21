@@ -2,7 +2,7 @@
 // -----------------------------------------------------------
 // React & Hooks
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useParams } from "react-router-dom"; // To fetch product ID from URL
 
 // Services
@@ -29,7 +29,9 @@ import StorePricingSpecialInput from "../components/input/StorePricingSpecialInp
 
 // -----------------------------------------------------------
 function AdminEditDash() {
-  const navigate = useNavigate();
+  const location = useLocation(); // Get location state
+  const navigate = useNavigate(); // For navigation after saving
+  const from = location.state?.from || "/admin"; // Get the previous page or default to admin
 
   const { productId } = useParams(); // Get the product ID from the URL
 
@@ -311,8 +313,8 @@ function AdminEditDash() {
       // Call the service to update the product
       await updateProductById(productId, formData);
 
-      // Navigate back to the admin dashboard after saving
-      navigate("/admin");
+      // Navigate back to the previous page
+      navigate(from);
     } catch (error) {
       console.error("Failed to save product changes:", error);
     }
@@ -326,7 +328,7 @@ function AdminEditDash() {
         <div className="flex w-full justify-between pt-6">
           <h2>Edit Product</h2>
           <Stack direction="horizontal" gap={2}>
-            <Btn variant="secondary" onClick={() => navigate("/admin")}>
+            <Btn variant="secondary" onClick={() => navigate(from)}>
               Cancel
             </Btn>
             {isChanged && (
