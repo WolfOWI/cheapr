@@ -1,13 +1,13 @@
 // IMPORT
 // -----------------------------------------------------------
 // React & Hooks
-// -
+import { useState, useEffect } from "react";
 
 // Services
-// -
+import { getBreadcrumbByProductId } from "../../services/breadcrumbService";
 
 // Utility Functions
-// -
+import { formatName } from "../../utils/wordFormatUtils";
 
 // Third-Party Components
 import { Row, Col, Stack } from "react-bootstrap";
@@ -18,26 +18,49 @@ import Btn from "../button/Btn";
 import MiniStorePriceBlock from "../building-blocks/MiniStorePriceBlock";
 
 // Imagery
-import appleTopRedImg from "../../assets/images/grocery-images/Apples_TopRed.png";
+// -
 
 // -----------------------------------------------------------
 
-const AdminProductItem = ({ product, type }) => {
+const AdminProductItem = ({ productId, product, type }) => {
+  const [breadcrumb, setBreadcrumb] = useState({});
+
+  // Get breadcrumb data when productId is received/changes
+  useEffect(() => {
+    const fetchBreadcrumb = async () => {
+      const data = await getBreadcrumbByProductId(productId);
+      setBreadcrumb(data);
+    };
+    fetchBreadcrumb();
+  }, [productId]);
+
+  useEffect(() => {
+    if (breadcrumb) {
+      console.log("breadcrumb", breadcrumb);
+    }
+  }, [breadcrumb]);
+
+  // console.log("productId:", productId);
+  // console.log("product:", product);
   return (
     <>
       <div className="flex justify-between group my-4 w-full">
         <div className="flex items-center w-full">
-          <img src={appleTopRedImg} alt={product.name} className="h-56" />
+          <img src={product.image} alt={product.name} className="h-56" />
           <div className="ml-4">
-            <Stack direction="horizontal" gap={2}>
+            <Stack direction="horizontal" gap={4}>
               <h3 className="font-bold">{product.name}</h3>
-              <h4 className="text-neutral-500">
+              <h3 className="text-neutral-500">
                 {product.amount}
                 {product.unit}
-              </h4>
+              </h3>
             </Stack>
-            <p>{`Food > Fruit & Vegetables > Fresh Fruit`}</p>
-            <Stack direction="horizontal" gap={4} className="mt-6">
+            {Object.keys(breadcrumb).length > 0 && (
+              <p>{`${formatName(breadcrumb.category)} > ${formatName(
+                breadcrumb.subcategory
+              )} > ${formatName(breadcrumb.type)}`}</p>
+            )}
+            <Stack direction="horizontal" gap={5} className="mt-6">
               <MiniStorePriceBlock
                 store="pnp"
                 price={product.pnp.price}

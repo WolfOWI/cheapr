@@ -26,8 +26,16 @@ const MiniStorePriceBlock = ({ store, price, updated }) => {
       <div className="flex items-center">
         <StoreLogo store={store} type="mini" className="h-12" />
         <div className="ml-2">
-          <h4 className="fw-bold">R{price}</h4>
-          <p className="text-sm">{updated}</p>
+          {price ? (
+            <>
+              <h4 className="fw-bold">R{price}</h4>
+              <p className="text-sm">{updated}</p>
+            </>
+          ) : (
+            <>
+              <p>No data</p>
+            </>
+          )}
         </div>
       </div>
     </>

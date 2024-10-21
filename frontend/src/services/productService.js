@@ -37,17 +37,8 @@ export const createPendingProduct = async (formData) => {
 
 // GET
 // -----------------------------------------------------
-// Get Any Product by ID
-export const getProductById = async (productId) => {
-  try {
-    const response = await axios.get(`${API_URL}/products/${productId}`);
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
-};
-
 // GET All APPROVED Products
+// - - - - - - - - - - - - - - - - - - - -
 export const getAllApprovedProducts = async () => {
   try {
     const response = await axios.get(`${API_URL}/products/approved`);
@@ -56,8 +47,10 @@ export const getAllApprovedProducts = async () => {
     throw error;
   }
 };
+// - - - - - - - - - - - - - - - - - - - -
 
 // Get All APPROVED products under a specific group (category / subcategory / product)
+// - - - - - - - - - - - - - - - - - - - -
 export const getProductsByGroupId = async (id) => {
   try {
     const response = await axios.get(`${API_URL}/products/approved/group/${id}`);
@@ -66,7 +59,31 @@ export const getProductsByGroupId = async (id) => {
     throw error;
   }
 };
+// - - - - - - - - - - - - - - - - - - - -
 
+// GET All PENDING Products
+// - - - - - - - - - - - - - - - - - - - -
+export const getAllPendingProducts = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/products/pending`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+// - - - - - - - - - - - - - - - - - - - -
+
+// Get Any Product by ID
+// - - - - - - - - - - - - - - - - - - - -
+export const getProductById = async (productId) => {
+  try {
+    const response = await axios.get(`${API_URL}/products/${productId}`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+// - - - - - - - - - - - - - - - - - - - -
 // -----------------------------------------------------
 
 // UPDATE

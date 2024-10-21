@@ -317,6 +317,19 @@ router.get("/approved/group/:id", async (req, res) => {
 });
 // - - - - - - - - - - - - - - - - - - - -
 
+// Get All PENDING Products
+// - - - - - - - - - - - - - - - - - - - -
+router.get("/pending", async (req, res) => {
+  try {
+    const snapshot = await admin.database().ref("products/pending").once("value");
+    const products = snapshot.val();
+    res.status(200).json(products);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+// - - - - - - - - - - - - - - - - - - - -
+
 // Get Any Product by ID (approved, pending, or rejected)
 // - - - - - - - - - - - - - - - - - - - -
 router.get("/:id", async (req, res) => {
