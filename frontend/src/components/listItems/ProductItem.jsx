@@ -33,7 +33,10 @@ const ProductItem = ({ product, admin, onViewClick, onEditClick, onDeleteClick, 
 
   // Get the cheapest price
   const cheapestPrice = getCheapestPrice(prices).cheapestPrice;
+  // console.log("Cheapest:");
   // console.log(cheapestPrice);
+  // console.log("Parse Int:");
+  // console.log(parseInt(cheapestPrice));
 
   return (
     <>
@@ -43,7 +46,7 @@ const ProductItem = ({ product, admin, onViewClick, onEditClick, onDeleteClick, 
       >
         {/* Product Information */}
         <Col xs={3} className="flex items-center">
-          <img src={product.image} alt={product.name} className="h-20 w-20 object-contain" />
+          <img src={product.image} alt={product.name} className="h-20 w-20 object-contain mr-4" />
           <div>
             <h4>{product.name}</h4>
             <h4 className="text-neutral-500 font-normal">
@@ -56,25 +59,33 @@ const ProductItem = ({ product, admin, onViewClick, onEditClick, onDeleteClick, 
           price={product.pnp.price}
           updated={product.pnp.updated}
           onSpecial={!!product.pnp.special}
-          isCheapest={parseInt(product.pnp.price) === cheapestPrice}
+          isCheapest={
+            parseFloat(product.pnp.price).toFixed(2) === parseFloat(cheapestPrice).toFixed(2)
+          }
         />
         <PriceBlock
           price={product.woolworths.price}
           updated={product.woolworths.updated}
           onSpecial={!!product.woolworths.special}
-          isCheapest={parseInt(product.woolworths.price) === cheapestPrice}
+          isCheapest={
+            parseFloat(product.woolworths.price).toFixed(2) === parseFloat(cheapestPrice).toFixed(2)
+          }
         />
         <PriceBlock
           price={product.checkers.price}
           updated={product.checkers.updated}
           onSpecial={!!product.checkers.special}
-          isCheapest={parseInt(product.checkers.price) === cheapestPrice}
+          isCheapest={
+            parseFloat(product.checkers.price).toFixed(2) === parseFloat(cheapestPrice).toFixed(2)
+          }
         />
         <PriceBlock
           price={product.spar.price}
           updated={product.spar.updated}
           onSpecial={!!product.spar.special}
-          isCheapest={parseInt(product.spar.price) === cheapestPrice}
+          isCheapest={
+            parseFloat(product.spar.price).toFixed(2) === parseFloat(cheapestPrice).toFixed(2)
+          }
         />
         <Col xs={1}>
           {admin ? (
