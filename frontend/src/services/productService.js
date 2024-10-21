@@ -101,7 +101,7 @@ export const updateProductById = async (productId, formData) => {
   }
 };
 
-// Approve Product (Move from pending to approve)
+// Approve Product (Move from pending to approved)
 // - - - - - - - - - - - - - - - - - - - -
 export const approveProductById = async (productId) => {
   try {
@@ -109,6 +109,18 @@ export const approveProductById = async (productId) => {
     return response.data;
   } catch (error) {
     console.error("Error approving product:", error);
+    throw error;
+  }
+};
+
+// Reject Product (Move from pending to rejected)
+// - - - - - - - - - - - - - - - - - - - -
+export const rejectProductById = async (productId) => {
+  try {
+    const response = await axios.put(`${API_URL}/products/reject/${productId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error rejecting product:", error);
     throw error;
   }
 };

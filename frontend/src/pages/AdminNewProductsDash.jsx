@@ -8,6 +8,7 @@ import {
   getAllPendingProducts,
   deleteProductById,
   approveProductById,
+  rejectProductById,
 } from "../services/productService";
 
 // Utility Functions
@@ -96,7 +97,7 @@ function AdminNewProductsDash() {
   const handleProductReject = async (productId) => {
     console.log("Product Reject Click:", productId);
     try {
-      await deleteProductById(productId);
+      await rejectProductById(productId);
       // Remove the rejected product from the local state
       setProducts((prevProducts) => {
         const updatedProducts = { ...prevProducts };
@@ -104,8 +105,19 @@ function AdminNewProductsDash() {
         return updatedProducts;
       });
     } catch (error) {
-      console.error("Failed to delete product:", error);
+      console.error("Failed to reject the product:", error);
     }
+    // try {
+    //   await deleteProductById(productId);
+    //   // Remove the rejected product from the local state
+    //   setProducts((prevProducts) => {
+    //     const updatedProducts = { ...prevProducts };
+    //     delete updatedProducts[productId];
+    //     return updatedProducts;
+    //   });
+    // } catch (error) {
+    //   console.error("Failed to delete product:", error);
+    // }
   };
 
   // Handle Product Approve
@@ -113,7 +125,7 @@ function AdminNewProductsDash() {
     console.log("Approve Click:", productId);
     try {
       await approveProductById(productId);
-      // Remove the rejected product from the local state
+      // Remove the approved product from the local state
       setProducts((prevProducts) => {
         const updatedProducts = { ...prevProducts };
         delete updatedProducts[productId];
