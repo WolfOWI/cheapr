@@ -26,12 +26,16 @@ import AdminEditDash from "./pages/AdminEditDash";
 import AdminFlaggedDash from "./pages/AdminFlaggedDash";
 import AdminRejectedProductsDash from "./pages/AdminRejectedProductsDash";
 
+// Private Route
+import PrivateRoute from "./components/PrivateRoute";
+
 // -----------------------------------------------------------
 
 function App() {
   return (
     <Router>
       <Routes>
+        {/* Public Routes */}
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
@@ -39,15 +43,80 @@ function App() {
         <Route path="/product/:productId" element={<ProductPage />} />
         <Route path="/planner" element={<CartPlannerPage />} />
         <Route path="/add" element={<AddProductPage />} />
-        <Route path="/admin" element={<AdminDash />} />
-        <Route path="/create" element={<AdminCreateMenuPage />} />
-        <Route path="/createsubcat" element={<AdminCreateSubcatPage />} />
-        <Route path="/createptype" element={<AdminCreatePTypePage />} />
-        <Route path="/createproduct" element={<AdminCreateProductPage />} />
-        <Route path="/newproducts" element={<AdminNewProductsDash />} />
-        <Route path="/edit/:productId" element={<AdminEditDash />} />
-        <Route path="/flagged" element={<AdminFlaggedDash />} />
-        <Route path="/rejectedproducts" element={<AdminRejectedProductsDash />} />
+
+        {/* Admin Routes - Protected by PrivateRoute */}
+        <Route
+          path="/admin"
+          element={
+            <PrivateRoute isAdmin={true}>
+              <AdminDash />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/create"
+          element={
+            <PrivateRoute isAdmin={true}>
+              <AdminCreateMenuPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/createsubcat"
+          element={
+            <PrivateRoute isAdmin={true}>
+              <AdminCreateSubcatPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/createptype"
+          element={
+            <PrivateRoute isAdmin={true}>
+              <AdminCreatePTypePage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/createproduct"
+          element={
+            <PrivateRoute isAdmin={true}>
+              <AdminCreateProductPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/newproducts"
+          element={
+            <PrivateRoute isAdmin={true}>
+              <AdminNewProductsDash />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/edit/:productId"
+          element={
+            <PrivateRoute isAdmin={true}>
+              <AdminEditDash />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/flagged"
+          element={
+            <PrivateRoute isAdmin={true}>
+              <AdminFlaggedDash />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/rejectedproducts"
+          element={
+            <PrivateRoute isAdmin={true}>
+              <AdminRejectedProductsDash />
+            </PrivateRoute>
+          }
+        />
       </Routes>
     </Router>
   );
