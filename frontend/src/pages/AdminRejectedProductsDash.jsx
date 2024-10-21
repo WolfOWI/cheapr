@@ -4,11 +4,7 @@
 import { useState, useEffect } from "react";
 
 // Services
-import {
-  getAllPendingProducts,
-  deleteProductById,
-  approveProductById,
-} from "../services/productService";
+import { getAllPendingProducts, deleteProductById } from "../services/productService";
 
 // Utility Functions
 import { sortProducts } from "../utils/productSortUtils";
@@ -27,7 +23,7 @@ import Drpdwn from "../components/input/Drpdwn";
 // -
 
 // -----------------------------------------------------------
-function AdminNewProductsDash() {
+function AdminRejectedProductsDash() {
   const [products, setProducts] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [sortDropLabel, setSortDropLabel] = useState("Most Recently Created");
@@ -109,19 +105,8 @@ function AdminNewProductsDash() {
   };
 
   // Handle Product Approve
-  const handleProductApprove = async (productId) => {
+  const handleProductApprove = (productId) => {
     console.log("Approve Click:", productId);
-    try {
-      await approveProductById(productId);
-      // Remove the rejected product from the local state
-      setProducts((prevProducts) => {
-        const updatedProducts = { ...prevProducts };
-        delete updatedProducts[productId];
-        return updatedProducts;
-      });
-    } catch (error) {
-      console.error("Failed to approve product:", error);
-    }
   };
 
   return (
@@ -175,4 +160,4 @@ function AdminNewProductsDash() {
   );
 }
 
-export default AdminNewProductsDash;
+export default AdminRejectedProductsDash;

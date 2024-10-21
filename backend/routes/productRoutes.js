@@ -364,7 +364,8 @@ router.get("/:id", async (req, res) => {
 
 // UPDATE
 // -----------------------------------------------------
-// Update a product by ID (approved, pending, or rejected)
+// Update a product's details by ID (approved, pending, or rejected)
+// - - - - - - - - - - - - - - - - - - - -
 router.put("/:id", upload.single("image"), async (req, res) => {
   try {
     const { id } = req.params; // Extract the product ID from the URL
@@ -490,6 +491,40 @@ router.put("/:id", upload.single("image"), async (req, res) => {
   }
 });
 
+// Approve a product by ID (pending -> approved)
+// - - - - - - - - - - - - - - - - - - - -
+router.put("/approve/:id", async (req, res) => {
+  try {
+    const { id } = req.params; // Extract the product ID from the URL
+
+    // Fetch the product from the pending node
+    const pendingSnapshot = await admin.database().ref(`products/pending/${id}`).once("value");
+
+    if (!pendingSnapshot.exists()) {
+      return res.status(404).json({ message: "Product not found in pending" });
+    }
+
+    const productData = pendingSnapshot.val(); // The product data in pending
+
+    // Copy the product data to the approved node
+    const approvedRef = admin.database().ref(`products/approved/${id}`);
+    await approvedRef.set(productData); // Save the product in the approved node
+
+    console.log("Product moved to approved node.");
+
+    // Remove the product from the pending node
+    await admin.database().ref(`products/pending/${id}`).remove();
+
+    console.log("Product removed from pending node.");
+
+    res.status(200).json({ message: "Product approved successfully!" });
+  } catch (error) {
+    console.error("Error approving product:", error.message);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// - - - - - - - - - - - - - - - - - - - -
 // -----------------------------------------------------
 
 // DELETE

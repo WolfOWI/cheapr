@@ -89,6 +89,7 @@ export const getProductById = async (productId) => {
 // UPDATE
 // -----------------------------------------------------
 // Update a product by ID (approved, pending, or rejected)
+// - - - - - - - - - - - - - - - - - - - -
 export const updateProductById = async (productId, formData) => {
   try {
     const response = await axios.put(`${API_URL}/products/${productId}`, formData, {
@@ -99,6 +100,21 @@ export const updateProductById = async (productId, formData) => {
     throw error;
   }
 };
+
+// Approve Product (Move from pending to approve)
+// - - - - - - - - - - - - - - - - - - - -
+export const approveProductById = async (productId) => {
+  try {
+    const response = await axios.put(`${API_URL}/products/approve/${productId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error approving product:", error);
+    throw error;
+  }
+};
+
+// - - - - - - - - - - - - - - - - - - - -
+
 // -----------------------------------------------------
 
 // DELETE

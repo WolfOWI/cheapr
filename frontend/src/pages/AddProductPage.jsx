@@ -165,7 +165,7 @@ const AddProductPage = () => {
     try {
       const response = await createPendingProduct(formData);
       console.log("Product created:", response);
-      navigate("/admin");
+      navigate("/groceries");
     } catch (err) {
       console.error("Failed to create product:", err);
       setError("Failed to create product. Please try again.");
