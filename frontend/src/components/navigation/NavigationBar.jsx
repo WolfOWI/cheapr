@@ -115,6 +115,7 @@ function NavigationBar({ admin }) {
                 <Link to="/admin">Admin</Link>
                 <Link to="/newproducts">New</Link>
                 <Link to="/flagged">Flagged</Link>
+                <Link to="/rejectedproducts">Rejected</Link>
                 {/* Dropdowns for each category */}
                 {renderCategoryDropdown("Food", "10000", foodSubcategories, foodProductTypes)}
                 {renderCategoryDropdown("Drinks", "20000", drinksSubcategories, drinksProductTypes)}

@@ -142,7 +142,9 @@ function AdminNewProductsDash() {
       <div className="mb-32">
         <Container className="pt-6">
           <div className="flex w-full justify-between">
-            <h2>{Object.keys(products).length} New Products</h2>
+            <h2>
+              {Object.keys(products).length} New Product{Object.keys(products).length !== 1 && "s"}
+            </h2>
             <Drpdwn title={`Sort: ${sortDropLabel}`} variant="dark-outline" onSelect={handleSelect}>
               <Dropdown.Item eventKey="AtoZ">Alfabetical (A to Z)</Dropdown.Item>
               <Dropdown.Item eventKey="ZtoA">Alfabetical (Z to A)</Dropdown.Item>

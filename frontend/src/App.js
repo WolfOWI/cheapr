@@ -24,6 +24,7 @@ import AdminCreateProductPage from "./pages/AdminCreateProductPage";
 import AdminNewProductsDash from "./pages/AdminNewProductsDash";
 import AdminEditDash from "./pages/AdminEditDash";
 import AdminFlaggedDash from "./pages/AdminFlaggedDash";
+import AdminRejectedProductsDash from "./pages/AdminRejectedProductsDash";
 
 // -----------------------------------------------------------
 
@@ -46,6 +47,7 @@ function App() {
         <Route path="/newproducts" element={<AdminNewProductsDash />} />
         <Route path="/edit/:productId" element={<AdminEditDash />} />
         <Route path="/flagged" element={<AdminFlaggedDash />} />
+        <Route path="/rejectedproducts" element={<AdminRejectedProductsDash />} />
       </Routes>
     </Router>
   );

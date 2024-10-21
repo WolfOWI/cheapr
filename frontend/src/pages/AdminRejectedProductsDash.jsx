@@ -4,7 +4,12 @@
 import { useState, useEffect } from "react";
 
 // Services
-import { getAllPendingProducts, deleteProductById } from "../services/productService";
+import {
+  getAllPendingProducts,
+  deleteProductById,
+  approveProductById,
+  rejectProductById,
+} from "../services/productService";
 
 // Utility Functions
 import { sortProducts } from "../utils/productSortUtils";
@@ -92,7 +97,7 @@ function AdminRejectedProductsDash() {
   const handleProductReject = async (productId) => {
     console.log("Product Reject Click:", productId);
     try {
-      await deleteProductById(productId);
+      await rejectProductById(productId);
       // Remove the rejected product from the local state
       setProducts((prevProducts) => {
         const updatedProducts = { ...prevProducts };
@@ -100,13 +105,35 @@ function AdminRejectedProductsDash() {
         return updatedProducts;
       });
     } catch (error) {
-      console.error("Failed to delete product:", error);
+      console.error("Failed to reject the product:", error);
     }
+    // try {
+    //   await deleteProductById(productId);
+    //   // Remove the rejected product from the local state
+    //   setProducts((prevProducts) => {
+    //     const updatedProducts = { ...prevProducts };
+    //     delete updatedProducts[productId];
+    //     return updatedProducts;
+    //   });
+    // } catch (error) {
+    //   console.error("Failed to delete product:", error);
+    // }
   };
 
   // Handle Product Approve
-  const handleProductApprove = (productId) => {
+  const handleProductApprove = async (productId) => {
     console.log("Approve Click:", productId);
+    try {
+      await approveProductById(productId);
+      // Remove the approved product from the local state
+      setProducts((prevProducts) => {
+        const updatedProducts = { ...prevProducts };
+        delete updatedProducts[productId];
+        return updatedProducts;
+      });
+    } catch (error) {
+      console.error("Failed to approve product:", error);
+    }
   };
 
   return (
@@ -114,16 +141,11 @@ function AdminRejectedProductsDash() {
       <NavigationBar admin />
       <div className="mb-32">
         <Container className="pt-6">
-          <div className="flex w-full justify-between">
-            <h2>{Object.keys(products).length} New Products</h2>
-            <Drpdwn title={`Sort: ${sortDropLabel}`} variant="dark-outline" onSelect={handleSelect}>
-              <Dropdown.Item eventKey="AtoZ">Alfabetical (A to Z)</Dropdown.Item>
-              <Dropdown.Item eventKey="ZtoA">Alfabetical (Z to A)</Dropdown.Item>
-              <Dropdown.Item eventKey="NewestCreated">Most Recently Created</Dropdown.Item>
-              <Dropdown.Item eventKey="OldestCreated">Oldest Creation</Dropdown.Item>
-              <Dropdown.Item eventKey="Cheapest">Lowest Price</Dropdown.Item>
-              <Dropdown.Item eventKey="Expensive">Highest Price</Dropdown.Item>
-            </Drpdwn>
+          <div className="flex w-full mb-8">
+            <h2>
+              {Object.keys(products).length} Rejected Product
+              {Object.keys(products).length !== 1 && "s"}
+            </h2>
           </div>
         </Container>
 
