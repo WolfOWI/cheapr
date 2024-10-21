@@ -39,10 +39,40 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
-        <Route path="/groceries/:groupId?" element={<GroceriesPage />} />
-        <Route path="/product/:productId" element={<ProductPage />} />
-        <Route path="/planner" element={<CartPlannerPage />} />
-        <Route path="/add" element={<AddProductPage />} />
+
+        {/* Customer Routes */}
+        <Route
+          path="/groceries/:groupId?"
+          element={
+            <PrivateRoute>
+              <GroceriesPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/product/:productId"
+          element={
+            <PrivateRoute>
+              <ProductPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/planner"
+          element={
+            <PrivateRoute>
+              <CartPlannerPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/add"
+          element={
+            <PrivateRoute>
+              <AddProductPage />
+            </PrivateRoute>
+          }
+        />
 
         {/* Admin Routes - Protected by PrivateRoute */}
         <Route

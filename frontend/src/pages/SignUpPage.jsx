@@ -37,11 +37,7 @@ function SignUpPage() {
     setError(null); // Reset error state
 
     try {
-      await signUpUser(email, password); // Call Firebase sign-up function
-
-      // TODO: You can also send the firstName and lastName to Firebase if needed in your app
-      // Example: Store these details in Firestore or Realtime Database
-
+      await signUpUser(email, password, firstName, lastName); // Call sign-up function
       navigate("/login"); // Redirect to login after successful sign-up
     } catch (err) {
       setError(err.message); // Set error message on failure

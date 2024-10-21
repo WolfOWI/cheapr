@@ -3,10 +3,13 @@
 // React & Hooks
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { getDatabase, ref, child, get } from "firebase/database";
 
 // Services
 import { getSubcategoriesByCategory } from "../../services/subcategoryService";
 import { getProductTypeBySubcategory } from "../../services/productTypeService";
+import { auth, logOutUser } from "../../services/firebaseAuthService";
 
 // Utility Functions
 import { formatName } from "../../utils/wordFormatUtils";
@@ -27,7 +30,21 @@ import logoColor from "../../assets/logos/logo_color.svg";
 // -----------------------------------------------------------
 
 function NavigationBar({ admin }) {
+  const [user] = useAuthState(auth);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const db = getDatabase();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user) {
+      const userRef = ref(db, `users/${user.uid}`);
+      get(child(userRef, "isAdmin")).then((snapshot) => {
+        if (snapshot.exists()) {
+          setIsAdmin(snapshot.val());
+        }
+      });
+    }
+  }, [db, user]);
 
   // State for each category's subcategories and product types
   const [foodSubcategories, setFoodSubcategories] = useState([]);
@@ -61,8 +78,7 @@ function NavigationBar({ admin }) {
     fetchSubcategoriesAndTypes("30000", setHouseholdSubcategories, setHouseholdProductTypes);
   }, []);
 
-  // Helper function to render dropdown for a given category
-  // Helper function to render dropdown for a given category
+  // Render dropdown for a given category
   const renderCategoryDropdown = (title, categoryId, subcategories, productTypes) => (
     <NavDropdown title={title} id={`${title}-nav-dropdown`}>
       {/* "All {Category}" option */}
@@ -96,6 +112,10 @@ function NavigationBar({ admin }) {
     </NavDropdown>
   );
 
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
+
   // TODO Change navbar based on user type (admin/customer)
 
   return (
@@ -127,23 +147,26 @@ function NavigationBar({ admin }) {
                 )}
               </Stack>
             </Nav>
-            {admin ? (
+            {/* Buttons (Admin or Normal User) */}
+            {isAdmin ? (
               <Stack direction="horizontal" gap={2}>
+                {user && <p>Welcome, {user.email}</p>}
                 <IconBtn iconType="add" onClick={() => navigate("/create")} />
 
-                <Btn variant="secondary" className="w-32">
+                <Btn variant="secondary" className="w-32" onClick={logOutUser}>
                   Log Out
                 </Btn>
               </Stack>
             ) : (
               <Stack direction="horizontal" gap={2}>
+                {user && <p>Welcome, {user.email}</p>}
                 <IconBtn variant="dark" iconType="add" onClick={() => navigate("/add")} />
                 <IconBtn
                   variant="primary"
                   iconType="cart_empty"
                   onClick={() => navigate("/planner")}
                 />
-                <Btn variant="secondary" className="w-32">
+                <Btn variant="secondary" className="w-32" onClick={logOutUser}>
                   Log Out
                 </Btn>
               </Stack>

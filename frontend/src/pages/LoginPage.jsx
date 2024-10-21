@@ -35,8 +35,12 @@ function LoginPage() {
     setError(null); // Reset error state
 
     try {
-      await loginUser(email, password); // Call Firebase login function
-      navigate("/"); // Redirect to home after successful login
+      const user = await loginUser(email, password); // Fetch user info from database
+      if (user.isAdmin) {
+        navigate("/admin"); // Redirect to admin page if admin
+      } else {
+        navigate("/"); // Redirect to home for normal users
+      }
     } catch (err) {
       setError(err.message); // Set error message on failure
     }
