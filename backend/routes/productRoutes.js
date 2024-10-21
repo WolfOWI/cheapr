@@ -10,7 +10,8 @@ const upload = multer({ storage: storage });
 
 // CREATE
 // -----------------------------------------------------
-// Create an APPROVED product
+// Create an APPROVED product (admin)
+// - - - - - - - - - - - - - - - - - - - -
 router.post("/approved", upload.single("image"), async (req, res) => {
   try {
     // Extract data directly from req.body
@@ -91,12 +92,98 @@ router.post("/approved", upload.single("image"), async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+// - - - - - - - - - - - - - - - - - - - -
+
+// Create an PENDING product (normal user)
+// - - - - - - - - - - - - - - - - - - - -
+router.post("/pending", upload.single("image"), async (req, res) => {
+  try {
+    // Extract data directly from req.body
+    const { categoryId, subcategoryId, typeId } = req.body;
+    console.log("Received CategoryId:", categoryId);
+    console.log("Received SubcategoryId:", subcategoryId);
+    console.log("Received TypeId:", typeId);
+
+    const productData = JSON.parse(req.body.productData); // Parse the stringified productData
+    console.log("Parsed Product Data:", productData);
+
+    const file = req.file; // Uploaded image
+    console.log("Uploaded file:", file ? file.originalname : "No file uploaded");
+
+    let imageUrl = "";
+    if (file) {
+      const bucket = admin.storage().bucket();
+      const fileName = `product_images/${Date.now()}_${file.originalname}`;
+      const fileUpload = bucket.file(fileName);
+      console.log("File name for storage:", fileName);
+
+      // Upload the image to Firebase Storage
+      await fileUpload.save(file.buffer);
+      console.log("File uploaded to Firebase Storage.");
+
+      // Get the image URL
+      const [url] = await fileUpload.getSignedUrl({
+        action: "read",
+        expires: "12-31-2025",
+      });
+      imageUrl = url;
+      console.log("Generated Image URL:", imageUrl);
+    }
+
+    // Add the image URL to the product data
+    const newProductData = {
+      ...productData,
+      image: imageUrl, // Add image URL to the product data
+    };
+    console.log("New Product Data with Image URL:", newProductData);
+
+    // Add product to the "pending" node
+    const ref = admin.database().ref("products/pending").push();
+    const productId = ref.key; // Get generated ID
+    console.log("Generated Product ID:", productId);
+
+    await ref.set(newProductData); // Save product data
+    console.log("Product data saved under 'pending' node.");
+
+    // Add the productId underneath category, subcategory, and type
+    const typeRef = admin
+      .database()
+      .ref(`categories/${categoryId}/subcategories/${subcategoryId}/types/${typeId}/productIds`);
+    console.log("Type reference path:", typeRef.path);
+
+    await typeRef.transaction((productIds = []) => {
+      console.log("Current product IDs before addition:", productIds);
+
+      if (!Array.isArray(productIds)) {
+        productIds = [];
+      }
+
+      if (!productIds.includes(productId)) {
+        productIds.push(productId); // Add the new product ID to the array
+        console.log("Added new Product ID to the list.");
+      } else {
+        console.log("Product ID already exists in the list.");
+      }
+
+      console.log("Product IDs after addition:", productIds);
+      return productIds;
+    });
+
+    console.log("Product ID added to category/type path successfully.");
+    res.status(200).json({ id: productId, message: "Product added successfully!" });
+  } catch (error) {
+    console.error("Error creating product:", error.message); // Log error message for better debugging
+    res.status(500).json({ error: error.message });
+  }
+});
+// - - - - - - - - - - - - - - - - - - - -
 
 // -----------------------------------------------------
 
 // READ / GET
 // -----------------------------------------------------
 // Get All APPROVED Products
+// - - - - - - - - - - - - - - - - - - - -
 router.get("/approved", async (req, res) => {
   try {
     const snapshot = await admin.database().ref("products/approved").once("value");
@@ -106,8 +193,10 @@ router.get("/approved", async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+// - - - - - - - - - - - - - - - - - - - -
 
 // Get all APPROVED products by ID of section (category, subcategory, or type)
+// - - - - - - - - - - - - - - - - - - - -
 router.get("/approved/group/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -226,10 +315,10 @@ router.get("/approved/group/:id", async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
-
-// - - - - - - - - - - - -
+// - - - - - - - - - - - - - - - - - - - -
 
 // Get Any Product by ID (approved, pending, or rejected)
+// - - - - - - - - - - - - - - - - - - - -
 router.get("/:id", async (req, res) => {
   try {
     const { id } = req.params;
@@ -257,6 +346,7 @@ router.get("/:id", async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+// - - - - - - - - - - - - - - - - - - - -
 // -----------------------------------------------------
 
 // UPDATE

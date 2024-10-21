@@ -5,7 +5,8 @@ const API_URL = process.env.API_URL || "http://localhost:3001";
 
 // CREATE
 // -----------------------------------------------------
-// Create APPROVED product
+// Create APPROVED product (admin)
+// - - - - - - - - - - - - - - - - - - - -
 export const createApprovedProduct = async (formData) => {
   try {
     const response = await axios.post(`${API_URL}/products/approved`, formData, {
@@ -16,6 +17,22 @@ export const createApprovedProduct = async (formData) => {
     throw error;
   }
 };
+// - - - - - - - - - - - - - - - - - - - -
+
+// Create PENDING product (normal user)
+// - - - - - - - - - - - - - - - - - - - -
+export const createPendingProduct = async (formData) => {
+  try {
+    const response = await axios.post(`${API_URL}/products/pending`, formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+// - - - - - - - - - - - - - - - - - - - -
+
 // -----------------------------------------------------
 
 // GET
