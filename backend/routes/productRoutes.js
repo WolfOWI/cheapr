@@ -663,6 +663,46 @@ router.put("/flag/:id", async (req, res) => {
 });
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+// Unflag a product by ID (flagged -> approved, remove flagMessage)
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+router.put("/unflag/:id", async (req, res) => {
+  try {
+    const { id } = req.params; // Extract the product ID from the URL
+
+    // Fetch the product from the flagged node
+    const flaggedSnapshot = await admin.database().ref(`products/flagged/${id}`).once("value");
+
+    if (!flaggedSnapshot.exists()) {
+      return res.status(404).json({ message: "Product not found in flagged." });
+    }
+
+    let productData = flaggedSnapshot.val(); // The product data in flagged
+
+    // Remove the flagMessage from the product data
+    if (productData.flagMessage) {
+      console.log("Delete the flagMessage:", productData.flagMessage);
+      delete productData.flagMessage; // Remove flagMessage
+    }
+
+    // Move the product back to the approved node
+    const approvedRef = admin.database().ref(`products/approved/${id}`);
+    await approvedRef.set(productData); // Save the product in the approved node
+
+    console.log("Product moved back to approved node.");
+
+    // Remove the product from the flagged node
+    await admin.database().ref(`products/flagged/${id}`).remove();
+
+    console.log("Product removed from flagged node.");
+
+    res.status(200).json({ message: "Product unflagged successfully!" });
+  } catch (error) {
+    console.error("Error unflagging product:", error.message);
+    res.status(500).json({ error: error.message });
+  }
+});
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 // - - - - - - - - - - - - - - - - - - - -
 // -----------------------------------------------------
 

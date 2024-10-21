@@ -30,8 +30,7 @@ const AdminProductItem = ({
   onApprove,
   onDelete,
   onEdit,
-  onFlagDismiss,
-  onFlagDone,
+  onReApprove,
 }) => {
   const [breadcrumb, setBreadcrumb] = useState({});
 
@@ -55,7 +54,7 @@ const AdminProductItem = ({
 
   return (
     <>
-      <div className="flex justify-between group my-4 w-full">
+      <div className="flex justify-between items-center group my-4 w-full">
         <div className="flex items-center w-full">
           <img src={product.image} alt={product.name} className="h-56" />
           <div className="ml-4">
@@ -127,16 +126,23 @@ const AdminProductItem = ({
             </Btn>
           </Stack>
         ) : (
-          <div className="flex flex-col justify-between bg-neutral-100 p-4 rounded-2xl my-4 w-[30%]">
-            <div>
+          <div className="w-[30%]">
+            <div className="flex flex-col justify-between bg-neutral-100 p-4 rounded-2xl mb-4">
               <h4>Message:</h4>
               <p>{product.flagMessage}</p>
             </div>
             <Stack direction="horizontal" gap={2} className="w-full">
-              <IconBtn iconType={"edit"} className="min-w-12" />
-              <IconBtn iconType={"delete"} variant="dark" className="min-w-12" />
-              <Btn variant="secondary" className="w-full">
-                Done
+              <IconBtn
+                iconType={"edit"}
+                className="min-w-12 opacity-30 group-hover:opacity-100 transition-all duration-150"
+                onClick={() => onEdit(productId)}
+              />
+              <Btn
+                variant="secondary"
+                className="w-full opacity-30 group-hover:opacity-100 transition-all duration-150"
+                onClick={() => onReApprove(productId)}
+              >
+                Re-Approve
               </Btn>
             </Stack>
           </div>

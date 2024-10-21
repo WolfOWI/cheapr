@@ -181,6 +181,19 @@ export const flagProductById = async (productId, flagMessage) => {
 };
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+// Unflag Product (Move from flagged to approved, remove flagMessage)
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+export const unflagProductById = async (productId) => {
+  try {
+    const response = await axios.put(`${API_URL}/products/unflag/${productId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error unflagging product:", error);
+    throw error;
+  }
+};
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 // - - - - - - - - - - - - - - - - - - - -
 
 // -----------------------------------------------------

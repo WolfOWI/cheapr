@@ -4,14 +4,10 @@
 import { useState, useEffect } from "react";
 
 // Services
-import {
-  getAllFlaggedProducts,
-  deleteProductById,
-  superApproveProductById,
-} from "../services/productService";
+import { getAllFlaggedProducts, unflagProductById } from "../services/productService";
 
 // Utility Functions
-import { sortProducts } from "../utils/productSortUtils";
+// -
 
 // Third-Party Components
 import { Container, Row, Col, Dropdown } from "react-bootstrap";
@@ -69,21 +65,21 @@ function AdminFlaggedDash() {
   //   }
   // };
 
-  // Handle Product Approve
-  // const handleProductApprove = async (productId) => {
-  //   console.log("Approve Click:", productId);
-  //   try {
-  //     await superApproveProductById(productId);
-  //     // Remove the super-approved product from the local state
-  //     setProducts((prevProducts) => {
-  //       const updatedProducts = { ...prevProducts };
-  //       delete updatedProducts[productId];
-  //       return updatedProducts;
-  //     });
-  //   } catch (error) {
-  //     console.error("Failed to super-approve product:", error);
-  //   }
-  // };
+  // Handle Product Re-Approve
+  const handleProductReApprove = async (productId) => {
+    console.log("ReApprove Click:", productId);
+    try {
+      await unflagProductById(productId);
+      // Remove the super-approved product from the local state
+      setProducts((prevProducts) => {
+        const updatedProducts = { ...prevProducts };
+        delete updatedProducts[productId];
+        return updatedProducts;
+      });
+    } catch (error) {
+      console.error("Failed to re-approve product:", error);
+    }
+  };
 
   return (
     <>
@@ -113,8 +109,7 @@ function AdminFlaggedDash() {
                     key={index}
                     type="flagging"
                     onEdit={""}
-                    onFlagDismiss={""}
-                    onFlagDone={""}
+                    onReApprove={handleProductReApprove}
                   />
                 ))
               ) : (
