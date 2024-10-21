@@ -343,6 +343,19 @@ router.get("/rejected", async (req, res) => {
 });
 // - - - - - - - - - - - - - - - - - - - -
 
+// Get All FLAGGED Products
+// - - - - - - - - - - - - - - - - - - - -
+router.get("/flagged", async (req, res) => {
+  try {
+    const snapshot = await admin.database().ref("products/flagged").once("value");
+    const products = snapshot.val();
+    res.status(200).json(products);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+// - - - - - - - - - - - - - - - - - - - -
+
 // Get Any Product by ID (approved, pending, or rejected)
 // - - - - - - - - - - - - - - - - - - - -
 router.get("/:id", async (req, res) => {
@@ -505,8 +518,10 @@ router.put("/:id", upload.single("image"), async (req, res) => {
 });
 // - - - - - - - - - - - - - - - - - - - -
 
-// SUPER Approve a product by ID (rejected -> approved)
+// STATUS
 // - - - - - - - - - - - - - - - - - - - -
+// SUPER Approve a product by ID (rejected -> approved)
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 router.put("/superapprove/:id", async (req, res) => {
   try {
     const { id } = req.params; // Extract the product ID from the URL
@@ -537,10 +552,10 @@ router.put("/superapprove/:id", async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
-// - - - - - - - - - - - - - - - - - - - -
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 // Approve a product by ID (pending -> approved)
-// - - - - - - - - - - - - - - - - - - - -
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 router.put("/approve/:id", async (req, res) => {
   try {
     const { id } = req.params; // Extract the product ID from the URL
@@ -571,10 +586,10 @@ router.put("/approve/:id", async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
-// - - - - - - - - - - - - - - - - - - - -
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 // Reject a product by ID (pending -> rejected)
-// - - - - - - - - - - - - - - - - - - - -
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 router.put("/reject/:id", async (req, res) => {
   try {
     const { id } = req.params; // Extract the product ID from the URL
@@ -605,6 +620,49 @@ router.put("/reject/:id", async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+// Flag a product by ID (approved -> flagged with flagMessage)
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+router.put("/flag/:id", async (req, res) => {
+  try {
+    const { id } = req.params; // Extract the product ID from the URL
+    const { flagMessage } = req.body; // Get the flag message from the request body
+
+    // Fetch the product from the approved node
+    const approvedSnapshot = await admin.database().ref(`products/approved/${id}`).once("value");
+
+    if (!approvedSnapshot.exists()) {
+      return res.status(404).json({ message: "Product not found in approved." });
+    }
+
+    const productData = approvedSnapshot.val(); // The product data in approved
+
+    // Add the flagMessage to the product data
+    const flaggedProductData = {
+      ...productData,
+      flagMessage, // Add flag message to product data
+    };
+
+    // Copy the product data to the flagged node
+    const flaggedRef = admin.database().ref(`products/flagged/${id}`);
+    await flaggedRef.set(flaggedProductData); // Save the product in the flagged node
+
+    console.log("Product moved to flagged node with flagMessage.");
+
+    // Remove the product from the approved node
+    await admin.database().ref(`products/approved/${id}`).remove();
+
+    console.log("Product removed from approved node.");
+
+    res.status(200).json({ message: "Product flagged successfully!" });
+  } catch (error) {
+    console.error("Error flagging product:", error.message);
+    res.status(500).json({ error: error.message });
+  }
+});
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 // - - - - - - - - - - - - - - - - - - - -
 // -----------------------------------------------------
 

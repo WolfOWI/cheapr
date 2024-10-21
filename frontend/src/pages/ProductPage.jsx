@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
 // Services
-import { getProductById } from "../services/productService";
+import { getProductById, flagProductById } from "../services/productService";
 import { getBreadcrumbByProductId } from "../services/breadcrumbService";
 
 // Utility Functions
@@ -14,7 +14,18 @@ import { getCheapestPrice } from "../utils/priceUtils";
 import { formatName } from "../utils/wordFormatUtils";
 
 // Third-Party Components
-import { Container, Row, Col, Breadcrumb, Stack, Form, InputGroup } from "react-bootstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Breadcrumb,
+  Stack,
+  Form,
+  InputGroup,
+  Button,
+  Modal,
+  FloatingLabel,
+} from "react-bootstrap";
 
 // Internal Components
 import NavigationBar from "../components/navigation/NavigationBar";
@@ -41,6 +52,16 @@ function ProductPage() {
   const [otherStores, setOtherStores] = useState([]);
   const [cheapestPrice, setCheapestPrice] = useState(null);
   const [savings, setSavings] = useState(null);
+
+  // Flagging Modal
+  // ----------------------------------------------
+  const [showFlagModal, setShowFlagModal] = useState(false);
+  const [flagMessage, setFlagMessage] = useState("");
+
+  const handleFlagModalClose = () => setShowFlagModal(false);
+  const handleFlagModalShow = () => setShowFlagModal(true);
+
+  // ----------------------------------------------
 
   // GET
   // ----------------------------------------------
@@ -87,16 +108,15 @@ function ProductPage() {
 
       setFormattedBreadcrumbArr(formattedArray);
 
-      // Log the formatted array for debugging
-      console.log("Formatted Breadcrumb:", formattedArray);
+      // console.log("Formatted Breadcrumb:", formattedArray);
     }
   }, [breadcrumb]);
 
-  useEffect(() => {
-    if (breadcrumb) {
-      console.log("breadcrumb:", breadcrumb);
-    }
-  }, [breadcrumb]);
+  // useEffect(() => {
+  //   if (breadcrumb) {
+  //     console.log("breadcrumb:", breadcrumb);
+  //   }
+  // }, [breadcrumb]);
 
   const handleBreadcrumbClick = (id) => {
     navigate(`/groceries/${id}`);
@@ -152,6 +172,16 @@ function ProductPage() {
       }
     }
   }, [prices]);
+
+  const handleFlagProduct = async () => {
+    try {
+      await flagProductById(productId, flagMessage); // Pass the flagMessage to the service function
+      console.log("You flagged the product:", productId);
+      handleFlagModalClose();
+    } catch (error) {
+      console.error("Error flagging product:", error);
+    }
+  };
 
   return (
     <>
@@ -273,7 +303,7 @@ function ProductPage() {
                   </InputGroup>
                   <Btn>Add to Cart</Btn>
                   <Btn variant="secondary">Update Price(s)</Btn>
-                  <IconBtn variant="dark" iconType="flag" />
+                  <IconBtn variant="dark" iconType="flag" onClick={handleFlagModalShow} />
                 </Stack>
               </div>
             </div>
@@ -281,6 +311,31 @@ function ProductPage() {
         )}
       </Container>
       <Footer />
+      <Modal show={showFlagModal} onHide={handleFlagModalClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Report a Problem</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p className="mb-4">What seems to be the problem with {product.name}?</p>
+          <Form.Floating>
+            <FloatingLabel controlId="floatingInput" label="Problem Description" className="mb-4">
+              <Form.Control
+                as="textarea"
+                placeholder=""
+                value={flagMessage}
+                onChange={(e) => setFlagMessage(e.target.value)}
+                className="input-style h-32"
+              />
+            </FloatingLabel>
+          </Form.Floating>
+        </Modal.Body>
+        <Modal.Footer>
+          <Btn variant="secondary" onClick={handleFlagModalClose}>
+            Cancel
+          </Btn>
+          <Btn onClick={handleFlagProduct}>Report Product</Btn>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 }

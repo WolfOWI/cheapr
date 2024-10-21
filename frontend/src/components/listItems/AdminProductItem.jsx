@@ -22,7 +22,17 @@ import MiniStorePriceBlock from "../building-blocks/MiniStorePriceBlock";
 
 // -----------------------------------------------------------
 
-const AdminProductItem = ({ productId, product, type, onReject, onApprove, onDelete }) => {
+const AdminProductItem = ({
+  productId,
+  product,
+  type,
+  onReject,
+  onApprove,
+  onDelete,
+  onEdit,
+  onFlagDismiss,
+  onFlagDone,
+}) => {
   const [breadcrumb, setBreadcrumb] = useState({});
 
   // Get breadcrumb data when productId is received/changes
@@ -117,15 +127,17 @@ const AdminProductItem = ({ productId, product, type, onReject, onApprove, onDel
             </Btn>
           </Stack>
         ) : (
-          <div className="flex flex-col justify-between bg-neutral-100 p-4 rounded-2xl my-4">
+          <div className="flex flex-col justify-between bg-neutral-100 p-4 rounded-2xl my-4 w-[30%]">
             <div>
-              <h4>Reported for:</h4>
-              <p>There is a spelling mistake on the word “apple”.</p>
+              <h4>Message:</h4>
+              <p>{product.flagMessage}</p>
             </div>
-            <Stack direction="horizontal" gap={2} className="justify-end">
-              <IconBtn iconType={"edit"} />
-              <IconBtn iconType={"delete"} variant="dark" />
-              <Btn variant="secondary">Done</Btn>
+            <Stack direction="horizontal" gap={2} className="w-full">
+              <IconBtn iconType={"edit"} className="min-w-12" />
+              <IconBtn iconType={"delete"} variant="dark" className="min-w-12" />
+              <Btn variant="secondary" className="w-full">
+                Done
+              </Btn>
             </Stack>
           </div>
         )}

@@ -1,101 +1,130 @@
 // IMPORT
 // -----------------------------------------------------------
 // React & Hooks
-// -
+import { useState, useEffect } from "react";
 
 // Services
-// -
+import {
+  getAllFlaggedProducts,
+  deleteProductById,
+  superApproveProductById,
+} from "../services/productService";
 
 // Utility Functions
-// -
+import { sortProducts } from "../utils/productSortUtils";
 
 // Third-Party Components
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Dropdown } from "react-bootstrap";
 
 // Internal Components
 import NavigationBar from "../components/navigation/NavigationBar";
 import Btn from "../components/button/Btn";
-import StoreLogo from "../components/building-blocks/StoreLogo";
 import AdminProductItem from "../components/listItems/AdminProductItem";
 import Footer from "../components/navigation/Footer";
+import Drpdwn from "../components/input/Drpdwn";
 
 // Imagery
 // -
 
 // -----------------------------------------------------------
 function AdminFlaggedDash() {
-  const products = [
-    {
-      name: "Top Red Apples",
-      image: "apple.jpg",
-      amount: "1.5",
-      unit: "kg",
-      pnp: {
-        price: 36.99,
-        updated: "19/09/2024",
-        onSpecial: false,
-      },
-      woolworths: {
-        price: 42.99,
-        updated: "19/09/2024",
-        onSpecial: false,
-      },
-      checkers: {
-        price: 40.95,
-        updated: "19/09/2024",
-        onSpecial: true,
-      },
-      spar: {
-        price: 38.86,
-        updated: "19/09/2024",
-        onSpecial: false,
-      },
-    },
-    {
-      name: "Juicy Mangos",
-      image: "mango.jpg",
-      amount: "2",
-      unit: "kg",
-      pnp: {
-        price: 57.99,
-        updated: "19/09/2024",
-        onSpecial: false,
-      },
-      woolworths: {
-        price: 56.99,
-        updated: "19/09/2024",
-        onSpecial: false,
-      },
-      checkers: {
-        price: 67.95,
-        updated: "19/09/2024",
-        onSpecial: false,
-      },
-      spar: {
-        price: 59.86,
-        updated: "19/09/2024",
-        onSpecial: false,
-      },
-    },
-  ];
+  const [products, setProducts] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
+
+  // On Page Mount
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const data = await getAllFlaggedProducts();
+        // console.log("data", data);
+        if (data) {
+          setProducts(data);
+        }
+        setIsLoading(false);
+      } catch (error) {
+        console.log("Error:", error);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+  // useEffect(() => {
+  //   console.log(products);
+  // }, [products]);
+
+  // Handle Product Delete
+  // const handleProductDelete = async (productId) => {
+  //   console.log("Product Delete Click:", productId);
+  //   try {
+  //     await deleteProductById(productId);
+  //     // Remove the rejected product from the local state
+  //     setProducts((prevProducts) => {
+  //       const updatedProducts = { ...prevProducts };
+  //       delete updatedProducts[productId];
+  //       return updatedProducts;
+  //     });
+  //   } catch (error) {
+  //     console.error("Failed to delete product:", error);
+  //   }
+  // };
+
+  // Handle Product Approve
+  // const handleProductApprove = async (productId) => {
+  //   console.log("Approve Click:", productId);
+  //   try {
+  //     await superApproveProductById(productId);
+  //     // Remove the super-approved product from the local state
+  //     setProducts((prevProducts) => {
+  //       const updatedProducts = { ...prevProducts };
+  //       delete updatedProducts[productId];
+  //       return updatedProducts;
+  //     });
+  //   } catch (error) {
+  //     console.error("Failed to super-approve product:", error);
+  //   }
+  // };
 
   return (
     <>
       <NavigationBar admin />
       <div className="mb-32">
         <Container className="pt-6">
-          <div className="flex w-full justify-between">
-            <h2>Flagged Products</h2>
-            <Btn variant="dark-outline">Sort by</Btn>
+          <div className="flex w-full mb-8">
+            <h2>
+              {Object.keys(products).length} Flagged Product
+              {Object.keys(products).length !== 1 && "s"}
+            </h2>
           </div>
         </Container>
 
         {/* Product List Container */}
         <Container className="my-4">
           {/* Product Rows */}
-          {products.map((product, index) => (
-            <AdminProductItem product={product} key={index} type="flagging" />
-          ))}
+          {isLoading ? (
+            <p>Loading Products</p>
+          ) : (
+            <>
+              {Object.keys(products).length > 0 ? (
+                Object.keys(products).map((productId, index) => (
+                  <AdminProductItem
+                    productId={productId}
+                    product={products[productId]}
+                    key={index}
+                    type="flagging"
+                    onEdit={""}
+                    onFlagDismiss={""}
+                    onFlagDone={""}
+                  />
+                ))
+              ) : (
+                <>
+                  {/* Empty Message */}
+                  <h3 className="text-neutral-600 font-normal mt-10">No Flagged Products.</h3>
+                </>
+              )}
+            </>
+          )}
         </Container>
       </div>
       <Footer />

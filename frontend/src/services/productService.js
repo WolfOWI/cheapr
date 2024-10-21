@@ -85,6 +85,18 @@ export const getAllRejectedProducts = async () => {
 };
 // - - - - - - - - - - - - - - - - - - - -
 
+// GET All FLAGGED Products
+// - - - - - - - - - - - - - - - - - - - -
+export const getAllFlaggedProducts = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/products/flagged`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+// - - - - - - - - - - - - - - - - - - - -
+
 // Get Any Product by ID
 // - - - - - - - - - - - - - - - - - - - -
 export const getProductById = async (productId) => {
@@ -149,6 +161,21 @@ export const rejectProductById = async (productId) => {
     return response.data;
   } catch (error) {
     console.error("Error rejecting product:", error);
+    throw error;
+  }
+};
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+// Flag Product (Move from approved to flagged with flagMessage)
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+export const flagProductById = async (productId, flagMessage) => {
+  try {
+    const response = await axios.put(`${API_URL}/products/flag/${productId}`, {
+      flagMessage,
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error flagging product:", error);
     throw error;
   }
 };
