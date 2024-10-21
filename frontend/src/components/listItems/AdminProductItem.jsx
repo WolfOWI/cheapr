@@ -22,7 +22,7 @@ import MiniStorePriceBlock from "../building-blocks/MiniStorePriceBlock";
 
 // -----------------------------------------------------------
 
-const AdminProductItem = ({ productId, product, type }) => {
+const AdminProductItem = ({ productId, product, type, onReject, onApprove }) => {
   const [breadcrumb, setBreadcrumb] = useState({});
 
   // Get breadcrumb data when productId is received/changes
@@ -34,11 +34,11 @@ const AdminProductItem = ({ productId, product, type }) => {
     fetchBreadcrumb();
   }, [productId]);
 
-  useEffect(() => {
-    if (breadcrumb) {
-      console.log("breadcrumb", breadcrumb);
-    }
-  }, [breadcrumb]);
+  // useEffect(() => {
+  //   if (breadcrumb) {
+  //     console.log("breadcrumb", breadcrumb);
+  //   }
+  // }, [breadcrumb]);
 
   // console.log("productId:", productId);
   // console.log("product:", product);
@@ -90,8 +90,12 @@ const AdminProductItem = ({ productId, product, type }) => {
               iconType={"wrong"}
               variant="dark"
               className="opacity-30 group-hover:opacity-100 transition-all duration-150"
+              onClick={() => onReject(productId)}
             />
-            <Btn className="opacity-30 group-hover:opacity-100 transition-all duration-150">
+            <Btn
+              className="opacity-30 group-hover:opacity-100 transition-all duration-150"
+              onClick={() => onApprove(productId)}
+            >
               Approve
             </Btn>
           </Stack>

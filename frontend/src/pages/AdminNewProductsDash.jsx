@@ -83,60 +83,15 @@ function AdminNewProductsDash() {
     }
   };
 
-  // const products = [
-  //   {
-  //     name: "Top Red Apples",
-  //     image: "apple.jpg",
-  //     amount: "1.5",
-  //     unit: "kg",
-  //     pnp: {
-  //       price: 36.99,
-  //       updated: "19/09/2024",
-  //       onSpecial: false,
-  //     },
-  //     woolworths: {
-  //       price: 42.99,
-  //       updated: "19/09/2024",
-  //       onSpecial: false,
-  //     },
-  //     checkers: {
-  //       price: 40.95,
-  //       updated: "19/09/2024",
-  //       onSpecial: true,
-  //     },
-  //     spar: {
-  //       price: 38.86,
-  //       updated: "19/09/2024",
-  //       onSpecial: false,
-  //     },
-  //   },
-  //   {
-  //     name: "Juicy Mangos",
-  //     image: "mango.jpg",
-  //     amount: "2",
-  //     unit: "kg",
-  //     pnp: {
-  //       price: 57.99,
-  //       updated: "19/09/2024",
-  //       onSpecial: false,
-  //     },
-  //     woolworths: {
-  //       price: 56.99,
-  //       updated: "19/09/2024",
-  //       onSpecial: false,
-  //     },
-  //     checkers: {
-  //       price: 67.95,
-  //       updated: "19/09/2024",
-  //       onSpecial: false,
-  //     },
-  //     spar: {
-  //       price: 59.86,
-  //       updated: "19/09/2024",
-  //       onSpecial: false,
-  //     },
-  //   },
-  // ];
+  // Handle Product Reject
+  const handleProductReject = (productId) => {
+    console.log("Product Reject Click:", productId);
+  };
+
+  // Handle Product Approve
+  const handleProductApprove = (productId) => {
+    console.log("Approve Click:", productId);
+  };
 
   return (
     <>
@@ -169,6 +124,8 @@ function AdminNewProductsDash() {
                   product={products[productId]}
                   key={index}
                   type="approveDeny"
+                  onReject={handleProductReject}
+                  onApprove={handleProductApprove}
                 />
               ))}
             </>

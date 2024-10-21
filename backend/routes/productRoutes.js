@@ -572,11 +572,27 @@ router.delete("/:id", async (req, res) => {
           return productIds;
         });
 
+      // Check if the product has an associated image and delete it from Firebase Storage
+      if (productData.image) {
+        const bucket = admin.storage().bucket();
+
+        // Extract the file path from the full image URL
+        const filePath = productData.image.split("/").slice(-1)[0].split("?")[0]; // Extract the file name before query parameters
+        const file = bucket.file(`product_images/${filePath}`); // Construct the path in the bucket
+
+        try {
+          await file.delete();
+          console.log("Image deleted from Firebase Storage:", filePath);
+        } catch (error) {
+          console.error("Error deleting image from Firebase Storage:", error.message);
+        }
+      }
+
       // Remove the product data
       await productRef.remove();
       console.log("Product data removed successfully from path:", productRef.path);
 
-      res.status(200).json({ message: "Product deleted successfully!" });
+      res.status(200).json({ message: "Product and image deleted successfully!" });
     } else {
       console.log("Product not found for ID:", id);
       res.status(404).json({ message: "Product not found" });
@@ -586,6 +602,7 @@ router.delete("/:id", async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+
 // -----------------------------------------------------
 
 export default router;
