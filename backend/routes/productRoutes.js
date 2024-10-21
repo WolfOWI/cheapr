@@ -590,7 +590,7 @@ router.delete("/:id", async (req, res) => {
 
       // Remove the product data
       await productRef.remove();
-      console.log("Product data removed successfully from path:", productRef.path);
+      console.log("Product data removed successfully");
 
       res.status(200).json({ message: "Product and image deleted successfully!" });
     } else {

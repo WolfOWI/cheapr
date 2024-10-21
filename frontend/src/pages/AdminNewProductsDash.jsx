@@ -4,7 +4,7 @@
 import { useState, useEffect } from "react";
 
 // Services
-import { getAllPendingProducts } from "../services/productService";
+import { getAllPendingProducts, deleteProductById } from "../services/productService";
 
 // Utility Functions
 import { sortProducts } from "../utils/productSortUtils";
@@ -31,19 +31,24 @@ function AdminNewProductsDash() {
   // On Page Mount
   useEffect(() => {
     const fetchProducts = async () => {
-      const data = await getAllPendingProducts();
-      const sortedData = sortProducts(data, "NewestCreated");
-      setProducts(sortedData);
+      try {
+        const data = await getAllPendingProducts();
+        console.log("data", data);
+        if (data) {
+          const sortedData = sortProducts(data, "NewestCreated");
+          setProducts(sortedData);
+        }
+        setIsLoading(false);
+      } catch (error) {
+        console.log("Error:", error);
+      }
     };
 
     fetchProducts();
   }, []);
 
-  // Loading of products
   useEffect(() => {
-    if (Object.keys(products).length > 0) {
-      setIsLoading(false);
-    }
+    console.log(products);
   }, [products]);
 
   // Handle sort dropdown select
@@ -84,8 +89,19 @@ function AdminNewProductsDash() {
   };
 
   // Handle Product Reject
-  const handleProductReject = (productId) => {
+  const handleProductReject = async (productId) => {
     console.log("Product Reject Click:", productId);
+    try {
+      await deleteProductById(productId);
+      // Remove the rejected product from the local state
+      setProducts((prevProducts) => {
+        const updatedProducts = { ...prevProducts };
+        delete updatedProducts[productId];
+        return updatedProducts;
+      });
+    } catch (error) {
+      console.error("Failed to delete product:", error);
+    }
   };
 
   // Handle Product Approve
@@ -118,21 +134,25 @@ function AdminNewProductsDash() {
             <p>Loading Products</p>
           ) : (
             <>
-              {Object.keys(products).map((productId, index) => (
-                <AdminProductItem
-                  productId={productId}
-                  product={products[productId]}
-                  key={index}
-                  type="approveDeny"
-                  onReject={handleProductReject}
-                  onApprove={handleProductApprove}
-                />
-              ))}
+              {Object.keys(products).length > 0 ? (
+                Object.keys(products).map((productId, index) => (
+                  <AdminProductItem
+                    productId={productId}
+                    product={products[productId]}
+                    key={index}
+                    type="approveDeny"
+                    onReject={handleProductReject}
+                    onApprove={handleProductApprove}
+                  />
+                ))
+              ) : (
+                <>
+                  {/* Empty Message */}
+                  <h3 className="text-neutral-600 font-normal mt-10">No Pending Products.</h3>
+                </>
+              )}
             </>
           )}
-          {/* {products.map((product, index) => (
-            <AdminProductItem product={product} key={index} type="approveDeny" />
-          ))} */}
         </Container>
       </div>
       <Footer />
