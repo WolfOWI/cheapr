@@ -45,7 +45,6 @@ function AdminEditDash() {
   const [oldCategoryId, setOldCategoryId] = useState("");
   const [oldSubcategoryId, setOldSubcategoryId] = useState("");
   const [oldTypeId, setOldTypeId] = useState("");
-  // TODO Show Image
   const [imageFile, setImageFile] = useState(null);
 
   // State for prices and special offer fields
@@ -153,41 +152,49 @@ function AdminEditDash() {
   // Fetch subcategories when category changes
   useEffect(() => {
     const fetchSubcategories = async () => {
-      if (!newCategoryId) return;
-      try {
-        const data = await getSubcategoriesByCategory(newCategoryId);
-        setSubcategories(Object.entries(data));
-        if (data && Object.keys(data).length > 0) {
-          setNewSubcategoryId(Object.keys(data)[0]); // Set default subcategory ID
+      if (newCategoryId) {
+        try {
+          const data = await getSubcategoriesByCategory(newCategoryId);
+          setSubcategories(Object.entries(data));
+
+          if (data && Object.keys(data).length > 0) {
+            setNewSubcategoryId(Object.keys(data)[0]); // Set default subcategory ID
+          } else {
+            setNewSubcategoryId(""); // Reset if no subcategories found
+          }
+        } catch (error) {
+          console.error("Failed to fetch subcategories", error);
         }
-      } catch (error) {
-        console.error("Failed to fetch subcategories", error);
       }
     };
 
     fetchSubcategories();
   }, [newCategoryId]);
 
-  // Fetch product types when subcategory changes
+  // Fetch product types when both category and subcategory are set
   useEffect(() => {
     const fetchProductTypes = async () => {
-      if (!newSubcategoryId) return;
-      try {
-        const data = await getProductTypeBySubcategory(newCategoryId, newSubcategoryId);
-        setProductTypes(Object.entries(data));
-        if (data && Object.keys(data).length > 0) {
-          setNewTypeId(Object.keys(data)[0]); // Set default product type ID
+      if (newCategoryId && newSubcategoryId) {
+        try {
+          const data = await getProductTypeBySubcategory(newCategoryId, newSubcategoryId);
+          setProductTypes(Object.entries(data));
+
+          if (data && Object.keys(data).length > 0) {
+            setNewTypeId(Object.keys(data)[0]); // Set default product type ID
+          } else {
+            setNewTypeId(""); // Reset if no product types found
+          }
+        } catch (error) {
+          console.error("Failed to fetch product types", error);
         }
-      } catch (error) {
-        console.error("Failed to fetch product types", error);
       }
     };
 
     fetchProductTypes();
-  }, [newCategoryId, newSubcategoryId]);
+  }, [newCategoryId, newSubcategoryId]); // Both dependencies are included
   // ----------------------------------------------
 
-  // INPUTS
+  // INPUTS & BUTTON HANDLERS
   // ----------------------------------------------
   // When a change has been made to the input fields
   const handleInputChange = (field, value) => {
@@ -409,11 +416,12 @@ function AdminEditDash() {
                       className="input-style"
                       onChange={handleSubcategoryChange}
                     >
-                      {subcategories.map(([subId, subcategory]) => (
-                        <option key={subId} value={subId}>
-                          {subcategory.name}
-                        </option>
-                      ))}
+                      {subcategories.length > 0 &&
+                        subcategories.map(([subId, subcategory]) => (
+                          <option key={subId} value={subId}>
+                            {subcategory.name}
+                          </option>
+                        ))}
                     </Form.Select>
                   </FloatingLabel>
                 </Form.Floating>
@@ -426,11 +434,12 @@ function AdminEditDash() {
                       className="input-style"
                       onChange={handleTypeChange}
                     >
-                      {productTypes.map(([typeId, productType]) => (
-                        <option key={typeId} value={typeId}>
-                          {productType.name}
-                        </option>
-                      ))}
+                      {productTypes.length > 0 &&
+                        productTypes.map(([typeId, productType]) => (
+                          <option key={typeId} value={typeId}>
+                            {productType.name}
+                          </option>
+                        ))}
                     </Form.Select>
                   </FloatingLabel>
                 </Form.Floating>
