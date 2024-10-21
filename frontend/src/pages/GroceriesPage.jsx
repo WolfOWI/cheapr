@@ -100,6 +100,12 @@ function GroceriesPage() {
     }
   }, [breadcrumb]);
 
+  useEffect(() => {
+    if (products) {
+      console.log("products:", products);
+    }
+  }, [products]);
+
   // Handle sort dropdown select
   const handleSelect = (eventKey) => {
     console.log(`Selected sort option: ${eventKey}`);

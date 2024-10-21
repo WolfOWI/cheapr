@@ -52,8 +52,7 @@ function ProductPage() {
         // Fetch product data
         const productData = await getProductById(productId);
         setProduct(productData);
-
-        // Fetch breadcrumb data
+        // // Fetch breadcrumb data
         const breadcrumbData = await getBreadcrumbByProductId(productId);
         setBreadcrumb(breadcrumbData);
       } catch (error) {
@@ -71,13 +70,19 @@ function ProductPage() {
 
       // Conditionally add each part to the array only if it exists
       if (breadcrumb["category"]) {
-        formattedArray.push(formatName(breadcrumb["category"]));
+        formattedArray.push({
+          name: formatName(breadcrumb["category"]),
+          id: breadcrumb["categoryId"],
+        });
       }
       if (breadcrumb["subcategory"]) {
-        formattedArray.push(formatName(breadcrumb["subcategory"]));
+        formattedArray.push({
+          name: formatName(breadcrumb["subcategory"]),
+          id: breadcrumb["subcategoryId"],
+        });
       }
       if (breadcrumb["type"]) {
-        formattedArray.push(formatName(breadcrumb["type"]));
+        formattedArray.push({ name: formatName(breadcrumb["type"]), id: breadcrumb["typeId"] });
       }
 
       setFormattedBreadcrumbArr(formattedArray);
@@ -86,6 +91,16 @@ function ProductPage() {
       console.log("Formatted Breadcrumb:", formattedArray);
     }
   }, [breadcrumb]);
+
+  useEffect(() => {
+    if (breadcrumb) {
+      console.log("breadcrumb:", breadcrumb);
+    }
+  }, [breadcrumb]);
+
+  const handleBreadcrumbClick = (id) => {
+    navigate(`/groceries/${id}`);
+  };
 
   // Set Prices after product loaded
   useEffect(() => {
@@ -151,8 +166,8 @@ function ProductPage() {
               <Breadcrumb>
                 <Breadcrumb.Item href="/groceries">Groceries</Breadcrumb.Item>
                 {formattedBreadcrumbArr.map((bread, index) => (
-                  <Breadcrumb.Item key={index} href="">
-                    {bread}
+                  <Breadcrumb.Item key={index} onClick={() => handleBreadcrumbClick(bread.id)}>
+                    {bread.name}
                   </Breadcrumb.Item>
                 ))}
                 <Breadcrumb.Item active>{product.name}</Breadcrumb.Item>

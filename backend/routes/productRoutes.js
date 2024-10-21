@@ -111,13 +111,15 @@ router.get("/approved", async (req, res) => {
 router.get("/approved/group/:id", async (req, res) => {
   try {
     const { id } = req.params;
+    const productsById = {}; // Create an object to store products by ID
 
     // Fetch the category node to check if the ID corresponds to a category
     const categorySnapshot = await admin.database().ref(`categories/${id}`).once("value");
     const categoryData = categorySnapshot.val();
 
+    // If the ID corresponds to a category
     if (categoryData) {
-      // If ID is a category, gather all product IDs from all subcategories and types
+      // Gather all product IDs from subcategories and types
       const productIds = [];
       Object.values(categoryData.subcategories || {}).forEach((subcategory) => {
         Object.values(subcategory.types || {}).forEach((type) => {
@@ -128,12 +130,21 @@ router.get("/approved/group/:id", async (req, res) => {
       });
 
       if (productIds.length > 0) {
+        // Fetch all the products by their IDs
         const productPromises = productIds.map((productId) =>
           admin.database().ref(`products/approved/${productId}`).once("value")
         );
         const productSnapshots = await Promise.all(productPromises);
-        const products = productSnapshots.map((snapshot) => snapshot.val()).filter(Boolean);
-        return res.status(200).json(products);
+
+        // Assign products to the productsById object using product IDs as keys
+        productSnapshots.forEach((snapshot) => {
+          const productData = snapshot.val();
+          if (productData) {
+            productsById[snapshot.key] = productData; // Key by product ID
+          }
+        });
+
+        return res.status(200).json(productsById);
       }
     }
 
@@ -159,8 +170,16 @@ router.get("/approved/group/:id", async (req, res) => {
           admin.database().ref(`products/approved/${productId}`).once("value")
         );
         const productSnapshots = await Promise.all(productPromises);
-        const products = productSnapshots.map((snapshot) => snapshot.val()).filter(Boolean);
-        return res.status(200).json(products);
+
+        // Assign products to the productsById object using product IDs as keys
+        productSnapshots.forEach((snapshot) => {
+          const productData = snapshot.val();
+          if (productData) {
+            productsById[snapshot.key] = productData;
+          }
+        });
+
+        return res.status(200).json(productsById);
       }
     }
 
@@ -187,11 +206,16 @@ router.get("/approved/group/:id", async (req, res) => {
         );
 
         const productSnapshots = await Promise.all(productPromises);
-        const products = productSnapshots
-          .map((snapshot) => snapshot.val())
-          .filter((product) => product);
 
-        return res.status(200).json(products);
+        // Assign products to the productsById object using product IDs as keys
+        productSnapshots.forEach((snapshot) => {
+          const productData = snapshot.val();
+          if (productData) {
+            productsById[snapshot.key] = productData;
+          }
+        });
+
+        return res.status(200).json(productsById);
       }
     }
 
@@ -202,6 +226,8 @@ router.get("/approved/group/:id", async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+
+// - - - - - - - - - - - -
 
 // Get Any Product by ID (approved, pending, or rejected)
 router.get("/:id", async (req, res) => {

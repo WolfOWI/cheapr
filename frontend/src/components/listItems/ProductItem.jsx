@@ -24,6 +24,7 @@ import Btn from "../button/Btn";
 
 const ProductItem = ({ product, admin, onViewClick, onEditClick, onDeleteClick, onCartClick }) => {
   // Array of prices from different stores
+
   const prices = [
     { store: "pnp", price: product.pnp.price },
     { store: "woolworths", price: product.woolworths.price },
