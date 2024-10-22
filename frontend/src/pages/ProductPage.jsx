@@ -578,6 +578,7 @@ function ProductPage() {
                   <Btn onClick={() => onCartBtnClick(productId)}>
                     {cartedItem ? `Remove From Cart` : `Add To Cart`}
                   </Btn>
+                  <IconBtn variant="dark" iconType="flag" onClick={handleFlagModalShow} />
                 </Stack>
               </div>
             </div>
