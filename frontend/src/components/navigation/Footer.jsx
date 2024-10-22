@@ -42,7 +42,7 @@ const Footer = ({ admin }) => {
                 </Nav.Link>
                 <p className="mx-8 text-primary font-bold hidden lg:block">|</p>
                 <Nav.Link as={Link} to="/add">
-                  Add a Product
+                  Submit a Product
                 </Nav.Link>
                 <p className="mx-8 text-primary font-bold hidden lg:block">|</p>
                 <Nav.Link as={Link} to="/planner">
