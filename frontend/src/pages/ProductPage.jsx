@@ -16,7 +16,7 @@ import { getBreadcrumbByProductId } from "../services/breadcrumbService";
 // Utility Functions
 import { getCheapestPrice } from "../utils/priceUtils";
 import { formatName } from "../utils/wordFormatUtils";
-import { getCurrentDate } from "../utils/dateUtils";
+import { getCurrentDate, formatFullDateToSlashShort } from "../utils/dateUtils";
 
 // Third-Party Components
 import {
@@ -281,21 +281,25 @@ function ProductPage() {
           store: "pnp",
           price: parseFloat(product.pnp.price) || null,
           updated: product.pnp.updated || "No data",
+          specialDate: product.pnp?.special || "",
         },
         {
           store: "woolworths",
           price: parseFloat(product.woolworths.price) || null,
           updated: product.woolworths.updated || "No data",
+          specialDate: product.woolworths?.special || "",
         },
         {
           store: "checkers",
           price: parseFloat(product.checkers.price) || null,
           updated: product.checkers.updated || "No data",
+          specialDate: product.checkers?.special || "",
         },
         {
           store: "spar",
           price: parseFloat(product.spar.price) || null,
           updated: product.spar.updated || "No data",
+          specialDate: product.spar?.special || "",
         },
       ];
 
@@ -305,7 +309,7 @@ function ProductPage() {
 
   // Pricing calculations after price loaded
   useEffect(() => {
-    // console.log(prices);
+    // console.log("prices", prices);
     // If prices exists
     if (prices.length > 0) {
       const { cheapestPrice, cheapestStores, otherStores } = getCheapestPrice(prices);
@@ -322,6 +326,10 @@ function ProductPage() {
     }
   }, [prices]);
 
+  // useEffect(() => {
+  //   console.log("cheapestStores:", cheapestStores);
+  // }, [cheapestStores]);
+
   // Handle Product Flagging
   const handleFlagProduct = async () => {
     try {
@@ -333,6 +341,11 @@ function ProductPage() {
       console.error("Error flagging product:", error);
     }
   };
+
+  // Special Icon Date (of 1 cheapest store only)
+  const firstSpecialStore = cheapestStores.find(
+    (store) => store.specialDate && store.specialDate !== ""
+  );
 
   return (
     <>
@@ -356,7 +369,16 @@ function ProductPage() {
             )}
             <div className="flex w-full pt-4">
               {/* Image */}
-              <img src={product.image} alt="img" className="w-[400px] object-contain mr-8" />
+              <div className="relative w-[400px] mr-8">
+                <img src={product.image} alt="img" className="object-center absolute" />
+                {cheapestStores.some((store) => store.specialDate && store.specialDate !== "") && (
+                  <div className="absolute bottom-0 right-5 bg-sky-800 text-white rounded-full h-32 w-32 flex flex-col items-center justify-center text-center">
+                    <h4 className="mb-1">Special</h4>
+                    <p>{formatFullDateToSlashShort(firstSpecialStore.specialDate)}</p>
+                  </div>
+                )}
+              </div>
+
               {/* Text Details */}
               <div className="flex flex-col justify-between">
                 <div>

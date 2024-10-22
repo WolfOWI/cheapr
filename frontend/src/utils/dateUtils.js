@@ -22,3 +22,9 @@ export const getCurrentTimeStamp = () => {
 
   return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 };
+
+// Format Date from YYYY-MM-DD to MM/DD
+export const formatFullDateToSlashShort = (date) => {
+  const [year, month, day] = date.split("-");
+  return `${month}/${day}`;
+};
