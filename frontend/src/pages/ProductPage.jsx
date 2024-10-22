@@ -12,7 +12,7 @@ import {
   updateProductPricesById,
 } from "../services/productService";
 import { getBreadcrumbByProductId } from "../services/breadcrumbService";
-import { getUserDetails } from "../services/userService";
+import { getUserDetails, getUserCart } from "../services/userService";
 
 // Utility Functions
 import { getCheapestPrice } from "../utils/priceUtils";
@@ -62,6 +62,9 @@ function ProductPage() {
   const [cheapestPrice, setCheapestPrice] = useState(null);
   const [savings, setSavings] = useState(null);
   const [loggedUser, setLoggedUser] = useState(null);
+  const [cart, setCart] = useState(null);
+
+  const [itemQuant, setItemQuant] = useState(1);
   // ----------------------------------------------
 
   // PRODUCT & PRICING
@@ -183,17 +186,56 @@ function ProductPage() {
 
   // CART
   // ----------------------------------------------
+  // On Page load
   useEffect(() => {
     const fetchLoggedUser = async () => {
       const user = await getUserDetails();
       setLoggedUser(user);
     };
+
+    const fetchCart = async () => {
+      const cartData = await getUserCart();
+      setCart(cartData);
+    };
+
     fetchLoggedUser();
+    fetchCart();
   }, []);
 
+  // useEffect(() => {
+  //   console.log(loggedUser);
+  // }, [loggedUser]);
+
   useEffect(() => {
-    console.log(loggedUser);
-  }, [loggedUser]);
+    console.log("cart", cart);
+  }, [cart]);
+
+  useEffect(() => {
+    console.log("itemQuant", itemQuant);
+  }, [itemQuant]);
+
+  // Handle Minus Click
+  const quantMinus = () => {
+    if (itemQuant > 1) {
+      setItemQuant(itemQuant - 1);
+    } else {
+      setItemQuant(1);
+    }
+  };
+
+  // Handle Item Quantity Change
+  const itemQuantChange = (value) => {
+    if (value) {
+      setItemQuant(value);
+    } else {
+      setItemQuant(1);
+    }
+  };
+
+  // Handle Add To Cart
+  const onAddToCartClick = () => {
+    console.log("add to cart clicked");
+  };
 
   // ----------------------------------------------
 
@@ -487,14 +529,22 @@ function ProductPage() {
                 {/* Buttons */}
                 <Stack direction="horizontal" gap={3} className="my-8">
                   <InputGroup className="bg-neutral-100 w-fit rounded-xl">
-                    <IconBtn variant="tertiary" iconType="minus" />
+                    <IconBtn variant="tertiary" iconType="minus" onClick={quantMinus} />
                     <Form.Control
                       type="number"
                       className="bg-transparent border-none text-center fw-bold p-0 no-arrows w-8"
+                      value={itemQuant}
+                      onChange={(e) => {
+                        itemQuantChange(parseInt(e.target.value));
+                      }}
                     />
-                    <IconBtn variant="tertiary" iconType="add" />
+                    <IconBtn
+                      variant="tertiary"
+                      iconType="add"
+                      onClick={() => setItemQuant(itemQuant + 1)}
+                    />
                   </InputGroup>
-                  <Btn>Add to Cart</Btn>
+                  <Btn onClick={onAddToCartClick}>Add to Cart</Btn>
                   <Btn variant="secondary" onClick={handlePriceModalShow}>
                     Update Price(s)
                   </Btn>
