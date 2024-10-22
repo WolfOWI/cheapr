@@ -12,7 +12,7 @@ import {
   updateProductPricesById,
 } from "../services/productService";
 import { getBreadcrumbByProductId } from "../services/breadcrumbService";
-import { getUserDetails, getUserCart, addToCart } from "../services/userService";
+import { getUserCart, addToCart, removeFromCart } from "../services/userService";
 
 // Utility Functions
 import { getCheapestPrice } from "../utils/priceUtils";
@@ -61,9 +61,8 @@ function ProductPage() {
   const [otherStores, setOtherStores] = useState([]);
   const [cheapestPrice, setCheapestPrice] = useState(null);
   const [savings, setSavings] = useState(null);
-  const [loggedUser, setLoggedUser] = useState(null);
   const [cart, setCart] = useState(null);
-  const [inCart, setInCart] = useState(false); // Is item in user's cart already?
+  const [cartedItem, setCartedItem] = useState({});
 
   const [itemQuant, setItemQuant] = useState(1);
   // ----------------------------------------------
@@ -189,31 +188,36 @@ function ProductPage() {
   // ----------------------------------------------
   // On Page load
   useEffect(() => {
-    const fetchLoggedUser = async () => {
-      const user = await getUserDetails();
-      setLoggedUser(user);
+    // Fetch Logged in user's Cart
+    const fetchCart = async () => {
+      const cartData = await getUserCart();
+      setCart(cartData);
     };
 
-    fetchLoggedUser();
     fetchCart();
   }, []);
 
-  const fetchCart = async () => {
-    const cartData = await getUserCart();
-    setCart(cartData);
-  };
-
-  // useEffect(() => {
-  //   console.log(loggedUser);
-  // }, [loggedUser]);
+  // Find Item in Cart
+  useEffect(() => {
+    if (cart) {
+      const product = cart.find((item) => item.productId === productId);
+      if (product) {
+        console.log("Product is in the cart");
+        setCartedItem(product);
+      } else {
+        console.log("Product is not in the cart");
+        setCartedItem(null);
+      }
+    }
+  }, [productId, cart]);
 
   useEffect(() => {
     console.log("cart", cart);
   }, [cart]);
 
   useEffect(() => {
-    console.log("itemQuant", itemQuant);
-  }, [itemQuant]);
+    console.log("cartedItem", cartedItem);
+  }, [cartedItem]);
 
   // Handle Minus Click (min of 1)
   const quantMinus = () => {
@@ -233,16 +237,24 @@ function ProductPage() {
     }
   };
 
-  // Handle Add To Cart
-  const onAddToCartClick = async () => {
-    // console.log("productId", productId);
-    // console.log("quantity", itemQuant);
-    try {
-      const res = await addToCart(productId, itemQuant);
-      console.log(res);
-      fetchCart();
-    } catch (error) {
-      console.log("Error adding item to cart:", error);
+  // Handle Add To Cart or Remove From Cart
+  const onCartBtnClick = async (id) => {
+    if (cartedItem) {
+      try {
+        const res = await removeFromCart(id);
+        console.log("Item removed from cart", res);
+        setCartedItem(null);
+      } catch (error) {
+        console.log("Error removing item from cart:", error);
+      }
+    } else {
+      try {
+        const res = await addToCart(id, itemQuant);
+        console.log("Item added to cart", res);
+        setCartedItem({ productId: id, quantity: itemQuant });
+      } catch (error) {
+        console.log("Error adding item to cart:", error);
+      }
     }
   };
 
@@ -537,27 +549,35 @@ function ProductPage() {
                 </div>
                 {/* Buttons */}
                 <Stack direction="horizontal" gap={3} className="my-8">
-                  <InputGroup className="bg-neutral-100 w-fit rounded-xl">
-                    <IconBtn variant="tertiary" iconType="minus" onClick={quantMinus} />
-                    <Form.Control
-                      type="number"
-                      className="bg-transparent border-none text-center fw-bold p-0 no-arrows w-8"
-                      value={itemQuant}
-                      onChange={(e) => {
-                        itemQuantChange(parseInt(e.target.value));
-                      }}
-                    />
-                    <IconBtn
-                      variant="tertiary"
-                      iconType="add"
-                      onClick={() => setItemQuant(itemQuant + 1)}
-                    />
-                  </InputGroup>
-                  <Btn onClick={onAddToCartClick}>Add to Cart</Btn>
-                  <Btn variant="secondary" onClick={handlePriceModalShow}>
-                    Update Price(s)
+                  {cartedItem ? (
+                    <>
+                      <div className="flex justify-center items-center text-center bg-neutral-100 w-fit px-6 rounded-xl h-full space-x-2">
+                        <h3>{cartedItem.quantity}</h3>
+                        <p>in cart</p>
+                      </div>
+                    </>
+                  ) : (
+                    <InputGroup className="bg-neutral-100 w-fit rounded-xl">
+                      <IconBtn variant="tertiary" iconType="minus" onClick={quantMinus} />
+                      <Form.Control
+                        type="number"
+                        className="bg-transparent border-none text-center fw-bold p-0 no-arrows w-8"
+                        value={itemQuant}
+                        onChange={(e) => {
+                          itemQuantChange(parseInt(e.target.value));
+                        }}
+                      />
+                      <IconBtn
+                        variant="tertiary"
+                        iconType="add"
+                        onClick={() => setItemQuant(itemQuant + 1)}
+                      />
+                    </InputGroup>
+                  )}
+
+                  <Btn onClick={() => onCartBtnClick(productId)}>
+                    {cartedItem ? `Remove From Cart` : `Add To Cart`}
                   </Btn>
-                  <IconBtn variant="dark" iconType="flag" onClick={handleFlagModalShow} />
                 </Stack>
               </div>
             </div>
