@@ -8,6 +8,7 @@ import dotenv from "dotenv";
 import productRoutes from "./routes/productRoutes.js";
 import categoryOperationsRoutes from "./routes/categoryOperationsRoutes.js";
 import breadcrumbRoutes from "./routes/breadcrumbRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
 
 // Load .env variables in
 dotenv.config();
@@ -43,6 +44,9 @@ app.use("/breadcrumb", breadcrumbRoutes);
 
 // Product Routes
 app.use("/products", productRoutes);
+
+// User Routes
+app.use("/user", userRoutes);
 // -----------------------------------------------------
 
 // Start the server

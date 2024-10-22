@@ -12,6 +12,7 @@ import {
   updateProductPricesById,
 } from "../services/productService";
 import { getBreadcrumbByProductId } from "../services/breadcrumbService";
+import { getUserDetails } from "../services/userService";
 
 // Utility Functions
 import { getCheapestPrice } from "../utils/priceUtils";
@@ -50,6 +51,8 @@ function ProductPage() {
 
   const { productId } = useParams();
 
+  // STATES
+  // ----------------------------------------------
   const [product, setProduct] = useState({});
   const [breadcrumb, setBreadcrumb] = useState({});
   const [formattedBreadcrumbArr, setFormattedBreadcrumbArr] = useState([]);
@@ -58,30 +61,168 @@ function ProductPage() {
   const [otherStores, setOtherStores] = useState([]);
   const [cheapestPrice, setCheapestPrice] = useState(null);
   const [savings, setSavings] = useState(null);
-
-  // Update Pricing Modal
+  const [loggedUser, setLoggedUser] = useState(null);
   // ----------------------------------------------
+
+  // PRODUCT & PRICING
+  // ----------------------------------------------
+  // Fetch product details and breadcrumb when page loads
+  useEffect(() => {
+    const fetchProductDetails = async () => {
+      try {
+        // Fetch product data
+        const productData = await getProductById(productId);
+        setProduct(productData);
+        // // Fetch breadcrumb data
+        const breadcrumbData = await getBreadcrumbByProductId(productId);
+        setBreadcrumb(breadcrumbData);
+      } catch (error) {
+        console.error("Failed to fetch product or breadcrumb data", error);
+      }
+    };
+
+    fetchProductDetails();
+  }, [productId]);
+
+  // Set Prices after product loaded
+  useEffect(() => {
+    // console.log(product);
+    // If product exists
+    if (Object.keys(product).length > 0) {
+      const storePrices = [
+        {
+          store: "pnp",
+          price: parseFloat(product.pnp.price) || null,
+          updated: product.pnp.updated || "No data",
+          specialDate: product.pnp?.special || "",
+        },
+        {
+          store: "woolworths",
+          price: parseFloat(product.woolworths.price) || null,
+          updated: product.woolworths.updated || "No data",
+          specialDate: product.woolworths?.special || "",
+        },
+        {
+          store: "checkers",
+          price: parseFloat(product.checkers.price) || null,
+          updated: product.checkers.updated || "No data",
+          specialDate: product.checkers?.special || "",
+        },
+        {
+          store: "spar",
+          price: parseFloat(product.spar.price) || null,
+          updated: product.spar.updated || "No data",
+          specialDate: product.spar?.special || "",
+        },
+      ];
+
+      setPrices(storePrices);
+    }
+  }, [product]);
+
+  // Pricing calculations after price loaded
+  useEffect(() => {
+    // console.log("prices", prices);
+    // If prices exists
+    if (prices.length > 0) {
+      const { cheapestPrice, cheapestStores, otherStores } = getCheapestPrice(prices);
+      setCheapestPrice(cheapestPrice);
+      setCheapestStores(cheapestStores);
+      setOtherStores(otherStores);
+
+      // Calculate the savings if there are other stores
+      if (otherStores.length > 0) {
+        const maxOtherPrice = Math.max(...otherStores.map((store) => store.price || 0));
+        const savings = maxOtherPrice - cheapestPrice;
+        setSavings(savings > 0 ? savings.toFixed(2) : null);
+      }
+    }
+  }, [prices]);
+
+  // Special Icon Date (of 1 cheapest store only)
+  const firstSpecialStore = cheapestStores.find(
+    (store) => store.specialDate && store.specialDate !== ""
+  );
+  // ----------------------------------------------
+
+  // BREADCRUMBS
+  // ----------------------------------------------
+  // Breadcrumb Formatting
+  useEffect(() => {
+    if (breadcrumb) {
+      const formattedArray = [];
+
+      // Conditionally add each part to the array only if it exists
+      if (breadcrumb["category"]) {
+        formattedArray.push({
+          name: formatName(breadcrumb["category"]),
+          id: breadcrumb["categoryId"],
+        });
+      }
+      if (breadcrumb["subcategory"]) {
+        formattedArray.push({
+          name: formatName(breadcrumb["subcategory"]),
+          id: breadcrumb["subcategoryId"],
+        });
+      }
+      if (breadcrumb["type"]) {
+        formattedArray.push({ name: formatName(breadcrumb["type"]), id: breadcrumb["typeId"] });
+      }
+
+      setFormattedBreadcrumbArr(formattedArray);
+
+      // console.log("Formatted Breadcrumb:", formattedArray);
+    }
+  }, [breadcrumb]);
+
+  // Breadcrumbs Click
+  const handleBreadcrumbClick = (id) => {
+    navigate(`/groceries/${id}`);
+  };
+  // ----------------------------------------------
+
+  // CART
+  // ----------------------------------------------
+  useEffect(() => {
+    const fetchLoggedUser = async () => {
+      const user = await getUserDetails();
+      setLoggedUser(user);
+    };
+    fetchLoggedUser();
+  }, []);
+
+  useEffect(() => {
+    console.log(loggedUser);
+  }, [loggedUser]);
+
+  // ----------------------------------------------
+
+  // MODALS
+  // ----------------------------------------------
+  // Update Pricing Modal
+  // - - - - - - - - - - - - - - - - -
+  // Pricing Modal States
   const [showPriceModal, setShowPriceModal] = useState(false);
+
+  // Stores States
   const [pnpPrice, setPnpPrice] = useState("");
   const [pnpUpdatedDate, setPnpUpdatedDate] = useState("");
   const [pnpOnSpecial, setPnpOnSpecial] = useState(false);
   const [pnpSpecialDate, setPnpSpecialDate] = useState("");
-
   const [woolworthsPrice, setWoolworthsPrice] = useState("");
   const [woolworthsUpdatedDate, setWoolworthsUpdatedDate] = useState("");
   const [woolworthsOnSpecial, setWoolworthsOnSpecial] = useState(false);
   const [woolworthsSpecialDate, setWoolworthsSpecialDate] = useState("");
-
   const [checkersPrice, setCheckersPrice] = useState("");
   const [checkersUpdatedDate, setCheckersUpdatedDate] = useState("");
   const [checkersOnSpecial, setCheckersOnSpecial] = useState(false);
   const [checkersSpecialDate, setCheckersSpecialDate] = useState("");
-
   const [sparPrice, setSparPrice] = useState("");
   const [sparUpdatedDate, setSparUpdatedDate] = useState("");
   const [sparOnSpecial, setSparOnSpecial] = useState(false);
   const [sparSpecialDate, setSparSpecialDate] = useState("");
 
+  // Open & Close Modal
   const handlePriceModalClose = () => setShowPriceModal(false);
   const handlePriceModalShow = () => {
     setPnpPrice(product.pnp?.price || "");
@@ -107,6 +248,7 @@ function ProductPage() {
     setShowPriceModal(true);
   };
 
+  // Pricing Modal Input Change
   const handleInputChange = (field, value) => {
     const today = getCurrentDate();
 
@@ -168,6 +310,7 @@ function ProductPage() {
     }
   };
 
+  // Pricing Modal Update Prices Btn Click
   const handleUpdatePrices = async () => {
     const updatedPrices = {
       pnp: {
@@ -200,137 +343,17 @@ function ProductPage() {
       console.error("Failed to update prices:", error);
     }
   };
-
-  // ----------------------------------------------
+  // - - - - - - - - - - - - - - - - -
 
   // Flagging Modal
-  // ----------------------------------------------
+  // - - - - - - - - - - - - - - - - -
   const [showFlagModal, setShowFlagModal] = useState(false);
   const [flagMessage, setFlagMessage] = useState("");
 
   const handleFlagModalClose = () => setShowFlagModal(false);
   const handleFlagModalShow = () => setShowFlagModal(true);
-  // ----------------------------------------------
 
-  // GET
-  // ----------------------------------------------
-
-  // Fetch product details and breadcrumb when page loads
-  useEffect(() => {
-    const fetchProductDetails = async () => {
-      try {
-        // Fetch product data
-        const productData = await getProductById(productId);
-        setProduct(productData);
-        // // Fetch breadcrumb data
-        const breadcrumbData = await getBreadcrumbByProductId(productId);
-        setBreadcrumb(breadcrumbData);
-      } catch (error) {
-        console.error("Failed to fetch product or breadcrumb data", error);
-      }
-    };
-
-    fetchProductDetails();
-  }, [productId]);
-
-  // Breadcrumb Formatting
-  useEffect(() => {
-    if (breadcrumb) {
-      const formattedArray = [];
-
-      // Conditionally add each part to the array only if it exists
-      if (breadcrumb["category"]) {
-        formattedArray.push({
-          name: formatName(breadcrumb["category"]),
-          id: breadcrumb["categoryId"],
-        });
-      }
-      if (breadcrumb["subcategory"]) {
-        formattedArray.push({
-          name: formatName(breadcrumb["subcategory"]),
-          id: breadcrumb["subcategoryId"],
-        });
-      }
-      if (breadcrumb["type"]) {
-        formattedArray.push({ name: formatName(breadcrumb["type"]), id: breadcrumb["typeId"] });
-      }
-
-      setFormattedBreadcrumbArr(formattedArray);
-
-      // console.log("Formatted Breadcrumb:", formattedArray);
-    }
-  }, [breadcrumb]);
-
-  // useEffect(() => {
-  //   if (breadcrumb) {
-  //     console.log("breadcrumb:", breadcrumb);
-  //   }
-  // }, [breadcrumb]);
-
-  const handleBreadcrumbClick = (id) => {
-    navigate(`/groceries/${id}`);
-  };
-
-  // Set Prices after product loaded
-  useEffect(() => {
-    // console.log(product);
-    // If product exists
-    if (Object.keys(product).length > 0) {
-      const storePrices = [
-        {
-          store: "pnp",
-          price: parseFloat(product.pnp.price) || null,
-          updated: product.pnp.updated || "No data",
-          specialDate: product.pnp?.special || "",
-        },
-        {
-          store: "woolworths",
-          price: parseFloat(product.woolworths.price) || null,
-          updated: product.woolworths.updated || "No data",
-          specialDate: product.woolworths?.special || "",
-        },
-        {
-          store: "checkers",
-          price: parseFloat(product.checkers.price) || null,
-          updated: product.checkers.updated || "No data",
-          specialDate: product.checkers?.special || "",
-        },
-        {
-          store: "spar",
-          price: parseFloat(product.spar.price) || null,
-          updated: product.spar.updated || "No data",
-          specialDate: product.spar?.special || "",
-        },
-      ];
-
-      setPrices(storePrices);
-    }
-  }, [product]);
-
-  // Pricing calculations after price loaded
-  useEffect(() => {
-    // console.log("prices", prices);
-    // If prices exists
-    if (prices.length > 0) {
-      const { cheapestPrice, cheapestStores, otherStores } = getCheapestPrice(prices);
-      setCheapestPrice(cheapestPrice);
-      setCheapestStores(cheapestStores);
-      setOtherStores(otherStores);
-
-      // Calculate the savings if there are other stores
-      if (otherStores.length > 0) {
-        const maxOtherPrice = Math.max(...otherStores.map((store) => store.price || 0));
-        const savings = maxOtherPrice - cheapestPrice;
-        setSavings(savings > 0 ? savings.toFixed(2) : null);
-      }
-    }
-  }, [prices]);
-
-  // useEffect(() => {
-  //   console.log("cheapestStores:", cheapestStores);
-  // }, [cheapestStores]);
-
-  // Handle Product Flagging
+  // Handle Product Flagging Btn Click
   const handleFlagProduct = async () => {
     try {
       await flagProductById(productId, flagMessage); // Pass the flagMessage to the service function
@@ -341,11 +364,8 @@ function ProductPage() {
       console.error("Error flagging product:", error);
     }
   };
-
-  // Special Icon Date (of 1 cheapest store only)
-  const firstSpecialStore = cheapestStores.find(
-    (store) => store.specialDate && store.specialDate !== ""
-  );
+  // - - - - - - - - - - - - - - - - -
+  // ----------------------------------------------
 
   return (
     <>

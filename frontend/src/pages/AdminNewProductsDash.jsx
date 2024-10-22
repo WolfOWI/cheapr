@@ -6,7 +6,6 @@ import { useState, useEffect } from "react";
 // Services
 import {
   getAllPendingProducts,
-  deleteProductById,
   approveProductById,
   rejectProductById,
 } from "../services/productService";
