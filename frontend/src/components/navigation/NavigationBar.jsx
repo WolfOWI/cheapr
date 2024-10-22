@@ -27,11 +27,13 @@ import IconBtn from "../button/IconBtn";
 
 // Imagery
 import logoColor from "../../assets/logos/logo_color.svg";
+import adminLogoColor from "../../assets/logos/cheapr_admin_logo.svg";
 // -----------------------------------------------------------
 
 function NavigationBar({ admin }) {
   const [user] = useAuthState(auth);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [loadingAdminStatus, setLoadingAdminStatus] = useState(true);
   const db = getDatabase();
   const navigate = useNavigate();
 
@@ -42,7 +44,10 @@ function NavigationBar({ admin }) {
         if (snapshot.exists()) {
           setIsAdmin(snapshot.val());
         }
+        setLoadingAdminStatus(false);
       });
+    } else {
+      setLoadingAdminStatus(false);
     }
   }, [db, user]);
 
@@ -112,68 +117,112 @@ function NavigationBar({ admin }) {
     </NavDropdown>
   );
 
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
-
-  // TODO Change navbar based on user type (admin/customer)
+  // useEffect(() => {
+  //   console.log(user);
+  // }, [user]);
 
   return (
     <>
-      <Navbar expand="lg" className="shadow-md py-4">
-        <Container>
-          <Navbar.Brand as={Link} to="/">
-            <img src={logoColor} alt="logo" className="max-h-10" />
-          </Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto">
-              <Stack direction="horizontal" gap={4}>
-                <Link to="/login">Login</Link>
-                <Link to="/signup">Sign Up</Link>
-                <Link to="/groceries">All Groceries</Link>
-                <Link to="/admin">Admin</Link>
-                <Link to="/newproducts">New</Link>
-                <Link to="/flagged">Flagged</Link>
-                <Link to="/rejectedproducts">Rejected</Link>
-                {/* Dropdowns for each category */}
-                {renderCategoryDropdown("Food", "10000", foodSubcategories, foodProductTypes)}
-                {renderCategoryDropdown("Drinks", "20000", drinksSubcategories, drinksProductTypes)}
-                {renderCategoryDropdown(
-                  "Household",
-                  "30000",
-                  householdSubcategories,
-                  householdProductTypes
-                )}
-              </Stack>
-            </Nav>
-            {/* Buttons (Admin or Normal User) */}
+      {loadingAdminStatus ? (
+        <Navbar expand="lg" className="shadow-md py-4 h-[88px]">
+          <Container>
+            <Navbar.Brand as={Link} to="/">
+              <img src={logoColor} alt="logo" className="max-h-10" />
+            </Navbar.Brand>
+          </Container>
+        </Navbar>
+      ) : (
+        <Navbar expand="lg" className="shadow-md py-4">
+          <Container>
             {isAdmin ? (
-              <Stack direction="horizontal" gap={2}>
-                {user && <p>Welcome, {user.email}</p>}
-                <IconBtn iconType="add" onClick={() => navigate("/create")} />
-
-                <Btn variant="secondary" className="w-32" onClick={logOutUser}>
-                  Log Out
-                </Btn>
-              </Stack>
+              <Navbar.Brand as={Link} to="/admin">
+                <img src={adminLogoColor} alt="logo" className="max-h-10" />
+              </Navbar.Brand>
             ) : (
-              <Stack direction="horizontal" gap={2}>
-                {user && <p>Welcome, {user.email}</p>}
-                <IconBtn variant="dark" iconType="add" onClick={() => navigate("/add")} />
-                <IconBtn
-                  variant="primary"
-                  iconType="cart_empty"
-                  onClick={() => navigate("/planner")}
-                />
-                <Btn variant="secondary" className="w-32" onClick={logOutUser}>
-                  Log Out
-                </Btn>
-              </Stack>
+              <Navbar.Brand as={Link} to="/">
+                <img src={logoColor} alt="logo" className="max-h-10" />
+              </Navbar.Brand>
             )}
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+              <Nav className="me-auto">
+                {user ? (
+                  // Admin Logged In
+                  isAdmin ? (
+                    <Stack direction="horizontal" gap={4}>
+                      <Link to="/newproducts">New</Link>
+                      <Link to="/flagged">Flagged</Link>
+                      <Link to="/rejectedproducts">Rejected</Link>
+                    </Stack>
+                  ) : (
+                    // Normal User Logged In
+                    <Stack direction="horizontal" gap={4} className="lg:ml-10">
+                      <Link to="/groceries" className="text-neutral-500 mr-2">
+                        Shop All
+                      </Link>
+                      {/* Dropdowns for each category */}
+                      {renderCategoryDropdown("Food", "10000", foodSubcategories, foodProductTypes)}
+                      {renderCategoryDropdown(
+                        "Drinks",
+                        "20000",
+                        drinksSubcategories,
+                        drinksProductTypes
+                      )}
+                      {renderCategoryDropdown(
+                        "Household",
+                        "30000",
+                        householdSubcategories,
+                        householdProductTypes
+                      )}
+                    </Stack>
+                  )
+                ) : (
+                  // No User Logged In
+                  <></>
+                )}
+              </Nav>
+              {/* Buttons (Admin or Normal User) */}
+              {user ? (
+                // Admin Logged In
+                isAdmin ? (
+                  <Stack direction="horizontal" gap={2}>
+                    <IconBtn iconType="add" onClick={() => navigate("/create")} />
+
+                    <Btn variant="secondary" className="w-32" onClick={logOutUser}>
+                      Log Out
+                    </Btn>
+                  </Stack>
+                ) : (
+                  // Normal User Logged In
+                  <Stack direction="horizontal" gap={2}>
+                    <IconBtn variant="dark" iconType="add" onClick={() => navigate("/add")} />
+                    <IconBtn
+                      variant="primary"
+                      iconType="cart_empty"
+                      onClick={() => navigate("/planner")}
+                    />
+                    <Btn variant="secondary" className="w-32" onClick={logOutUser}>
+                      Log Out
+                    </Btn>
+                  </Stack>
+                )
+              ) : (
+                // No User Logged In
+                <>
+                  <Stack direction="horizontal" gap={2}>
+                    <Btn className="w-32" onClick={() => navigate("/login")}>
+                      Log In
+                    </Btn>
+                    <Btn variant="secondary" className="w-32" onClick={() => navigate("/signup")}>
+                      Sign Up
+                    </Btn>
+                  </Stack>
+                </>
+              )}
+            </Navbar.Collapse>
+          </Container>
+        </Navbar>
+      )}
     </>
   );
 }

@@ -3,7 +3,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { getAuth } from "firebase/auth";
 import app from "../firebaseConfig";
 import { useState, useEffect } from "react";
-import { getDatabase, ref, get, child } from "firebase/database"; // Real-time database
+import { getDatabase, ref, get, child } from "firebase/database"; // For real-time database
 
 const auth = getAuth(app);
 const db = getDatabase(app);
@@ -11,6 +11,7 @@ const db = getDatabase(app);
 function PrivateRoute({ children, isAdmin = false }) {
   const [user, loading] = useAuthState(auth); // Track auth state
   const [isAdminUser, setIsAdminUser] = useState(false);
+  const [loadingAdminStatus, setLoadingAdminStatus] = useState(true); // New loading state for admin check
 
   useEffect(() => {
     if (user) {
@@ -20,11 +21,14 @@ function PrivateRoute({ children, isAdmin = false }) {
         if (snapshot.exists()) {
           setIsAdminUser(snapshot.val());
         }
+        setLoadingAdminStatus(false); // Set to false after fetching admin status
       });
+    } else {
+      setLoadingAdminStatus(false); // No user, no need to fetch admin status
     }
   }, [user]);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading || loadingAdminStatus) return <p>Loading...</p>; // Wait for both auth and admin status
 
   if (!user) {
     return <Navigate to="/login" />;
