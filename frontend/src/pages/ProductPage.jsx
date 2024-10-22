@@ -12,7 +12,7 @@ import {
   updateProductPricesById,
 } from "../services/productService";
 import { getBreadcrumbByProductId } from "../services/breadcrumbService";
-import { getUserDetails, getUserCart } from "../services/userService";
+import { getUserDetails, getUserCart, addToCart } from "../services/userService";
 
 // Utility Functions
 import { getCheapestPrice } from "../utils/priceUtils";
@@ -63,6 +63,7 @@ function ProductPage() {
   const [savings, setSavings] = useState(null);
   const [loggedUser, setLoggedUser] = useState(null);
   const [cart, setCart] = useState(null);
+  const [inCart, setInCart] = useState(false); // Is item in user's cart already?
 
   const [itemQuant, setItemQuant] = useState(1);
   // ----------------------------------------------
@@ -193,14 +194,14 @@ function ProductPage() {
       setLoggedUser(user);
     };
 
-    const fetchCart = async () => {
-      const cartData = await getUserCart();
-      setCart(cartData);
-    };
-
     fetchLoggedUser();
     fetchCart();
   }, []);
+
+  const fetchCart = async () => {
+    const cartData = await getUserCart();
+    setCart(cartData);
+  };
 
   // useEffect(() => {
   //   console.log(loggedUser);
@@ -214,7 +215,7 @@ function ProductPage() {
     console.log("itemQuant", itemQuant);
   }, [itemQuant]);
 
-  // Handle Minus Click
+  // Handle Minus Click (min of 1)
   const quantMinus = () => {
     if (itemQuant > 1) {
       setItemQuant(itemQuant - 1);
@@ -223,7 +224,7 @@ function ProductPage() {
     }
   };
 
-  // Handle Item Quantity Change
+  // Handle Item Quantity Change (only numbers & min of 1)
   const itemQuantChange = (value) => {
     if (value) {
       setItemQuant(value);
@@ -233,8 +234,16 @@ function ProductPage() {
   };
 
   // Handle Add To Cart
-  const onAddToCartClick = () => {
-    console.log("add to cart clicked");
+  const onAddToCartClick = async () => {
+    // console.log("productId", productId);
+    // console.log("quantity", itemQuant);
+    try {
+      const res = await addToCart(productId, itemQuant);
+      console.log(res);
+      fetchCart();
+    } catch (error) {
+      console.log("Error adding item to cart:", error);
+    }
   };
 
   // ----------------------------------------------
