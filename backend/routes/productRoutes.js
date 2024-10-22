@@ -520,7 +520,58 @@ router.put("/:id", upload.single("image"), async (req, res) => {
 });
 // - - - - - - - - - - - - - - - - - - - -
 
-// STATUS
+// Update a product's prices by ID (approved, pending, rejected or flagged)
+// - - - - - - - - - - - - - - - - - - - -
+router.put("/:id/prices", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { pnp, woolworths, checkers, spar } = req.body; // Expecting new prices from the frontend
+
+    // Find the product in approved, pending, rejected or flagged
+    const approvedSnapshot = await admin.database().ref(`products/approved/${id}`).once("value");
+    const pendingSnapshot = await admin.database().ref(`products/pending/${id}`).once("value");
+    const rejectedSnapshot = await admin.database().ref(`products/rejected/${id}`).once("value");
+    const flaggedSnapshot = await admin.database().ref(`products/flagged/${id}`).once("value");
+
+    let productRef;
+    if (approvedSnapshot.exists()) {
+      productRef = admin.database().ref(`products/approved/${id}`);
+    }
+    if (pendingSnapshot.exists()) {
+      productRef = admin.database().ref(`products/pending/${id}`);
+    }
+    if (rejectedSnapshot.exists()) {
+      productRef = admin.database().ref(`products/rejected/${id}`);
+    }
+    if (flaggedSnapshot.exists()) {
+      productRef = admin.database().ref(`products/flagged/${id}`);
+    }
+
+    if (productRef) {
+      // Update only the price details in the relevant path
+      const updatedPrices = {
+        ...(pnp && { pnp }),
+        ...(woolworths && { woolworths }),
+        ...(checkers && { checkers }),
+        ...(spar && { spar }),
+      };
+
+      await productRef.update(updatedPrices);
+
+      console.log("Product prices updated successfully for ID:", id);
+      res.status(200).json({ message: "Product prices updated successfully!" });
+    } else {
+      console.log("Product not found for ID:", id);
+      res.status(404).json({ message: "Product not found" });
+    }
+  } catch (error) {
+    console.error("Error updating product prices:", error);
+    res.status(500).json({ error: error.message });
+  }
+});
+// - - - - - - - - - - - - - - - - - - - -
+
+// STATUS UPDATES
 // - - - - - - - - - - - - - - - - - - - -
 // SUPER Approve a product by ID (rejected -> approved)
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

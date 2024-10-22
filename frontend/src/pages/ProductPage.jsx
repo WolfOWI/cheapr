@@ -6,12 +6,17 @@ import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
 // Services
-import { getProductById, flagProductById } from "../services/productService";
+import {
+  getProductById,
+  flagProductById,
+  updateProductPricesById,
+} from "../services/productService";
 import { getBreadcrumbByProductId } from "../services/breadcrumbService";
 
 // Utility Functions
 import { getCheapestPrice } from "../utils/priceUtils";
 import { formatName } from "../utils/wordFormatUtils";
+import { getCurrentDate } from "../utils/dateUtils";
 
 // Third-Party Components
 import {
@@ -34,6 +39,7 @@ import StoreLogo from "../components/building-blocks/StoreLogo";
 import IconBtn from "../components/button/IconBtn";
 import MiniStorePriceBlock from "../components/building-blocks/MiniStorePriceBlock";
 import Footer from "../components/navigation/Footer";
+import StorePricingSpecialInput from "../components/input/StorePricingSpecialInput";
 
 // Imagery
 //-
@@ -53,6 +59,150 @@ function ProductPage() {
   const [cheapestPrice, setCheapestPrice] = useState(null);
   const [savings, setSavings] = useState(null);
 
+  // Update Pricing Modal
+  // ----------------------------------------------
+  const [showPriceModal, setShowPriceModal] = useState(false);
+  const [pnpPrice, setPnpPrice] = useState("");
+  const [pnpUpdatedDate, setPnpUpdatedDate] = useState("");
+  const [pnpOnSpecial, setPnpOnSpecial] = useState(false);
+  const [pnpSpecialDate, setPnpSpecialDate] = useState("");
+
+  const [woolworthsPrice, setWoolworthsPrice] = useState("");
+  const [woolworthsUpdatedDate, setWoolworthsUpdatedDate] = useState("");
+  const [woolworthsOnSpecial, setWoolworthsOnSpecial] = useState(false);
+  const [woolworthsSpecialDate, setWoolworthsSpecialDate] = useState("");
+
+  const [checkersPrice, setCheckersPrice] = useState("");
+  const [checkersUpdatedDate, setCheckersUpdatedDate] = useState("");
+  const [checkersOnSpecial, setCheckersOnSpecial] = useState(false);
+  const [checkersSpecialDate, setCheckersSpecialDate] = useState("");
+
+  const [sparPrice, setSparPrice] = useState("");
+  const [sparUpdatedDate, setSparUpdatedDate] = useState("");
+  const [sparOnSpecial, setSparOnSpecial] = useState(false);
+  const [sparSpecialDate, setSparSpecialDate] = useState("");
+
+  const handlePriceModalClose = () => setShowPriceModal(false);
+  const handlePriceModalShow = () => {
+    setPnpPrice(product.pnp?.price || "");
+    setPnpUpdatedDate(product.pnp?.updated || "");
+    setPnpOnSpecial(product.pnp?.special ? true : false);
+    setPnpSpecialDate(product.pnp?.special || "");
+
+    setWoolworthsPrice(product.woolworths?.price || "");
+    setWoolworthsUpdatedDate(product.woolworths?.updated || "");
+    setWoolworthsOnSpecial(product.woolworths?.special ? true : false);
+    setWoolworthsSpecialDate(product.woolworths?.special || "");
+
+    setCheckersPrice(product.checkers?.price || "");
+    setCheckersUpdatedDate(product.checkers?.updated || "");
+    setCheckersOnSpecial(product.checkers?.special ? true : false);
+    setCheckersSpecialDate(product.checkers?.special || "");
+
+    setSparPrice(product.spar?.price || "");
+    setSparUpdatedDate(product.spar?.updated || "");
+    setSparOnSpecial(product.spar?.special ? true : false);
+    setSparSpecialDate(product.spar?.special || "");
+
+    setShowPriceModal(true);
+  };
+
+  const handleInputChange = (field, value) => {
+    const today = getCurrentDate();
+
+    switch (field) {
+      // Pick n Pay
+      case "pnpPrice":
+        setPnpPrice(value);
+        setPnpUpdatedDate(today);
+        break;
+      case "pnpOnSpecial":
+        setPnpOnSpecial(value);
+        setPnpUpdatedDate(today);
+        break;
+      case "pnpSpecialDate":
+        setPnpSpecialDate(value);
+        setPnpUpdatedDate(today);
+        break;
+      // Woolworths
+      case "woolworthsPrice":
+        setWoolworthsPrice(value);
+        setWoolworthsUpdatedDate(today);
+        break;
+      case "woolworthsOnSpecial":
+        setWoolworthsOnSpecial(value);
+        setWoolworthsUpdatedDate(today);
+        break;
+      case "woolworthsSpecialDate":
+        setWoolworthsSpecialDate(value);
+        setWoolworthsUpdatedDate(today);
+        break;
+      // Checkers
+      case "checkersPrice":
+        setCheckersPrice(value);
+        setCheckersUpdatedDate(today);
+        break;
+      case "checkersOnSpecial":
+        setCheckersOnSpecial(value);
+        setCheckersUpdatedDate(today);
+        break;
+      case "checkersSpecialDate":
+        setCheckersSpecialDate(value);
+        setCheckersUpdatedDate(today);
+        break;
+      // Spar
+      case "sparPrice":
+        setSparPrice(value);
+        setSparUpdatedDate(today);
+        break;
+      case "sparOnSpecial":
+        setSparOnSpecial(value);
+        setSparUpdatedDate(today);
+        break;
+      case "sparSpecialDate":
+        setSparSpecialDate(value);
+        setSparUpdatedDate(today);
+        break;
+      default:
+        break;
+    }
+  };
+
+  const handleUpdatePrices = async () => {
+    const updatedPrices = {
+      pnp: {
+        price: pnpPrice || null,
+        updated: pnpUpdatedDate,
+        special: pnpOnSpecial ? pnpSpecialDate : null,
+      },
+      woolworths: {
+        price: woolworthsPrice || null,
+        updated: woolworthsUpdatedDate,
+        special: woolworthsOnSpecial ? woolworthsSpecialDate : null,
+      },
+      checkers: {
+        price: checkersPrice || null,
+        updated: checkersUpdatedDate,
+        special: checkersOnSpecial ? checkersSpecialDate : null,
+      },
+      spar: {
+        price: sparPrice || null,
+        updated: sparUpdatedDate,
+        special: sparOnSpecial ? sparSpecialDate : null,
+      },
+    };
+
+    try {
+      await updateProductPricesById(productId, updatedPrices);
+      handlePriceModalClose();
+      window.location.reload();
+    } catch (error) {
+      console.error("Failed to update prices:", error);
+    }
+  };
+
+  // ----------------------------------------------
+
   // Flagging Modal
   // ----------------------------------------------
   const [showFlagModal, setShowFlagModal] = useState(false);
@@ -60,7 +210,6 @@ function ProductPage() {
 
   const handleFlagModalClose = () => setShowFlagModal(false);
   const handleFlagModalShow = () => setShowFlagModal(true);
-
   // ----------------------------------------------
 
   // GET
@@ -304,7 +453,9 @@ function ProductPage() {
                     <IconBtn variant="tertiary" iconType="add" />
                   </InputGroup>
                   <Btn>Add to Cart</Btn>
-                  <Btn variant="secondary">Update Price(s)</Btn>
+                  <Btn variant="secondary" onClick={handlePriceModalShow}>
+                    Update Price(s)
+                  </Btn>
                   <IconBtn variant="dark" iconType="flag" onClick={handleFlagModalShow} />
                 </Stack>
               </div>
@@ -313,6 +464,68 @@ function ProductPage() {
         )}
       </Container>
       <Footer />
+
+      {/* UPDATE PRICE MODAL */}
+      <Modal show={showPriceModal} onHide={handlePriceModalClose} size="lg">
+        <Modal.Header closeButton>
+          <Modal.Title>Update Pricing</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p className="mb-4">Update the prices for {product.name}</p>
+          <div className="flex space-x-8">
+            <StorePricingSpecialInput
+              storeKey="pnp"
+              storePrice={pnpPrice}
+              setStorePrice={(value) => handleInputChange("pnpPrice", value)}
+              onSpecial={pnpOnSpecial}
+              setOnSpecial={(value) => handleInputChange("pnpOnSpecial", value)}
+              storeSpecialDate={pnpSpecialDate}
+              setStoreSpecialDate={(value) => handleInputChange("pnpSpecialDate", value)}
+              className={"w-full"}
+            />
+            <StorePricingSpecialInput
+              storeKey="woolworths"
+              storePrice={woolworthsPrice}
+              setStorePrice={(value) => handleInputChange("woolworthsPrice", value)}
+              onSpecial={woolworthsOnSpecial}
+              setOnSpecial={(value) => handleInputChange("woolworthsOnSpecial", value)}
+              storeSpecialDate={woolworthsSpecialDate}
+              setStoreSpecialDate={(value) => handleInputChange("woolworthsSpecialDate", value)}
+              className={"w-full"}
+            />
+          </div>
+          <div className="flex space-x-8">
+            <StorePricingSpecialInput
+              storeKey="checkers"
+              storePrice={checkersPrice}
+              setStorePrice={(value) => handleInputChange("checkersPrice", value)}
+              onSpecial={checkersOnSpecial}
+              setOnSpecial={(value) => handleInputChange("checkersOnSpecial", value)}
+              storeSpecialDate={checkersSpecialDate}
+              setStoreSpecialDate={(value) => handleInputChange("checkersSpecialDate", value)}
+              className={"w-full"}
+            />
+            <StorePricingSpecialInput
+              storeKey="spar"
+              storePrice={sparPrice}
+              setStorePrice={(value) => handleInputChange("sparPrice", value)}
+              onSpecial={sparOnSpecial}
+              setOnSpecial={(value) => handleInputChange("sparOnSpecial", value)}
+              storeSpecialDate={sparSpecialDate}
+              setStoreSpecialDate={(value) => handleInputChange("sparSpecialDate", value)}
+              className={"w-full"}
+            />
+          </div>
+        </Modal.Body>
+        <Modal.Footer>
+          <Btn variant="secondary" onClick={handlePriceModalClose}>
+            Cancel
+          </Btn>
+          <Btn onClick={handleUpdatePrices}>Update Prices</Btn>
+        </Modal.Footer>
+      </Modal>
+
+      {/* FLAGGING MODAL */}
       <Modal show={showFlagModal} onHide={handleFlagModalClose}>
         <Modal.Header closeButton>
           <Modal.Title>Report a Problem</Modal.Title>

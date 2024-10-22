@@ -28,6 +28,7 @@ const StorePricingSpecialInput = ({
   setOnSpecial,
   storeSpecialDate,
   setStoreSpecialDate,
+  className,
 }) => {
   // console.log("props", {
   //   storeKey,
@@ -40,7 +41,7 @@ const StorePricingSpecialInput = ({
   // });
   // console.log("storeSpecialDate", storeSpecialDate);
   return (
-    <div className="mb-16">
+    <div className={`mb-16 ${className}`}>
       <Form.Label>
         <div className="flex items-center">
           <StoreLogo store={storeKey} className="h-4" />

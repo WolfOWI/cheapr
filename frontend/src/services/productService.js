@@ -125,6 +125,18 @@ export const updateProductById = async (productId, formData) => {
   }
 };
 
+// Update the prices of a product by ID
+// - - - - - - - - - - - - - - - - - - - -
+export const updateProductPricesById = async (productId, priceData) => {
+  try {
+    const response = await axios.put(`${API_URL}/products/${productId}/prices`, priceData);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+// - - - - - - - - - - - - - - - - - - - -
+
 // STATUS
 // - - - - - - - - - - - - - - - - - - - -
 // Super Approve Product (Move from pending to approved)
