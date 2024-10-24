@@ -24,6 +24,12 @@ import CartItem from "./CartItem";
 const StoreCartList = ({ store, products, onMoveProduct, refreshCart }) => {
   const [cartProducts, setCartProducts] = useState([]);
 
+  const totalItems = cartProducts.reduce((acc, product) => acc + product.quantity, 0);
+  const totalPrice = cartProducts.reduce(
+    (acc, product) => acc + product.quantity * product.productInfo[store].price,
+    0
+  );
+
   useEffect(() => {
     if (products) {
       setCartProducts(products);
@@ -49,10 +55,10 @@ const StoreCartList = ({ store, products, onMoveProduct, refreshCart }) => {
       <StoreLogo store={store} type="colour" className="h-5" />
       <div className="flex items-center justify-center space-x-3 mt-2">
         <p className="text-neutral-500">
-          {products.length} Item{products.length !== 1 && "s"}
+          {totalItems} Item{totalItems !== 1 && "s"}
         </p>
         <p className="text-neutral-500">•</p>
-        <p className="text-neutral-500">R123.45</p>
+        <p className="text-neutral-500">{`R${totalPrice.toFixed(2)}`}</p>
       </div>
       <Stack gap={4} className="mt-8">
         {cartProducts.length > 0 ? (

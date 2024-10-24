@@ -135,6 +135,34 @@ function CartPlannerPage() {
       sortProductsByStore();
     }
   }, [allCartProducts]);
+
+  // Calcuclate the final totals
+  const calculateTotals = () => {
+    let totalCost = 0;
+    let totalSavings = 0;
+
+    allCartProducts.forEach((cartProduct) => {
+      const quantity = cartProduct.quantity;
+
+      // Get all store prices for comparison
+      const prices = [
+        cartProduct.productInfo.pnp.price,
+        cartProduct.productInfo.woolworths.price,
+        cartProduct.productInfo.checkers.price,
+        cartProduct.productInfo.spar.price,
+      ];
+
+      const cheapestPrice = Math.min(...prices.filter((price) => price > 0));
+      const mostExpensivePrice = Math.max(...prices.filter((price) => price > 0));
+
+      totalCost += cheapestPrice * quantity;
+      totalSavings += (mostExpensivePrice - cheapestPrice) * quantity;
+    });
+
+    return { totalCost, totalSavings };
+  };
+
+  const { totalCost, totalSavings } = calculateTotals();
   // ------------------------------------------------
 
   // USER ACTIONS
@@ -279,10 +307,10 @@ function CartPlannerPage() {
             <h3 className="">Total</h3>
             <div className="flex space-x-4">
               <h3 className="flex justify-center items-center h-16 px-8 bg-neutral-100 rounded-2xl font-semibold">
-                R1300.54
+                {`R${totalCost.toFixed(2)}`}
               </h3>
               <h4 className="flex justify-center items-center h-16 px-8 bg-primary text-white rounded-2xl font-normal">
-                R548.32 Saved
+                {`R${totalSavings.toFixed(2)} Saved`}
               </h4>
             </div>
           </div>
