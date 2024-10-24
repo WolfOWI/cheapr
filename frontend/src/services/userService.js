@@ -84,3 +84,20 @@ export const removeFromCart = async (productId) => {
     throw error;
   }
 };
+
+// Clear the current user's cart
+export const clearCart = async () => {
+  try {
+    const userId = getUserId();
+    const db = getDatabase();
+    const userRef = ref(db, `users/${userId}/cart`);
+
+    // You can either remove the cart key or set it to an empty array
+    await set(userRef, null); // Removes the cart key from the user's data
+
+    return { message: "Cart cleared successfully" };
+  } catch (error) {
+    throw error;
+  }
+};
+// -----------------------------------------------------

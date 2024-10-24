@@ -4,7 +4,7 @@
 import { useState, useEffect } from "react";
 
 // Services
-import { getUserCart, addToCart, removeFromCart } from "../services/userService";
+import { getUserCart, addToCart, removeFromCart, clearCart } from "../services/userService";
 import { getProductById } from "../services/productService";
 
 // Utility Functions
@@ -35,6 +35,8 @@ function CartPlannerPage() {
   const [checkersProducts, setCheckersProducts] = useState([]);
   const [sparProducts, setSparProducts] = useState([]);
 
+  // POPULATE THE CART LIST
+  // ------------------------------------------------
   // On page load, fetch user's cart
   useEffect(() => {
     const fetchUserCart = async () => {
@@ -133,7 +135,10 @@ function CartPlannerPage() {
       sortProductsByStore();
     }
   }, [allCartProducts]);
+  // ------------------------------------------------
 
+  // USER ACTIONS
+  // ------------------------------------------------
   // Jump product between stores (dropdown btn)
   const moveProductToStore = (targetStore, product) => {
     console.log("targetStore:", targetStore);
@@ -164,9 +169,26 @@ function CartPlannerPage() {
     }
   };
 
-  useEffect(() => {
-    console.log("PNP:", pnpProducts);
-  }, [pnpProducts]);
+  // Clear Cart Clicked
+  const handleClearCart = async () => {
+    try {
+      await clearCart();
+      setAllCartProducts([]);
+      setUserCart([]);
+      setPnpProducts([]);
+      setWoolworthsProducts([]);
+      setCheckersProducts([]);
+      setSparProducts([]);
+    } catch (error) {
+      console.error("Failed to clear the cart:", error);
+    }
+  };
+
+  // ------------------------------------------------
+
+  // useEffect(() => {
+  //   console.log("PNP:", pnpProducts);
+  // }, [pnpProducts]);
 
   // useEffect(() => {
   //   console.log("WOOL:", woolworthsProducts);
@@ -191,8 +213,12 @@ function CartPlannerPage() {
               <h4 className="text-neutral-600 mt-2">15 Grocery Items</h4>
             </div>
             <Stack direction="horizontal" gap={2}>
-              <Btn variant="secondary">Reset</Btn>
-              <Btn variant="dark-outline">Clear All</Btn>
+              <Btn variant="secondary" onClick={() => window.location.reload()}>
+                Reset
+              </Btn>
+              <Btn variant="dark-outline" onClick={() => handleClearCart()}>
+                Clear All
+              </Btn>
             </Stack>
           </div>
         </Container>
