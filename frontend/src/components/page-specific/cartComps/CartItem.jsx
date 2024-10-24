@@ -87,7 +87,7 @@ const CartItem = ({ product, store, cheapestStores, quantity, onStoreSelect, ref
 
             {itemQuant > 1 ? (
               <div className="flex items-center space-x-3">
-                <p>{`R98.76`}</p>
+                <p>{`R${(product.productInfo[store].price * itemQuant).toFixed(2)}`}</p>
                 <small className="text-neutral-400 opacity-0 group-hover:opacity-100">{`R${product.productInfo[store].price} / item`}</small>
               </div>
             ) : (
