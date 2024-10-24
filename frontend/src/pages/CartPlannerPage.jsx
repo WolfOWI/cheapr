@@ -221,11 +221,14 @@ function CartPlannerPage() {
         <Container className="pt-6">
           <div className="flex w-full justify-between">
             <div>
-              <h2>Shop Planner</h2>
-              <h4 className="text-neutral-600 mt-2">15 Grocery Items</h4>
+              <h2>Store Planner</h2>
+              <p className="px-4 py-3 bg-neutral-100 text-neutral-600 mt-2 font-medium rounded-xl w-fit">
+                15 Products
+              </p>
             </div>
-            <Stack direction="horizontal" gap={2}>
-              <Btn variant="secondary" onClick={() => window.location.reload()}>
+
+            <Stack direction="horizontal" gap={2} className="h-fit">
+              <Btn variant="secondary" onClick={() => refreshCart()}>
                 Reset
               </Btn>
               <Btn variant="dark-outline" onClick={() => handleClearCart()}>
@@ -234,6 +237,7 @@ function CartPlannerPage() {
             </Stack>
           </div>
         </Container>
+
         <Container className="mt-16">
           <Row>
             <Col xs={3} className="flex flex-col items-center">
@@ -269,6 +273,19 @@ function CartPlannerPage() {
               />
             </Col>
           </Row>
+        </Container>
+        <Container className="mt-24">
+          <div className="flex items-center w-full space-x-8 h-16">
+            <h3 className="">Total</h3>
+            <div className="flex space-x-4">
+              <h3 className="flex justify-center items-center h-16 px-8 bg-neutral-100 rounded-2xl font-semibold">
+                R1300.54
+              </h3>
+              <h4 className="flex justify-center items-center h-16 px-8 bg-primary text-white rounded-2xl font-normal">
+                R548.32 Saved
+              </h4>
+            </div>
+          </div>
         </Container>
       </div>
       <Footer />
