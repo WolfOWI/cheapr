@@ -223,7 +223,7 @@ function CartPlannerPage() {
             <div>
               <h2>Store Planner</h2>
               <p className="px-4 py-3 bg-neutral-100 text-neutral-600 mt-2 font-medium rounded-xl w-fit">
-                15 Products
+                15 Item Types
               </p>
             </div>
 

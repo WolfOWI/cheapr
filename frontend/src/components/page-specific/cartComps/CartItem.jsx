@@ -83,8 +83,16 @@ const CartItem = ({ product, store, cheapestStores, quantity, onStoreSelect, ref
         </div>
         <div>
           <div className="translate-y-4 group-hover:translate-y-0 transition-all duration-150">
-            <h5 className="font-bold">{`${product.productInfo.name} (${product.productInfo.amount}${product.productInfo.unit})`}</h5>
-            <p>{`R${product.productInfo[store].price}`}</p>
+            <h5 className="font-bold mb-1">{`${product.productInfo.name} (${product.productInfo.amount}${product.productInfo.unit})`}</h5>
+
+            {itemQuant > 1 ? (
+              <div className="flex items-center space-x-3">
+                <p>{`R98.76`}</p>
+                <small className="text-neutral-400 opacity-0 group-hover:opacity-100">{`R${product.productInfo[store].price} / item`}</small>
+              </div>
+            ) : (
+              <p>{`R${product.productInfo[store].price}`}</p>
+            )}
           </div>
           {/*  */}
           <Stack

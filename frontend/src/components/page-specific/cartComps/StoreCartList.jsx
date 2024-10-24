@@ -47,9 +47,13 @@ const StoreCartList = ({ store, products, onMoveProduct, refreshCart }) => {
   return (
     <>
       <StoreLogo store={store} type="colour" className="h-5" />
-      <p className="text-neutral-500">
-        {products.length} Item{products.length !== 1 && "s"}
-      </p>
+      <div className="flex items-center justify-center space-x-3 mt-2">
+        <p className="text-neutral-500">
+          {products.length} Item{products.length !== 1 && "s"}
+        </p>
+        <p className="text-neutral-500">•</p>
+        <p className="text-neutral-500">R123.45</p>
+      </div>
       <Stack gap={4} className="mt-8">
         {cartProducts.length > 0 ? (
           cartProducts.map((product, index) => {
