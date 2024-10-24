@@ -7,6 +7,7 @@ import { useNavigate, useParams } from "react-router-dom";
 // Services
 import { getAllApprovedProducts, getProductsByGroupId } from "../services/productService";
 import { getBreadcrumbByGroupId } from "../services/breadcrumbService";
+import { getUserCart, addToCart, removeFromCart } from "../services/userService";
 
 // Utility Functions
 import { sortProducts } from "../utils/productSortUtils";
@@ -32,6 +33,7 @@ function GroceriesPage() {
   const { groupId } = useParams();
 
   const [products, setProducts] = useState({});
+  const [userCart, setUserCart] = useState([]);
   const [breadcrumb, setBreadcrumb] = useState({});
   const [formattedBreadcrumbArr, setFormattedBreadcrumbArr] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -39,25 +41,48 @@ function GroceriesPage() {
 
   const navigate = useNavigate();
 
-  // On Page Mount or when groupId changes
+  // On Page Mount (When groupId changes (category / subcat / type))
   useEffect(() => {
-    const fetchProducts = async () => {
+    const fetchProductsAndCart = async () => {
+      setIsLoading(true); // Start loading
+
       try {
-        let data;
+        // Fetch products based on groupId
+        let productsData;
         if (groupId) {
-          data = await getProductsByGroupId(groupId);
+          productsData = await getProductsByGroupId(groupId);
         } else {
-          data = await getAllApprovedProducts();
+          productsData = await getAllApprovedProducts();
         }
-        const sortedData = sortProducts(data, "NewestApproved");
+
+        // Fetch user's cart data concurrently
+        const cartData = await getUserCart();
+        setUserCart(cartData);
+
+        // Sort products
+        const sortedData = sortProducts(productsData, "NewestApproved");
+
+        // For each product, check if it's in the cart & add "inCart" boolean
+        for (let productId in sortedData) {
+          const productInCart = cartData.some((cartItem) => cartItem.productId === productId);
+
+          if (productInCart) {
+            sortedData[productId]["inCart"] = true;
+          } else {
+            sortedData[productId]["inCart"] = false;
+          }
+        }
+
+        // Update products with "inCart" status
         setProducts(sortedData);
       } catch (error) {
-        console.error("Failed to fetch products:", error);
+        console.error("Failed to fetch products or cart data:", error);
       } finally {
-        setIsLoading(false);
+        setIsLoading(false); // Stop loading
       }
     };
 
+    // Fetch the current breadcrumb
     const fetchBreadcrumb = async () => {
       try {
         let breads;
@@ -70,16 +95,15 @@ function GroceriesPage() {
       }
     };
 
-    fetchProducts();
-    fetchBreadcrumb();
+    fetchProductsAndCart(); // Fetch products & cart together
+    fetchBreadcrumb(); // Fetch breadcrumbs separately
   }, [groupId]);
 
-  // Format Breadcrumb
+  // Format Breadcrumb Name (fruits_and_veggies to Fruits & Veggies)
   useEffect(() => {
     if (breadcrumb) {
       const formattedArray = [];
 
-      // Conditionally add each part to the array only if it exists
       if (breadcrumb["category"]) {
         formattedArray.push({
           name: formatName(breadcrumb["category"]),
@@ -100,11 +124,19 @@ function GroceriesPage() {
     }
   }, [breadcrumb]);
 
-  // useEffect(() => {
-  //   if (products) {
-  //     console.log("products:", products);
-  //   }
-  // }, [products]);
+  // ----------------------
+  useEffect(() => {
+    if (products) {
+      console.log("products:", products);
+    }
+  }, [products]);
+
+  useEffect(() => {
+    if (userCart) {
+      console.log("userCart:", userCart);
+    }
+  }, [userCart]);
+  // ----------------------
 
   // Handle sort dropdown select
   const handleSelect = (eventKey) => {
@@ -149,6 +181,40 @@ function GroceriesPage() {
 
   const handleBreadcrumbClick = (id) => {
     navigate(`/groceries/${id}`);
+  };
+
+  // Add To Cart Clicked
+  const handleAddCartClick = async (productId) => {
+    try {
+      await addToCart(productId, 1);
+      console.log("Product successfully added to cart: ", productId);
+
+      // Update the userCart and products state
+      setUserCart([...userCart, { productId }]); // Add to cart state
+      setProducts((prevProducts) => ({
+        ...prevProducts,
+        [productId]: { ...prevProducts[productId], inCart: true }, // Update inCart flag
+      }));
+    } catch (error) {
+      console.log("Product couldn't be added to cart: ", error);
+    }
+  };
+
+  // Remove From Cart Clicked
+  const handleRemoveCartClick = async (productId) => {
+    try {
+      await removeFromCart(productId);
+      console.log("Product successfully removed from cart: ", productId);
+
+      // Update the userCart and products state
+      setUserCart(userCart.filter((item) => item.productId !== productId)); // Remove from cart state
+      setProducts((prevProducts) => ({
+        ...prevProducts,
+        [productId]: { ...prevProducts[productId], inCart: false }, // Update inCart flag
+      }));
+    } catch (error) {
+      console.log("Product couldn't be removed from cart: ", error);
+    }
   };
 
   return (
@@ -223,6 +289,8 @@ function GroceriesPage() {
                     key={index}
                     product={products[productId]}
                     onViewClick={() => handleOnViewClick(productId)}
+                    onAddCartClick={() => handleAddCartClick(productId)}
+                    onRemoveCartClick={() => handleRemoveCartClick(productId)}
                   />
                 ))
               ) : (

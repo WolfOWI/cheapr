@@ -16,13 +16,22 @@ import { Row, Col, Stack } from "react-bootstrap";
 import PriceBlock from "../building-blocks/PriceBlock";
 import IconBtn from "../button/IconBtn";
 import Btn from "../button/Btn";
+import Icon from "../building-blocks/Icon";
 
 // Imagery
 // -
 
 // -----------------------------------------------------------
 
-const ProductItem = ({ product, admin, onViewClick, onEditClick, onDeleteClick, onCartClick }) => {
+const ProductItem = ({
+  product,
+  admin,
+  onViewClick,
+  onEditClick,
+  onDeleteClick,
+  onAddCartClick,
+  onRemoveCartClick,
+}) => {
   // Array of prices from different stores
 
   const prices = [
@@ -47,7 +56,16 @@ const ProductItem = ({ product, admin, onViewClick, onEditClick, onDeleteClick, 
       >
         {/* Product Information */}
         <Col xs={3} className="flex items-center">
-          <img src={product.image} alt={product.name} className="h-20 w-20 object-contain mr-4" />
+          <div className="max-h-20 max-w-20 min-h-20 min-w-20 mr-4 relative">
+            <img src={product.image} alt={product.name} className="object-contain absolute" />
+
+            {product.inCart && (
+              <div className="h-8 w-8 absolute right-0 bottom-0 bg-priM1 flex items-center justify-center rounded-full">
+                <Icon type={"cart_full"} className="h-4 w-4 text-white" />
+              </div>
+            )}
+          </div>
+
           <div>
             <h4>{product.name}</h4>
             <h4 className="text-neutral-500 font-normal">
@@ -105,10 +123,24 @@ const ProductItem = ({ product, admin, onViewClick, onEditClick, onDeleteClick, 
                 onClick={onDeleteClick}
               />
             </Stack>
+          ) : product.inCart ? (
+            <IconBtn
+              iconType="cart_clear"
+              variant="dark"
+              className="opacity-0 group-hover:opacity-100 transition-all duration-150"
+              onClick={(e) => {
+                e.stopPropagation(); // Prevent from going to individual product page
+                onRemoveCartClick();
+              }}
+            />
           ) : (
             <IconBtn
-              iconType={"cart_add"}
+              iconType="cart_add"
               className="opacity-0 group-hover:opacity-100 transition-all duration-150"
+              onClick={(e) => {
+                e.stopPropagation(); // Prevent from going to individual product page
+                onAddCartClick();
+              }}
             />
           )}
         </Col>
