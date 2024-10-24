@@ -29,7 +29,12 @@ const CartItem = ({ product, store, cheapestStores, quantity }) => {
       <div className="flex items-center group h-[80px]">
         <div className="relative mr-3">
           <img src={product.image} alt="" className="w-16" />
-          <div className="bg-primary rounded-full h-8 w-8 flex justify-center items-center text-white font-bold absolute bottom-0 right-0 transition-all duration-150 group-hover:h-full group-hover:w-full ">
+          {quantity !== 1 && (
+            <div className="bg-primary rounded-full h-8 w-8 flex justify-center items-center text-white font-bold absolute bottom-0 right-0 transition-all duration-150 group-hover:h-full group-hover:w-full ">
+              {quantity}
+            </div>
+          )}
+          <div className="bg-primary rounded-full h-8 w-8 flex  justify-center items-center text-white font-bold absolute bottom-0 right-0 transition-all duration-150 group-hover:h-full group-hover:w-full opacity-0 group-hover:opacity-100">
             {quantity}
           </div>
         </div>
