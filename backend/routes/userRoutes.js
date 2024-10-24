@@ -66,6 +66,33 @@ router.post("/cart/add", async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+
+// Update the quantity of a product in the current user's cart
+router.post("/cart/updateQuantity", async (req, res) => {
+  const { userId, productId, quantity } = req.body;
+
+  try {
+    const userSnapshot = await admin.database().ref(`users/${userId}`).once("value");
+    if (userSnapshot.exists()) {
+      let cart = userSnapshot.val().cart || [];
+      const existingProductIndex = cart.findIndex((item) => item.productId === productId);
+
+      if (existingProductIndex !== -1) {
+        cart[existingProductIndex].quantity = quantity; // Set new quantity
+        if (cart[existingProductIndex].quantity <= 0) {
+          cart = cart.filter((item) => item.productId !== productId); // Remove item if quantity is 0
+        }
+      }
+
+      await admin.database().ref(`users/${userId}`).update({ cart });
+      res.status(200).json({ message: "Product quantity updated successfully" });
+    } else {
+      res.status(404).json({ message: "User not found" });
+    }
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
 // -----------------------------------------------------
 
 // DELETE

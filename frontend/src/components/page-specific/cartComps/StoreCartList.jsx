@@ -21,7 +21,7 @@ import CartItem from "./CartItem";
 
 // -----------------------------------------------------------
 
-const StoreCartList = ({ store, products, onMoveProduct }) => {
+const StoreCartList = ({ store, products, onMoveProduct, refreshCart }) => {
   const [cartProducts, setCartProducts] = useState([]);
 
   useEffect(() => {
@@ -68,7 +68,8 @@ const StoreCartList = ({ store, products, onMoveProduct }) => {
                 quantity={product.quantity}
                 store={store}
                 cheapestStores={cheapestStores}
-                onStoreSelect={onMoveProduct} // Pass handler to CartItem
+                onStoreSelect={onMoveProduct}
+                refreshCart={refreshCart}
               />
             );
           })

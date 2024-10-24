@@ -141,8 +141,8 @@ function CartPlannerPage() {
   // ------------------------------------------------
   // Jump product between stores (dropdown btn)
   const moveProductToStore = (targetStore, product) => {
-    console.log("targetStore:", targetStore);
-    console.log("product:", product);
+    // console.log("targetStore:", targetStore);
+    // console.log("product:", product);
 
     // Remove product from current store
     setPnpProducts((prev) => prev.filter((item) => item.productId !== product.productId));
@@ -184,6 +184,18 @@ function CartPlannerPage() {
     }
   };
 
+  // ------------------------------------------------
+
+  // REFRESH
+  // ------------------------------------------------
+  const refreshCart = async () => {
+    try {
+      const cartData = await getUserCart();
+      setUserCart(cartData);
+    } catch (error) {
+      console.log("Couldn't refresh the cart.");
+    }
+  };
   // ------------------------------------------------
 
   // useEffect(() => {
@@ -229,6 +241,7 @@ function CartPlannerPage() {
                 store="pnp"
                 products={pnpProducts}
                 onMoveProduct={moveProductToStore}
+                refreshCart={refreshCart}
               />
             </Col>
             <Col xs={3} className="flex flex-col items-center">
@@ -236,6 +249,7 @@ function CartPlannerPage() {
                 store="woolworths"
                 products={woolworthsProducts}
                 onMoveProduct={moveProductToStore}
+                refreshCart={refreshCart}
               />
             </Col>
             <Col xs={3} className="flex flex-col items-center">
@@ -243,6 +257,7 @@ function CartPlannerPage() {
                 store="checkers"
                 products={checkersProducts}
                 onMoveProduct={moveProductToStore}
+                refreshCart={refreshCart}
               />
             </Col>
             <Col xs={3} className="flex flex-col items-center">
@@ -250,6 +265,7 @@ function CartPlannerPage() {
                 store="spar"
                 products={sparProducts}
                 onMoveProduct={moveProductToStore}
+                refreshCart={refreshCart}
               />
             </Col>
           </Row>

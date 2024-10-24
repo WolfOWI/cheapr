@@ -4,7 +4,7 @@
 import { useState } from "react";
 
 // Services
-// -
+import { updateProductQuantity } from "../../../services/userService";
 
 // Utility Functions
 import { formatName } from "../../../utils/wordFormatUtils";
@@ -20,8 +20,10 @@ import IconBtn from "../../button/IconBtn";
 
 // -----------------------------------------------------------
 
-const CartItem = ({ product, store, cheapestStores, quantity, onStoreSelect }) => {
+const CartItem = ({ product, store, cheapestStores, quantity, onStoreSelect, refreshCart }) => {
   const [showDropdown, setShowDropdown] = useState(false);
+
+  const [itemQuant, setItemQuant] = useState(quantity); // Frontend-Only Quantity State (to improve speed)
 
   // console.log(
   //   "CartItem received:",
@@ -37,6 +39,34 @@ const CartItem = ({ product, store, cheapestStores, quantity, onStoreSelect }) =
   //   onStoreSelect
   // );
 
+  const handleIncreaseQuantity = () => {
+    setItemQuant((current) => current + 1);
+
+    // Update the backend asynchronously
+    updateProductQuantity(product.productId, itemQuant + 1)
+      .then(() => {
+        refreshCart();
+      })
+      .catch((error) => {
+        console.error("Failed to increase quantity:", error);
+      });
+  };
+
+  const handleDecreaseQuantity = () => {
+    if (itemQuant > 1) {
+      setItemQuant((current) => current - 1);
+
+      // Update the backend asynchronously
+      updateProductQuantity(product.productId, itemQuant - 1)
+        .then(() => {
+          refreshCart(); // Optional: refresh cart after backend update
+        })
+        .catch((error) => {
+          console.error("Failed to decrease quantity:", error);
+        });
+    }
+  };
+
   return (
     <>
       <div className="flex items-center group h-[80px]">
@@ -44,11 +74,11 @@ const CartItem = ({ product, store, cheapestStores, quantity, onStoreSelect }) =
           <img src={product.productInfo.image} alt="" className="w-16" />
           {quantity !== 1 && (
             <div className="bg-primary rounded-full h-8 w-8 flex justify-center items-center text-white font-bold absolute bottom-0 right-0 transition-all duration-150 group-hover:h-full group-hover:w-full ">
-              {quantity}
+              {itemQuant}
             </div>
           )}
           <div className="bg-primary rounded-full h-8 w-8 flex  justify-center items-center text-white font-bold absolute bottom-0 right-0 transition-all duration-150 group-hover:h-full group-hover:w-full opacity-0 group-hover:opacity-100">
-            {quantity}
+            {itemQuant}
           </div>
         </div>
         <div>
@@ -62,8 +92,18 @@ const CartItem = ({ product, store, cheapestStores, quantity, onStoreSelect }) =
             gap={1}
             className="opacity-0 group-hover:opacity-100 transition-all duration-150"
           >
-            <IconBtn variant="tertiary-special" iconType="minus" size="sm" />
-            <IconBtn variant="tertiary-special" iconType="add" size="sm" />
+            <IconBtn
+              variant="tertiary-special"
+              iconType="minus"
+              size="sm"
+              onClick={handleDecreaseQuantity}
+            />
+            <IconBtn
+              variant="tertiary-special"
+              iconType="add"
+              size="sm"
+              onClick={handleIncreaseQuantity}
+            />
             {/* Dropdown for multiple cheapest stores */}
             {cheapestStores.length > 1 && (
               <div className="relative">

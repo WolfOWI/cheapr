@@ -1,7 +1,7 @@
 import { getDatabase, ref, get, set, update, child } from "firebase/database";
 import { auth } from "./firebaseAuthService";
 
-// Helper function to get current user ID
+// Helper function to get current logged-in user's ID
 const getUserId = () => {
   const user = auth.currentUser;
   if (user) {
@@ -39,7 +39,7 @@ export const getUserCart = async () => {
   }
 };
 
-// POST
+// UPDATE
 // -----------------------------------------------------
 // Add product to the current user's cart
 export const addToCart = async (productId, quantity) => {
@@ -60,6 +60,31 @@ export const addToCart = async (productId, quantity) => {
 
     await update(userRef, { cart });
     return { message: "Product added to cart successfully" };
+  } catch (error) {
+    throw error;
+  }
+};
+
+// Update the quantity of a product in the user's cart
+export const updateProductQuantity = async (productId, quantity) => {
+  try {
+    const userId = getUserId();
+    const db = getDatabase();
+    const userRef = ref(db, `users/${userId}`);
+    const userSnapshot = await get(userRef);
+
+    let cart = userSnapshot.val().cart || [];
+    const existingProductIndex = cart.findIndex((item) => item.productId === productId);
+
+    if (existingProductIndex !== -1) {
+      cart[existingProductIndex].quantity = quantity;
+      if (cart[existingProductIndex].quantity <= 0) {
+        cart = cart.filter((item) => item.productId !== productId); // Remove if quantity is 0
+      }
+    }
+
+    await update(userRef, { cart });
+    return { message: "Product quantity updated successfully" };
   } catch (error) {
     throw error;
   }
