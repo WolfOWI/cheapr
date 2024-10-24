@@ -1,13 +1,14 @@
 // IMPORT
 // -----------------------------------------------------------
 // React & Hooks
-// -
+import { useState, useEffect } from "react";
 
 // Services
-// -
+import { getUserCart, addToCart, removeFromCart } from "../services/userService";
+import { getProductById } from "../services/productService";
 
 // Utility Functions
-// -
+import { getCheapestPrice } from "../utils/priceUtils";
 
 // Third-Party Components
 import { Container, Row, Col, Stack } from "react-bootstrap";
@@ -25,80 +26,117 @@ import Footer from "../components/navigation/Footer";
 
 // -----------------------------------------------------------
 function CartPlannerPage() {
-  const products = [
-    {
-      id: "abc",
-      name: "Top Red Apples",
-      image: "apple.jpg",
-      amount: "1.5",
-      unit: "kg",
-      pnp: {
-        price: 11.11,
-        updated: "19/09/2024",
-        onSpecial: false,
-      },
-      woolworths: {
-        price: 22.11,
-        updated: "19/09/2024",
-        onSpecial: false,
-      },
-      checkers: {
-        price: 33.11,
-        updated: "19/09/2024",
-        onSpecial: true,
-      },
-      spar: {
-        price: 44.11,
-        updated: "19/09/2024",
-        onSpecial: false,
-      },
-    },
-    {
-      id: "def",
-      name: "Juicy Mangos",
-      image: "mango.jpg",
-      amount: "2",
-      unit: "kg",
-      pnp: {
-        price: 11.22,
-        updated: "19/09/2024",
-        onSpecial: false,
-      },
-      woolworths: {
-        price: 22.22,
-        updated: "19/09/2024",
-        onSpecial: false,
-      },
-      checkers: {
-        price: 33.22,
-        updated: "19/09/2024",
-        onSpecial: false,
-      },
-      spar: {
-        price: 44.22,
-        updated: "19/09/2024",
-        onSpecial: false,
-      },
-    },
-  ];
+  const [userCart, setUserCart] = useState([]);
+  const [allCartProducts, setAllCartProducts] = useState([]);
 
-  const user = {
-    firstName: "John",
-    lastName: "Doe",
-    email: "john@gmail.com",
-    password: "1234",
-    userType: "customer",
-    cart: [
-      {
-        productId: "abc",
-        quantity: 2,
-      },
-      {
-        productId: "def",
-        quantity: 6,
-      },
-    ],
-  };
+  // Store Product States
+  const [pnpProducts, setPnpProducts] = useState([]);
+  const [woolworthsProducts, setWoolworthsProducts] = useState([]);
+  const [checkersProducts, setCheckersProducts] = useState([]);
+  const [sparProducts, setSparProducts] = useState([]);
+
+  // On page load, fetch user's cart
+  useEffect(() => {
+    const fetchUserCart = async () => {
+      try {
+        const cartData = await getUserCart();
+        setUserCart(cartData);
+      } catch (error) {
+        console.log("Couldn't fetch user's cart.");
+      }
+    };
+
+    fetchUserCart();
+  }, []);
+
+  // On userCart change, fetch product details
+  useEffect(() => {
+    const fetchCartProductDetails = async () => {
+      try {
+        // Check if there are items in the cart
+        if (userCart.length > 0) {
+          const productsWithDetails = await Promise.all(
+            userCart.map(async (cartItem) => {
+              const productInfo = await getProductById(cartItem.productId);
+              return {
+                ...cartItem,
+                productInfo,
+              };
+            })
+          );
+
+          setAllCartProducts(productsWithDetails);
+        }
+      } catch (error) {
+        console.log("Couldn't fetch product details for the cart.", error);
+      }
+    };
+
+    // Only call this effect if userCart has items
+    if (userCart.length > 0) {
+      fetchCartProductDetails();
+    }
+  }, [userCart]);
+
+  // On allCartProducts change, sort into correct groups
+  useEffect(() => {
+    console.log("allCartProducts", allCartProducts);
+
+    const sortProductsByStore = () => {
+      // Reset store products before sorting
+      let pnp = [];
+      let woolworths = [];
+      let checkers = [];
+      let spar = [];
+
+      allCartProducts.forEach((cartProduct) => {
+        // Determine the cheapest store(s) for the product
+        const prices = [
+          { store: "pnp", price: cartProduct.productInfo.pnp.price },
+          { store: "woolworths", price: cartProduct.productInfo.woolworths.price },
+          { store: "checkers", price: cartProduct.productInfo.checkers.price },
+          { store: "spar", price: cartProduct.productInfo.spar.price },
+        ];
+
+        const { cheapestStores } = getCheapestPrice(prices);
+
+        // Add the product to each store that has the cheapest price
+        cheapestStores.forEach((store) => {
+          if (store.store === "pnp") pnp.push(cartProduct);
+          if (store.store === "woolworths") woolworths.push(cartProduct);
+          if (store.store === "checkers") checkers.push(cartProduct);
+          if (store.store === "spar") spar.push(cartProduct);
+        });
+      });
+
+      // Set sorted products to corresponding store states
+      setPnpProducts(pnp);
+      setWoolworthsProducts(woolworths);
+      setCheckersProducts(checkers);
+      setSparProducts(spar);
+    };
+
+    // Call sorting function if allCartProducts is set
+    if (allCartProducts.length > 0) {
+      sortProductsByStore();
+    }
+  }, [allCartProducts]);
+
+  useEffect(() => {
+    console.log("PNP:", pnpProducts);
+  }, [pnpProducts]);
+
+  useEffect(() => {
+    console.log("WOOL:", woolworthsProducts);
+  }, [woolworthsProducts]);
+
+  useEffect(() => {
+    console.log("CHECKERS:", checkersProducts);
+  }, [checkersProducts]);
+
+  useEffect(() => {
+    console.log("SPAR:", sparProducts);
+  }, [sparProducts]);
 
   return (
     <>
@@ -119,16 +157,16 @@ function CartPlannerPage() {
         <Container className="mt-16">
           <Row>
             <Col xs={3} className="flex flex-col items-center">
-              <StoreCartList store="pnp" products={products} user={user} />
+              <StoreCartList store="pnp" products={pnpProducts} />
             </Col>
             <Col xs={3} className="flex flex-col items-center">
-              <StoreCartList store="woolworths" products={products} user={user} />
+              <StoreCartList store="woolworths" products={woolworthsProducts} />
             </Col>
             <Col xs={3} className="flex flex-col items-center">
-              <StoreCartList store="checkers" products={products} user={user} />
+              <StoreCartList store="checkers" products={checkersProducts} />
             </Col>
             <Col xs={3} className="flex flex-col items-center">
-              <StoreCartList store="spar" products={products} user={user} />
+              <StoreCartList store="spar" products={sparProducts} />
             </Col>
           </Row>
         </Container>

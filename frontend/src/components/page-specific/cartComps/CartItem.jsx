@@ -1,7 +1,7 @@
 // IMPORT
 // -----------------------------------------------------------
 // React & Hooks
-// -
+import { useState } from "react";
 
 // Services
 // -
@@ -16,18 +16,21 @@ import { Stack } from "react-bootstrap";
 import IconBtn from "../../button/IconBtn";
 
 // Imagery
-import tempImg from "../../../assets/images/grocery-images/Apples_TopRed.png";
+// -
 
 // -----------------------------------------------------------
 
-const CartItem = ({ product, store }) => {
+const CartItem = ({ product, store, cheapestStores, quantity }) => {
+  const [showDropdown, setShowDropdown] = useState(false);
+  console.log(cheapestStores);
+
   return (
     <>
       <div className="flex items-center group h-[80px]">
         <div className="relative mr-3">
-          <img src={tempImg} alt="" className="w-16" />
+          <img src={product.image} alt="" className="w-16" />
           <div className="bg-primary rounded-full h-8 w-8 flex justify-center items-center text-white font-bold absolute bottom-0 right-0 transition-all duration-150 group-hover:h-full group-hover:w-full ">
-            2
+            {quantity}
           </div>
         </div>
         <div>
@@ -43,7 +46,26 @@ const CartItem = ({ product, store }) => {
           >
             <IconBtn variant="tertiary-special" iconType="minus" size="sm" />
             <IconBtn variant="tertiary-special" iconType="add" size="sm" />
-            <IconBtn variant="primary" iconType="bounce" size="sm" />
+            {/* Dropdown for multiple cheapest stores */}
+            {cheapestStores.length > 1 && (
+              <div className="relative">
+                <IconBtn
+                  variant="primary"
+                  iconType="bounce"
+                  size="sm"
+                  onClick={() => setShowDropdown(!showDropdown)} // Toggle dropdown visibility
+                />
+                {showDropdown && (
+                  <div className="dropdown-menu show absolute top-0 translate-y-10">
+                    {cheapestStores.map((storeItem, idx) => (
+                      <button className="dropdown-item" key={idx} type="button">
+                        {storeItem.store}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
             <IconBtn variant="dark" iconType="delete" size="sm" />
           </Stack>
         </div>
