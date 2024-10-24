@@ -1,5 +1,7 @@
 // Get the cheapest price from an array of price objects, ignoring 0 values
 export const getCheapestPrice = (prices) => {
+  // console.log("getCheapestPrice received:", prices);
+
   // Filter out prices that are 0 or null
   const validPrices = prices.filter((store) => store.price > 0);
 

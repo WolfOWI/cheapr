@@ -52,6 +52,7 @@ function CartPlannerPage() {
   // On userCart change, fetch product details
   useEffect(() => {
     const fetchCartProductDetails = async () => {
+      // console.log("Trying to fetch the cart", userCart);
       try {
         // Check if there are items in the cart
         if (userCart.length > 0) {
@@ -80,7 +81,7 @@ function CartPlannerPage() {
 
   // On allCartProducts change, sort into correct groups
   useEffect(() => {
-    console.log("allCartProducts", allCartProducts);
+    // console.log("allCartProducts", allCartProducts);
 
     const sortProductsByStore = () => {
       // Reset store products before sorting
@@ -100,13 +101,24 @@ function CartPlannerPage() {
 
         const { cheapestStores } = getCheapestPrice(prices);
 
-        // Add the product to each store that has the cheapest price
-        cheapestStores.forEach((store) => {
-          if (store.store === "pnp") pnp.push(cartProduct);
-          if (store.store === "woolworths") woolworths.push(cartProduct);
-          if (store.store === "checkers") checkers.push(cartProduct);
-          if (store.store === "spar") spar.push(cartProduct);
-        });
+        // Add product to first cheapestStores
+        for (let i = 0; i < cheapestStores.length; i++) {
+          const store = cheapestStores[i].store;
+
+          if (store === "pnp") {
+            pnp.push(cartProduct);
+            break;
+          } else if (store === "woolworths") {
+            woolworths.push(cartProduct);
+            break;
+          } else if (store === "checkers") {
+            checkers.push(cartProduct);
+            break;
+          } else if (store === "spar") {
+            spar.push(cartProduct);
+            break;
+          }
+        }
       });
 
       // Set sorted products to corresponding store states
@@ -122,21 +134,51 @@ function CartPlannerPage() {
     }
   }, [allCartProducts]);
 
+  // Jump product between stores (dropdown btn)
+  const moveProductToStore = (targetStore, product) => {
+    console.log("targetStore:", targetStore);
+    console.log("product:", product);
+
+    // Remove product from current store
+    setPnpProducts((prev) => prev.filter((item) => item.productId !== product.productId));
+    setWoolworthsProducts((prev) => prev.filter((item) => item.productId !== product.productId));
+    setCheckersProducts((prev) => prev.filter((item) => item.productId !== product.productId));
+    setSparProducts((prev) => prev.filter((item) => item.productId !== product.productId));
+
+    // Add product to the selected store's array
+    switch (targetStore) {
+      case "pnp":
+        setPnpProducts((prev) => [...prev, { ...product }]);
+        break;
+      case "woolworths":
+        setWoolworthsProducts((prev) => [...prev, { ...product }]);
+        break;
+      case "checkers":
+        setCheckersProducts((prev) => [...prev, { ...product }]);
+        break;
+      case "spar":
+        setSparProducts((prev) => [...prev, { ...product }]);
+        break;
+      default:
+        break;
+    }
+  };
+
   useEffect(() => {
     console.log("PNP:", pnpProducts);
   }, [pnpProducts]);
 
-  useEffect(() => {
-    console.log("WOOL:", woolworthsProducts);
-  }, [woolworthsProducts]);
+  // useEffect(() => {
+  //   console.log("WOOL:", woolworthsProducts);
+  // }, [woolworthsProducts]);
 
-  useEffect(() => {
-    console.log("CHECKERS:", checkersProducts);
-  }, [checkersProducts]);
+  // useEffect(() => {
+  //   console.log("CHECKERS:", checkersProducts);
+  // }, [checkersProducts]);
 
-  useEffect(() => {
-    console.log("SPAR:", sparProducts);
-  }, [sparProducts]);
+  // useEffect(() => {
+  //   console.log("SPAR:", sparProducts);
+  // }, [sparProducts]);
 
   return (
     <>
@@ -145,7 +187,7 @@ function CartPlannerPage() {
         <Container className="pt-6">
           <div className="flex w-full justify-between">
             <div>
-              <h2>Shopping Cart Planner</h2>
+              <h2>Shop Planner</h2>
               <h4 className="text-neutral-600 mt-2">15 Grocery Items</h4>
             </div>
             <Stack direction="horizontal" gap={2}>
@@ -157,16 +199,32 @@ function CartPlannerPage() {
         <Container className="mt-16">
           <Row>
             <Col xs={3} className="flex flex-col items-center">
-              <StoreCartList store="pnp" products={pnpProducts} />
+              <StoreCartList
+                store="pnp"
+                products={pnpProducts}
+                onMoveProduct={moveProductToStore}
+              />
             </Col>
             <Col xs={3} className="flex flex-col items-center">
-              <StoreCartList store="woolworths" products={woolworthsProducts} />
+              <StoreCartList
+                store="woolworths"
+                products={woolworthsProducts}
+                onMoveProduct={moveProductToStore}
+              />
             </Col>
             <Col xs={3} className="flex flex-col items-center">
-              <StoreCartList store="checkers" products={checkersProducts} />
+              <StoreCartList
+                store="checkers"
+                products={checkersProducts}
+                onMoveProduct={moveProductToStore}
+              />
             </Col>
             <Col xs={3} className="flex flex-col items-center">
-              <StoreCartList store="spar" products={sparProducts} />
+              <StoreCartList
+                store="spar"
+                products={sparProducts}
+                onMoveProduct={moveProductToStore}
+              />
             </Col>
           </Row>
         </Container>

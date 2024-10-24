@@ -7,7 +7,7 @@ import { useState } from "react";
 // -
 
 // Utility Functions
-// -
+import { formatName } from "../../../utils/wordFormatUtils";
 
 // Third-Party Components
 import { Stack } from "react-bootstrap";
@@ -20,15 +20,28 @@ import IconBtn from "../../button/IconBtn";
 
 // -----------------------------------------------------------
 
-const CartItem = ({ product, store, cheapestStores, quantity }) => {
+const CartItem = ({ product, store, cheapestStores, quantity, onStoreSelect }) => {
   const [showDropdown, setShowDropdown] = useState(false);
-  console.log(cheapestStores);
+
+  // console.log(
+  //   "CartItem received:",
+  //   "product:",
+  //   product,
+  //   "store:",
+  //   store,
+  //   "cheapestStores:",
+  //   quantity,
+  //   "quantity:",
+  //   store,
+  //   "onStoreSelect:",
+  //   onStoreSelect
+  // );
 
   return (
     <>
       <div className="flex items-center group h-[80px]">
         <div className="relative mr-3">
-          <img src={product.image} alt="" className="w-16" />
+          <img src={product.productInfo.image} alt="" className="w-16" />
           {quantity !== 1 && (
             <div className="bg-primary rounded-full h-8 w-8 flex justify-center items-center text-white font-bold absolute bottom-0 right-0 transition-all duration-150 group-hover:h-full group-hover:w-full ">
               {quantity}
@@ -40,8 +53,8 @@ const CartItem = ({ product, store, cheapestStores, quantity }) => {
         </div>
         <div>
           <div className="translate-y-4 group-hover:translate-y-0 transition-all duration-150">
-            <h5 className="font-bold">{`${product.name} (${product.amount}${product.unit})`}</h5>
-            <p>{`R${product[store].price}`}</p>
+            <h5 className="font-bold">{`${product.productInfo.name} (${product.productInfo.amount}${product.productInfo.unit})`}</h5>
+            <p>{`R${product.productInfo[store].price}`}</p>
           </div>
           {/*  */}
           <Stack
@@ -58,15 +71,27 @@ const CartItem = ({ product, store, cheapestStores, quantity }) => {
                   variant="primary"
                   iconType="bounce"
                   size="sm"
-                  onClick={() => setShowDropdown(!showDropdown)} // Toggle dropdown visibility
+                  onClick={() => setShowDropdown(!showDropdown)} // Toggle dropdown
                 />
                 {showDropdown && (
                   <div className="dropdown-menu show absolute top-0 translate-y-10">
+                    <h4 className="text-center cursor-default">Move To</h4>
                     {cheapestStores.map((storeItem, idx) => (
-                      <button className="dropdown-item" key={idx} type="button">
-                        {storeItem.store}
+                      <button
+                        className="dropdown-item"
+                        key={idx}
+                        type="button"
+                        onClick={() => {
+                          onStoreSelect(storeItem.store, product);
+                          setShowDropdown(false); // Hide dropdown after selection
+                        }}
+                      >
+                        {formatName(storeItem.store)}
                       </button>
                     ))}
+                    <p className="text-center cursor-default text-sm text-neutral-500 mt-2">
+                      (Same Priced Stores)
+                    </p>
                   </div>
                 )}
               </div>
