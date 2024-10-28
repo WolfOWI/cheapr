@@ -12,6 +12,7 @@ import { getCheapestPrice } from "../utils/priceUtils";
 
 // Third-Party Components
 import { Container, Row, Col, Stack } from "react-bootstrap";
+import Loader from "react-spinners/PropagateLoader";
 
 // Internal Components
 import NavigationBar from "../components/navigation/NavigationBar";
@@ -26,6 +27,7 @@ import Footer from "../components/navigation/Footer";
 
 // -----------------------------------------------------------
 function CartPlannerPage() {
+  const [isLoading, setIsLoading] = useState(true);
   const [userCart, setUserCart] = useState([]);
   const [allCartProducts, setAllCartProducts] = useState([]);
 
@@ -69,16 +71,28 @@ function CartPlannerPage() {
           );
 
           setAllCartProducts(productsWithDetails);
+          setIsLoading(false);
         }
       } catch (error) {
         console.log("Couldn't fetch product details for the cart.", error);
+        setIsLoading(false);
       }
     };
 
     // Only call this effect if userCart has items
-    if (userCart.length > 0) {
+    if (userCart.length > 0 || userCart.length === 0) {
       fetchCartProductDetails();
     }
+
+    // Timeout to stop loading if the cart is empty after 1 second
+    const timeoutId = setTimeout(() => {
+      if (userCart.length === 0) {
+        setIsLoading(false);
+      }
+    }, 1500);
+
+    // Clean up the timeout on component unmount
+    return () => clearTimeout(timeoutId);
   }, [userCart]);
 
   // On allCartProducts change, sort into correct groups
@@ -251,7 +265,7 @@ function CartPlannerPage() {
             <div>
               <h2>Store Planner</h2>
               <p className="px-4 py-3 bg-neutral-100 text-neutral-600 mt-2 font-medium rounded-xl w-fit">
-                15 Item Types
+                {userCart.length} Item Types
               </p>
             </div>
 
@@ -266,55 +280,63 @@ function CartPlannerPage() {
           </div>
         </Container>
 
-        <Container className="mt-16">
-          <Row>
-            <Col xs={3} className="flex flex-col items-center">
-              <StoreCartList
-                store="pnp"
-                products={pnpProducts}
-                onMoveProduct={moveProductToStore}
-                refreshCart={refreshCart}
-              />
-            </Col>
-            <Col xs={3} className="flex flex-col items-center">
-              <StoreCartList
-                store="woolworths"
-                products={woolworthsProducts}
-                onMoveProduct={moveProductToStore}
-                refreshCart={refreshCart}
-              />
-            </Col>
-            <Col xs={3} className="flex flex-col items-center">
-              <StoreCartList
-                store="checkers"
-                products={checkersProducts}
-                onMoveProduct={moveProductToStore}
-                refreshCart={refreshCart}
-              />
-            </Col>
-            <Col xs={3} className="flex flex-col items-center">
-              <StoreCartList
-                store="spar"
-                products={sparProducts}
-                onMoveProduct={moveProductToStore}
-                refreshCart={refreshCart}
-              />
-            </Col>
-          </Row>
-        </Container>
-        <Container className="mt-24">
-          <div className="flex items-center w-full space-x-8 h-16">
-            <h3 className="">Total</h3>
-            <div className="flex space-x-4">
-              <h3 className="flex justify-center items-center h-16 px-8 bg-neutral-100 rounded-2xl font-semibold">
-                {`R${totalCost.toFixed(2)}`}
-              </h3>
-              <h4 className="flex justify-center items-center h-16 px-8 bg-primary text-white rounded-2xl font-normal">
-                {`R${totalSavings.toFixed(2)} Saved`}
-              </h4>
-            </div>
+        {isLoading ? (
+          <div className="w-full flex justify-center items-center mt-20 p-32">
+            <Loader color="#C34534" size={20} loading={true} />
           </div>
-        </Container>
+        ) : (
+          <>
+            <Container className="mt-16">
+              <Row>
+                <Col xs={3} className="flex flex-col items-center">
+                  <StoreCartList
+                    store="pnp"
+                    products={pnpProducts}
+                    onMoveProduct={moveProductToStore}
+                    refreshCart={refreshCart}
+                  />
+                </Col>
+                <Col xs={3} className="flex flex-col items-center">
+                  <StoreCartList
+                    store="woolworths"
+                    products={woolworthsProducts}
+                    onMoveProduct={moveProductToStore}
+                    refreshCart={refreshCart}
+                  />
+                </Col>
+                <Col xs={3} className="flex flex-col items-center">
+                  <StoreCartList
+                    store="checkers"
+                    products={checkersProducts}
+                    onMoveProduct={moveProductToStore}
+                    refreshCart={refreshCart}
+                  />
+                </Col>
+                <Col xs={3} className="flex flex-col items-center">
+                  <StoreCartList
+                    store="spar"
+                    products={sparProducts}
+                    onMoveProduct={moveProductToStore}
+                    refreshCart={refreshCart}
+                  />
+                </Col>
+              </Row>
+            </Container>
+            <Container className="mt-24">
+              <div className="flex items-center w-full space-x-8 h-16">
+                <h3 className="">Total</h3>
+                <div className="flex space-x-4">
+                  <h3 className="flex justify-center items-center h-16 px-8 bg-neutral-100 rounded-2xl font-semibold">
+                    {`R${totalCost.toFixed(2)}`}
+                  </h3>
+                  <h4 className="flex justify-center items-center h-16 px-8 bg-primary text-white rounded-2xl font-normal">
+                    {`R${totalSavings.toFixed(2)} Saved`}
+                  </h4>
+                </div>
+              </div>
+            </Container>
+          </>
+        )}
       </div>
       <Footer />
     </>

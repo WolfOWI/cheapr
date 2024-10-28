@@ -45,7 +45,7 @@ function GroceriesPage() {
   // On Page Mount (When groupId changes (category / subcat / type))
   useEffect(() => {
     const fetchProductsAndCart = async () => {
-      setIsLoading(true); // Start loading
+      setIsLoading(true);
 
       try {
         // Fetch products based on groupId
@@ -79,7 +79,7 @@ function GroceriesPage() {
       } catch (error) {
         console.error("Failed to fetch products or cart data:", error);
       } finally {
-        setIsLoading(false); // Stop loading
+        setIsLoading(false);
       }
     };
 

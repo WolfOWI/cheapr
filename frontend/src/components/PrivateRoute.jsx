@@ -4,7 +4,7 @@ import { getAuth } from "firebase/auth";
 import app from "../firebaseConfig";
 import { useState, useEffect } from "react";
 import { getDatabase, ref, get, child } from "firebase/database"; // For real-time database
-import Loader from "react-spinners/PropagateLoader";
+import Loader from "react-spinners/ClipLoader";
 
 const auth = getAuth(app);
 const db = getDatabase(app);
@@ -32,7 +32,7 @@ function PrivateRoute({ children, isAdmin = false }) {
   if (loading || loadingAdminStatus)
     return (
       <div className="w-full flex justify-center items-center mt-20">
-        <Loader color="#C34534" size={20} loading={true} />
+        <Loader color="#C34534" loading={true} />
       </div>
     ); // Wait for both auth and admin status
 

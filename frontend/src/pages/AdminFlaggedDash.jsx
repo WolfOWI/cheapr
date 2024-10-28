@@ -12,6 +12,7 @@ import { getAllFlaggedProducts, unflagProductById } from "../services/productSer
 
 // Third-Party Components
 import { Container, Row, Col, Dropdown } from "react-bootstrap";
+import Loader from "react-spinners/GridLoader";
 
 // Internal Components
 import NavigationBar from "../components/navigation/NavigationBar";
@@ -92,7 +93,9 @@ function AdminFlaggedDash() {
         <Container className="my-4">
           {/* Product Rows */}
           {isLoading ? (
-            <p>Loading Products</p>
+            <div className="w-full flex justify-center items-center mt-20 p-16">
+              <Loader color="#C34534" loading={true} />
+            </div>
           ) : (
             <>
               {Object.keys(products).length > 0 ? (
