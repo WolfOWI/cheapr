@@ -32,6 +32,7 @@ import {
   Modal,
   FloatingLabel,
 } from "react-bootstrap";
+import Loader from "react-spinners/PropagateLoader";
 
 // Internal Components
 import NavigationBar from "../components/navigation/NavigationBar";
@@ -53,6 +54,7 @@ function ProductPage() {
 
   // STATES
   // ----------------------------------------------
+  const [isLoading, setIsLoading] = useState(true);
   const [product, setProduct] = useState({});
   const [breadcrumb, setBreadcrumb] = useState({});
   const [formattedBreadcrumbArr, setFormattedBreadcrumbArr] = useState([]);
@@ -63,7 +65,6 @@ function ProductPage() {
   const [savings, setSavings] = useState(null);
   const [cart, setCart] = useState(null);
   const [cartedItem, setCartedItem] = useState({});
-
   const [itemQuant, setItemQuant] = useState(1);
   // ----------------------------------------------
 
@@ -79,6 +80,7 @@ function ProductPage() {
         // // Fetch breadcrumb data
         const breadcrumbData = await getBreadcrumbByProductId(productId);
         setBreadcrumb(breadcrumbData);
+        setIsLoading(false);
       } catch (error) {
         console.error("Failed to fetch product or breadcrumb data", error);
       }
@@ -435,8 +437,10 @@ function ProductPage() {
       <NavigationBar />
       <Container className="pt-6 mb-32">
         {/* Product Content */}
-        {!product ? (
-          <p>Loading Product</p>
+        {isLoading ? (
+          <div className="w-full flex justify-center items-center mt-20 p-48">
+            <Loader color="#C34534" size={20} loading={true} />
+          </div>
         ) : (
           <>
             {formattedBreadcrumbArr && (
