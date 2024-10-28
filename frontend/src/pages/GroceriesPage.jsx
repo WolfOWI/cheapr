@@ -16,6 +16,7 @@ import { formatName } from "../utils/wordFormatUtils";
 // Third-Party Components
 import { Container, Row, Col, Dropdown } from "react-bootstrap";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
+import Loader from "react-spinners/PropagateLoader";
 
 // Internal Components
 import NavigationBar from "../components/navigation/NavigationBar";
@@ -280,7 +281,9 @@ function GroceriesPage() {
         <Container className="my-4">
           {/* Product Rows */}
           {isLoading ? (
-            <p>Loading Products</p>
+            <div className="w-full flex justify-center items-center mt-20">
+              <Loader color="#C34534" size={20} loading={true} />
+            </div>
           ) : (
             <>
               {Object.keys(products).length > 0 ? (
