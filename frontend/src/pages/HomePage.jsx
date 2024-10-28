@@ -67,18 +67,18 @@ function HomePage() {
           <Col xs={12} lg={6} className="mb-4">
             <ExplainerBlock iconType={"piggy"} heading={"Save Time & Money"}>
               <p>
-                Create a shopping plan, compare prices, and see the best route to maximise your
-                savings every time you shop.
+                Create a shopping plan and see the best route to maximise your savings every time
+                you go out and shop.
               </p>
             </ExplainerBlock>
           </Col>
         </Row>
         <Row className="">
           <Col xs={12} lg={6} className="mb-4">
-            <ExplainerBlock iconType={"chart"} heading={"Historical Prices"}>
+            <ExplainerBlock iconType={"chart"} heading={"Price Specials"}>
               <p>
-                Track prices over time, so you know exactly when to buy and when to hold off for
-                better savings.
+                See if products are currently on special, so you know exactly when to buy and when
+                to hold off for better savings.
               </p>
             </ExplainerBlock>
           </Col>
