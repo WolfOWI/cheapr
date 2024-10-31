@@ -1,7 +1,7 @@
 // IMPORT
 // -----------------------------------------------------------
 // React & Hooks
-import { useState, useEffect } from "react";
+// -
 
 // Services
 // -
@@ -32,10 +32,8 @@ const ProductItem = ({
   onAddCartClick,
   onRemoveCartClick,
 }) => {
-  const [imageSrc, setImageSrc] = useState(product.image);
-  const [retry, setRetry] = useState(0);
-
   // Array of prices from different stores
+
   const prices = [
     { store: "pnp", price: product.pnp.price },
     { store: "woolworths", price: product.woolworths.price },
@@ -50,16 +48,6 @@ const ProductItem = ({
   // console.log("Parse Int:");
   // console.log(parseInt(cheapestPrice));
 
-  // Handle image error, attempting retry up to 3 times
-  const handleImageError = () => {
-    if (retry < 3) {
-      setRetry((prevRetry) => prevRetry + 1); // Increase retry count
-      setImageSrc(`${product.image}?retry=${retry + 1}`); // Force reload with retry param
-    } else {
-      setImageSrc(null); // Use placeholder after max retries
-    }
-  };
-
   return (
     <>
       <Row
@@ -69,21 +57,7 @@ const ProductItem = ({
         {/* Product Information */}
         <Col xs={3} className="flex items-center">
           <div className="max-h-20 max-w-20 min-h-20 min-w-20 mr-4 relative">
-            {imageSrc ? (
-              <img
-                src={imageSrc}
-                alt={product.name}
-                className="object-contain absolute"
-                onError={handleImageError}
-              />
-            ) : (
-              <div className="h-full w-full flex items-center justify-center">
-                <Icon
-                  type={"box"}
-                  className="max-h-20 max-w-20 min-h-20 min-w-20 relative text-neutral-200"
-                />
-              </div>
-            )}
+            <img src={product.image} alt={product.name} className="object-contain absolute" />
 
             {product.inCart && (
               <div className="h-8 w-8 absolute right-0 bottom-0 bg-priM1 flex items-center justify-center rounded-full">
