@@ -137,6 +137,12 @@ const AdminProductItem = ({
                 className="min-w-12 opacity-30 group-hover:opacity-100 transition-all duration-150"
                 onClick={() => onEdit(productId)}
               />
+              <IconBtn
+                iconType={"wrong"}
+                variant="dark"
+                className="min-w-12 opacity-30 group-hover:opacity-100 transition-all duration-150"
+                onClick={() => onReject(productId)}
+              />
               <Btn
                 variant="secondary"
                 className="w-full opacity-30 group-hover:opacity-100 transition-all duration-150"

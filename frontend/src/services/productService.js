@@ -178,6 +178,19 @@ export const rejectProductById = async (productId) => {
 };
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+// Reject Flagged Product (Move from flagged to rejected)
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+export const rejectFlaggedProductById = async (productId) => {
+  try {
+    const response = await axios.put(`${API_URL}/products/rejectflagged/${productId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error rejecting the flagged product:", error);
+    throw error;
+  }
+};
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 // Flag Product (Move from approved to flagged with flagMessage)
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 export const flagProductById = async (productId, flagMessage) => {

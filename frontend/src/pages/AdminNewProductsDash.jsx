@@ -107,17 +107,6 @@ function AdminNewProductsDash() {
     } catch (error) {
       console.error("Failed to reject the product:", error);
     }
-    // try {
-    //   await deleteProductById(productId);
-    //   // Remove the rejected product from the local state
-    //   setProducts((prevProducts) => {
-    //     const updatedProducts = { ...prevProducts };
-    //     delete updatedProducts[productId];
-    //     return updatedProducts;
-    //   });
-    // } catch (error) {
-    //   console.error("Failed to delete product:", error);
-    // }
   };
 
   // Handle Product Approve

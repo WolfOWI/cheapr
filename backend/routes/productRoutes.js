@@ -675,6 +675,40 @@ router.put("/reject/:id", async (req, res) => {
 });
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+// Reject a flagged product by ID (flagged -> rejected)
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+router.put("/rejectflagged/:id", async (req, res) => {
+  try {
+    const { id } = req.params; // Extract the product ID from the URL
+
+    // Fetch the product from the flagged node
+    const flaggedSnapshot = await admin.database().ref(`products/flagged/${id}`).once("value");
+
+    if (!flaggedSnapshot.exists()) {
+      return res.status(404).json({ message: "Product not found in flagged" });
+    }
+
+    const productData = flaggedSnapshot.val(); // The product data in flagged
+
+    // Copy the product data to the rejected node
+    const rejectedRef = admin.database().ref(`products/rejected/${id}`);
+    await rejectedRef.set(productData); // Save the product in the rejected node
+
+    console.log("Product moved to rejected node.");
+
+    // Remove the product from the flagged node
+    await admin.database().ref(`products/flagged/${id}`).remove();
+
+    console.log("Product removed from flagged node.");
+
+    res.status(200).json({ message: "Flagged Product rejected successfully!" });
+  } catch (error) {
+    console.error("Error rejecting the flagged product:", error.message);
+    res.status(500).json({ error: error.message });
+  }
+});
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 // Flag a product by ID (approved -> flagged with flagMessage)
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 router.put("/flag/:id", async (req, res) => {

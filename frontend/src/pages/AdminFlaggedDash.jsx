@@ -5,7 +5,11 @@ import { useState, useEffect } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 
 // Services
-import { getAllFlaggedProducts, unflagProductById } from "../services/productService";
+import {
+  getAllFlaggedProducts,
+  unflagProductById,
+  rejectFlaggedProductById,
+} from "../services/productService";
 
 // Utility Functions
 // -
@@ -60,6 +64,22 @@ function AdminFlaggedDash() {
     });
   };
 
+  // Handle Product Reject
+  const handleProductReject = async (productId) => {
+    console.log("Product Reject Click:", productId);
+    try {
+      await rejectFlaggedProductById(productId);
+      // Remove the rejected product from the local state
+      setProducts((prevProducts) => {
+        const updatedProducts = { ...prevProducts };
+        delete updatedProducts[productId];
+        return updatedProducts;
+      });
+    } catch (error) {
+      console.error("Failed to reject the product:", error);
+    }
+  };
+
   // Handle Product Re-Approve
   const handleProductReApprove = async (productId) => {
     console.log("ReApprove Click:", productId);
@@ -106,6 +126,7 @@ function AdminFlaggedDash() {
                     key={index}
                     type="flagging"
                     onEdit={handleProductEdit}
+                    onReject={handleProductReject}
                     onReApprove={handleProductReApprove}
                   />
                 ))
