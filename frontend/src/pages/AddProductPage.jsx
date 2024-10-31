@@ -68,9 +68,22 @@ const AddProductPage = () => {
     const fetchSubcategories = async () => {
       try {
         const data = await getSubcategoriesByCategory(categoryId);
-        setSubcategories(Object.entries(data));
-        if (data && Object.keys(data).length > 0) {
-          setSubcategoryId(Object.keys(data)[0]);
+        // Filter subcategories to include only those with productTypes
+        const filteredSubcategories = await Promise.all(
+          Object.entries(data).map(async ([subId, subcategory]) => {
+            const types = await getProductTypeBySubcategory(categoryId, subId);
+            return types && Object.keys(types).length > 0 ? [subId, subcategory] : null;
+          })
+        );
+
+        // Remove null values for subcategories with no productTypes
+        setSubcategories(filteredSubcategories.filter(Boolean));
+
+        // Set the first valid subcategory as selected if it exists
+        if (filteredSubcategories.length > 0) {
+          setSubcategoryId(filteredSubcategories[0][0]);
+        } else {
+          setSubcategoryId("");
         }
       } catch (err) {
         console.error("Error fetching subcategories:", err);
@@ -98,9 +111,8 @@ const AddProductPage = () => {
       } catch (err) {
         console.error("Error fetching product types:", err);
         setIsPageLoading(false);
-        setError("Failed to fetch product types.");
       }
-    }, 200); // 200ms delay (waiting for subcat to update)
+    }, 400); // Delay (waiting for subcat to update)
 
     return () => clearTimeout(fetchProductTypes);
   }, [categoryId, subcategoryId]);
