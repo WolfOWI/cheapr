@@ -414,19 +414,25 @@ function ProductPage() {
   // - - - - - - - - - - - - - - - - -
   const [showFlagModal, setShowFlagModal] = useState(false);
   const [flagMessage, setFlagMessage] = useState("");
+  const [flagError, setFlagError] = useState(null);
 
   const handleFlagModalClose = () => setShowFlagModal(false);
   const handleFlagModalShow = () => setShowFlagModal(true);
 
   // Handle Product Flagging Btn Click
   const handleFlagProduct = async () => {
-    try {
-      await flagProductById(productId, flagMessage); // Pass the flagMessage to the service function
-      // console.log("You flagged the product:", productId);
-      handleFlagModalClose();
-      navigate("/groceries");
-    } catch (error) {
-      console.error("Error flagging product:", error);
+    // If reason for flag is empty
+    if (!flagMessage || flagMessage === "") {
+      setFlagError("Please enter a reason for flagging this product above.");
+    } else {
+      try {
+        await flagProductById(productId, flagMessage); // Pass the flagMessage to the service function
+        // console.log("You flagged the product:", productId);
+        handleFlagModalClose();
+        navigate("/groceries");
+      } catch (error) {
+        console.error("Error flagging product:", error);
+      }
     }
   };
   // - - - - - - - - - - - - - - - - -
@@ -672,6 +678,7 @@ function ProductPage() {
               />
             </FloatingLabel>
           </Form.Floating>
+          {flagError && <p className="text-red-600 mb-2">{flagError}</p>}
         </Modal.Body>
         <Modal.Footer>
           <Btn variant="secondary" onClick={handleFlagModalClose}>

@@ -39,7 +39,7 @@ function LoginPage() {
       if (user.isAdmin) {
         navigate("/admin"); // Redirect to admin page if admin
       } else {
-        navigate("/"); // Redirect to home (normal users)
+        navigate("/groceries"); // Redirect to groceries (normal users)
       }
     } catch (err) {
       // Custom Error Message
