@@ -52,15 +52,30 @@ const StorePricingSpecialInput = ({
         <InputGroup.Text className="input-style h-[58px] font-bold">R</InputGroup.Text>
         <Form.Control
           type="text"
-          inputMode="numeric"
+          inputMode="decimal"
           className="input-style h-[58px]"
           value={storePrice}
           onChange={(e) => {
-            const numericValue = e.target.value.replace(/\D/g, ""); // Remove non-numeric characters
-            setStorePrice(numericValue);
+            // Replace commas with periods and allow only numbers and periods
+            let inputValue = e.target.value.replace(/,/g, ".").replace(/[^0-9.]/g, "");
+
+            // Ensure only one decimal point exists
+            const parts = inputValue.split(".");
+            if (parts.length > 2) {
+              inputValue = `${parts[0]}.${parts[1]}`; // Keep only the first period
+            }
+
+            // Limit to two digits after the decimal point if there is a decimal
+            if (parts[1] && parts[1].length > 2) {
+              inputValue = `${parts[0]}.${parts[1].slice(0, 2)}`;
+            }
+
+            setStorePrice(inputValue);
           }}
+          maxLength={10}
         />
       </InputGroup>
+
       <Form.Group className="mb-2" controlId={`formBasicCheckbox-${storeKey}`}>
         <Form.Check
           type="checkbox"
