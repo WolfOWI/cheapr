@@ -9,7 +9,7 @@ import { getSubcategoriesByCategory } from "../services/subcategoryService";
 import { createProductType, getProductTypeBySubcategory } from "../services/productTypeService";
 
 // Utility Functions
-// -
+import { formatName, formatToSnake } from "../utils/wordFormatUtils";
 
 // Third-Party Components
 import { Container, Form, Stack, FloatingLabel } from "react-bootstrap";
@@ -34,20 +34,27 @@ const AdminCreatePTypePage = () => {
   const [productTypes, setProductTypes] = useState([]);
   const [productTypeName, setProductTypeName] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isCreateLoading, setIsCreateLoading] = useState(false);
   const [error, setError] = useState(null);
 
   // Fetch subcategories when category changes
   useEffect(() => {
     const fetchSubcategories = async () => {
+      setIsLoading(true);
+      setError(null);
       try {
         const data = await getSubcategoriesByCategory(categoryId);
         setSubcategories(Object.entries(data)); // Convert object to array of key-value pairs
         if (data && Object.keys(data).length > 0) {
-          setSubcategoryId(Object.keys(data)[0]); // Set the first subcategory by default
+          setSubcategoryId(Object.keys(data)[0]);
+        } else {
+          setSubcategoryId("");
         }
       } catch (err) {
         console.error("Error fetching subcategories:", err);
         setError("Failed to fetch subcategories.");
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -56,8 +63,12 @@ const AdminCreatePTypePage = () => {
 
   // Fetch product types when subcategory changes
   useEffect(() => {
-    if (!subcategoryId) return;
-    const fetchProductTypes = async () => {
+    if (!subcategoryId || !categoryId) return;
+
+    const fetchProductTypes = setTimeout(async () => {
+      setIsLoading(true);
+      setError(null);
+
       try {
         const data = await getProductTypeBySubcategory(categoryId, subcategoryId);
         setProductTypes(Object.entries(data));
@@ -65,31 +76,42 @@ const AdminCreatePTypePage = () => {
         setProductTypes([]);
         console.error("Error fetching product types:", err);
         // setError("Failed to fetch product types.");
+        setProductTypes([]);
+      } finally {
+        setIsLoading(false);
       }
-    };
+    }, 400); // Delay (waiting for subcat to update)
 
-    fetchProductTypes();
-  }, [subcategoryId, categoryId, productTypes]);
+    return () => clearTimeout(fetchProductTypes);
+  }, [subcategoryId, categoryId]);
 
-  // Handle form submission
+  useEffect(() => {
+    console.log("productTypeName:", productTypeName);
+  }, [productTypeName]);
+
+  // Handle Create
   const handleCreateProductType = async () => {
     if (!productTypeName) {
       setError("Please provide a product type name.");
       return;
     }
 
-    setIsLoading(true);
+    setIsCreateLoading(true);
     setError(null);
 
     try {
-      const response = await createProductType(categoryId, subcategoryId, productTypeName);
+      const response = await createProductType(
+        categoryId,
+        subcategoryId,
+        formatToSnake(productTypeName)
+      );
       console.log("Product type created:", response);
       navigate("/create");
     } catch (err) {
       console.error("Failed to create product type:", err);
       setError("Failed to create product type. Please try again.");
     } finally {
-      setIsLoading(false);
+      setIsCreateLoading(false);
     }
   };
 
@@ -110,7 +132,7 @@ const AdminCreatePTypePage = () => {
                 aria-label="Floating label select example"
                 className="input-style"
                 value={categoryId}
-                onChange={(e) => setCategoryId(e.target.value)} // Update categoryId on selection
+                onChange={(e) => setCategoryId(e.target.value)}
               >
                 <option value="10000">Food</option>
                 <option value="20000">Drinks</option>
@@ -125,12 +147,13 @@ const AdminCreatePTypePage = () => {
                 aria-label="Floating label select example"
                 className="input-style"
                 value={subcategoryId}
-                onChange={(e) => setSubcategoryId(e.target.value)} // Update subcategoryId on selection
+                onChange={(e) => setSubcategoryId(e.target.value)}
+                disabled={!subcategories.length}
               >
                 {subcategories.length > 0 ? (
                   subcategories.map(([subId, subcategory]) => (
                     <option key={subId} value={subId}>
-                      {subcategory.name}
+                      {formatName(subcategory.name)}
                     </option>
                   ))
                 ) : (
@@ -147,7 +170,7 @@ const AdminCreatePTypePage = () => {
                 placeholder="Enter Product Type"
                 className="input-style"
                 value={productTypeName}
-                onChange={(e) => setProductTypeName(e.target.value)} // Update productTypeName on input
+                onChange={(e) => setProductTypeName(e.target.value)}
               />
             </FloatingLabel>
           </Form.Floating>
@@ -160,7 +183,7 @@ const AdminCreatePTypePage = () => {
                   key={typeId}
                   className="bg-highlight text-neutral-700 px-2 py-1 rounded-md text-center"
                 >
-                  {productType.name}
+                  {formatName(productType.name)}
                 </small>
               ))
             ) : (
@@ -176,12 +199,12 @@ const AdminCreatePTypePage = () => {
               variant="primary"
               className="w-full"
               onClick={handleCreateProductType}
-              disabled={isLoading}
+              disabled={isCreateLoading}
             >
-              {isLoading ? "Creating..." : "Create"}
+              {isCreateLoading ? "Creating..." : "Create"}
             </Btn>
           </Stack>
-          {error && <p className="text-blue-500 mt-2">{error}</p>}
+          {error && <p className="text-red-500 mt-2">{error}</p>}
         </Form>
       </Container>
       <Footer />

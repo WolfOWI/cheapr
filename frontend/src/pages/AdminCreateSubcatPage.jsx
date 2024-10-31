@@ -141,7 +141,7 @@ const AdminCreateSubcatPage = () => {
                 {isLoading ? "Creating..." : "Create"}
               </Btn>
             </Stack>
-            {error && <p className="text-blue-500 mt-2">{error}</p>}
+            {error && <p className="text-red-500 mt-2">{error}</p>}
           </div>
         </Form>
       </Container>

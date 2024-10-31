@@ -16,34 +16,42 @@ function PrivateRoute({ children, isAdmin = false }) {
 
   useEffect(() => {
     if (user) {
-      // Fetch user details from the database
       const userRef = ref(db, `users/${user.uid}`);
-      get(child(userRef, "isAdmin")).then((snapshot) => {
-        if (snapshot.exists()) {
-          setIsAdminUser(snapshot.val());
-        }
-        setLoadingAdminStatus(false); // Set to false after fetching admin status
-      });
+      get(child(userRef, "isAdmin"))
+        .then((snapshot) => {
+          if (snapshot.exists()) {
+            setIsAdminUser(snapshot.val());
+          }
+          setLoadingAdminStatus(false); // Stop loading after checking admin status
+        })
+        .catch((error) => {
+          console.error("Error fetching admin status:", error);
+          setLoadingAdminStatus(false);
+        });
     } else {
-      setLoadingAdminStatus(false); // No user, no need to fetch admin status
+      setLoadingAdminStatus(false); // If no user, stop admin status check
     }
   }, [user]);
 
-  if (loading || loadingAdminStatus)
+  if (loading || loadingAdminStatus) {
     return (
       <div className="w-full flex justify-center items-center mt-20">
         <Loader color="#C34534" loading={true} />
       </div>
-    ); // Wait for both auth and admin status
+    );
+  } // Wait for both auth and admin status
 
+  // Redirect non-logged-in users to the login page
   if (!user) {
     return <Navigate to="/login" />;
   }
 
+  // Redirect non-admins trying to access admin routes
   if (isAdmin && !isAdminUser) {
     return <Navigate to="/" />;
   }
 
+  // Render children if authorised
   return children;
 }
 
