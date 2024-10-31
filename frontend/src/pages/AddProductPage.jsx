@@ -11,6 +11,7 @@ import { createPendingProduct } from "../services/productService";
 
 // Utility Functions
 import { getCurrentDate, getCurrentTimeStamp } from "../utils/dateUtils";
+import { prettifyTextInput } from "../utils/wordFormatUtils";
 
 // Third-Party Components
 import { Container, Form, Stack, FloatingLabel, InputGroup } from "react-bootstrap";
@@ -19,7 +20,6 @@ import Loader from "react-spinners/PropagateLoader";
 // Internal Components
 import NavigationBar from "../components/navigation/NavigationBar";
 import Btn from "../components/button/Btn";
-import StoreLogo from "../components/building-blocks/StoreLogo";
 import Footer from "../components/navigation/Footer";
 import StorePricingSpecialInput from "../components/input/StorePricingSpecialInput";
 
@@ -58,6 +58,7 @@ const AddProductPage = () => {
   const [sparOnSpecial, setSparOnSpecial] = useState(false);
   const [sparSpecialDate, setSparSpecialDate] = useState("");
 
+  // Loading & Error States
   const [isSubmitLoading, setIsSubmitLoading] = useState(false);
   const [isPageLoading, setIsPageLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -82,9 +83,12 @@ const AddProductPage = () => {
 
   // Fetch product types when subcategory changes
   useEffect(() => {
-    if (!subcategoryId) return;
-    const fetchProductTypes = async () => {
+    if (!subcategoryId || !categoryId) return;
+
+    const fetchProductTypes = setTimeout(async () => {
       try {
+        console.log("categoryId:", categoryId);
+        console.log("subcategoryId:", subcategoryId);
         const data = await getProductTypeBySubcategory(categoryId, subcategoryId);
         setProductTypes(Object.entries(data));
         if (data && Object.keys(data).length > 0) {
@@ -96,27 +100,29 @@ const AddProductPage = () => {
         setIsPageLoading(false);
         setError("Failed to fetch product types.");
       }
-    };
+    }, 200); // 200ms delay (waiting for subcat to update)
 
-    fetchProductTypes();
+    return () => clearTimeout(fetchProductTypes);
   }, [categoryId, subcategoryId]);
 
   // Handle form submission
   const handleCreateProduct = async () => {
-    // console.log("categoryId:", categoryId);
-    // console.log("subcategoryId:", subcategoryId);
-    // console.log("typeId:", typeId);
-
+    // If some fields are not filled in, show error
     if (
       !productName ||
       !productAmount ||
       !productUnit ||
       !categoryId ||
       !subcategoryId ||
-      !typeId ||
-      !imageFile
+      !typeId
     ) {
-      setError("Please fill in all required fields.");
+      setError("Please fill in all the product info fields.");
+      return;
+    } else if (!imageFile) {
+      setError("Please upload an image for your product.");
+      return;
+    } else if (!pnpPrice && !woolworthsPrice && !checkersPrice && !sparPrice) {
+      setError("Please enter atleast 1 price for your product.");
       return;
     }
 
@@ -128,7 +134,7 @@ const AddProductPage = () => {
     let createdAt = getCurrentTimeStamp();
 
     const productData = {
-      name: productName,
+      name: prettifyTextInput(productName),
       amount: productAmount,
       unit: productUnit,
       created: createdAt,
@@ -174,7 +180,7 @@ const AddProductPage = () => {
       console.error("Failed to create product:", err);
       setError("Failed to create product. Please try again.");
     } finally {
-      isSubmitLoading(false);
+      setIsSubmitLoading(false);
     }
   };
 
@@ -183,7 +189,10 @@ const AddProductPage = () => {
       <NavigationBar admin />
       <Container className="mb-32">
         <div className="flex w-full justify-between pt-6">
-          <h2>Submit a Product</h2>
+          <div>
+            <h2>Submit a Product</h2>
+            {error && <p className="text-red-600 mb-2">{error}</p>}
+          </div>
           <Stack direction="horizontal" gap={2}>
             <Btn variant="secondary" onClick={() => navigate("/groceries")}>
               Cancel
@@ -193,7 +202,7 @@ const AddProductPage = () => {
             </Btn>
           </Stack>
         </div>
-        {isPageLoading ? (
+        {isPageLoading || isSubmitLoading ? (
           <div className="w-full flex justify-center items-center mt-20 p-64">
             <Loader color="#C34534" size={20} loading={true} />
           </div>
@@ -210,6 +219,7 @@ const AddProductPage = () => {
                         value={productName}
                         onChange={(e) => setProductName(e.target.value)}
                         className="input-style"
+                        maxLength={40}
                       />
                     </FloatingLabel>
                   </Form.Floating>
@@ -220,11 +230,16 @@ const AddProductPage = () => {
                       className="mb-4"
                     >
                       <Form.Control
-                        type="number"
+                        type="text"
+                        inputMode="numeric"
                         placeholder=""
                         value={productAmount}
-                        onChange={(e) => setProductAmount(e.target.value)}
+                        onChange={(e) => {
+                          const numericValue = e.target.value.replace(/\D/g, ""); // Remove non-numeric characters
+                          setProductAmount(numericValue);
+                        }}
                         className="input-style"
+                        maxLength={5}
                       />
                     </FloatingLabel>
                   </Form.Floating>
@@ -311,7 +326,19 @@ const AddProductPage = () => {
                     <Form.Control
                       type="file"
                       id="imageUpload"
-                      onChange={(e) => setImageFile(e.target.files[0])}
+                      accept="image/webp, image/png, image/jpeg, image/jpg"
+                      onChange={(e) => {
+                        const file = e.target.files[0];
+                        const maxSizeInMB = 10;
+                        const maxSizeInBytes = maxSizeInMB * 1024 * 1024; // Convert MB to bytes
+
+                        if (file && file.size > maxSizeInBytes) {
+                          alert(`File size should not exceed ${maxSizeInMB} MB.`);
+                          e.target.value = ""; // Reset the input if the file is too large
+                        } else {
+                          setImageFile(file); // Set the file if size is within limit
+                        }
+                      }}
                       className="d-none"
                     />
                   </div>

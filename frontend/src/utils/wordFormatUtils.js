@@ -7,10 +7,19 @@ export const formatName = (str) => {
       if (word.toLowerCase() === "and") {
         return "&";
       }
-      // Capitalize the first letter of each word
+      // Capitalise the first letter of each word
       return word.charAt(0).toUpperCase() + word.slice(1);
     })
     .join(" ");
 };
 
-export default formatName;
+// Makes bad text input, pretty.
+export const prettifyTextInput = (input) => {
+  return input
+    .trim() // Remove leading and trailing spaces
+    .replace(/\s+/g, " ") // Replace multiple spaces with a single space
+    .replace(/[^a-zA-Z0-9\s]/g, "") // Remove non-alphanumeric characters except spaces
+    .split(" ") // Split into words
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()) // Capitalise each word
+    .join(" "); // Join words with a single space
+};
