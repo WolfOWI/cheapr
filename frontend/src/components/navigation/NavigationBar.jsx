@@ -64,19 +64,30 @@ function NavigationBar({ admin }) {
     try {
       const subcategories = await getSubcategoriesByCategory(categoryId);
 
+      // Check if subcategories data is valid
+      if (!subcategories || Object.keys(subcategories).length === 0) {
+        setProductTypes({});
+        return; // Exit if no subcategories are found
+      }
+
       setSubcategories(Object.entries(subcategories));
 
       const allProductTypes = {};
+
       for (const [subcatId] of Object.entries(subcategories)) {
         const productTypes = await getProductTypeBySubcategory(categoryId, subcatId);
 
-        // Filter out null values in productIds
-        const filteredProductTypes = Object.entries(productTypes).map(([typeId, productType]) => {
-          const filteredProductIds = (productType.productIds || []).filter((id) => id !== null);
-          return [typeId, { ...productType, productIds: filteredProductIds }];
-        });
+        if (productTypes) {
+          // Filter out null values in productIds
+          const filteredProductTypes = Object.entries(productTypes).map(([typeId, productType]) => {
+            const filteredProductIds = (productType.productIds || []).filter((id) => id !== null);
+            return [typeId, { ...productType, productIds: filteredProductIds }];
+          });
 
-        allProductTypes[subcatId] = filteredProductTypes;
+          allProductTypes[subcatId] = filteredProductTypes;
+        } else {
+          allProductTypes[subcatId] = []; // Set an empty array if no product types found
+        }
       }
 
       setProductTypes(allProductTypes);
@@ -109,10 +120,10 @@ function NavigationBar({ admin }) {
         >
           {/* "All {Subcategory}" option */}
           <NavDropdown.Item onClick={() => navigate(`/groceries/${subcatId}`)}>
-            {subcategory?.name ? formatName(subcategory.name) : "Unnamed Subcategory"}
+            {subcategory?.name ? `All ${formatName(subcategory.name)}` : "Unnamed Subcategory"}
           </NavDropdown.Item>
 
-          {productTypes[subcatId] ? (
+          {productTypes[subcatId] && productTypes[subcatId].length ? (
             productTypes[subcatId].map(([typeId, productType]) => (
               <NavDropdown.Item key={typeId} onClick={() => navigate(`/groceries/${typeId}`)}>
                 {productType?.name ? formatName(productType.name) : "Unnamed Product Type"}

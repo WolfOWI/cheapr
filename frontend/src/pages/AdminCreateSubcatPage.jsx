@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { createSubcategory, getSubcategoriesByCategory } from "../services/subcategoryService";
 
 // Utility Functions
-// -
+import { formatName, formatToSnake } from "../utils/wordFormatUtils";
 
 // Third-Party Components
 import { Container, Form, Stack, FloatingLabel } from "react-bootstrap";
@@ -59,7 +59,7 @@ const AdminCreateSubcatPage = () => {
     setError(null);
 
     try {
-      const response = await createSubcategory(categoryId, subcategoryName);
+      const response = await createSubcategory(categoryId, formatToSnake(subcategoryName));
       console.log("Subcategory created:", response);
       navigate("/create");
     } catch (err) {
@@ -120,7 +120,7 @@ const AdminCreateSubcatPage = () => {
                     key={subId}
                     className="bg-highlight text-neutral-700 px-2 py-1 rounded-md text-center"
                   >
-                    {subcategory.name}
+                    {formatName(subcategory.name)}
                   </small>
                 ))
               ) : (
