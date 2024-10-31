@@ -40,7 +40,21 @@ function SignUpPage() {
       await signUpUser(email, password, firstName, lastName); // Call sign-up function
       navigate("/login"); // Redirect to login after successful sign-up
     } catch (err) {
-      setError(err.message); // Set error message on failure
+      // Custom Error Message
+      let customErrorMessage;
+      switch (err.code) {
+        case "auth/email-already-in-use":
+          customErrorMessage =
+            "This email is already in use. Please log in or use a different email.";
+          break;
+        case "auth/weak-password":
+          customErrorMessage = "Password should be at least 6 characters long.";
+          break;
+        default:
+          customErrorMessage = "Sign-up failed. Please check your details and try again.";
+          break;
+      }
+      setError(customErrorMessage);
     }
   };
 
@@ -61,6 +75,7 @@ function SignUpPage() {
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value)} // Track state
                   className="input-style"
+                  required
                 />
               </Form.Group>
               <Form.Group className="mb-4" controlId="formBasicLastName">
@@ -71,6 +86,7 @@ function SignUpPage() {
                   value={lastName}
                   onChange={(e) => setLastName(e.target.value)} // Track state
                   className="input-style"
+                  required
                 />
               </Form.Group>
               <Form.Group className="mb-4" controlId="formBasicEmail">
@@ -81,6 +97,7 @@ function SignUpPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)} // Track state
                   className="input-style"
+                  required
                 />
               </Form.Group>
               <Form.Group className="mb-4" controlId="formBasicPassword">
@@ -91,6 +108,7 @@ function SignUpPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)} // Track state
                   className="input-style"
+                  required
                 />
               </Form.Group>
               {error && <p className="text-red-600">{error}</p>} {/* Display error */}

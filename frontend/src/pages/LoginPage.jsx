@@ -42,11 +42,11 @@ function LoginPage() {
         navigate("/"); // Redirect to home for normal users
       }
     } catch (err) {
-      // Map Firebase error codes to custom messages
+      // Custom Error Message
       let customErrorMessage;
       switch (err.code) {
         case "auth/invalid-credential":
-          customErrorMessage = "The username or password is incorrect. ";
+          customErrorMessage = "The username or password is incorrect.";
           break;
         default:
           customErrorMessage = "Login failed. Please check your credentials and try again.";
