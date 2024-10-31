@@ -11,6 +11,7 @@ import { createApprovedProduct } from "../services/productService";
 
 // Utility Functions
 import { getCurrentDate, getCurrentTimeStamp } from "../utils/dateUtils";
+import { prettifyTextInput, formatName } from "../utils/wordFormatUtils";
 
 // Third-Party Components
 import { Container, Form, Stack, FloatingLabel } from "react-bootstrap";
@@ -19,7 +20,6 @@ import Loader from "react-spinners/GridLoader";
 // Internal Components
 import NavigationBar from "../components/navigation/NavigationBar";
 import Btn from "../components/button/Btn";
-import StoreLogo from "../components/building-blocks/StoreLogo";
 import Footer from "../components/navigation/Footer";
 import StorePricingSpecialInput from "../components/input/StorePricingSpecialInput";
 
@@ -67,9 +67,23 @@ const AdminCreateProductPage = () => {
     const fetchSubcategories = async () => {
       try {
         const data = await getSubcategoriesByCategory(categoryId);
-        setSubcategories(Object.entries(data));
-        if (data && Object.keys(data).length > 0) {
-          setSubcategoryId(Object.keys(data)[0]);
+
+        // Filter subcategories to include only those with productTypes
+        const filteredSubcategories = await Promise.all(
+          Object.entries(data).map(async ([subId, subcategory]) => {
+            const types = await getProductTypeBySubcategory(categoryId, subId);
+            return types && Object.keys(types).length > 0 ? [subId, subcategory] : null;
+          })
+        );
+
+        // Remove null values for subcategories with no productTypes
+        setSubcategories(filteredSubcategories.filter(Boolean));
+
+        // Set the first valid subcategory as selected if it exists
+        if (filteredSubcategories.length > 0) {
+          setSubcategoryId(filteredSubcategories[0][0]);
+        } else {
+          setSubcategoryId("");
         }
       } catch (err) {
         console.error("Error fetching subcategories:", err);
@@ -82,8 +96,9 @@ const AdminCreateProductPage = () => {
 
   // Fetch product types when subcategory changes
   useEffect(() => {
-    if (!subcategoryId) return;
-    const fetchProductTypes = async () => {
+    if (!subcategoryId || !categoryId) return;
+
+    const fetchProductTypes = setTimeout(async () => {
       try {
         const data = await getProductTypeBySubcategory(categoryId, subcategoryId);
         setProductTypes(Object.entries(data));
@@ -96,9 +111,9 @@ const AdminCreateProductPage = () => {
         setIsPageLoading(false);
         setError("Failed to fetch product types.");
       }
-    };
+    }, 400); // Delay by 400ms
 
-    fetchProductTypes();
+    return () => clearTimeout(fetchProductTypes);
   }, [categoryId, subcategoryId]);
 
   // Handle form submission
@@ -113,10 +128,15 @@ const AdminCreateProductPage = () => {
       !productUnit ||
       !categoryId ||
       !subcategoryId ||
-      !typeId ||
-      !imageFile
+      !typeId
     ) {
-      setError("Please fill in all required fields.");
+      setError("Please fill in all the product info fields.");
+      return;
+    } else if (!imageFile) {
+      setError("Please upload an image for the product.");
+      return;
+    } else if (!pnpPrice && !woolworthsPrice && !checkersPrice && !sparPrice) {
+      setError("Please enter at least one price for the product.");
       return;
     }
 
@@ -124,11 +144,10 @@ const AdminCreateProductPage = () => {
     setError(null);
 
     const formData = new FormData();
-
-    let createdAt = getCurrentTimeStamp();
+    const createdAt = getCurrentTimeStamp();
 
     const productData = {
-      name: productName,
+      name: prettifyTextInput(productName),
       amount: productAmount,
       unit: productUnit,
       created: createdAt,
@@ -160,11 +179,9 @@ const AdminCreateProductPage = () => {
     formData.append("categoryId", categoryId);
     formData.append("subcategoryId", subcategoryId);
     formData.append("typeId", typeId);
-    if (imageFile) {
-      formData.append("image", imageFile); // Append the image file
-    }
+    formData.append("image", imageFile);
 
-    console.log("formData", formData);
+    // console.log("formData", formData);
 
     try {
       const response = await createApprovedProduct(formData);
@@ -183,7 +200,10 @@ const AdminCreateProductPage = () => {
       <NavigationBar admin />
       <Container className="mb-32">
         <div className="flex w-full justify-between pt-6">
-          <h2>Create a Product</h2>
+          <div>
+            <h2>Create a Product</h2>
+            {error && <p className="text-red-600 mb-2">{error}</p>}
+          </div>
           <Stack direction="horizontal" gap={2}>
             <Btn variant="secondary" onClick={() => navigate("/create")}>
               Cancel
@@ -210,6 +230,7 @@ const AdminCreateProductPage = () => {
                         value={productName}
                         onChange={(e) => setProductName(e.target.value)}
                         className="input-style"
+                        maxLength={40}
                       />
                     </FloatingLabel>
                   </Form.Floating>
@@ -220,18 +241,22 @@ const AdminCreateProductPage = () => {
                       className="mb-4"
                     >
                       <Form.Control
-                        type="number"
+                        type="text"
+                        inputMode="numeric"
                         placeholder=""
                         value={productAmount}
-                        onChange={(e) => setProductAmount(e.target.value)}
+                        onChange={(e) => {
+                          const numericValue = e.target.value.replace(/\D/g, ""); // Remove non-numeric characters
+                          setProductAmount(numericValue);
+                        }}
                         className="input-style"
+                        maxLength={5}
                       />
                     </FloatingLabel>
                   </Form.Floating>
                   <Form.Floating>
                     <FloatingLabel controlId="floatingInput" label="Unit" className="mb-4">
                       <Form.Select
-                        aria-label="Floating label select example"
                         value={productUnit}
                         onChange={(e) => setProductUnit(e.target.value)}
                         className="input-style"
@@ -249,7 +274,6 @@ const AdminCreateProductPage = () => {
                   <Form.Floating>
                     <FloatingLabel controlId="floatingInput" label="Category" className="mb-4">
                       <Form.Select
-                        aria-label="Floating label select example"
                         value={categoryId}
                         onChange={(e) => setCategoryId(e.target.value)}
                         className="input-style"
@@ -270,7 +294,7 @@ const AdminCreateProductPage = () => {
                       >
                         {subcategories.map(([subId, subcategory]) => (
                           <option key={subId} value={subId}>
-                            {subcategory.name}
+                            {formatName(subcategory.name)}
                           </option>
                         ))}
                       </Form.Select>
@@ -279,14 +303,13 @@ const AdminCreateProductPage = () => {
                   <Form.Floating>
                     <FloatingLabel controlId="floatingInput" label="Type" className="mb-4">
                       <Form.Select
-                        aria-label="Floating label select example"
                         value={typeId}
                         onChange={(e) => setTypeId(e.target.value)}
                         className="input-style"
                       >
                         {productTypes.map(([typeId, productType]) => (
                           <option key={typeId} value={typeId}>
-                            {productType.name}
+                            {formatName(productType.name)}
                           </option>
                         ))}
                       </Form.Select>
@@ -311,7 +334,19 @@ const AdminCreateProductPage = () => {
                     <Form.Control
                       type="file"
                       id="imageUpload"
-                      onChange={(e) => setImageFile(e.target.files[0])}
+                      accept="image/webp, image/png, image/jpeg, image/jpg"
+                      onChange={(e) => {
+                        const file = e.target.files[0];
+                        const maxSizeInMB = 10;
+                        const maxSizeInBytes = maxSizeInMB * 1024 * 1024; // Convert MB to bytes
+
+                        if (file && file.size > maxSizeInBytes) {
+                          alert(`File size should not exceed ${maxSizeInMB} MB.`);
+                          e.target.value = ""; // Reset the input if the file is too large
+                        } else {
+                          setImageFile(file); // Set the file if size is within limit
+                        }
+                      }}
                       className="d-none"
                     />
                   </div>

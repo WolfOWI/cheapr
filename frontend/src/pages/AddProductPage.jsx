@@ -258,7 +258,6 @@ const AddProductPage = () => {
                   <Form.Floating>
                     <FloatingLabel controlId="floatingInput" label="Unit" className="mb-4">
                       <Form.Select
-                        aria-label="Floating label select example"
                         value={productUnit}
                         onChange={(e) => setProductUnit(e.target.value)}
                         className="input-style"
@@ -276,7 +275,6 @@ const AddProductPage = () => {
                   <Form.Floating>
                     <FloatingLabel controlId="floatingInput" label="Category" className="mb-4">
                       <Form.Select
-                        aria-label="Floating label select example"
                         value={categoryId}
                         onChange={(e) => setCategoryId(e.target.value)}
                         className="input-style"
@@ -306,7 +304,6 @@ const AddProductPage = () => {
                   <Form.Floating>
                     <FloatingLabel controlId="floatingInput" label="Type" className="mb-4">
                       <Form.Select
-                        aria-label="Floating label select example"
                         value={typeId}
                         onChange={(e) => setTypeId(e.target.value)}
                         className="input-style"
