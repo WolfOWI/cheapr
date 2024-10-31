@@ -11,7 +11,7 @@ import { createPendingProduct } from "../services/productService";
 
 // Utility Functions
 import { getCurrentDate, getCurrentTimeStamp } from "../utils/dateUtils";
-import { prettifyTextInput } from "../utils/wordFormatUtils";
+import { prettifyTextInput, formatName } from "../utils/wordFormatUtils";
 
 // Third-Party Components
 import { Container, Form, Stack, FloatingLabel, InputGroup } from "react-bootstrap";
@@ -100,8 +100,8 @@ const AddProductPage = () => {
 
     const fetchProductTypes = setTimeout(async () => {
       try {
-        console.log("categoryId:", categoryId);
-        console.log("subcategoryId:", subcategoryId);
+        // console.log("categoryId:", categoryId);
+        // console.log("subcategoryId:", subcategoryId);
         const data = await getProductTypeBySubcategory(categoryId, subcategoryId);
         setProductTypes(Object.entries(data));
         if (data && Object.keys(data).length > 0) {
@@ -295,7 +295,7 @@ const AddProductPage = () => {
                       >
                         {subcategories.map(([subId, subcategory]) => (
                           <option key={subId} value={subId}>
-                            {subcategory.name}
+                            {formatName(subcategory.name)}
                           </option>
                         ))}
                       </Form.Select>
@@ -310,7 +310,7 @@ const AddProductPage = () => {
                       >
                         {productTypes.map(([typeId, productType]) => (
                           <option key={typeId} value={typeId}>
-                            {productType.name}
+                            {formatName(productType.name)}
                           </option>
                         ))}
                       </Form.Select>
