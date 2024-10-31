@@ -39,7 +39,7 @@ function LoginPage() {
       if (user.isAdmin) {
         navigate("/admin"); // Redirect to admin page if admin
       } else {
-        navigate("/"); // Redirect to home for normal users
+        navigate("/"); // Redirect to home (normal users)
       }
     } catch (err) {
       // Custom Error Message
@@ -48,8 +48,13 @@ function LoginPage() {
         case "auth/invalid-credential":
           customErrorMessage = "The username or password is incorrect.";
           break;
+        case "auth/user-disabled":
+          customErrorMessage =
+            "Your account has been banned and is disabled. Contact support for more info.";
+          break;
         default:
           customErrorMessage = "Login failed. Please check your credentials and try again.";
+          console.log("Error Code:", err.code);
           break;
       }
       setError(customErrorMessage); // Set error message
@@ -87,7 +92,7 @@ function LoginPage() {
                   required
                 />
               </Form.Group>
-              {error && <p className="text-red-600">{error}</p>} {/* Display error */}
+              {error && <p className="text-red-600 mb-2">{error}</p>} {/* Display error */}
               <Btn variant="primary" className="w-full" type="submit">
                 Login
               </Btn>

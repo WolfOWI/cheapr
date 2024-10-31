@@ -37,8 +37,8 @@ function SignUpPage() {
     setError(null); // Reset error state
 
     try {
-      await signUpUser(email, password, firstName, lastName); // Call sign-up function
-      navigate("/login"); // Redirect to login after successful sign-up
+      await signUpUser(email, password, firstName, lastName);
+      navigate("/groceries"); // Redirect to home after successful sign-up
     } catch (err) {
       // Custom Error Message
       let customErrorMessage;
@@ -111,7 +111,7 @@ function SignUpPage() {
                   required
                 />
               </Form.Group>
-              {error && <p className="text-red-600">{error}</p>} {/* Display error */}
+              {error && <p className="text-red-600 mb-2">{error}</p>} {/* Display error */}
               <Btn variant="primary" className="w-full" type="submit">
                 Create New Account
               </Btn>
