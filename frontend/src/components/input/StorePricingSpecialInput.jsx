@@ -51,10 +51,14 @@ const StorePricingSpecialInput = ({
       <InputGroup className="mb-2 h-[58px]">
         <InputGroup.Text className="input-style h-[58px] font-bold">R</InputGroup.Text>
         <Form.Control
-          type="number"
+          type="text"
+          inputMode="numeric"
           className="input-style h-[58px]"
           value={storePrice}
-          onChange={(e) => setStorePrice(e.target.value)}
+          onChange={(e) => {
+            const numericValue = e.target.value.replace(/\D/g, ""); // Remove non-numeric characters
+            setStorePrice(numericValue);
+          }}
         />
       </InputGroup>
       <Form.Group className="mb-2" controlId={`formBasicCheckbox-${storeKey}`}>
