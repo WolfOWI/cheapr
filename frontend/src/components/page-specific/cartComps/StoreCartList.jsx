@@ -21,7 +21,7 @@ import CartItem from "./CartItem";
 
 // -----------------------------------------------------------
 
-const StoreCartList = ({ store, products, onMoveProduct, refreshCart }) => {
+const StoreCartList = ({ store, products, onMoveProduct, onItemDelete, refreshCart }) => {
   const [cartProducts, setCartProducts] = useState([]);
 
   const totalItems = cartProducts.reduce((acc, product) => acc + product.quantity, 0);
@@ -80,6 +80,7 @@ const StoreCartList = ({ store, products, onMoveProduct, refreshCart }) => {
                 cheapestStores={cheapestStores}
                 onStoreSelect={onMoveProduct}
                 refreshCart={refreshCart}
+                onItemDelete={onItemDelete}
               />
             );
           })

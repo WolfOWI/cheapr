@@ -20,7 +20,15 @@ import IconBtn from "../../button/IconBtn";
 
 // -----------------------------------------------------------
 
-const CartItem = ({ product, store, cheapestStores, quantity, onStoreSelect, refreshCart }) => {
+const CartItem = ({
+  product,
+  store,
+  cheapestStores,
+  quantity,
+  onStoreSelect,
+  refreshCart,
+  onItemDelete,
+}) => {
   const [showDropdown, setShowDropdown] = useState(false);
 
   const [itemQuant, setItemQuant] = useState(quantity); // Frontend-Only Quantity State (to improve speed)
@@ -56,7 +64,6 @@ const CartItem = ({ product, store, cheapestStores, quantity, onStoreSelect, ref
     if (itemQuant > 1) {
       setItemQuant((current) => current - 1);
 
-      // Update the backend asynchronously
       updateProductQuantity(product.productId, itemQuant - 1)
         .then(() => {
           refreshCart(); // Optional: refresh cart after backend update
@@ -144,7 +151,14 @@ const CartItem = ({ product, store, cheapestStores, quantity, onStoreSelect, ref
                 )}
               </div>
             )}
-            <IconBtn variant="dark" iconType="delete" size="sm" />
+            <IconBtn
+              variant="dark"
+              iconType="delete"
+              size="sm"
+              onClick={() => {
+                onItemDelete(product.productId);
+              }}
+            />
           </Stack>
         </div>
       </div>

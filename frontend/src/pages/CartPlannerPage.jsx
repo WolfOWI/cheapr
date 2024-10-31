@@ -226,7 +226,18 @@ function CartPlannerPage() {
     }
   };
 
+  // Delete Cart Item
   // ------------------------------------------------
+  const handleItemDelete = async (id) => {
+    try {
+      await removeFromCart(id);
+      console.log("Product removed from cart:", id);
+
+      refreshCart();
+    } catch (error) {
+      console.log("Product couldn't be removed from cart: ", error);
+    }
+  };
 
   // REFRESH
   // ------------------------------------------------
@@ -238,6 +249,7 @@ function CartPlannerPage() {
       console.log("Couldn't refresh the cart.");
     }
   };
+
   // ------------------------------------------------
 
   // useEffect(() => {
@@ -294,6 +306,7 @@ function CartPlannerPage() {
                     products={pnpProducts}
                     onMoveProduct={moveProductToStore}
                     refreshCart={refreshCart}
+                    onItemDelete={handleItemDelete}
                   />
                 </Col>
                 <Col xs={3} className="flex flex-col items-center">
@@ -302,6 +315,7 @@ function CartPlannerPage() {
                     products={woolworthsProducts}
                     onMoveProduct={moveProductToStore}
                     refreshCart={refreshCart}
+                    onItemDelete={handleItemDelete}
                   />
                 </Col>
                 <Col xs={3} className="flex flex-col items-center">
@@ -310,6 +324,7 @@ function CartPlannerPage() {
                     products={checkersProducts}
                     onMoveProduct={moveProductToStore}
                     refreshCart={refreshCart}
+                    onItemDelete={handleItemDelete}
                   />
                 </Col>
                 <Col xs={3} className="flex flex-col items-center">
@@ -318,6 +333,7 @@ function CartPlannerPage() {
                     products={sparProducts}
                     onMoveProduct={moveProductToStore}
                     refreshCart={refreshCart}
+                    onItemDelete={handleItemDelete}
                   />
                 </Col>
               </Row>
