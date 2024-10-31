@@ -12,10 +12,11 @@ import { getSubcategoriesByCategory } from "../services/subcategoryService";
 import { getProductTypeBySubcategory } from "../services/productTypeService";
 
 // Utility Functions
-import { getCurrentDate, getCurrentTimeStamp } from "../utils/dateUtils";
+import { getCurrentDate } from "../utils/dateUtils";
+import { prettifyTextInput, formatName } from "../utils/wordFormatUtils";
 
 // Third-Party Components
-import { Container, Stack, Form, FloatingLabel, Button, InputGroup } from "react-bootstrap";
+import { Container, Stack, Form, FloatingLabel } from "react-bootstrap";
 import Loader from "react-spinners/GridLoader";
 
 // Internal Components
@@ -72,6 +73,8 @@ function AdminEditDash() {
   const [isChanged, setIsChanged] = useState(false);
 
   const [isLoading, setIsLoading] = useState(true);
+  const [isUpdating, setIsUpdating] = useState(false);
+  const [error, setError] = useState(null);
 
   // GET
   // ----------------------------------------------
@@ -176,26 +179,24 @@ function AdminEditDash() {
 
   // Fetch product types when both category and subcategory are set
   useEffect(() => {
-    const fetchProductTypes = async () => {
-      if (newCategoryId && newSubcategoryId) {
-        try {
-          const data = await getProductTypeBySubcategory(newCategoryId, newSubcategoryId);
-          setProductTypes(Object.entries(data));
+    if (!newCategoryId || !newSubcategoryId) return;
 
-          if (data && Object.keys(data).length > 0) {
-            setNewTypeId(Object.keys(data)[0]); // Set default product type ID
-          } else {
-            setNewTypeId(""); // Reset if no product types found
-          }
-          setIsLoading(false);
-        } catch (error) {
-          console.error("Failed to fetch product types", error);
-          setIsLoading(false);
+    const fetchProductTypes = setTimeout(async () => {
+      try {
+        const data = await getProductTypeBySubcategory(newCategoryId, newSubcategoryId);
+        setProductTypes(Object.entries(data));
+
+        if (data && Object.keys(data).length > 0) {
+          setNewTypeId(Object.keys(data)[0]);
         }
+        setIsLoading(false);
+      } catch (error) {
+        console.error("Failed to fetch product types:", error);
+        setIsLoading(false);
       }
-    };
+    }, 400);
 
-    fetchProductTypes();
+    return () => clearTimeout(fetchProductTypes);
   }, [newCategoryId, newSubcategoryId]); // Both dependencies are included
   // ----------------------------------------------
 
@@ -206,32 +207,38 @@ function AdminEditDash() {
     setIsChanged(true);
 
     if (field === "image") {
-      setProduct((prevProduct) => ({
-        ...prevProduct,
-        image: value.target.files[0], // Set the image file
-      }));
-      setImageFile(value.target.files[0]); // Save the image file
-    } else if (field.includes("price") || field.includes("special")) {
-      // Changing price or special input fields
-      const storeKey = field.split(".")[0]; // Get the store key (e.g., "pnp", "woolworths")
+      const file = value.target.files[0];
+      const maxSizeInMB = 10;
+      const maxSizeInBytes = maxSizeInMB * 1024 * 1024;
 
-      setProduct((prevProduct) => ({
-        ...prevProduct,
-        [storeKey]: {
-          ...prevProduct[storeKey],
-          [field.split(".")[1]]: value, // Update the price or special field
-          updated: getCurrentDate(), // Update the date when price/special changes
-        },
-      }));
-    } else if (field.includes("onSpecial")) {
-      // Changing checkbox (onSpecial)
+      if (file && file.size > maxSizeInBytes) {
+        alert(`File size should not exceed ${maxSizeInMB} MB.`);
+        value.target.value = ""; // Reset input if file is too large
+      } else {
+        setProduct((prevProduct) => ({
+          ...prevProduct,
+          image: file, // Set the image file if within size limit
+        }));
+        setImageFile(file); // Update state with valid image
+      }
+    } else if (field.includes("price") || field.includes("special")) {
       const storeKey = field.split(".")[0];
       setProduct((prevProduct) => ({
         ...prevProduct,
         [storeKey]: {
           ...prevProduct[storeKey],
-          special: value ? getCurrentDate() : null, // Update the special date or set to null
-          updated: getCurrentDate(), // Update date when special is toggled
+          [field.split(".")[1]]: value,
+          updated: getCurrentDate(),
+        },
+      }));
+    } else if (field.includes("onSpecial")) {
+      const storeKey = field.split(".")[0];
+      setProduct((prevProduct) => ({
+        ...prevProduct,
+        [storeKey]: {
+          ...prevProduct[storeKey],
+          special: value ? getCurrentDate() : null,
+          updated: getCurrentDate(),
         },
       }));
     } else {
@@ -273,7 +280,27 @@ function AdminEditDash() {
   //   console.log("PType:", typeId);
   // }, [categoryId, subcategoryId, typeId]);
 
+  // Handle Save Changes (update)
   const handleSaveChanges = async () => {
+    // Validate inputs before proceeding
+    if (
+      !product.name ||
+      !product.amount ||
+      !product.unit ||
+      !newCategoryId ||
+      !newSubcategoryId ||
+      !newTypeId
+    ) {
+      setError("Please fill in all required fields.");
+      return;
+    } else if (!pnpPrice && !woolworthsPrice && !checkersPrice && !sparPrice) {
+      setError("Please enter at least one price for your product.");
+      return;
+    }
+
+    setIsUpdating(true);
+    setError(null);
+
     try {
       const formData = new FormData();
 
@@ -281,7 +308,7 @@ function AdminEditDash() {
       formData.append(
         "productData",
         JSON.stringify({
-          name: product.name,
+          name: prettifyTextInput(product.name),
           amount: product.amount,
           unit: product.unit,
           created: product.created,
@@ -320,7 +347,7 @@ function AdminEditDash() {
         formData.append("image", imageFile); // Append the image file
       }
 
-      console.log("Form data to update:", formData);
+      // console.log("Form data to update:", formData);
 
       // Call the service to update the product
       await updateProductById(productId, formData);
@@ -329,6 +356,9 @@ function AdminEditDash() {
       navigate(from);
     } catch (error) {
       console.error("Failed to save product changes:", error);
+      setError("Failed to save changes. Please try again.");
+    } finally {
+      setIsUpdating(false);
     }
   };
   // ----------------------------------------------
@@ -338,7 +368,10 @@ function AdminEditDash() {
       <NavigationBar admin />
       <Container className="mb-32">
         <div className="flex w-full justify-between pt-6">
-          <h2>Edit Product</h2>
+          <div>
+            <h2>Edit Product</h2>
+            {error && <p className="text-red-600 mb-2">{error}</p>}
+          </div>
           <Stack direction="horizontal" gap={2}>
             <Btn variant="secondary" onClick={() => navigate(from)}>
               Cancel
@@ -367,6 +400,7 @@ function AdminEditDash() {
                         value={product.name || ""}
                         className="input-style"
                         onChange={(e) => handleInputChange("name", e.target.value)}
+                        maxLength={40}
                       />
                     </FloatingLabel>
                   </Form.Floating>
@@ -376,12 +410,24 @@ function AdminEditDash() {
                       label="Measurement Amount"
                       className="mb-4"
                     >
-                      <Form.Control
+                      {/* <Form.Control
                         type="number"
                         placeholder=""
-                        value={product.amount || ""}
+                        
                         className="input-style"
                         onChange={(e) => handleInputChange("amount", e.target.value)}
+                      /> */}
+                      <Form.Control
+                        type="text"
+                        inputMode="numeric"
+                        placeholder=""
+                        value={product.amount || ""}
+                        onChange={(e) => {
+                          const numericValue = e.target.value.replace(/\D/g, ""); // Remove non-numeric characters
+                          handleInputChange("amount", numericValue);
+                        }}
+                        className="input-style"
+                        maxLength={5}
                       />
                     </FloatingLabel>
                   </Form.Floating>
@@ -429,7 +475,7 @@ function AdminEditDash() {
                         {subcategories.length > 0 &&
                           subcategories.map(([subId, subcategory]) => (
                             <option key={subId} value={subId}>
-                              {subcategory.name}
+                              {formatName(subcategory.name)}
                             </option>
                           ))}
                       </Form.Select>
@@ -447,7 +493,7 @@ function AdminEditDash() {
                         {productTypes.length > 0 &&
                           productTypes.map(([typeId, productType]) => (
                             <option key={typeId} value={typeId}>
-                              {productType.name}
+                              {formatName(productType.name)}
                             </option>
                           ))}
                       </Form.Select>
