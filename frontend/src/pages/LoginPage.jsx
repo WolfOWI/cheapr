@@ -42,7 +42,17 @@ function LoginPage() {
         navigate("/"); // Redirect to home for normal users
       }
     } catch (err) {
-      setError(err.message); // Set error message on failure
+      // Map Firebase error codes to custom messages
+      let customErrorMessage;
+      switch (err.code) {
+        case "auth/invalid-credential":
+          customErrorMessage = "The username or password is incorrect. ";
+          break;
+        default:
+          customErrorMessage = "Login failed. Please check your credentials and try again.";
+          break;
+      }
+      setError(customErrorMessage); // Set error message
     }
   };
 
@@ -63,6 +73,7 @@ function LoginPage() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)} // Track email state
                   className="input-style"
+                  required
                 />
               </Form.Group>
               <Form.Group className="mb-4" controlId="formBasicPassword">
@@ -73,6 +84,7 @@ function LoginPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)} // Track password state
                   className="input-style"
+                  required
                 />
               </Form.Group>
               {error && <p className="text-red-600">{error}</p>} {/* Display error */}
