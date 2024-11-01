@@ -460,23 +460,23 @@ function ProductPage() {
                 <Breadcrumb.Item active>{product.name}</Breadcrumb.Item>
               </Breadcrumb>
             )}
-            <div className="flex w-full pt-4">
+            <div className="flex flex-col lg:flex-row pt-4 w-full md:items-center lg:items-start">
               {/* Image */}
-              <div className="relative w-[400px] mr-8">
-                <img src={product.image} alt="img" className="object-center absolute" />
+              <div className="relative w-fit lg:w-[400px] mb-8 lg:mb-0 lg:mr-4 h-fit">
+                <img src={product.image} alt="img" className="object-center " />
                 {cheapestStores.some((store) => store.specialDate && store.specialDate !== "") && (
-                  <div className="absolute bottom-0 right-5 bg-sky-800 text-white rounded-full h-32 w-32 flex flex-col items-center justify-center text-center">
+                  <div className="absolute bottom-0 sm:bottom-5 md:bottom-5 lg:bottom-0 xl:bottom-0 right-5 lg:right-0 xl:right-5 bg-sky-800 text-white rounded-full h-32 w-32 flex flex-col items-center justify-center text-center">
                     <h4 className="mb-1">Special</h4>
                     <p>{formatFullDateToSlashShort(firstSpecialStore.specialDate)}</p>
                   </div>
                 )}
               </div>
 
-              {/* Text Details */}
-              <div className="flex flex-col justify-between">
+              {/* Product Contents */}
+              <div className="flex flex-col justify-between w-full">
                 <div>
                   {/* Title */}
-                  <div className="flex">
+                  <div className="flex flex-col xl:flex-row">
                     <h2 className="mr-3">{product.name}</h2>
                     <h2 className="text-gray-400">
                       {product.amount}
@@ -485,7 +485,7 @@ function ProductPage() {
                   </div>
                   {/* Price */}
                   {prices.length > 0 && cheapestPrice !== null && (
-                    <div className="flex mt-8">
+                    <div className="flex flex-col xl:flex-row mt-8">
                       {/* Cheapest Price */}
                       <div className="w-fit">
                         {/* All Stores Same Price */}
@@ -540,9 +540,9 @@ function ProductPage() {
                         )}
                       </div>
                       {otherStores.length > 0 && (
-                        <div className="ml-10 mt-6">
-                          <p className="font-bold">Other Stores</p>
-                          <Stack direction="horizontal" gap={5} className="mt-2">
+                        <div className="mt-6 xl:ml-10">
+                          <h3 className="text-3xl xl:text-base">Other Stores</h3>
+                          <div className="mt-4 xl:mt-2 flex justify-between items-center md:justify-start md:space-x-5">
                             {otherStores.map((store, index) => (
                               <MiniStorePriceBlock
                                 key={index}
@@ -551,23 +551,23 @@ function ProductPage() {
                                 updated={store.updated}
                               />
                             ))}
-                          </Stack>
+                          </div>
                         </div>
                       )}
                     </div>
                   )}
                 </div>
                 {/* Buttons */}
-                <Stack direction="horizontal" gap={3} className="my-8">
+                <div className="flex flex-col space-y-3 sm:flex-row sm:items-center sm:space-x-3 sm:space-y-0 my-8 h-fit">
                   {cartedItem ? (
                     <>
-                      <div className="flex justify-center items-center text-center bg-neutral-100 w-fit px-6 rounded-xl h-full space-x-2">
-                        <h3>{cartedItem.quantity}</h3>
+                      <div className="flex justify-center items-center text-center bg-neutral-100 w-full sm:w-fit min-w-fit px-6 rounded-xl h-full space-x-2 py-4">
+                        <h4>{cartedItem.quantity}</h4>
                         <p>in cart</p>
                       </div>
                     </>
                   ) : (
-                    <InputGroup className="bg-neutral-100 w-fit rounded-xl">
+                    <InputGroup className="bg-neutral-100 rounded-xl w-full md:w-fit md:min-w-fit flex flex-row ">
                       <IconBtn variant="tertiary" iconType="minus" onClick={quantMinus} />
                       <Form.Control
                         type="number"
@@ -585,14 +585,28 @@ function ProductPage() {
                     </InputGroup>
                   )}
 
-                  <Btn onClick={() => onCartBtnClick(productId)}>
+                  <Btn
+                    onClick={() => onCartBtnClick(productId)}
+                    className="min-w-fit md:w-full lg:w-fit"
+                  >
                     {cartedItem ? `Remove From Cart` : `Add To Cart`}
                   </Btn>
-                  <Btn onClick={handlePriceModalShow} variant="secondary">
-                    Update Price
-                  </Btn>
-                  <IconBtn variant="dark" iconType="flag" onClick={handleFlagModalShow} />
-                </Stack>
+                  <div className="flex items-center space-x-3 w-full min-w-fit">
+                    <Btn
+                      onClick={handlePriceModalShow}
+                      variant="secondary"
+                      className="w-full lg:w-fit"
+                    >
+                      Update Price
+                    </Btn>
+                    <IconBtn
+                      variant="dark"
+                      iconType="flag"
+                      onClick={handleFlagModalShow}
+                      className="min-w-12"
+                    />
+                  </div>
+                </div>
               </div>
             </div>
           </>
