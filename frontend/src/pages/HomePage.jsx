@@ -32,19 +32,19 @@ function HomePage() {
     <>
       <NavigationBar />
       {/* Hero Image */}
-      <div className="flex items-center justify-center h-[95vh] bg-gradient-to-tr from-red-100 to-yellow-50">
-        <div className="flex items-center pb-24 mx-24">
-          <img src={shoppingBags} alt="shopping bags" className="h-96" />
+      <div className="flex items-center justify-center h-[400px] sm:h-[600px] lg:h-[800px] bg-gradient-to-tr from-red-100 to-yellow-50">
+        <Container className="flex items-center md:mx-4 lg:mx-24">
+          <img src={shoppingBags} alt="shopping bags" className="h-96 hidden lg:block" />
           <div>
-            <h1>
+            <h1 className="text-5xl sm:text-7xl mb-4">
               Shop like a <span className="text-primary">pro</span>
             </h1>
-            <h2>The best grocery deals in SA in one place.</h2>
-            <Btn className="mt-8" onClick={() => navigate("/groceries")}>
+            <h2 className="text-2xl sm:text-4xl ">The best grocery deals in SA in one place.</h2>
+            <Btn className="mt-8 w-full sm:w-fit px-8" onClick={() => navigate("/groceries")}>
               Find Deals
             </Btn>
           </div>
-        </div>
+        </Container>
       </div>
       {/* Why Cheaper? Section */}
       <Container className="my-24">
@@ -115,10 +115,16 @@ function HomePage() {
       </Container>
 
       {/* Call To Action */}
-      <div className="flex items-center justify-center py-8 mt-24 bg-priM1">
-        <img src={happyShopWoman} alt="happy shop woman" className="max-h-64 w-auto" />
+      <div className="flex items-center justify-center py-16 md:py-8 mt-24 bg-priM1">
+        <img
+          src={happyShopWoman}
+          alt="happy shop woman"
+          className="max-h-64 w-auto hidden md:block"
+        />
         <div className="ml-8">
-          <h2 className="text-white mb-[-16px]">Join Us & Start Saving Today</h2>
+          <h2 className="text-white mb-[-16px] text-2xl sm:text-4xl lg:text-5xl">
+            Join Us & Start Saving Today
+          </h2>
           <Btn className="mt-8" onClick={() => navigate("/signup")}>
             Create An Account
           </Btn>
