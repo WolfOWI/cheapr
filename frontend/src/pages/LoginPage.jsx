@@ -66,9 +66,11 @@ function LoginPage() {
       <NavigationBar />
       <div className="w-full flex relative bg-neutral-200 h-svh">
         <Container className="flex justify-center z-10 mb-64">
-          <div className="bg-white w-[500px] rounded-2xl p-10 h-fit mt-24">
+          <div className="bg-white w-[500px] rounded-2xl p-6 sm:p-10 h-fit mt-24">
             <h2>Welcome</h2>
-            <h4>Please enter your login details below.</h4>
+            <h4 className="font-normal text-base sm:text-xl sm:font-bold">
+              Please enter your login details below.
+            </h4>
             <Form onSubmit={handleLogin}>
               <Form.Group className="mt-8 mb-4" controlId="formBasicEmail">
                 <Form.Label className="font-semibold">Email address</Form.Label>

@@ -63,9 +63,11 @@ function SignUpPage() {
       <NavigationBar />
       <div className="w-full flex relative bg-neutral-200 h-svh">
         <Container className="flex justify-center z-10 mb-32">
-          <div className="bg-white w-[500px] rounded-2xl p-10 h-fit mt-24">
+          <div className="bg-white w-[500px] rounded-2xl p-6 sm:p-10 h-fit mt-24">
             <h2>Join Us Today</h2>
-            <h4>Sign up and start saving time & money!</h4>
+            <h4 className="font-normal text-base sm:text-xl sm:font-bold">
+              Sign up and start saving time & money!
+            </h4>
             <Form onSubmit={handleSignUp}>
               <Form.Group className="mt-8 mb-4" controlId="formBasicFirstName">
                 <Form.Label className="font-semibold">First Name</Form.Label>
