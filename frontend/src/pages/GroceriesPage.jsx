@@ -126,17 +126,17 @@ function GroceriesPage() {
   }, [breadcrumb]);
 
   // ----------------------
-  useEffect(() => {
-    if (products) {
-      console.log("products:", products);
-    }
-  }, [products]);
+  // useEffect(() => {
+  //   if (products) {
+  //     console.log("products:", products);
+  //   }
+  // }, [products]);
 
-  useEffect(() => {
-    if (userCart) {
-      console.log("userCart:", userCart);
-    }
-  }, [userCart]);
+  // useEffect(() => {
+  //   if (userCart) {
+  //     console.log("userCart:", userCart);
+  //   }
+  // }, [userCart]);
   // ----------------------
 
   // Handle sort dropdown select

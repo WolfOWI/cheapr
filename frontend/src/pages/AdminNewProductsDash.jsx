@@ -38,7 +38,7 @@ function AdminNewProductsDash() {
     const fetchProducts = async () => {
       try {
         const data = await getAllPendingProducts();
-        console.log("data", data);
+        // console.log("data", data);
         if (data) {
           const sortedData = sortProducts(data, "NewestCreated");
           setProducts(sortedData);
@@ -52,9 +52,9 @@ function AdminNewProductsDash() {
     fetchProducts();
   }, []);
 
-  useEffect(() => {
-    console.log(products);
-  }, [products]);
+  // useEffect(() => {
+  //   console.log(products);
+  // }, [products]);
 
   // Handle sort dropdown select
   const handleSelect = (eventKey) => {

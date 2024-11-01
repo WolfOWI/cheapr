@@ -85,9 +85,9 @@ const AdminCreatePTypePage = () => {
     return () => clearTimeout(fetchProductTypes);
   }, [subcategoryId, categoryId]);
 
-  useEffect(() => {
-    console.log("productTypeName:", productTypeName);
-  }, [productTypeName]);
+  // useEffect(() => {
+  //   console.log("productTypeName:", productTypeName);
+  // }, [productTypeName]);
 
   // Handle Create
   const handleCreateProductType = async () => {

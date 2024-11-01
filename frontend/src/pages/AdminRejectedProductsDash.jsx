@@ -14,15 +14,13 @@ import {
 import { sortProducts } from "../utils/productSortUtils";
 
 // Third-Party Components
-import { Container, Row, Col, Dropdown } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import Loader from "react-spinners/GridLoader";
 
 // Internal Components
 import NavigationBar from "../components/navigation/NavigationBar";
-import Btn from "../components/button/Btn";
 import AdminProductItem from "../components/listItems/AdminProductItem";
 import Footer from "../components/navigation/Footer";
-import Drpdwn from "../components/input/Drpdwn";
 
 // Imagery
 // -
@@ -31,14 +29,13 @@ import Drpdwn from "../components/input/Drpdwn";
 function AdminRejectedProductsDash() {
   const [products, setProducts] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-  const [sortDropLabel, setSortDropLabel] = useState("Most Recently Created");
 
   // On Page Mount
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         const data = await getAllRejectedProducts();
-        console.log("data", data);
+        // console.log("data", data);
         if (data) {
           const sortedData = sortProducts(data, "NewestCreated");
           setProducts(sortedData);
@@ -52,9 +49,9 @@ function AdminRejectedProductsDash() {
     fetchProducts();
   }, []);
 
-  useEffect(() => {
-    console.log(products);
-  }, [products]);
+  // useEffect(() => {
+  //   console.log(products);
+  // }, [products]);
 
   // Handle Product Delete
   const handleProductDelete = async (productId) => {

@@ -204,22 +204,22 @@ function ProductPage() {
     if (cart) {
       const product = cart.find((item) => item.productId === productId);
       if (product) {
-        console.log("Product is in the cart");
+        // console.log("Product is in the cart");
         setCartedItem(product);
       } else {
-        console.log("Product is not in the cart");
+        // console.log("Product is not in the cart");
         setCartedItem(null);
       }
     }
   }, [productId, cart]);
 
-  useEffect(() => {
-    console.log("cart", cart);
-  }, [cart]);
+  // useEffect(() => {
+  //   console.log("cart", cart);
+  // }, [cart]);
 
-  useEffect(() => {
-    console.log("cartedItem", cartedItem);
-  }, [cartedItem]);
+  // useEffect(() => {
+  //   console.log("cartedItem", cartedItem);
+  // }, [cartedItem]);
 
   // Handle Minus Click (min of 1)
   const quantMinus = () => {
