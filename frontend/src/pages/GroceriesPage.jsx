@@ -222,7 +222,7 @@ function GroceriesPage() {
     <>
       <NavigationBar />
       <div className="mb-32">
-        <Container className="pt-6">
+        <Container className="pt-6 mb-12 lg:mb-2">
           <Breadcrumb>
             <Breadcrumb.Item href="/groceries">Groceries</Breadcrumb.Item>
             {formattedBreadcrumbArr.map((bread, index) => (
@@ -231,17 +231,28 @@ function GroceriesPage() {
               </Breadcrumb.Item>
             ))}
           </Breadcrumb>
-          <div className="flex w-full justify-between">
+          <div className="flex w-full flex-col sm:flex-row sm:justify-between sm:items-center">
             {
-              <h2>
-                {groupId
-                  ? formattedBreadcrumbArr.length > 0 &&
-                    formattedBreadcrumbArr[formattedBreadcrumbArr.length - 1].name
-                  : "All Groceries"}
-              </h2>
+              <div className="flex flex-row justify-between items-center sm:flex-col sm:justify-normal sm:items-start">
+                <h2 className="text-4xl md:text-5xl mb-4 sm:mb-0">
+                  {groupId
+                    ? formattedBreadcrumbArr.length > 0 &&
+                      formattedBreadcrumbArr[formattedBreadcrumbArr.length - 1].name
+                    : "All Groceries"}
+                </h2>
+                <h4 className="lg:hidden mr-2 text-neutral-500 font-normal">
+                  {Object.keys(products).length} Product
+                  {Object.keys(products).length === 1 ? "" : "s"}
+                </h4>
+              </div>
             }
 
-            <Drpdwn title={`Sort: ${sortDropLabel}`} variant="dark-outline" onSelect={handleSelect}>
+            <Drpdwn
+              title={`Sort: ${sortDropLabel}`}
+              variant="dark-outline"
+              onSelect={handleSelect}
+              className="w-full sm:w-fit"
+            >
               <Dropdown.Item eventKey="AtoZ">Alfabetical (A to Z)</Dropdown.Item>
               <Dropdown.Item eventKey="ZtoA">Alfabetical (Z to A)</Dropdown.Item>
               <Dropdown.Item eventKey="NewestApproved">Most Recent</Dropdown.Item>
@@ -252,11 +263,12 @@ function GroceriesPage() {
           </div>
         </Container>
         {/* Header */}
-        <div className="bg-neutral-700 py-8 w-100 mt-4">
+        <div className="bg-neutral-700 py-8 w-100 mt-4 hidden lg:block">
           <Container>
-            <Row>
+            {/* Larger desktop views */}
+            <Row className=" items-center">
               <Col xs={3}>
-                <h4 className="text-white font-bold">
+                <h4 className="text-white font-bold text-base md:text-xl">
                   {Object.keys(products).length} Product
                   {Object.keys(products).length === 1 ? "" : "s"}
                 </h4>
