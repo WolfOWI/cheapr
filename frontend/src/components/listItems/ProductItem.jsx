@@ -51,29 +51,38 @@ const ProductItem = ({
   return (
     <>
       {/* Mobile View */}
+      {/* ------------------------------------------- */}
       <Row
         className={`mb-12 align-items-center group ${!admin && "cursor-pointer"} lg:hidden`}
         onClick={onViewClick}
       >
         {/* Product Information */}
-        <Col xs={12} className="flex justify-between items-center mb-2">
+        <Col xs={12} className="flex justify-between items-center mb-1">
           <div className="flex items-center">
-            <div className="max-h-20 max-w-20 min-h-20 min-w-20 mr-4 relative">
+            <div className="max-h-24 max-w-24 min-h-24 min-w-24 relative">
               <img src={product.image} alt={product.name} className="object-contain absolute" />
-
-              {product.inCart && (
-                <div className="h-8 w-8 absolute right-0 bottom-0 bg-priM1 flex items-center justify-center rounded-full">
-                  <Icon type={"cart_full"} className="h-4 w-4 text-white" />
-                </div>
-              )}
             </div>
 
-            <div>
-              <h4>{product.name}</h4>
-              <h4 className="text-neutral-500 font-normal">
-                {product.amount}
-                {product.unit}
-              </h4>
+            {/* MD Breakpoint */}
+            <div className="hidden md:block ml-4">
+              <div className="flex flex-col">
+                <h3>{product.name}</h3>
+                <h3 className="text-neutral-500 font-normal">
+                  {product.amount}
+                  {product.unit}
+                </h3>
+              </div>
+            </div>
+
+            {/* XS & SM Breakpoint */}
+            <div className="block md:hidden ml-2">
+              <div className="flex flex-col">
+                <h4>{product.name}</h4>
+                <p className="text-neutral-500 font-normal">
+                  {product.amount}
+                  {product.unit}
+                </p>
+              </div>
             </div>
           </div>
           <div>
@@ -85,6 +94,7 @@ const ProductItem = ({
             ) : product.inCart ? (
               <IconBtn
                 iconType="cart_clear"
+                size="lg"
                 variant="dark"
                 onClick={(e) => {
                   e.stopPropagation(); // Prevent from going to individual product page
@@ -94,6 +104,7 @@ const ProductItem = ({
             ) : (
               <IconBtn
                 iconType="cart_add"
+                size="lg"
                 onClick={(e) => {
                   e.stopPropagation(); // Prevent from going to individual product page
                   onAddCartClick();
@@ -139,7 +150,10 @@ const ProductItem = ({
           }
         />
       </Row>
+      {/* ------------------------------------------- */}
+
       {/* Larger Desktop View */}
+      {/* ------------------------------------------- */}
       <Row
         className={`align-items-center group ${!admin && "cursor-pointer"} hidden lg:flex`}
         onClick={onViewClick}
@@ -156,13 +170,29 @@ const ProductItem = ({
             )}
           </div>
 
-          <div>
-            <h4>{product.name}</h4>
-            <h4 className="text-neutral-500 font-normal">
-              {product.amount}
-              {product.unit}
-            </h4>
+          {/* LG Breakpoint */}
+          <div className="hidden lg:block xl:hidden">
+            <div className="flex flex-col">
+              <p className="font-bold">{product.name}</p>
+              <p className="text-neutral-500 font-normal">
+                {product.amount}
+                {product.unit}
+              </p>
+            </div>
           </div>
+
+          {/* XL Breakpoint */}
+          <div className="hidden xl:block">
+            <div className="flex flex-col">
+              <h4>{product.name}</h4>
+              <p className="text-neutral-500 font-normal">
+                {product.amount}
+                {product.unit}
+              </p>
+            </div>
+          </div>
+
+          <div></div>
         </Col>
         <PriceBlock
           store={"pnp"}
@@ -239,6 +269,7 @@ const ProductItem = ({
           )}
         </Col>
       </Row>
+      {/* ------------------------------------------- */}
     </>
   );
 };

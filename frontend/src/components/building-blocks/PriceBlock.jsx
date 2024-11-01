@@ -32,11 +32,16 @@ const PriceBlock = ({ store, price, updated, onSpecial, isCheapest }) => {
               isCheapest ? "bg-primary text-white" : "bg-neutral-100 text-black"
             }`}
           >
-            <StoreLogo
-              store={store}
-              type={isCheapest ? "miniWhite" : "mini"}
-              className="h-10 mr-2"
-            />
+            <div className="block group-hover:hidden">
+              <StoreLogo
+                store={store}
+                type={isCheapest ? "miniWhite" : "mini"}
+                className="h-10 mr-2"
+              />
+            </div>
+            <div className="hidden group-hover:block">
+              <StoreLogo store={store} type="mini" className="h-10 mr-2" />
+            </div>
             <div className="flex flex-col">
               <div className="flex items-center">
                 <p className="mr-1 font-bold">R{price}</p>
@@ -47,9 +52,9 @@ const PriceBlock = ({ store, price, updated, onSpecial, isCheapest }) => {
           </div>
         </Col>
       ) : (
-        <Col xs={2} className="px-1 lg:hidden">
+        <Col xs={6} className="px-1 lg:hidden">
           <div className="flex flex-col justify-center items-center h-20 my-1 w-full text-center rounded-xl bg-neutral-100 group-hover:bg-highlight ">
-            <small className="hidden group-hover:flex">No Data</small>
+            <p className="hidden group-hover:flex">No Data</p>
             <Icon type="question" className="h-10 text-neutral-400 group-hover:hidden" />
           </div>
         </Col>
@@ -70,7 +75,7 @@ const PriceBlock = ({ store, price, updated, onSpecial, isCheapest }) => {
           </div>
         </Col>
       ) : (
-        <Col xs={2} className="px-1">
+        <Col xs={2} className="px-1 hidden lg:flex">
           <div className="flex flex-col justify-center items-center h-20 my-1 w-full text-center rounded-xl bg-neutral-100 group-hover:bg-highlight ">
             <small className="hidden group-hover:flex">No Data</small>
             <Icon type="question" className="h-10 text-neutral-400 group-hover:hidden" />

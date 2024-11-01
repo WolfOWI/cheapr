@@ -62,6 +62,9 @@ const IconBtn = ({ className = "", variant = "primary", onClick, iconType, size 
   } else if (size === "md") {
     btnSize = "w-10 h-10";
     iconSize = "w-5 h-5";
+  } else if (size === "lg") {
+    btnSize = "w-16 h-16";
+    iconSize = "w-8 h-8";
   } else {
     btnSize = "w-12 h-12";
     iconSize = "w-6 h-6";
