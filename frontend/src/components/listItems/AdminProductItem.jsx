@@ -130,20 +130,20 @@ const AdminProductItem = ({
           </div>
         ) : type === "approveDelete" ? (
           // Type: Approve & Delete
-          <Stack direction="horizontal" gap={2}>
+          <div className="flex space-x-2 items-center mt-8 lg:mt-0 w-full lg:w-fit">
             <IconBtn
               iconType={"delete"}
               variant="dark"
-              className="opacity-30 group-hover:opacity-100 transition-all duration-150"
+              className="opacity-30 group-hover:opacity-100 transition-all duration-150 min-w-12"
               onClick={() => onDelete(productId)}
             />
             <Btn
-              className="opacity-30 group-hover:opacity-100 transition-all duration-150"
+              className="opacity-30 group-hover:opacity-100 transition-all duration-150 w-full min-w-48"
               onClick={() => onApprove(productId)}
             >
               Approve
             </Btn>
-          </Stack>
+          </div>
         ) : (
           // Type: Flagged
           <div className="w-[30%]">

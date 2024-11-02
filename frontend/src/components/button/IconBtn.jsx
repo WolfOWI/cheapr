@@ -76,7 +76,7 @@ const IconBtn = ({ className = "", variant = "primary", onClick, iconType, size 
   return (
     <Button className={`${combinedClassName} p-0`} onClick={onClick}>
       {/* Use the Icon component, passing the icon type */}
-      <Icon type={iconType} className={`${iconSize} ${iconVariantClass}`} />
+      <Icon type={iconType} className={`${iconSize} ${iconVariantClass} `} />
     </Button>
   );
 };

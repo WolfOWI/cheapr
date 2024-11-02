@@ -28,7 +28,7 @@ const MiniStorePriceBlock = ({ store, price, updated, className }) => {
         <div className="ml-2">
           {price ? (
             <>
-              <h4 className="fw-bold">R{price}</h4>
+              <h4 className="fw-bold">R{parseFloat(price).toFixed(2)}</h4>
               <p className="text-sm">{updated}</p>
             </>
           ) : (

@@ -99,7 +99,7 @@ function AdminRejectedProductsDash() {
         </Container>
 
         {/* Product List Container */}
-        <Container className="my-4">
+        <Container className="my-4 flex flex-wrap justify-center md:justify-start md:gap-x-16 lg:gap-x-0 lg:space-x-0">
           {/* Product Rows */}
           {isLoading ? (
             <div className="w-full flex justify-center items-center mt-20 p-16">
