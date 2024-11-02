@@ -273,19 +273,23 @@ function CartPlannerPage() {
       <NavigationBar />
       <div className="mb-32">
         <Container className="pt-6">
-          <div className="flex w-full justify-between">
-            <div>
-              <h2>Store Planner</h2>
+          <div className="flex w-full flex-col md:flex-row md:justify-between">
+            <div className="flex flex-row justify-between items-center md:flex-col md:justify-start md:items-start">
+              <h2 className="text-4xl lg:text-5xl">Store Planner</h2>
               <p className="px-4 py-3 bg-neutral-100 text-neutral-600 mt-2 font-medium rounded-xl w-fit">
                 {userCart.length} Item Types
               </p>
             </div>
 
-            <Stack direction="horizontal" gap={2} className="h-fit">
-              <Btn variant="secondary" onClick={() => refreshCart()}>
+            <Stack direction="horizontal" gap={2} className="h-fit mt-4 sm:mt-0">
+              <Btn variant="secondary" onClick={() => refreshCart()} className="w-full sm:w-fit">
                 Reset
               </Btn>
-              <Btn variant="dark-outline" onClick={() => handleClearCart()}>
+              <Btn
+                variant="dark-outline"
+                onClick={() => handleClearCart()}
+                className="w-full sm:w-fit"
+              >
                 Clear All
               </Btn>
             </Stack>
@@ -299,8 +303,8 @@ function CartPlannerPage() {
         ) : (
           <>
             <Container className="mt-16">
-              <Row>
-                <Col xs={3} className="flex flex-col items-center">
+              <Row className="flex">
+                <Col xs={12} sm={6} lg={3} className="flex flex-col items-center">
                   <StoreCartList
                     store="pnp"
                     products={pnpProducts}
@@ -309,7 +313,7 @@ function CartPlannerPage() {
                     onItemDelete={handleItemDelete}
                   />
                 </Col>
-                <Col xs={3} className="flex flex-col items-center">
+                <Col xs={12} sm={6} lg={3} className="flex flex-col items-center mt-24 sm:mt-0">
                   <StoreCartList
                     store="woolworths"
                     products={woolworthsProducts}
@@ -318,7 +322,12 @@ function CartPlannerPage() {
                     onItemDelete={handleItemDelete}
                   />
                 </Col>
-                <Col xs={3} className="flex flex-col items-center">
+                <Col
+                  xs={12}
+                  sm={6}
+                  lg={3}
+                  className="flex flex-col items-center mt-24 sm:mt-12 lg:mt-0"
+                >
                   <StoreCartList
                     store="checkers"
                     products={checkersProducts}
@@ -327,7 +336,12 @@ function CartPlannerPage() {
                     onItemDelete={handleItemDelete}
                   />
                 </Col>
-                <Col xs={3} className="flex flex-col items-center">
+                <Col
+                  xs={12}
+                  sm={6}
+                  lg={3}
+                  className="flex flex-col items-center mt-24 sm:mt-12 lg:mt-0"
+                >
                   <StoreCartList
                     store="spar"
                     products={sparProducts}
@@ -339,13 +353,13 @@ function CartPlannerPage() {
               </Row>
             </Container>
             <Container className="mt-24">
-              <div className="flex items-center w-full space-x-8 h-16">
-                <h3 className="">Total</h3>
-                <div className="flex space-x-4">
-                  <h3 className="flex justify-center items-center h-16 px-8 bg-neutral-100 rounded-2xl font-semibold">
+              <div className="flex flex-col sm:flex-row items-center w-full sm:space-x-8">
+                <h3 className="mb-4 sm:mb-0">Total</h3>
+                <div className="flex flex-col sm:flex-row sm:space-x-4 w-full">
+                  <h3 className="flex justify-center items-center h-16 px-8 bg-neutral-100 rounded-2xl font-semibold w-full sm:w-fit">
                     {`R${totalCost.toFixed(2)}`}
                   </h3>
-                  <h4 className="flex justify-center items-center h-16 px-8 bg-primary text-white rounded-2xl font-normal">
+                  <h4 className="flex justify-center items-center h-16 px-8 bg-primary text-white rounded-2xl font-normal mt-2 sm:mt-0">
                     {`R${totalSavings.toFixed(2)} Saved`}
                   </h4>
                 </div>

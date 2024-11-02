@@ -52,7 +52,7 @@ const StoreCartList = ({ store, products, onMoveProduct, onItemDelete, refreshCa
 
   return (
     <>
-      <StoreLogo store={store} type="colour" className="h-5" />
+      <StoreLogo store={store} type="colour" className="h-8 sm:h-6 lg:h-5" />
       <div className="flex items-center justify-center space-x-3 mt-2">
         <p className="text-neutral-500">
           {totalItems} Item{totalItems !== 1 && "s"}

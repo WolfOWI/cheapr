@@ -76,9 +76,9 @@ const CartItem = ({
 
   return (
     <>
-      <div className="flex items-center group h-[80px]">
+      <div className="flex items-center group h-[90px]">
         <div className="relative mr-3">
-          <img src={product.productInfo.image} alt="" className="w-16" />
+          <img src={product.productInfo.image} alt="" className="w-20 sm:w-16" />
           {quantity !== 1 && (
             <div className="bg-primary rounded-full h-8 w-8 flex justify-center items-center text-white font-bold absolute bottom-0 right-0 transition-all duration-150 group-hover:h-full group-hover:w-full ">
               {itemQuant}
@@ -90,7 +90,7 @@ const CartItem = ({
         </div>
         <div>
           <div className="translate-y-4 group-hover:translate-y-0 transition-all duration-150">
-            <h5 className="font-bold mb-1">{`${product.productInfo.name} (${product.productInfo.amount}${product.productInfo.unit})`}</h5>
+            <h5 className="font-bold mb-0 sm:mb-1 text-lg sm:text-base">{`${product.productInfo.name} (${product.productInfo.amount}${product.productInfo.unit})`}</h5>
 
             {itemQuant > 1 ? (
               <div className="flex items-center space-x-3">
