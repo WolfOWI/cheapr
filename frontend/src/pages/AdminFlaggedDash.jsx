@@ -102,7 +102,7 @@ function AdminFlaggedDash() {
       <div className="mb-32">
         <Container className="pt-6">
           <div className="flex w-full mb-8">
-            <h2>
+            <h2 className="text-4xl lg:text-5xl mb-4 md:mb-0">
               {Object.keys(products).length} Flagged Product
               {Object.keys(products).length !== 1 && "s"}
             </h2>

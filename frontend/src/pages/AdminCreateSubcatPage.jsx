@@ -74,7 +74,7 @@ const AdminCreateSubcatPage = () => {
     <>
       <NavigationBar admin />
       <Container className="mb-32 mt-8 md:w-[60%] lg:w-[50%] xl:w-[40%]">
-        <div className="">
+        <div>
           <h2 className="text-center">Create Subcategory</h2>
           <p className="text-center">
             Please select which category the new subcategory would fall under.

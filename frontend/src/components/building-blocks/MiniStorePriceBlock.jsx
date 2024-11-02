@@ -20,10 +20,10 @@ import StoreLogo from "./StoreLogo";
 
 // -----------------------------------------------------------
 
-const MiniStorePriceBlock = ({ store, price, updated }) => {
+const MiniStorePriceBlock = ({ store, price, updated, className }) => {
   return (
     <>
-      <div className="flex items-center">
+      <div className={`flex items-center ${className}`}>
         <StoreLogo store={store} type="mini" className="h-12" />
         <div className="ml-2">
           {price ? (

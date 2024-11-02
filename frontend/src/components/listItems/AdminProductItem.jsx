@@ -54,10 +54,17 @@ const AdminProductItem = ({
 
   return (
     <>
-      <div className="flex justify-between items-center group my-4 w-full">
-        <div className="flex items-center w-full">
-          <img src={product.image} alt={product.name} className="h-56" />
-          <div className="ml-4">
+      <div className="flex flex-col lg:flex-row justify-between items-end md:items-center group my-16 md:my-8  xl:my-4 w-full md:w-[45%] lg:w-full">
+        <div className="flex flex-col lg:flex-row md:items-center w-full">
+          {/* Product Image */}
+          <img
+            src={product.image}
+            alt={product.name}
+            className="h-64 lg:h-56 xl:h-56 object-contain md:w-fit"
+          />
+          {/* Product Details */}
+          <div className="mt-4 lg:mt-0 lg:ml-4 w-full">
+            {/* Title */}
             <Stack direction="horizontal" gap={4}>
               <h3 className="font-bold">{product.name}</h3>
               <h3 className="text-neutral-500">
@@ -65,52 +72,64 @@ const AdminProductItem = ({
                 {product.unit}
               </h3>
             </Stack>
+            {/* Breadcrumb */}
             {Object.keys(breadcrumb).length > 0 && (
               <p>{`${formatName(breadcrumb.category)} > ${formatName(
                 breadcrumb.subcategory
               )} > ${formatName(breadcrumb.type)}`}</p>
             )}
-            <Stack direction="horizontal" gap={5} className="mt-6">
-              <MiniStorePriceBlock
-                store="pnp"
-                price={product.pnp.price}
-                updated={product.pnp.updated}
-              />
-              <MiniStorePriceBlock
-                store="woolworths"
-                price={product.woolworths.price}
-                updated={product.woolworths.updated}
-              />
-              <MiniStorePriceBlock
-                store="checkers"
-                price={product.checkers.price}
-                updated={product.checkers.updated}
-              />
-              <MiniStorePriceBlock
-                store="spar"
-                price={product.spar.price}
-                updated={product.spar.updated}
-              />
-            </Stack>
+            {/* Prices */}
+            <div className="flex mt-6 flex-col xl:flex-row xl:space-x-6 space-y-6 xl:space-y-0 items-center lg:items-start w-full">
+              <div className="flex xl:flex-row xl:space-y-0 space-x-6 xl:space-x-6 w-full">
+                <MiniStorePriceBlock
+                  store="pnp"
+                  price={product.pnp.price}
+                  updated={product.pnp.updated}
+                  className={"w-full"}
+                />
+                <MiniStorePriceBlock
+                  store="woolworths"
+                  price={product.woolworths.price}
+                  updated={product.woolworths.updated}
+                  className={"w-full"}
+                />
+              </div>
+              <div className="flex xl:flex-row xl:space-y-0 space-x-6 xl:space-x-6 w-full">
+                <MiniStorePriceBlock
+                  store="checkers"
+                  price={product.checkers.price}
+                  updated={product.checkers.updated}
+                  className={"w-full"}
+                />
+                <MiniStorePriceBlock
+                  store="spar"
+                  price={product.spar.price}
+                  updated={product.spar.updated}
+                  className={"w-full"}
+                />
+              </div>
+            </div>
           </div>
         </div>
-        {/* Type: Approve & Reject */}
+        {/* Action Buttons */}
         {type === "approveDeny" ? (
-          <Stack direction="horizontal" gap={2}>
+          // Type: Approve & Reject
+          <div className="flex space-x-2 items-center mt-8 lg:mt-0 w-full lg:w-fit">
             <IconBtn
               iconType={"wrong"}
               variant="dark"
-              className="opacity-30 group-hover:opacity-100 transition-all duration-150"
+              className="opacity-30 group-hover:opacity-100 transition-all duration-150 min-w-12"
               onClick={() => onReject(productId)}
             />
             <Btn
-              className="opacity-30 group-hover:opacity-100 transition-all duration-150"
+              className="opacity-30 group-hover:opacity-100 transition-all duration-150 w-full min-w-48"
               onClick={() => onApprove(productId)}
             >
               Approve
             </Btn>
-          </Stack>
+          </div>
         ) : type === "approveDelete" ? (
+          // Type: Approve & Delete
           <Stack direction="horizontal" gap={2}>
             <IconBtn
               iconType={"delete"}
@@ -126,6 +145,7 @@ const AdminProductItem = ({
             </Btn>
           </Stack>
         ) : (
+          // Type: Flagged
           <div className="w-[30%]">
             <div className="flex flex-col justify-between bg-neutral-100 p-4 rounded-2xl mb-4">
               <h4>Message:</h4>

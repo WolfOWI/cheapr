@@ -130,11 +130,16 @@ function AdminNewProductsDash() {
       <NavigationBar admin />
       <div className="mb-32">
         <Container className="pt-6">
-          <div className="flex w-full justify-between">
-            <h2>
+          <div className="flex w-full flex-col md:flex-row md:justify-between md:items-center mb-8">
+            <h2 className="text-4xl lg:text-5xl mb-4 md:mb-0">
               {Object.keys(products).length} New Product{Object.keys(products).length !== 1 && "s"}
             </h2>
-            <Drpdwn title={`Sort: ${sortDropLabel}`} variant="dark-outline" onSelect={handleSelect}>
+            <Drpdwn
+              title={`Sort: ${sortDropLabel}`}
+              variant="dark-outline"
+              onSelect={handleSelect}
+              className="w-full md:w-fit"
+            >
               <Dropdown.Item eventKey="AtoZ">Alfabetical (A to Z)</Dropdown.Item>
               <Dropdown.Item eventKey="ZtoA">Alfabetical (Z to A)</Dropdown.Item>
               <Dropdown.Item eventKey="NewestCreated">Most Recently Created</Dropdown.Item>
@@ -146,7 +151,7 @@ function AdminNewProductsDash() {
         </Container>
 
         {/* Product List Container */}
-        <Container className="my-4">
+        <Container className="my-4 flex flex-wrap justify-center md:justify-start md:gap-x-16 lg:gap-x-0 lg:space-x-0">
           {/* Product Rows */}
           {isLoading ? (
             <div className="w-full flex justify-center items-center mt-20 p-16">
