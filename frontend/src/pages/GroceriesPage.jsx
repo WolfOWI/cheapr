@@ -268,7 +268,7 @@ function GroceriesPage() {
             {/* Larger desktop views */}
             <Row className=" items-center">
               <Col xs={3}>
-                <h4 className="text-white font-bold text-base md:text-xl">
+                <h4 className="text-white font-bold text-base">
                   {Object.keys(products).length} Product
                   {Object.keys(products).length === 1 ? "" : "s"}
                 </h4>

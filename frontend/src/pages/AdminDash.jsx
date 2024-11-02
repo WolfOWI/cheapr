@@ -122,10 +122,15 @@ function AdminDash() {
     <>
       <NavigationBar admin />
       <div className="mb-32">
-        <Container className="pt-6">
-          <div className="flex w-full justify-between">
-            <h2>All Listed Products</h2>
-            <Drpdwn title={`Sort: ${sortDropLabel}`} variant="dark-outline" onSelect={handleSelect}>
+        <Container className="pt-6 mb-12 lg:mb-2">
+          <div className="flex w-full flex-col md:flex-row md:justify-between md:items-center">
+            <h2 className="text-4xl lg:text-5xl mb-4 md:mb-0">All Listed Products</h2>
+            <Drpdwn
+              title={`Sort: ${sortDropLabel}`}
+              variant="dark-outline"
+              onSelect={handleSelect}
+              className="w-full md:w-fit"
+            >
               <Dropdown.Item eventKey="AtoZ">Alfabetical (A to Z)</Dropdown.Item>
               <Dropdown.Item eventKey="ZtoA">Alfabetical (Z to A)</Dropdown.Item>
               <Dropdown.Item eventKey="NewestApproved">Most Recently Approved</Dropdown.Item>
@@ -138,7 +143,7 @@ function AdminDash() {
           </div>
         </Container>
         {/* Header */}
-        <div className="bg-neutral-700 py-8 w-100 mt-4">
+        <div className="bg-neutral-700 py-8 w-100 mt-4 hidden lg:block">
           <Container>
             <Row>
               <Col xs={3}>

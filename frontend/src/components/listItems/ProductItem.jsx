@@ -15,7 +15,6 @@ import { Row, Col, Stack } from "react-bootstrap";
 // Internal Components
 import PriceBlock from "../building-blocks/PriceBlock";
 import IconBtn from "../button/IconBtn";
-import Btn from "../button/Btn";
 import Icon from "../building-blocks/Icon";
 
 // Imagery
@@ -87,10 +86,19 @@ const ProductItem = ({
           </div>
           <div>
             {admin ? (
-              <Stack direction="horizontal" gap={2}>
-                <IconBtn iconType={"edit"} size="md" onClick={onEditClick} />
-                <IconBtn iconType={"delete"} size="md" variant="dark" onClick={onDeleteClick} />
-              </Stack>
+              <>
+                {/* XS & SM View */}
+                <div className="flex space-x-1 sm:hidden">
+                  <IconBtn iconType={"edit"} size="md" onClick={onEditClick} />
+                  <IconBtn iconType={"delete"} size="md" variant="dark" onClick={onDeleteClick} />
+                </div>
+
+                {/* MD View */}
+                <div className="hidden sm:flex space-x-2">
+                  <IconBtn iconType={"edit"} onClick={onEditClick} />
+                  <IconBtn iconType={"delete"} variant="dark" onClick={onDeleteClick} />
+                </div>
+              </>
             ) : product.inCart ? (
               <IconBtn
                 iconType="cart_clear"
@@ -232,21 +240,40 @@ const ProductItem = ({
         />
         <Col xs={1}>
           {admin ? (
-            <Stack direction="horizontal" gap={2}>
-              <IconBtn
-                iconType={"edit"}
-                size="md"
-                className="opacity-0 group-hover:opacity-100 transition-all duration-150"
-                onClick={onEditClick}
-              />
-              <IconBtn
-                iconType={"delete"}
-                size="md"
-                variant="dark"
-                className="opacity-0 group-hover:opacity-100 transition-all duration-150"
-                onClick={onDeleteClick}
-              />
-            </Stack>
+            <>
+              {/* LG Size */}
+              <div className="flex xl:hidden flex-col space-y-1 ">
+                <IconBtn
+                  iconType={"edit"}
+                  size="sm"
+                  className="opacity-0 group-hover:opacity-100 transition-all duration-150"
+                  onClick={onEditClick}
+                />
+                <IconBtn
+                  iconType={"delete"}
+                  size="sm"
+                  variant="dark"
+                  className="opacity-0 group-hover:opacity-100 transition-all duration-150"
+                  onClick={onDeleteClick}
+                />
+              </div>
+              {/* XL Size */}
+              <div className="hidden xl:flex flex-row space-x-1">
+                <IconBtn
+                  iconType={"edit"}
+                  size="md"
+                  className="opacity-0 group-hover:opacity-100 transition-all duration-150"
+                  onClick={onEditClick}
+                />
+                <IconBtn
+                  iconType={"delete"}
+                  size="md"
+                  variant="dark"
+                  className="opacity-0 group-hover:opacity-100 transition-all duration-150"
+                  onClick={onDeleteClick}
+                />
+              </div>
+            </>
           ) : product.inCart ? (
             <IconBtn
               iconType="cart_clear"
