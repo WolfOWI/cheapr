@@ -53,7 +53,7 @@ const Footer = ({ admin }) => {
           </Col>
         </Row>
         <div className="py-8 flex justify-center">
-          <Stack direction="horizontal" gap={4}>
+          <div className="flex flex-col md:flex-row space-y-6 md:space-y-0  md:space-x-6 items-center justify-center">
             <div>
               <img src={logoCol} alt="cheapr logo" className="max-h-10" />
               <p className="text-sm font-bold text-neutral-600">Shop Smarter, Not Harder.</p>
@@ -67,9 +67,6 @@ const Footer = ({ admin }) => {
               >
                 <Icon type="youtube" className="h-8 text-primary hover:text-black cursor-pointer" />
               </a>
-              <a href="https://www.x.com/" target="_blank" rel="noreferrer">
-                <Icon type="x" className="h-8 text-primary hover:text-black cursor-pointer" />
-              </a>
               <a href="https://www.instagram.com/" target="_blank" rel="noreferrer">
                 <Icon
                   type="instagram"
@@ -82,14 +79,11 @@ const Footer = ({ admin }) => {
                   className="h-8 text-primary hover:text-black cursor-pointer"
                 />
               </a>
-              <a href="https://www.threads.net/" target="_blank" rel="noreferrer">
-                <Icon type="threads" className="h-8 text-primary hover:text-black cursor-pointer" />
-              </a>
               <a href="https://www.tiktok.com/" target="_blank" rel="noreferrer">
                 <Icon type="tiktok" className="h-8 text-primary hover:text-black cursor-pointer" />
               </a>
             </Stack>
-          </Stack>
+          </div>
         </div>
         <div className="flex justify-center bg-white py-4">
           <p className="text-sm">© 2024 Wolf Botha | 21100255 | Open Window Institute</p>
