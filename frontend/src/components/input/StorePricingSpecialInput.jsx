@@ -41,7 +41,7 @@ const StorePricingSpecialInput = ({
   // });
   // console.log("storeSpecialDate", storeSpecialDate);
   return (
-    <div className={`mb-16 ${className}`}>
+    <div className={` ${className}`}>
       <Form.Label>
         <div className="flex items-center">
           <StoreLogo store={storeKey} className="h-4" />

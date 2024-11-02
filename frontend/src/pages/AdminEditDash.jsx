@@ -367,12 +367,12 @@ function AdminEditDash() {
     <>
       <NavigationBar admin />
       <Container className="mb-32">
-        <div className="flex w-full justify-between pt-6">
+        <div className="flex w-full justify-between pt-6 items-center">
           <div>
-            <h2>Edit Product</h2>
+            <h2 className="text-4xl lg:text-5xl">Edit Product</h2>
             {error && <p className="text-red-600 mb-2">{error}</p>}
           </div>
-          <Stack direction="horizontal" gap={2}>
+          <Stack direction="horizontal" gap={2} className="hidden md:flex">
             <Btn variant="secondary" onClick={() => navigate(from)}>
               Cancel
             </Btn>
@@ -388,204 +388,208 @@ function AdminEditDash() {
             <Loader color="#C34534" loading={true} />
           </div>
         ) : (
-          <div>
-            <Form>
-              <div className="flex">
-                <div className="w-full p-8">
-                  <Form.Floating>
-                    <FloatingLabel controlId="floatingInput" label="Product Name" className="mb-4">
-                      <Form.Control
-                        type="text"
-                        placeholder=""
-                        value={product.name || ""}
-                        className="input-style"
-                        onChange={(e) => handleInputChange("name", e.target.value)}
-                        maxLength={40}
-                      />
-                    </FloatingLabel>
-                  </Form.Floating>
-                  <Form.Floating>
-                    <FloatingLabel
-                      controlId="floatingInput"
-                      label="Measurement Amount"
-                      className="mb-4"
-                    >
-                      {/* <Form.Control
+          <Form className="mt-8 lg:mt-0">
+            <div className="flex flex-col sm:flex-row space-y-8 sm:space-y-0 sm:space-x-6 lg:space-x-0">
+              <div className="w-full p-0 lg:p-8">
+                <Form.Floating>
+                  <FloatingLabel controlId="floatingInput" label="Product Name" className="mb-4">
+                    <Form.Control
+                      type="text"
+                      placeholder=""
+                      value={product.name || ""}
+                      className="input-style"
+                      onChange={(e) => handleInputChange("name", e.target.value)}
+                      maxLength={40}
+                    />
+                  </FloatingLabel>
+                </Form.Floating>
+                <Form.Floating>
+                  <FloatingLabel
+                    controlId="floatingInput"
+                    label="Measurement Amount"
+                    className="mb-4"
+                  >
+                    {/* <Form.Control
                         type="number"
                         placeholder=""
                         
                         className="input-style"
                         onChange={(e) => handleInputChange("amount", e.target.value)}
                       /> */}
-                      <Form.Control
-                        type="text"
-                        inputMode="numeric"
-                        placeholder=""
-                        value={product.amount || ""}
-                        onChange={(e) => {
-                          const numericValue = e.target.value.replace(/\D/g, ""); // Remove non-numeric characters
-                          handleInputChange("amount", numericValue);
-                        }}
-                        className="input-style"
-                        maxLength={5}
-                      />
-                    </FloatingLabel>
-                  </Form.Floating>
-                  <Form.Floating>
-                    <FloatingLabel controlId="floatingInput" label="Unit" className="mb-4">
-                      <Form.Select
-                        aria-label="Floating label select example"
-                        value={product.unit || ""}
-                        className="input-style"
-                        onChange={(e) => handleInputChange("unit", e.target.value)}
-                      >
-                        <option value="mg">Miligrams</option>
-                        <option value="g">Grams</option>
-                        <option value="kg">Kilograms</option>
-                        <option value="ml">Milliliters</option>
-                        <option value="l">Liters</option>
-                        <option value="pcs">Piece(s)</option>
-                        <option value="pk">Pack(s)</option>
-                      </Form.Select>
-                    </FloatingLabel>
-                  </Form.Floating>
-                  <Form.Floating>
-                    <FloatingLabel controlId="floatingInput" label="Category" className="mb-4">
-                      <Form.Select
-                        aria-label="Floating label select example"
-                        value={newCategoryId || ""}
-                        className="input-style"
-                        onChange={handleCategoryChange}
-                      >
-                        <option value="10000">Food</option>
-                        <option value="20000">Drinks</option>
-                        <option value="30000">Household</option>
-                      </Form.Select>
-                    </FloatingLabel>
-                  </Form.Floating>
-
-                  <Form.Floating>
-                    <FloatingLabel controlId="floatingInput" label="Subcategory" className="mb-4">
-                      <Form.Select
-                        aria-label="Floating label select"
-                        value={newSubcategoryId || ""}
-                        className="input-style"
-                        onChange={handleSubcategoryChange}
-                      >
-                        {subcategories.length > 0 &&
-                          subcategories.map(([subId, subcategory]) => (
-                            <option key={subId} value={subId}>
-                              {formatName(subcategory.name)}
-                            </option>
-                          ))}
-                      </Form.Select>
-                    </FloatingLabel>
-                  </Form.Floating>
-
-                  <Form.Floating>
-                    <FloatingLabel controlId="floatingInput" label="Type" className="mb-4">
-                      <Form.Select
-                        aria-label="Floating label select"
-                        value={newTypeId || ""}
-                        className="input-style"
-                        onChange={handleTypeChange}
-                      >
-                        {productTypes.length > 0 &&
-                          productTypes.map(([typeId, productType]) => (
-                            <option key={typeId} value={typeId}>
-                              {formatName(productType.name)}
-                            </option>
-                          ))}
-                      </Form.Select>
-                    </FloatingLabel>
-                  </Form.Floating>
-
-                  <div
-                    className="bg-neutral-100 rounded-xl h-64 flex flex-col items-center justify-center cursor-pointer pt-2 pb-8"
-                    onClick={() => document.getElementById("imageUpload").click()}
-                  >
-                    {imageFile ? (
-                      <>
-                        <small className="text-gray-500 w-full pl-4 mb-4">New Product Image</small>
-                        <img
-                          src={URL.createObjectURL(imageFile)}
-                          alt="New Product"
-                          className="object-contain h-full w-full rounded-xl"
-                        />
-                      </>
-                    ) : product.image ? (
-                      <>
-                        <small className="text-gray-500 w-full pl-4 mb-4">
-                          Current Product Image
-                        </small>
-                        <img
-                          src={product.image}
-                          alt="Product"
-                          className="object-contain h-full w-full rounded-xl"
-                        />
-                      </>
-                    ) : (
-                      <p className="text-gray-500">Click to upload an product image</p>
-                    )}
                     <Form.Control
-                      type="file"
-                      id="imageUpload"
-                      onChange={(e) => handleInputChange("image", e)}
-                      className="d-none" // Hide the input element visually
+                      type="text"
+                      inputMode="numeric"
+                      placeholder=""
+                      value={product.amount || ""}
+                      onChange={(e) => {
+                        const numericValue = e.target.value.replace(/\D/g, ""); // Remove non-numeric characters
+                        handleInputChange("amount", numericValue);
+                      }}
+                      className="input-style"
+                      maxLength={5}
                     />
-                  </div>
-                </div>
+                  </FloatingLabel>
+                </Form.Floating>
+                <Form.Floating>
+                  <FloatingLabel controlId="floatingInput" label="Unit" className="mb-4">
+                    <Form.Select
+                      aria-label="Floating label select example"
+                      value={product.unit || ""}
+                      className="input-style"
+                      onChange={(e) => handleInputChange("unit", e.target.value)}
+                    >
+                      <option value="mg">Miligrams</option>
+                      <option value="g">Grams</option>
+                      <option value="kg">Kilograms</option>
+                      <option value="ml">Milliliters</option>
+                      <option value="l">Liters</option>
+                      <option value="pcs">Piece(s)</option>
+                      <option value="pk">Pack(s)</option>
+                    </Form.Select>
+                  </FloatingLabel>
+                </Form.Floating>
+                <Form.Floating>
+                  <FloatingLabel controlId="floatingInput" label="Category" className="mb-4">
+                    <Form.Select
+                      aria-label="Floating label select example"
+                      value={newCategoryId || ""}
+                      className="input-style"
+                      onChange={handleCategoryChange}
+                    >
+                      <option value="10000">Food</option>
+                      <option value="20000">Drinks</option>
+                      <option value="30000">Household</option>
+                    </Form.Select>
+                  </FloatingLabel>
+                </Form.Floating>
 
-                <div className="w-full p-8">
-                  {/* Pick n Pay Pricing */}
-                  <StorePricingSpecialInput
-                    storeKey="pnp"
-                    storePrice={pnpPrice}
-                    setStorePrice={(value) => handleInputChange("pnp.price", value)}
-                    onSpecial={pnpOnSpecial}
-                    setOnSpecial={(value) => handleInputChange("pnp.special", value)}
-                    storeSpecialDate={pnpSpecialDate}
-                    setStoreSpecialDate={(value) => handleInputChange("pnp.special", value)}
-                  />
-                  {/* Woolworths Section */}
-                  <StorePricingSpecialInput
-                    storeKey="woolworths"
-                    storePrice={woolworthsPrice}
-                    setStorePrice={(value) => handleInputChange("woolworths.price", value)}
-                    onSpecial={woolworthsOnSpecial}
-                    setOnSpecial={(value) => handleInputChange("woolworths.special", value)}
-                    storeSpecialDate={woolworthsSpecialDate}
-                    setStoreSpecialDate={(value) => handleInputChange("woolworths.special", value)}
-                  />
-                </div>
+                <Form.Floating>
+                  <FloatingLabel controlId="floatingInput" label="Subcategory" className="mb-4">
+                    <Form.Select
+                      aria-label="Floating label select"
+                      value={newSubcategoryId || ""}
+                      className="input-style"
+                      onChange={handleSubcategoryChange}
+                    >
+                      {subcategories.length > 0 &&
+                        subcategories.map(([subId, subcategory]) => (
+                          <option key={subId} value={subId}>
+                            {formatName(subcategory.name)}
+                          </option>
+                        ))}
+                    </Form.Select>
+                  </FloatingLabel>
+                </Form.Floating>
 
-                <div className="w-full p-8">
-                  {/* Checkers Section */}
-                  <StorePricingSpecialInput
-                    storeKey="checkers"
-                    storePrice={checkersPrice}
-                    setStorePrice={(value) => handleInputChange("checkers.price", value)}
-                    onSpecial={checkersOnSpecial}
-                    setOnSpecial={(value) => handleInputChange("checkers.special", value)}
-                    storeSpecialDate={checkersSpecialDate}
-                    setStoreSpecialDate={(value) => handleInputChange("checkers.special", value)}
-                  />
+                <Form.Floating>
+                  <FloatingLabel controlId="floatingInput" label="Type" className="mb-4">
+                    <Form.Select
+                      aria-label="Floating label select"
+                      value={newTypeId || ""}
+                      className="input-style"
+                      onChange={handleTypeChange}
+                    >
+                      {productTypes.length > 0 &&
+                        productTypes.map(([typeId, productType]) => (
+                          <option key={typeId} value={typeId}>
+                            {formatName(productType.name)}
+                          </option>
+                        ))}
+                    </Form.Select>
+                  </FloatingLabel>
+                </Form.Floating>
 
-                  {/* Spar Section */}
-                  <StorePricingSpecialInput
-                    storeKey="spar"
-                    storePrice={sparPrice}
-                    setStorePrice={(value) => handleInputChange("spar.price", value)}
-                    onSpecial={sparOnSpecial}
-                    setOnSpecial={(value) => handleInputChange("spar.special", value)}
-                    storeSpecialDate={sparSpecialDate}
-                    setStoreSpecialDate={(value) => handleInputChange("spar.special", value)}
+                <div
+                  className="bg-neutral-100 rounded-xl h-64 flex flex-col items-center justify-center cursor-pointer pt-2 pb-8"
+                  onClick={() => document.getElementById("imageUpload").click()}
+                >
+                  {imageFile ? (
+                    <>
+                      <small className="text-gray-500 w-full pl-4 mb-4">New Product Image</small>
+                      <img
+                        src={URL.createObjectURL(imageFile)}
+                        alt="New Product"
+                        className="object-contain h-full w-full rounded-xl"
+                      />
+                    </>
+                  ) : product.image ? (
+                    <>
+                      <small className="text-gray-500 w-full pl-4 mb-4">
+                        Current Product Image
+                      </small>
+                      <img
+                        src={product.image}
+                        alt="Product"
+                        className="object-contain h-full w-full rounded-xl"
+                      />
+                    </>
+                  ) : (
+                    <p className="text-gray-500">Click to upload an product image</p>
+                  )}
+                  <Form.Control
+                    type="file"
+                    id="imageUpload"
+                    onChange={(e) => handleInputChange("image", e)}
+                    className="d-none" // Hide the input element visually
                   />
                 </div>
               </div>
-            </Form>
-          </div>
+
+              <div className="w-full p-0 lg:p-8 space-y-8 ">
+                {/* Pick n Pay Pricing */}
+                <StorePricingSpecialInput
+                  storeKey="pnp"
+                  storePrice={pnpPrice}
+                  setStorePrice={(value) => handleInputChange("pnp.price", value)}
+                  onSpecial={pnpOnSpecial}
+                  setOnSpecial={(value) => handleInputChange("pnp.special", value)}
+                  storeSpecialDate={pnpSpecialDate}
+                  setStoreSpecialDate={(value) => handleInputChange("pnp.special", value)}
+                />
+                {/* Woolworths Section */}
+                <StorePricingSpecialInput
+                  storeKey="woolworths"
+                  storePrice={woolworthsPrice}
+                  setStorePrice={(value) => handleInputChange("woolworths.price", value)}
+                  onSpecial={woolworthsOnSpecial}
+                  setOnSpecial={(value) => handleInputChange("woolworths.special", value)}
+                  storeSpecialDate={woolworthsSpecialDate}
+                  setStoreSpecialDate={(value) => handleInputChange("woolworths.special", value)}
+                />
+                {/* Checkers Section */}
+                <StorePricingSpecialInput
+                  storeKey="checkers"
+                  storePrice={checkersPrice}
+                  setStorePrice={(value) => handleInputChange("checkers.price", value)}
+                  onSpecial={checkersOnSpecial}
+                  setOnSpecial={(value) => handleInputChange("checkers.special", value)}
+                  storeSpecialDate={checkersSpecialDate}
+                  setStoreSpecialDate={(value) => handleInputChange("checkers.special", value)}
+                />
+                {/* Spar Section */}
+                <StorePricingSpecialInput
+                  storeKey="spar"
+                  storePrice={sparPrice}
+                  setStorePrice={(value) => handleInputChange("spar.price", value)}
+                  onSpecial={sparOnSpecial}
+                  setOnSpecial={(value) => handleInputChange("spar.special", value)}
+                  storeSpecialDate={sparSpecialDate}
+                  setStoreSpecialDate={(value) => handleInputChange("spar.special", value)}
+                />
+              </div>
+            </div>
+          </Form>
         )}
+        <Stack direction="horizontal" gap={2} className="flex md:hidden mt-8">
+          <Btn variant="secondary" onClick={() => navigate(from)} className="px-10">
+            Cancel
+          </Btn>
+          {isChanged && (
+            <Btn variant="primary" onClick={handleSaveChanges} className="w-full">
+              Save Changes
+            </Btn>
+          )}
+        </Stack>
       </Container>
       <Footer />
     </>
