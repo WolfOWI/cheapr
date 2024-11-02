@@ -73,7 +73,7 @@ const AdminCreateSubcatPage = () => {
   return (
     <>
       <NavigationBar admin />
-      <Container className="mb-32 mt-6 w-[30%]">
+      <Container className="mb-32 mt-8 md:w-[60%] lg:w-[50%] xl:w-[40%]">
         <div className="">
           <h2 className="text-center">Create Subcategory</h2>
           <p className="text-center">
