@@ -105,7 +105,7 @@ function NavigationBar({ admin }) {
 
   // Render dropdown for a given category
   const renderCategoryDropdown = (title, categoryId, subcategories, productTypes) => (
-    <NavDropdown title={title} id={`${title}-nav-dropdown`}>
+    <NavDropdown title={title} id={`${title}-nav-dropdown`} className="absolute ">
       {/* "All {Category}" option */}
       <NavDropdown.Item onClick={() => navigate(`/groceries/${categoryId}`)}>
         All {title}
@@ -120,6 +120,7 @@ function NavigationBar({ admin }) {
             key={subcatId}
             id={`subcategory-${subcatId}`}
             drop="end"
+            className="pl-4 lg:pl-2"
           >
             {/* Only display "All Subcategory" if there are product types */}
             {hasProductTypes && (
@@ -170,37 +171,50 @@ function NavigationBar({ admin }) {
                 <img src={logoColor} alt="logo" className="max-h-10" />
               </Navbar.Brand>
             )}
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Toggle aria-controls="basic-navbar-nav" className="border-0" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
                 {user ? (
                   // Admin Logged In
                   isAdmin ? (
-                    <Stack direction="horizontal" gap={4}>
+                    <div className="flex h-11 space-x-4 pt-1 lg:pt-0 lg:items-center">
                       <Link to="/newproducts">New</Link>
                       <Link to="/flagged">Flagged</Link>
                       <Link to="/rejectedproducts">Rejected</Link>
-                    </Stack>
+                    </div>
                   ) : (
                     // Normal User Logged In
                     <Stack direction="horizontal" gap={4} className="lg:ml-10">
                       <Link to="/groceries" className="text-neutral-500 mr-2">
                         Shop All
                       </Link>
-                      {/* Dropdowns for each category */}
-                      {renderCategoryDropdown("Food", "10000", foodSubcategories, foodProductTypes)}
-                      {renderCategoryDropdown(
-                        "Drinks",
-                        "20000",
-                        drinksSubcategories,
-                        drinksProductTypes
-                      )}
-                      {renderCategoryDropdown(
-                        "Household",
-                        "30000",
-                        householdSubcategories,
-                        householdProductTypes
-                      )}
+                      <div className="flex space-x-4 relative">
+                        {/* Dropdowns for each category */}
+                        <div className="w-14 h-11 ">
+                          {renderCategoryDropdown(
+                            "Food",
+                            "10000",
+                            foodSubcategories,
+                            foodProductTypes
+                          )}
+                        </div>
+                        <div className="w-16 h-11">
+                          {renderCategoryDropdown(
+                            "Drinks",
+                            "20000",
+                            drinksSubcategories,
+                            drinksProductTypes
+                          )}
+                        </div>
+                        <div className="w-24 h-11">
+                          {renderCategoryDropdown(
+                            "Household",
+                            "30000",
+                            householdSubcategories,
+                            householdProductTypes
+                          )}
+                        </div>
+                      </div>
                     </Stack>
                   )
                 ) : (
@@ -213,22 +227,57 @@ function NavigationBar({ admin }) {
                 // Admin Logged In
                 isAdmin ? (
                   <Stack direction="horizontal" gap={2}>
-                    <IconBtn iconType="add" onClick={() => navigate("/create")} />
+                    <div className="w-full sm:w-fit">
+                      <IconBtn
+                        iconType="add"
+                        onClick={() => navigate("/create")}
+                        className=" hidden lg:flex"
+                      />
+                      <Btn
+                        className="w-full sm:w-32 block lg:hidden"
+                        onClick={() => navigate("/create")}
+                      >
+                        Create
+                      </Btn>
+                    </div>
 
-                    <Btn variant="secondary" className="w-32" onClick={logOutUser}>
+                    <Btn variant="secondary" className="min-w-32" onClick={logOutUser}>
                       Log Out
                     </Btn>
                   </Stack>
                 ) : (
                   // Normal User Logged In
                   <Stack direction="horizontal" gap={2}>
-                    <IconBtn variant="dark" iconType="add" onClick={() => navigate("/add")} />
-                    <IconBtn
-                      variant="primary"
-                      iconType="cart_empty"
-                      onClick={() => navigate("/planner")}
-                    />
-                    <Btn variant="secondary" className="w-32" onClick={logOutUser}>
+                    <div className="w-full sm:w-fit">
+                      <IconBtn
+                        variant="dark"
+                        iconType="add"
+                        onClick={() => navigate("/add")}
+                        className=" hidden lg:flex"
+                      />
+                      <Btn
+                        variant="dark"
+                        onClick={() => navigate("/add")}
+                        className="w-full sm:min-w-fit block lg:hidden"
+                      >
+                        Add Product
+                      </Btn>
+                    </div>
+                    <div className="w-full sm:w-fit">
+                      <IconBtn
+                        variant="primary"
+                        iconType="cart_empty"
+                        className=" hidden lg:flex"
+                        onClick={() => navigate("/planner")}
+                      />
+                      <Btn
+                        className="w-full sm:w-32 block lg:hidden"
+                        onClick={() => navigate("/planner")}
+                      >
+                        Planner
+                      </Btn>
+                    </div>
+                    <Btn variant="secondary" className="min-w-32" onClick={logOutUser}>
                       Log Out
                     </Btn>
                   </Stack>
@@ -236,14 +285,18 @@ function NavigationBar({ admin }) {
               ) : (
                 // No User Logged In
                 <>
-                  <Stack direction="horizontal" gap={2}>
-                    <Btn className="w-32" onClick={() => navigate("/login")}>
+                  <div className="flex space-x-2 mt-4 lg:mt-0">
+                    <Btn className="w-full sm:w-32" onClick={() => navigate("/login")}>
                       Log In
                     </Btn>
-                    <Btn variant="secondary" className="w-32" onClick={() => navigate("/signup")}>
+                    <Btn
+                      variant="secondary"
+                      className="w-full sm:w-32"
+                      onClick={() => navigate("/signup")}
+                    >
                       Sign Up
                     </Btn>
-                  </Stack>
+                  </div>
                 </>
               )}
             </Navbar.Collapse>
