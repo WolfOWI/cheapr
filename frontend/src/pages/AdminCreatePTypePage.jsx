@@ -118,8 +118,8 @@ const AdminCreatePTypePage = () => {
   return (
     <>
       <NavigationBar admin />
-      <Container className="mb-32 mt-6 w-[30%]">
-        <div className="">
+      <Container className="mb-32 mt-8 md:w-[60%] lg:w-[50%] xl:w-[40%]">
+        <div>
           <h2 className="text-center">Create Product Type</h2>
           <p className="text-center">
             Please select which category and subcategory the new product type would fall under.
