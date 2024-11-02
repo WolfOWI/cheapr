@@ -20,7 +20,7 @@ import Icon from "../building-blocks/Icon";
 
 // -----------------------------------------------------------
 
-const MenuBtn = ({ type, onClick }) => {
+const MenuBtn = ({ type, onClick, className }) => {
   let iconType = "";
   let labelText = "";
   let exampleText = "";
@@ -49,7 +49,7 @@ const MenuBtn = ({ type, onClick }) => {
   return (
     <>
       <div
-        className="flex flex-col justify-center items-center bg-neutral-100 p-8 rounded-xl cursor-pointer w-full h-64 group hover:bg-primary"
+        className={`flex flex-col justify-center items-center bg-neutral-100 p-8 rounded-xl cursor-pointer w-full h-64 group hover:bg-primary ${className}`}
         onClick={onClick}
       >
         <Icon type={iconType} className="w-24 group-hover:w-32 transition-all duration-150 mb-4" />

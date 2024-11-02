@@ -1,7 +1,7 @@
 // IMPORT
 // -----------------------------------------------------------
 // React & Hooks
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 // Services
 // -
@@ -10,7 +10,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 // -
 
 // Third-Party Components
-import { Container, Row, Col, Stack } from "react-bootstrap";
+import { Container, Stack } from "react-bootstrap";
 
 // Internal Components
 import NavigationBar from "../components/navigation/NavigationBar";
@@ -32,12 +32,20 @@ const AdminCreateMenuPage = () => {
       <div className="mb-32">
         <Container className="pt-6">
           <div className="flex flex-col w-full">
-            <h2>Create a New</h2>
-            <Stack direction="horizontal" gap={4} className="mt-8">
-              <MenuBtn type="subcategory" onClick={() => navigate("/createsubcat")} />
-              <MenuBtn type="type" onClick={() => navigate("/createptype")} />
-              <MenuBtn type="product" onClick={() => navigate("/createproduct")} />
-            </Stack>
+            <h2 className="text-4xl lg:text-5xl">Create New</h2>
+            <div className="mt-8 flex flex-col lg:flex-row space-x-0 lg:space-x-4 space-y-4 lg:space-y-0">
+              <MenuBtn
+                type="subcategory"
+                onClick={() => navigate("/createsubcat")}
+                className="min-w-fit"
+              />
+              <MenuBtn type="type" onClick={() => navigate("/createptype")} className="min-w-fit" />
+              <MenuBtn
+                type="product"
+                onClick={() => navigate("/createproduct")}
+                className="min-w-fit"
+              />
+            </div>
           </div>
         </Container>
 
