@@ -14,12 +14,11 @@ import {
 import { sortProducts } from "../utils/productSortUtils";
 
 // Third-Party Components
-import { Container, Row, Col, Dropdown } from "react-bootstrap";
+import { Container, Dropdown } from "react-bootstrap";
 import Loader from "react-spinners/GridLoader";
 
 // Internal Components
 import NavigationBar from "../components/navigation/NavigationBar";
-import Btn from "../components/button/Btn";
 import AdminProductItem from "../components/listItems/AdminProductItem";
 import Footer from "../components/navigation/Footer";
 import Drpdwn from "../components/input/Drpdwn";

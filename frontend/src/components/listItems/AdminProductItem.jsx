@@ -146,9 +146,9 @@ const AdminProductItem = ({
           </div>
         ) : (
           // Type: Flagged
-          <div className="w-[30%]">
-            <div className="flex flex-col justify-between bg-neutral-100 p-4 rounded-2xl mb-4">
-              <h4>Message:</h4>
+          <div className="w-full lg:w-[30%] flex flex-col">
+            <div className="flex flex-col justify-between bg-neutral-100 p-4 rounded-2xl mb-4 mt-4 lg:mt-0">
+              <h4>Reason:</h4>
               <p>{product.flagMessage}</p>
             </div>
             <Stack direction="horizontal" gap={2} className="w-full">
@@ -163,9 +163,14 @@ const AdminProductItem = ({
                 className="min-w-12 opacity-30 group-hover:opacity-100 transition-all duration-150"
                 onClick={() => onReject(productId)}
               />
+              <IconBtn
+                iconType={"right"}
+                className="min-w-12 opacity-30 group-hover:opacity-100 transition-all duration-150 hidden lg:flex xl:hidden"
+                onClick={() => onReApprove(productId)}
+              />
               <Btn
                 variant="secondary"
-                className="w-full opacity-30 group-hover:opacity-100 transition-all duration-150"
+                className="w-full opacity-30 group-hover:opacity-100 transition-all duration-150 lg:hidden xl:block"
                 onClick={() => onReApprove(productId)}
               >
                 Re-Approve
