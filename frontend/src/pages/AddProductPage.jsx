@@ -222,6 +222,7 @@ const AddProductPage = () => {
           <Form className="mt-8 lg:mt-0">
             <div className="flex flex-col sm:flex-row space-y-8 sm:space-y-0 sm:space-x-6 lg:space-x-0">
               <div className="w-full p-0 lg:p-8">
+                {/* Product Name */}
                 <Form.Floating>
                   <FloatingLabel controlId="floatingInput" label="Product Name" className="mb-4">
                     <Form.Control
@@ -234,6 +235,7 @@ const AddProductPage = () => {
                     />
                   </FloatingLabel>
                 </Form.Floating>
+                {/* Measurement Amount */}
                 <Form.Floating>
                   <FloatingLabel
                     controlId="floatingInput"
@@ -254,6 +256,7 @@ const AddProductPage = () => {
                     />
                   </FloatingLabel>
                 </Form.Floating>
+                {/* Product Unit */}
                 <Form.Floating>
                   <FloatingLabel controlId="floatingInput" label="Unit" className="mb-4">
                     <Form.Select
@@ -271,6 +274,7 @@ const AddProductPage = () => {
                     </Form.Select>
                   </FloatingLabel>
                 </Form.Floating>
+                {/* Product Category */}
                 <Form.Floating>
                   <FloatingLabel controlId="floatingInput" label="Category" className="mb-4">
                     <Form.Select
@@ -284,6 +288,7 @@ const AddProductPage = () => {
                     </Form.Select>
                   </FloatingLabel>
                 </Form.Floating>
+                {/* Product Subcategory */}
                 <Form.Floating>
                   <FloatingLabel controlId="floatingInput" label="Subcategory" className="mb-4">
                     <Form.Select
@@ -300,6 +305,7 @@ const AddProductPage = () => {
                     </Form.Select>
                   </FloatingLabel>
                 </Form.Floating>
+                {/* Product Type */}
                 <Form.Floating>
                   <FloatingLabel controlId="floatingInput" label="Type" className="mb-4">
                     <Form.Select
@@ -315,6 +321,7 @@ const AddProductPage = () => {
                     </Form.Select>
                   </FloatingLabel>
                 </Form.Floating>
+                {/* Product Image */}
                 <div
                   className="bg-neutral-100 rounded-xl h-64 flex flex-col items-center justify-center cursor-pointer pt-2 pb-8"
                   onClick={() => document.getElementById("imageUpload").click()}
@@ -352,6 +359,7 @@ const AddProductPage = () => {
                 </div>
               </div>
 
+              {/* Product Pricing */}
               <div className="w-full p-0 lg:p-8 space-y-8 ">
                 {/* Pick n Pay Pricing */}
                 <StorePricingSpecialInput

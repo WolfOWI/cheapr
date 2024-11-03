@@ -72,7 +72,7 @@ const StorePricingSpecialInput = ({
 
             setStorePrice(inputValue);
           }}
-          maxLength={10}
+          maxLength={7}
         />
       </InputGroup>
 
