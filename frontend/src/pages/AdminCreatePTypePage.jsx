@@ -170,7 +170,8 @@ const AdminCreatePTypePage = () => {
                 placeholder="Enter Product Type"
                 className="input-style"
                 value={productTypeName}
-                onChange={(e) => setProductTypeName(e.target.value)}
+                onChange={(e) => setProductTypeName(e.target.value.replace(/[^a-zA-Z\s-]/g, ""))} // Allows only letters, dashes, and spaces
+                maxLength={25}
               />
             </FloatingLabel>
           </Form.Floating>

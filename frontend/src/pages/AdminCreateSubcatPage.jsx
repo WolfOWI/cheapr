@@ -105,10 +105,11 @@ const AdminCreateSubcatPage = () => {
               >
                 <Form.Control
                   type="text"
-                  placeholder="Enter Subcategory"
+                  placeholder=""
                   className="input-style"
                   value={subcategoryName}
-                  onChange={(e) => setSubcategoryName(e.target.value)} // Update subcategoryName on input
+                  onChange={(e) => setSubcategoryName(e.target.value.replace(/[^a-zA-Z\s-]/g, ""))} // Allows only letters, dashes, and spaces
+                  maxLength={25}
                 />
               </FloatingLabel>
             </Form.Floating>
