@@ -69,49 +69,72 @@ function SignUpPage() {
               Sign up and start saving time & money!
             </h4>
             <Form onSubmit={handleSignUp}>
+              {/* First Name */}
               <Form.Group className="mt-8 mb-4" controlId="formBasicFirstName">
                 <Form.Label className="font-semibold">First Name</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="First Name"
                   value={firstName}
-                  onChange={(e) => setFirstName(e.target.value)} // Track state
+                  onChange={(e) => setFirstName(e.target.value.replace(/[^a-zA-Z]/g, ""))} // Allows only letters
                   className="input-style"
                   required
+                  maxLength={18}
                 />
+                {firstName.length > 15 && (
+                  <Form.Text className="text-danger">
+                    First name should not exceed 15 characters.
+                  </Form.Text>
+                )}
               </Form.Group>
+              {/* Last Name */}
               <Form.Group className="mb-4" controlId="formBasicLastName">
                 <Form.Label className="font-semibold">Last Name</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="Last Name"
                   value={lastName}
-                  onChange={(e) => setLastName(e.target.value)} // Track state
+                  onChange={(e) => setLastName(e.target.value.replace(/[^a-zA-Z]/g, ""))} // Allows only letters
                   className="input-style"
                   required
+                  maxLength={18}
                 />
+                {lastName.length > 15 && (
+                  <Form.Text className="text-danger">
+                    Last name should not exceed 15 characters.
+                  </Form.Text>
+                )}
               </Form.Group>
+              {/* Email */}
               <Form.Group className="mb-4" controlId="formBasicEmail">
                 <Form.Label className="font-semibold">Email address</Form.Label>
                 <Form.Control
                   type="email"
                   placeholder="hello@gmail.com"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)} // Track state
+                  onChange={(e) => setEmail(e.target.value.trim())} // Trim spaces in front/back
                   className="input-style"
                   required
                 />
               </Form.Group>
+              {/* Password */}
               <Form.Group className="mb-4" controlId="formBasicPassword">
                 <Form.Label className="font-semibold">Password</Form.Label>
                 <Form.Control
                   type="password"
                   placeholder="Password"
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)} // Track state
+                  onChange={(e) => setPassword(e.target.value)}
                   className="input-style"
                   required
                 />
+                {!/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&])/.test(password) &&
+                  password.length > 0 && (
+                    <Form.Text className="text-danger">
+                      Password must contain at least one uppercase letter, one lowercase letter, one
+                      digit, and one special character.
+                    </Form.Text>
+                  )}
               </Form.Group>
               {error && <p className="text-red-600 mb-2">{error}</p>} {/* Display error */}
               <Btn variant="primary" className="w-full" type="submit">

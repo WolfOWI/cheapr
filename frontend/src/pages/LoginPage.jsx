@@ -78,7 +78,7 @@ function LoginPage() {
                   type="email"
                   placeholder="hello@gmail.com"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)} // Track email state
+                  onChange={(e) => setEmail(e.target.value.trim())} // Trim spaces front/back
                   className="input-style"
                   required
                 />
@@ -89,7 +89,7 @@ function LoginPage() {
                   type="password"
                   placeholder="Password"
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)} // Track password state
+                  onChange={(e) => setPassword(e.target.value)}
                   className="input-style"
                   required
                 />
