@@ -61,6 +61,7 @@ const AdminProductItem = ({
             src={product.image}
             alt={product.name}
             className="h-64 lg:h-56 xl:h-56 object-contain md:w-fit"
+            loading="lazy"
           />
           {/* Product Details */}
           <div className="mt-4 lg:mt-0 lg:ml-4 w-full">

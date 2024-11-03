@@ -59,7 +59,12 @@ const ProductItem = ({
         <Col xs={12} className="flex justify-between items-center mb-1">
           <div className="flex items-center">
             <div className="max-h-24 max-w-24 min-h-24 min-w-24 relative">
-              <img src={product.image} alt={product.name} className="object-contain absolute" />
+              <img
+                src={product.image}
+                alt={product.name}
+                className="object-contain absolute"
+                loading="lazy"
+              />
             </div>
 
             {/* MD Breakpoint */}
