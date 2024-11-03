@@ -230,9 +230,11 @@ function ProductPage() {
     }
   };
 
-  // Handle Item Quantity Change (only numbers & min of 1)
+  // Handle Item Quantity Change (only numbers & min of 1 & max of 99)
   const itemQuantChange = (value) => {
-    if (value) {
+    if (value > 99) {
+      setItemQuant(99);
+    } else if (value) {
       setItemQuant(value);
     } else {
       setItemQuant(1);
@@ -576,6 +578,7 @@ function ProductPage() {
                         onChange={(e) => {
                           itemQuantChange(parseInt(e.target.value));
                         }}
+                        maxLength={2}
                       />
                       <IconBtn
                         variant="tertiary"
