@@ -61,11 +61,11 @@ function AdminNewProductsDash() {
 
     switch (eventKey) {
       case "AtoZ":
-        setSortDropLabel("Alfabetical (A to Z)");
+        setSortDropLabel("Alphabetical (A to Z)");
         setProducts(sortProducts(products, "AtoZ"));
         break;
       case "ZtoA":
-        setSortDropLabel("Alfabetical (Z to A)");
+        setSortDropLabel("Alphabetical (Z to A)");
         setProducts(sortProducts(products, "ZtoA"));
         break;
       case "NewestCreated":
@@ -139,8 +139,8 @@ function AdminNewProductsDash() {
               onSelect={handleSelect}
               className="w-full md:w-fit"
             >
-              <Dropdown.Item eventKey="AtoZ">Alfabetical (A to Z)</Dropdown.Item>
-              <Dropdown.Item eventKey="ZtoA">Alfabetical (Z to A)</Dropdown.Item>
+              <Dropdown.Item eventKey="AtoZ">Alphabetical (A to Z)</Dropdown.Item>
+              <Dropdown.Item eventKey="ZtoA">Alphabetical (Z to A)</Dropdown.Item>
               <Dropdown.Item eventKey="NewestCreated">Most Recently Created</Dropdown.Item>
               <Dropdown.Item eventKey="OldestCreated">Oldest Creation</Dropdown.Item>
               <Dropdown.Item eventKey="Cheapest">Lowest Price</Dropdown.Item>

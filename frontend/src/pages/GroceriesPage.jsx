@@ -145,11 +145,11 @@ function GroceriesPage() {
 
     switch (eventKey) {
       case "AtoZ":
-        setSortDropLabel("Alfabetical (A to Z)");
+        setSortDropLabel("Alphabetical (A to Z)");
         setProducts(sortProducts(products, "AtoZ"));
         break;
       case "ZtoA":
-        setSortDropLabel("Alfabetical (Z to A)");
+        setSortDropLabel("Alphabetical (Z to A)");
         setProducts(sortProducts(products, "ZtoA"));
         break;
       case "NewestApproved":
@@ -253,8 +253,8 @@ function GroceriesPage() {
               onSelect={handleSelect}
               className="w-full sm:w-fit"
             >
-              <Dropdown.Item eventKey="AtoZ">Alfabetical (A to Z)</Dropdown.Item>
-              <Dropdown.Item eventKey="ZtoA">Alfabetical (Z to A)</Dropdown.Item>
+              <Dropdown.Item eventKey="AtoZ">Alphabetical (A to Z)</Dropdown.Item>
+              <Dropdown.Item eventKey="ZtoA">Alphabetical (Z to A)</Dropdown.Item>
               <Dropdown.Item eventKey="NewestApproved">Most Recent</Dropdown.Item>
               <Dropdown.Item eventKey="OldestApproved">Oldest</Dropdown.Item>
               <Dropdown.Item eventKey="Cheapest">Lowest Price</Dropdown.Item>
