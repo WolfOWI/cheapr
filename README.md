@@ -37,13 +37,11 @@
 
 - [Table of Contents](#table-of-contents)
 - [About the Project](#about-the-project)
-  - [What is Rosemont Estates?](#what-is-rosemont-estates)
+  - [What is CHEAPR?](#what-is-cheapr)
   - [Built With](#built-with)
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
-  - [How to install](#how-to-install)
-  - [How to Install](#how-to-install-1)
-  - [Installation](#installation)
+  - [Installation Steps](#installation-steps)
 - [Features and Functionality](#features-and-functionality)
   - [Home Page](#home-page)
   - [Login \& Signup Page](#login--signup-page)
@@ -84,7 +82,7 @@
 
 ![image1][image1]
 
-### What is Rosemont Estates?
+### What is CHEAPR?
 
 CHEAPR is a community-driven grocery platform designed to help users find the best deals across four grocery stores. CHEAPR attempts to lessen the financial pressures of the rising cost of food & groceries in a post-COVID South Africa, allowing shoppers to easily browse and compare the cheapest prices of different groceries in Pick n Pay, Woolworths, Checkers and Spar.
 
@@ -107,13 +105,7 @@ The following instructions will get you a copy of the project up and running on 
 
 Ensure that you have the latest version of [Node.js](https://nodejs.org/) installed on your machine.
 
-### How to install
-
-Here’s a structured **Installation** section for your README, including steps for setting up the Firebase database and authentication:
-
-### How to Install
-
-### Installation
+### Installation Steps
 
 Follow these steps to clone, configure, and run the Cheapr project on your local machine.
 
@@ -422,8 +414,8 @@ Distributed under the MIT License. See `LICENSE` for more information.\
 [image7A]: docs/readme_media/oldDesign01.png
 [image7B]: docs/readme_media/oldDesign02.png
 [image7C]: docs/readme_media/oldDesign03.png
-[image9]: docs/readme_media/oldDesign02.png
-[image10]: docs/readme_media/oldDesign03.png
+[image9]: docs/readme_media/mockupB.png
+[image10]: docs/readme_media/mockupC.png
 
 <!-- Refer to https://shields.io/ for more information and options about the shield links at the top of the ReadMe file -->
 
