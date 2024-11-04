@@ -76,7 +76,7 @@ function SignUpPage() {
                   type="text"
                   placeholder="First Name"
                   value={firstName}
-                  onChange={(e) => setFirstName(e.target.value.replace(/[^a-zA-Z]/g, ""))} // Allows only letters
+                  onChange={(e) => setFirstName(e.target.value)}
                   className="input-style"
                   required
                   maxLength={18}
@@ -94,7 +94,7 @@ function SignUpPage() {
                   type="text"
                   placeholder="Last Name"
                   value={lastName}
-                  onChange={(e) => setLastName(e.target.value.replace(/[^a-zA-Z]/g, ""))} // Allows only letters
+                  onChange={(e) => setLastName(e.target.value)}
                   className="input-style"
                   required
                   maxLength={18}
