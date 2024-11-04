@@ -41,23 +41,27 @@
   - [Built With](#built-with)
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
+  - [How to install](#how-to-install)
+  - [How to Install](#how-to-install-1)
   - [Installation](#installation)
 - [Features and Functionality](#features-and-functionality)
-  - [Login \& Signup](#login--signup)
-  - [Home](#home)
-  - [Listing (With Filtering)](#listing-with-filtering)
-  - [Individual Listing](#individual-listing)
-  - [Edit Listing](#edit-listing)
-  - [Create Listing](#create-listing)
-  - [Profile](#profile)
-  - [Admin New Listings Dash](#admin-new-listings-dash)
-  - [Admin Potential Buyers](#admin-potential-buyers)
-  - [Admin Potential Tenants](#admin-potential-tenants)
-  - [Admin Closed Deals](#admin-closed-deals)
-  - [Admin Rejected Homes](#admin-rejected-homes)
+  - [Home Page](#home-page)
+  - [Login \& Signup Page](#login--signup-page)
+  - [Groceries Page](#groceries-page)
+  - [Individual Product Page](#individual-product-page)
+  - [Store Planner Page](#store-planner-page)
+  - [Add Product Page](#add-product-page)
+  - [Admin: All Listed Page](#admin-all-listed-page)
+  - [Admin: New Products Page](#admin-new-products-page)
+  - [Admin: Flagged Products Page](#admin-flagged-products-page)
+  - [Admin: Rejected Products Page](#admin-rejected-products-page)
+  - [Admin: Create Menu](#admin-create-menu)
+  - [Admin: Create Subcategory Page](#admin-create-subcategory-page)
+  - [Admin: Create Product Type Page](#admin-create-product-type-page)
+  - [Admin: Create Product Page](#admin-create-product-page)
+  - [Admin: Edit Product Page](#admin-edit-product-page)
 - [Concept Process](#concept-process)
-  - [Ideation \& Wireframing](#ideation--wireframing)
-  - [ER Diagram](#er-diagram)
+  - [Wireframing \& Old Designs](#wireframing--old-designs)
 - [Development Process](#development-process)
   - [Implementation Process](#implementation-process)
     - [Highlights](#highlights)
@@ -82,19 +86,18 @@
 
 ### What is Rosemont Estates?
 
-Rosemont Estates is a luxury real estate platform designed to connect discerning buyers and renters with the most exquisite properties on the market. Whether you're looking for a serene getaway, a stately mansion, or an elegant modern home, Rosemont Estates offers a curated selection of high-end properties to meet every need. Our platform provides a seamless experience for users to browse, compare, and connect with agents, ensuring that every transaction is handled with the utmost professionalism and care.
+CHEAPR is a community-driven grocery platform designed to help users find the best deals across four grocery stores. CHEAPR attempts to lessen the financial pressures of the rising cost of food & groceries in a post-COVID South Africa, allowing shoppers to easily browse and compare the cheapest prices of different groceries in Pick n Pay, Woolworths, Checkers and Spar.
 
 ### Built With
 
+- [Firebase](https://firebase.google.com/)
+- [ExpressJS](https://expressjs.com/)
 - [React](https://react.dev)
 - [React Router](https://reactrouter.com/en/main)
-- [PHP](https://www.php.net/)
-- [MySQL](https://www.mysql.com/)
 - [Node.js](https://nodejs.org/en)
-- [Leaflet Geosearch](https://www.npmjs.com/package/leaflet-geosearch)
+- [Axios](https://axios-http.com/)
 - [Tailwind CSS](https://tailwindcss.com/)
-- [Chakra UI](https://v2.chakra-ui.com/)
-- [Material UI Icons](https://mui.com/material-ui/material-icons/)
+- [React Bootstrap](https://react-bootstrap.netlify.app/)
 
 ## Getting Started
 
@@ -104,198 +107,243 @@ The following instructions will get you a copy of the project up and running on 
 
 Ensure that you have the latest version of [Node.js](https://nodejs.org/) installed on your machine.
 
+### How to install
+
+Here’s a structured **Installation** section for your README, including steps for setting up the Firebase database and authentication:
+
+### How to Install
+
 ### Installation
 
-Here are the steps to clone this repository, set up the MySQL database, and run the project locally:
+Follow these steps to clone, configure, and run the Cheapr project on your local machine.
 
 1. **Clone the Repository**:
 
-   - Open GitHub Desktop or your terminal/command prompt.
-   - If using GitHub Desktop:
-     - Click on `File` -> `Clone repository...`.
-     - In the `URL` tab, enter `https://github.com/WolfOWI/cheapr.git` and choose the local path where you want to save the repository.
-     - Click `Clone`.
-   - If using the terminal:
-     - Run the following command to clone the repository:
-       ```sh
-       git clone https://github.com/WolfOWI/cheapr.git
-       ```
-   - Navigate to the cloned repository directory:
-     ```sh
-     cd cheapr
-     ```
+   - Open GitHub Desktop.
+   - Select `File` -> `Clone repository...`.
+   - In the `URL` tab, enter `https://github.com/WolfOWI/cheapr.git`, choose your local path, and click `Clone`.
 
 2. **Install Dependencies**:
 
-   - Ensure you are in the `root` directory inside the cloned repository.
-   - Run the following command to install all required dependencies:
+   - **Frontend**:  
+     Open a terminal, navigate to the `frontend` folder, and install the dependencies:
+
      ```sh
+     cd frontend
      npm install
      ```
 
-3. **Set Up MySQL Database**:
-
-   - Ensure that you have MySQL installed on your machine. You can download it from [MySQL](https://www.mysql.com/).
-   - Open your MySQL client (like phpMyAdmin, MySQL Workbench, or the command line).
-   - Create a new database for the project:
-     ```sql
-     CREATE DATABASE rosemont_estates;
+   - **Backend**:  
+     Open a separate terminal, navigate to the `backend` folder, and install backend dependencies:
+     ```sh
+     cd backend
+     npm install
      ```
-   - Import the database schema and data:
-     - If using phpMyAdmin:
-       - Open phpMyAdmin and select the `rosemont_estates` database.
-       - Click on the `Import` tab.
-       - Choose the SQL file located in the `database` directory of your cloned repository (`database/rosemont_estates.sql`).
-       - Click `Go` to import the database.
-     - If using the command line:
+
+3. **Set Up Firebase Project**:
+
+   - **Create a Firebase Project**:
+     Go to the [Firebase Console](https://console.firebase.google.com/) and create a new project.
+
+   - **Database**:
+
+     - Create a Realtime Database in Firebase.
+     - Set up security rules to restrict read and write access based on authentication.
+     - Included in the root of the CHEAPR repository is a [database backup](cheapr-database-backup.json).
+     - Import the provided backup file on Firebase to populate the initial data. (Please note: you will have to manually add images to each product.)
+
+   - **Authentication**:
+
+     - In Firebase, enable Email/Password authentication under **Authentication** > **Sign-in Method**.
+
+   - **Storage**:
+     - Enable Firebase Storage for image uploads and update security rules to restrict access based on user authentication.
+
+4. **Set Up Environment Variables**:
+
+   - **Backend Environment Variables**:
+
+     - In the `backend` folder, create a `.env` file with the following content:
+
        ```sh
-       mysql -u your_username -p rosemont_estates < database/rosemont_estates.sql
+       FIREBASE_PROJECT_ID=your_project_id
+       FIREBASE_PRIVATE_KEY_ID=your_firebase_private_key_id
+       FIREBASE_PRIVATE_KEY=""
+       FIREBASE_CLIENT_EMAIL=your_firebase_client_email
+       FIREBASE_DATABASE_URL=https://<your_project_id>-default-rtdb.firebaseio.com
+       FIREBASE_STORAGE_BUCKET=<your_bucket_name>.appspot.com
        ```
-       Replace `your_username` with your MySQL username and enter your password when prompted.
 
-4. **Run Backend Server**:
+     - Replace placeholders with your Firebase project credentials.
 
-   - Ensure that your local server (like Apache or Nginx) is running and configured to serve PHP files.
-   - Place the project files in your server’s root directory (e.g., `htdocs` for XAMPP or `www` for WAMP/MAMP).
-   - Make sure the server points to the correct directory where the project is stored.
-   - Open your browser and navigate to `http://localhost/cheapr` to verify that the backend server is correctly serving the application.
+   - **Frontend Environment Variables**:
+     - In the `frontend` folder, create a `.env` file with:
+       ```sh
+       REACT_APP_API_URL=http://localhost:3001
+       ```
 
-5. **Run the Frontend Server**:
+5. **Run the Backend Server**:
 
-   - After installing the dependencies, run the following command to start the frontend server:
+   - In the `backend` directory, start the backend server:
      ```sh
      npm start
      ```
-   - The frontend server should now be running on `http://localhost:3000`.
+   - The backend server will run at `http://localhost:3001`.
 
-6. **Access the Application**:
+6. **Run the Frontend Server**:
 
-   - Open your web browser and go to `http://localhost:3000`.
-   - You should see the homepage of the Rosemont Estates application.
+   - In the `frontend` directory, start the frontend server:
+     ```sh
+     npm start
+     ```
+   - The frontend server will run at `http://localhost:3000`.
 
-By following these steps, you will have the Rosemont Estates project fully set up and running on your local machine. This setup ensures that your MySQL database is correctly configured.
+7. **Access the Application**:
+
+   - Open `http://localhost:3000` in your browser to access the Cheapr application.
+
+By following these steps, you will have the CHEAPR project up and running on your local machine with your API keys securely stored in the `.env` file. This ensures that your keys are not publicly displayed or included in your repository.
 
 ## Features and Functionality
 
-### Login & Signup
+### Home Page
 
-The Login and Signup feature allows users to create an account or log in to the Rosemont Estates platform. Users can sign up as either a regular user or an agent, with the platform customising their experience accordingly. Once logged in, users can access personalised features, such as managing their listings or browsing potential properties.
+The Home page serves as an overall explanation of what users can expect on the CHEAPR website. The page includes a welcoming hero header, a brief introduction to why users should use CHEAPR, the stores featured on CHEAPR as well as a final call to action to sign up.
 
 ![feature1][fimage1]
+
+### Login & Signup Page
+
+The Login and Signup feature allows users to create an account or log in to the CHEAPR platform. Once logged in, users can access personalised features, such as managing their shopping planner or browsing all the different products.
+
 ![feature2][fimage2]
-
-### Home
-
-The Home page serves as the central hub for users, featuring a welcoming hero section, a brief introduction to the platform, and quick links to browse listings, view user profiles, and more.
-
 ![feature3][fimage3]
 
-### Listing (With Filtering)
+### Groceries Page
 
-The Listing feature provides users with a comprehensive view of all available properties. Users can apply filters based on a text search of location (suburbs, cities, provinces, zip codes) max & min price range, number of interior spaces, number of exterior areas, and home features to narrow down their search and find properties that meet their specific needs. The filtering is responsive and updates in real-time as users adjust their preferences.
+The Groceries page is the main hub for users to browse and discover the cheapest prices of a wide variety of grocery items available across the 4 South African stores. The cheapest price / prices are highlighted in red, and if a price is on a temporary special discount, a symbol would appear next to each price. Users can filter products by category, subcategory, and product type, to easily find what they need. Additionally, they can sort items based on factors like price or alphabetically, and add selected products to their shopping planner (aka the cart).
 
 ![feature4][fimage4]
+
+### Individual Product Page
+
+The Individual Product page provides users with detailed information about a specific product prices across various stores. Users can see the date of when each price was updated, check if a product is on special, and decide which store offers the best deal. There are also options to add more than 1 of the product to a shopping planner directly from this page. The user can also update any price(s) with the Update Pricing popup modal, or report a product and write a message that will flag the item, removing it from the public listings, and send it an admin for review.
+
 ![feature5][fimage5]
 
-### Individual Listing
+### Store Planner Page
 
-The Individual Listing page offers detailed information about a specific property, including high-resolution images (between 1 and 5, which would dynamically change layout), price, property features, and more. Users can also save the property to their favorites or notify the agent directly from this page using the "Show Interest" button.
+The Store Planner page is a personalised feature that allows users to organises and groups their grocery shopping list based on the cheapest price, making it easier to plan what items to buy where. Users can increase/decrese the quantity of an item, delete it, or "jump" the item to another store that has the same price (which occurs frequently). Furthermore, the total cost of all the items (and their quantities), as well as how much is saved by using CHEAPR is indicated at the bottom of the page.
 
 ![feature6][fimage6]
 
-### Edit Listing
+### Add Product Page
 
-The Edit Listing feature is available to users who have created property listings. It allows them to modify their own property details, update images, and change availability status. This ensures that property information remains accurate and up-to-date.
+On the Add Product Page (same concept & design as Admin Create Product Page listed further down below), users can create new products by filling in the text fields, and clicking submit. The newly submitted products will appear on the Admin's "New Products Page" for review, and once accepted, will be listed on CHEAPR.
+
+### Admin: All Listed Page
+
+The Admin All Listed Products page provides administrators with a complete overview of all public products currently listed on CHEAPR. Admins can manage each listings, and either update product details or delete items, to ensure data accuracy across the platform.
 
 ![feature7][fimage7]
 
-### Create Listing
+### Admin: New Products Page
 
-The Create Listing feature enables users to add new properties to the Rosemont Estates platform. Once submitted, the property will be sent to the admins for approval, and will have a "Pending" status on the user's profile page.
+The Admin New Products page allows administrators to review newly added products by regular users. Admins can approve or reject these items based on quality standards, ensuring that only verified products are listed on the CHEAPR platform.
 
 ![feature8][fimage8]
 
-### Profile
+### Admin: Flagged Products Page
 
-The Profile page allows users to manage their account information, view saved (favourited) properties, and access their listings. It provides a personalised space for users to keep track of their interactions with the platform and update their contact details as needed.
+The Admin Flagged Products page displays products that have been flagged by users for potential issues, such as incorrect pricing or outdated information. Admins can read the message submitted by the user, review flagged items, make corrections, reject them if necessary, or re-approve the item, ensuring that the platform remains reliable and user-friendly.
 
 ![feature9][fimage9]
 
-### Admin New Listings Dash
+### Admin: Rejected Products Page
 
-The Admin New Listings Dash is designed for agents and admin users to manage newly submitted property listings. From this dashboard, they can review, approve, or reject listings, ensuring that only verified properties are published on the platform.
+The Admin Rejected Products page is where administrators can view products that have been rejected by admins. This page allows admins to review these items further, and either approve them or delete them completely from the database.
 
 ![feature10][fimage10]
 
-### Admin Potential Buyers
+### Admin: Create Menu
 
-This feature allows agents and admin users to view and manage potential buyers interested in properties listed for sale (users that clicked on the "Interested" button). Agents can contact interested buyers directly with the email button, dismiss an interest, or mark a property as sold, which would delete all interests of any user in that respective property.
+The Admin Create Menu is a transition page, that provides admins with the option to add new subcategories, product types, or individual products, by simply clicking/tapping on one of the menu buttons.
 
 ![feature11][fimage11]
 
-### Admin Potential Tenants
+### Admin: Create Subcategory Page
 
-Similar to the Potential Buyers feature, the Admin Potential Tenants section helps agents manage renters interested in properties available to rent.
+This page allows administrators to add subcategories within a main grocery category (Food, Drinks, Household). For convenience, the existing subcategories are displaying underneath. The admin can select which category the new subcategory will fall under, and enter the name to create it.
 
 ![feature12][fimage12]
 
-### Admin Closed Deals
+### Admin: Create Product Type Page
 
-The Admin Closed Deals feature provides a record of all successfully closed property deals. Agents can review the history of sales and rentals, ensuring that all transactions are properly documented and finalised, and also relist the property.
+Similar to the "Admin: Create Subcategory Page", the Create Product Type Page allows admins to create a new product type (a sub-subcategory), by selecting the main category, subcategory, and entering the product type name. The existing product types are also displayed for convenience and to prevent doubled creation.
 
 ![feature13][fimage13]
 
-### Admin Rejected Homes
+### Admin: Create Product Page
 
-The Admin Rejected Homes feature allows agents and admins to review properties that were submitted but not approved for listing. Here, the admin/agent can request a reevaluation, which will move it back to the main admin listings screen. Furthermore, admins and agents can easily change their real estate in the admin sidebar, which would filter the listings/buyers/renters by real estate agency.
+The Admin Create Product page is where admins can add new products, by entering the name, measurement, unit, select the appropriate categorisation, upload an image (max 2MB), and the pricing information. Unlike the standard user's "Add Product Page", this page immediately creates and lists a product on CHEAPR, and does not require approval first, since an administrator is creating it.
 
 ![feature14][fimage14]
+
+### Admin: Edit Product Page
+
+This page is for administrators to modify the details of existing products, which not only includes the pricing, but all other information as well as changing the product image. This page is essential for keeping product information current and correct, such as adjusting prices or updating spell mistakes, etc., ensuring that users have access to the most accurate data.
+
 ![feature15][fimage15]
 
 ## Concept Process
 
-The `Conceptual Process` consisted of visual research (including research colour, design elements, typography, etc.), high-fidelity wireframing (to be used as reference for development), and planning the architecture of the Reosemont Estates website.
-
-### Ideation & Wireframing
+The `Conceptual Process` for CHEAPR involved creating a comprehensive project brief to outline the application's objectives, core requirements, and desired user experience. Key tasks included defining a color palette and design elements within Figma and ensuring consistency in the design system with TailwindCSS and Bootstrap. The design phase centered on creating high-fidelity wireframes in Figma, which served as a foundational reference for development. As development progressed, designs were occasionally adapted to reflect new requirements and technical considerations.
 
 ![image5][image5]
-<br>
-![image6][image6]
 
-### ER Diagram
+![image6A][image6A]
 
-![image8][image8]
+![image6B][image6B]
+
+### Wireframing & Old Designs
+
+![image7A][image7A]
+
+![image7B][image7B]
+
+![image7C][image7C]
 
 ## Development Process
 
-The Development Process involved the technical implementation of both the frontend and backend of the Rosemont Estates application. This section highlights the key functionalities developed, challenges faced, and solutions implemented.
+The Development Process focused on building both the frontend and backend of CHEAPR, implementing essential functionality, and tackling development challenges. This section outlines key features, highlights, and solutions to the issues encountered during implementation.
 
 ### Implementation Process
 
-- Implemented user authentication and session management using PHP and MySQL to ensure secure login and role-based access.
-- Developed dynamic filtering functionality for property listings, allowing users to search by location, price range, number of rooms, exterior areas and features.
-- Created a responsive frontend using React, Tailwind and Chakra UI, ensuring a seamless user experience across devices.
-- Integrated a custom email button feature, allowing direct communication between potential buyers/tenants and agents.
-- Designed and implemented the admin dashboard with features for managing property listings, potential buyers, and tenants, as well as handling rejected and closed deals.
-- Set up role-based page access controls to ensure that users and agents have appropriate permissions across different sections of the site (such as editing buttons only appearing for users who own specific properties)
+- Integrated Firebase authentication for user sign-up and login, providing secure, role-based access to the platform.
+- Developed dynamic price comparison functionality, allowing users to view grocery products from various stores, filter by categories, and easily identify the best deals.
+- Created a responsive and user-friendly frontend with React, Bootstrap, and TailwindCSS, optimised for seamless use across devices.
+- Established a shopping planner feature, allowing users to save selected items and plan their shopping.
+- Built an admin dashboard with tools for managing product listings, reviewing flagged items, approving new products, and overseeing user-submitted data.
+- Implemented Firebase Realtime Database for storing product data and used Firebase Storage for managing product images, ensuring efficient data management and secure storage.
 
 #### Highlights
 
-- Successfully implemented a fully functional role-based access control system, ensuring that users only have access to the appropriate sections of the site.
-- Developed a comprehensive filtering system for property listings, providing users with powerful tools to find the properties that match their needs.
-- Added dynamic design rendering changes, depending on content (such as houses with 1-5 images)
+- **Personalised Shopping Planner:** Developed a user-driven planner feature that automatically calculates and groups products under the cheapest store, with the ability to "jump" or move items if they are the same price.
+- **Category & Product Data Structuring:** Structured data in Firebase in such a way that product information is kept separate from the categorisation of each item - only a productId is stored under the product type in the categories node, thus keeping the data neat and organised.
 
 #### Challenges
 
-- **State Synchronisation:** One of the primary challenges was synchronising state across multiple components, particularly when managing session data. This issue was addressed by implementing a centralised state management approach, often within the parent component or page, to ensure consistency and reliability across the application.
+- **Complex Data:** Managing and organising large volumes of product data, categories, subcategories, and prices across multiple stores presented a significant challenge. Ensuring the right balance between data normalisation and ease of access was essential to avoid redundancy and keep the system fast, especially as the dataset grew.
 
-- **React-PHP Integration:** Integrating React with PHP posed several difficulties, especially in maintaining seamless communication between the frontend and backend. Although the process was complex and at times frustrating, it provided valuable insights into managing the interoperability between different programming environments. Continuous debugging and testing were essential in overcoming these hurdles and ensuring a smooth integration.
+- **State Consistency:** Maintaining a consistent state across the app, particularly for user actions like adding/removing items from the planner, required diligent state management and testing.
 
 ### Future Implementation
 
-- **Enhanced Analytics**: Implementing analytics features for admin users to track property views, user interactions, and other key metrics.
-- **Automated Property Valuation**: Integrating an AI-based system for estimating property values based on market trends.
-- **Advanced Filtering Options**: Adding more detailed filtering options, such as neighborhood amenities, or proximity to public transportation.
+- **Additional Stores**: Include more South African grocery stores, providing users with a broader range of options and price comparisons.
+
+- **Web Scraping Price Data**: Implement web scraping or API integrations to automatically gather up-to-date product prices from various online grocery stores (if allowed/legal).
+
+- **Cart Product Notifications**: Implement a feature where users can receive notifications when their carted products drop in price, helping them save money on regular purchases.
 
 ## Final Outcome
 
@@ -311,7 +359,7 @@ The Development Process involved the technical implementation of both the fronte
 
 To see a run through of the application, click below:
 
-[View Demonstration](https://youtu.be/K2DtZRP9LBY?si=4abhtoUpneIFh21x)
+[View Demonstration](https:/)
 
 <!-- ROADMAP -->
 
@@ -352,27 +400,30 @@ Distributed under the MIT License. See `LICENSE` for more information.\
 
 <!-- MARKDOWN LINKS & IMAGES -->
 
-[image1]: src/assets/mockups/macbook_mockup.png
-[fimage1]: src/assets/mockups/01login.png
-[fimage2]: src/assets/mockups/02signup.png
-[fimage3]: src/assets/mockups/03home.png
-[fimage4]: src/assets/mockups/04listings.png
-[fimage5]: src/assets/mockups/05filter.png
-[fimage6]: src/assets/mockups/06individual.png
-[fimage7]: src/assets/mockups/07edit.png
-[fimage8]: src/assets/mockups/08create.png
-[fimage9]: src/assets/mockups/09profile.png
-[fimage10]: src/assets/mockups/10adminListings.png
-[fimage11]: src/assets/mockups/11potBuyers.png
-[fimage12]: src/assets/mockups/12potTenants.png
-[fimage13]: src/assets/mockups/13closedDeals.png
-[fimage14]: src/assets/mockups/14RejectedHomes.png
-[fimage15]: src/assets/mockups/15agencyChange.png
-[image5]: src/assets/mockups/LoginDesign.jpg
-[image6]: src/assets/mockups/HomeDesign.jpg
-[image8]: src/assets/mockups/rosemontERD.png
-[image9]: src/assets/mockups/imac_light_mockup.png
-[image10]: src/assets/mockups/imac_dark_mockup.png
+[image1]: docs/readme_media/mockupA.png
+[fimage1]: docs/readme_media/01HomePage.png
+[fimage2]: docs/readme_media/02SignUp.png
+[fimage3]: docs/readme_media/03Login.png
+[fimage4]: docs/readme_media/04Groceries.png
+[fimage5]: docs/readme_media/05Individual.png
+[fimage6]: docs/readme_media/06Planner.png
+[fimage7]: docs/readme_media/07AdminMain.png
+[fimage8]: docs/readme_media/08AdminNew.png
+[fimage9]: docs/readme_media/09AdminFlag.png
+[fimage10]: docs/readme_media/10AdminReject.png
+[fimage11]: docs/readme_media/11AdminCreate.png
+[fimage12]: docs/readme_media/12AdminSubCat.png
+[fimage13]: docs/readme_media/13AdminPType.png
+[fimage14]: docs/readme_media/14AdminProductCreate.png
+[fimage15]: docs/readme_media/15AdminEditProd.png
+[image5]: docs/readme_media/ConceptualPrcoess.png
+[image6A]: docs/readme_media/Colours.png
+[image6B]: docs/readme_media/tailwindConfigImage.png
+[image7A]: docs/readme_media/oldDesign01.png
+[image7B]: docs/readme_media/oldDesign02.png
+[image7C]: docs/readme_media/oldDesign03.png
+[image9]: docs/readme_media/oldDesign02.png
+[image10]: docs/readme_media/oldDesign03.png
 
 <!-- Refer to https://shields.io/ for more information and options about the shield links at the top of the ReadMe file -->
 

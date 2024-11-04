@@ -1,0 +1,1937 @@
+{
+  "categories": {
+    "10000": {
+      "name": "food",
+      "subcategories": {
+        "10001": {
+          "name": "fruit_and_vegetables",
+          "types": {
+            "10002": {
+              "name": "fresh_fruit",
+              "productIds": [
+                null,
+                "-O9_MjzDtke9i1C8juDq",
+                "-O9_O-OUmLUexg3JL6hq",
+                "-O9_OcD1SEFrs-uKpezD",
+                "-O9_RYNgRIMzU1cA5CDq",
+                "-O9_nS8tl5xE1knFbrt_",
+                "-O9_qcJuzLOSHe1x78cn",
+                "-O9_ynv3lRP3DttL_DA8",
+                "-OAbCHg8jA-dAFPr_SGV",
+                "-OAbFO-0tpgUhim17KOh"
+              ]
+            },
+            "10003": {
+              "name": "fresh_vegetables",
+              "productIds": [
+                "placeholder",
+                "-O9_QvcwTeoAI3dIINnv",
+                "-O9_Rz1aO9A1un8c6ZsP"
+              ]
+            },
+            "10004": {
+              "name": "frozen_vegetables",
+              "productIds": [
+                "placeholder",
+                "-O9_kYIrYCCy5dmw0kr3"
+              ]
+            },
+            "-OAWwfpsK223ZsQTERfg": {
+              "id": "-OAWwfpsK223ZsQTERfg",
+              "name": "frozen_fruit",
+              "productIds": [
+                "-OAXQy09sjJTIiOIgE03"
+              ]
+            }
+          }
+        },
+        "10005": {
+          "name": "meat_poultry_fish",
+          "types": {
+            "10006": {
+              "name": "fresh_meat",
+              "productIds": [
+                "placeholder",
+                "-O9_tm5OELBfaUuILgQ2"
+              ]
+            },
+            "10007": {
+              "name": "fish_seafood",
+              "productIds": [
+                "placeholder"
+              ]
+            },
+            "10008": {
+              "name": "frozen_meat",
+              "productIds": [
+                "placeholder",
+                "-O9_juXZXbZuUHOd6l4m"
+              ]
+            },
+            "10009": {
+              "name": "cured_processed_meats",
+              "productIds": [
+                "placeholder",
+                "-O9_n-gT8VI1arNIciGM"
+              ]
+            }
+          }
+        },
+        "10010": {
+          "name": "dairy_eggs",
+          "types": {
+            "10011": {
+              "name": "milk_cream",
+              "productIds": [
+                "placeholder",
+                "-O9_U696WhmCRefzJD-W"
+              ]
+            },
+            "10012": {
+              "name": "cheese",
+              "productIds": [
+                "placeholder",
+                "-O9_m3babolUhhZWVzsz",
+                "-O9_ugvy9WjnUY7h6yQw"
+              ]
+            },
+            "10013": {
+              "name": "yoghurt",
+              "productIds": [
+                "placeholder",
+                "-O9_zqrTKQOJCnePwUqe"
+              ]
+            },
+            "10014": {
+              "name": "eggs",
+              "productIds": [
+                "placeholder",
+                "-O9_pwYGV9pF-tnwn9P5"
+              ]
+            },
+            "10015": {
+              "name": "alternatives",
+              "productIds": [
+                "placeholder",
+                "-O9_xpJM3j79ORtwQPEJ",
+                "-O9_xGz5tnSae-802fTg"
+              ]
+            },
+            "-O9_UbIBdJDhA2gRCNiA": {
+              "id": "-O9_UbIBdJDhA2gRCNiA",
+              "name": "ice_cream",
+              "productIds": [
+                "-O9_UyDSEUACgcCU-1KS"
+              ]
+            }
+          }
+        },
+        "10016": {
+          "name": "baked_goods",
+          "types": {
+            "10017": {
+              "name": "fresh_bread",
+              "productIds": [
+                "placeholder",
+                "-O9_T78dsZH2QZiMRaao"
+              ]
+            },
+            "10018": {
+              "name": "pastries",
+              "productIds": [
+                "placeholder",
+                "-OAXOPgahpyrBzZ-bJzy"
+              ]
+            },
+            "10019": {
+              "name": "cakes_pies",
+              "productIds": [
+                "placeholder"
+              ]
+            }
+          }
+        },
+        "10020": {
+          "name": "pantry",
+          "types": {
+            "10021": {
+              "name": "pasta_noodles",
+              "productIds": [
+                "placeholder",
+                "-O9_vFr40YU65WPIYPm5"
+              ]
+            },
+            "10022": {
+              "name": "rice_grains",
+              "productIds": [
+                "placeholder",
+                "-O9_w1InUef35J0RHi9z",
+                "-O9_yF9Oa-m_gYZmfVFX"
+              ]
+            },
+            "10023": {
+              "name": "canned_goods",
+              "productIds": [
+                "placeholder",
+                "-O9_zGxqrBZQUcaYK_51"
+              ]
+            }
+          }
+        },
+        "10024": {
+          "name": "snacks",
+          "types": {
+            "10025": {
+              "name": "chips",
+              "productIds": [
+                "placeholder",
+                "-O9_r6YZmOPkTGNor5uy"
+              ]
+            },
+            "10026": {
+              "name": "nuts_seeds",
+              "productIds": [
+                "placeholder"
+              ]
+            },
+            "10027": {
+              "name": "cookies",
+              "productIds": [
+                "placeholder",
+                "-O9_s0IVvAv-mM7qZbMi",
+                "-O9_siiPLu3p1rKTRuIH",
+                "-O9_ss70fCrVdWDMN13F"
+              ]
+            },
+            "10028": {
+              "name": "chocolates",
+              "productIds": [
+                "placeholder",
+                "-O9_wdO30GoTKYAxNSmG"
+              ]
+            },
+            "10029": {
+              "name": "sweets",
+              "productIds": [
+                "placeholder",
+                "-OAXQKr9_DvH2D1alvOp",
+                "-OAbDx5KUBY2MZdSTOIg"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "20000": {
+      "name": "drinks",
+      "subcategories": {
+        "20001": {
+          "name": "non_alcoholic",
+          "types": {
+            "20002": {
+              "name": "water",
+              "productIds": [
+                "placeholder",
+                "-OAbCX62lbz-zGOw0IEG",
+                "-OAbCrUaBqnAD9NXmKfZ"
+              ]
+            },
+            "20003": {
+              "name": "soft_drinks",
+              "productIds": [
+                "placeholder",
+                "-O9_SZTEy1ufMxPnP6W7",
+                "-OAbBj-1_nrojLiiYj_9",
+                "-OAbFWZRvSEXVIpzLPOn"
+              ]
+            },
+            "20004": {
+              "name": "juices",
+              "productIds": [
+                "placeholder",
+                "-OAbDMrsbv8GqKnabhrE",
+                "-OAbDmyWfo4I5LafrJpq"
+              ]
+            },
+            "20005": {
+              "name": "teas_coffee",
+              "productIds": [
+                "placeholder",
+                "-OAbBvO_YlLtzBjI6fBv"
+              ]
+            }
+          }
+        },
+        "20006": {
+          "name": "wine",
+          "types": {
+            "20007": {
+              "name": "red_wine",
+              "productIds": [
+                "placeholder",
+                "-O9_jJbWSg5dQk_SYq-J"
+              ]
+            },
+            "20008": {
+              "name": "white_wine",
+              "productIds": [
+                "placeholder"
+              ]
+            },
+            "20009": {
+              "name": "rose",
+              "productIds": [
+                "placeholder"
+              ]
+            },
+            "20010": {
+              "name": "sparkling_wine",
+              "productIds": [
+                "placeholder"
+              ]
+            }
+          }
+        },
+        "20011": {
+          "name": "spirits",
+          "types": {
+            "20012": {
+              "name": "vodka",
+              "productIds": [
+                "placeholder",
+                "-OAXPPb9XFLSWMHuGSv4"
+              ]
+            },
+            "20013": {
+              "name": "whiskey",
+              "productIds": [
+                "placeholder"
+              ]
+            },
+            "20014": {
+              "name": "gin",
+              "productIds": [
+                "placeholder",
+                "-O9_lKCtVJ6ccnv9RXFE"
+              ]
+            },
+            "20015": {
+              "name": "tequila",
+              "productIds": [
+                "placeholder"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "30000": {
+      "name": "household",
+      "subcategories": {
+        "30001": {
+          "name": "cleaning_supplies",
+          "types": {
+            "30002": {
+              "name": "cleaners",
+              "productIds": [
+                "placeholder",
+                "-O9JLGJs8XF6_6GeWWEj",
+                "-OAbD0nUYB42ZxwzgOiO"
+              ]
+            },
+            "30003": {
+              "name": "laundry",
+              "productIds": [
+                "placeholder"
+              ]
+            },
+            "30004": {
+              "name": "dishwashing",
+              "productIds": [
+                "placeholder",
+                "-O9_iC84SMha7_H5elPs"
+              ]
+            },
+            "30005": {
+              "name": "trash",
+              "productIds": [
+                "placeholder",
+                "-OAbDX6m8XUDDoO-HXwK"
+              ]
+            }
+          }
+        },
+        "30006": {
+          "name": "kitchen",
+          "types": {
+            "30007": {
+              "name": "foils_wrapping",
+              "productIds": [
+                "placeholder",
+                "-O9a-MgEwRCb_9sy9B_0"
+              ]
+            },
+            "30008": {
+              "name": "disposable",
+              "productIds": [
+                "placeholder",
+                "-O9_oUku_O157JJHsQX6",
+                "-OAbC5fwXfxnPfoScV-N",
+                "-OAbDBedXS7Cq6fUo3wF",
+                "-OAbFg3lbr2RTLKNnVsd"
+              ]
+            },
+            "30009": {
+              "name": "utensils",
+              "productIds": [
+                "placeholder"
+              ]
+            },
+            "30010": {
+              "name": "paper_products",
+              "productIds": [
+                "placeholder",
+                "-O9_nuFzOV96QXMzojqp"
+              ]
+            }
+          }
+        },
+        "30011": {
+          "name": "bathroom",
+          "types": {
+            "30012": {
+              "name": "cleaning",
+              "productIds": [
+                "placeholder",
+                "-OAbCfj8WPA_-Ho0dATm"
+              ]
+            },
+            "30013": {
+              "name": "toilet_paper",
+              "productIds": [
+                "placeholder",
+                "-O9a-zoHP1cM59mvE6iA",
+                "-O9a0cCxw2FcehWJEY4k"
+              ]
+            },
+            "30014": {
+              "name": "personal_care",
+              "productIds": [
+                "placeholder"
+              ]
+            }
+          }
+        },
+        "-OAWil5TiT2zIhRYKSQi": {
+          "id": "-OAWil5TiT2zIhRYKSQi",
+          "name": "dining_room"
+        }
+      }
+    }
+  },
+  "products": {
+    "approved": {
+      "-O9_MjzDtke9i1C8juDq": {
+        "adminDecisionDate": "2024-10-19 17:21:57",
+        "amount": "400",
+        "checkers": {
+          "price": "49.99",
+          "updated": "2024-10-19"
+        },
+        "created": "2024-10-19 17:21:57",
+        "image": "https://storage.googleapis.com/cheapr-fc010.appspot.com/product_images/1729351317704_10359932EA-20190726-Media-checkers515Wx515H.webp?GoogleAccessId=firebase-adminsdk-61cwt%40cheapr-fc010.iam.gserviceaccount.com&Expires=1767132000&Signature=UTeWZguFTr5pWoROoWYhrQ98C%2Fc5n3aVTBoi%2FneYju8CFsD4%2B6qp3AW0Yczbomudh8TNoSZYLk3hLxkzIGC9XUwsMh6gyeMt3a6KEcRsDym3lah9Kn3AH5wSliTjIxVUUycOCCmk%2B6lxhZnsUgJLE0TVm1kRt%2FyNxZvWrCtgCo3ggy%2F37yQBjA3Ml1%2BKSR9%2BZszYI17mY%2BoD8ZsgZym0zkc%2F1JQzL%2BZQHIbq05nENGimOhOL%2BZydFNf6t7Q4lpATGjNkczaWr4ajgPqJwAdtlFnLLBGKlV2t%2Fk5HsHdjLuqq%2BpgIdojS7Hyei%2BDZgk8s5WS%2FpMVQezVFO7pdq7XfYA%3D%3D",
+        "name": "Strawberries",
+        "pnp": {
+          "price": 0
+        },
+        "spar": {
+          "price": "64.59",
+          "updated": "2024-10-19"
+        },
+        "unit": "g",
+        "woolworths": {
+          "price": "56.99",
+          "updated": "2024-10-19"
+        }
+      },
+      "-O9_O-OUmLUexg3JL6hq": {
+        "adminDecisionDate": "2024-10-19 17:27:27",
+        "amount": "1.5",
+        "checkers": {
+          "price": "32.99",
+          "updated": "2024-10-19"
+        },
+        "created": "2024-10-19 17:27:27",
+        "image": "https://storage.googleapis.com/cheapr-fc010.appspot.com/product_images/1729351647494_Granny-Smith-Apples-1-5-kg-20016425.jpeg?GoogleAccessId=firebase-adminsdk-61cwt%40cheapr-fc010.iam.gserviceaccount.com&Expires=1767132000&Signature=M%2BMfMsAvCrXlbPQTClAxdOiVRb2TTroP%2BllOsWgZek1EFzUYanPTRVZszy2X%2BMiWkJxZYRUUUFo5bcspTO1EMRQbvvhXgVEshAwTaUOTu0hmtt549KPTd9Ibkx6ZjvPphaj6kcVCe9s0pNbx3FD9xvvtXG%2Fls99cNM8EH33jt99jlEdKWOV%2Fai7lXbMmeUZK7B%2F4yn4tunQQpmoP5vw%2FMaUKbf94%2BHahsNyZLpvgq%2F%2FPhnHBbAHxW4415hOT2HehmS9XwcrtObSvqSLOfIKkNjQg3pUV%2BYbjzQIsSH6c2tnY1%2FxwEdYsQwKJYvghxv3NhkcIe%2FnaG5g1ZwFqtvashA%3D%3D",
+        "name": "Granny Smith Apples",
+        "pnp": {
+          "price": "34.99",
+          "special": "2024-12-31",
+          "updated": "2024-10-19"
+        },
+        "spar": {
+          "price": "34.99",
+          "updated": "2024-10-19"
+        },
+        "unit": "kg",
+        "woolworths": {
+          "price": "36.99",
+          "updated": "2024-10-19"
+        }
+      },
+      "-O9_OcD1SEFrs-uKpezD": {
+        "adminDecisionDate": "2024-10-19 17:30:10",
+        "amount": "1",
+        "checkers": {
+          "price": "21.99",
+          "updated": "2024-10-19"
+        },
+        "created": "2024-10-19 17:30:10",
+        "image": "https://storage.googleapis.com/cheapr-fc010.appspot.com/product_images/1729351810385_10258387EA-20190726-Media-checkers515Wx515H.webp?GoogleAccessId=firebase-adminsdk-61cwt%40cheapr-fc010.iam.gserviceaccount.com&Expires=1767132000&Signature=AcUA2R4%2FR5XobRbzycLoBM%2Fo8gQX7yzywsipdjDu6tIEbzuOdV%2FSiqw%2BFGh%2FnBsooWtJ9CztrGj%2B4MZo%2BqNDo0MK0uFcPsSufjhWg7Z2RWBC3M3WEl%2B%2Bon4W%2BgKsJdqfP4wqgInN7Rp06VkyCEWY8aJOzhkGxDMKSnHghFnYfwDLDLMEVDH4RNMPSViMufDDMNfPP58rSsIllNGtD7O01Lm%2FYaRW4X5iJDee%2Bodr4p2R1fGvqJgPBhy2CgNwhiEsAgM9rIKSsvnbDaxtcyUv9Ja3oKjqIi3qDgUrTrzHXiIZXaOP6ECDVdoaPbPyP35U0vl2SWg5zl5kHXYZfVGvwg%3D%3D",
+        "name": "Queen Pineapple",
+        "pnp": {
+          "price": "18.99",
+          "updated": "2024-10-19"
+        },
+        "spar": {
+          "price": 0
+        },
+        "unit": "pcs",
+        "woolworths": {
+          "price": "24.99",
+          "updated": "2024-10-19"
+        }
+      },
+      "-O9_QvcwTeoAI3dIINnv": {
+        "adminDecisionDate": "2024-10-19 17:40:14",
+        "amount": "1",
+        "checkers": {
+          "price": "26.99",
+          "updated": "2024-10-19"
+        },
+        "created": "2024-10-19 17:40:14",
+        "image": "https://storage.googleapis.com/cheapr-fc010.appspot.com/product_images/1729352414482_10145422EA-checkers515Wx515H.webp?GoogleAccessId=firebase-adminsdk-61cwt%40cheapr-fc010.iam.gserviceaccount.com&Expires=1767132000&Signature=BXx0HFu4JK1BquoLU%2FrE1e%2FAydZADGxJsz%2FJFGfrKIOpgKfAuR7J6b6QLcRn4b8oE8lNGjGExQQ5MrBOOg6FobCMpZ%2F1wr4WjwH2EYk5ZtWI00Qa6m2DldrW5y04casfOlv337jVTELGUzon7%2F04I5TfjcACpGRdyplROlplB6eorfFjWDxTs6%2Ft7YlnxbW3eXnU15kkKQXGns7RHJLSLoQN6jYfgYYrQ7oPGmQtjzhhDYxqedw1QGb8uiM1Ug2UV8CoupyaKHikkPw1MZlkeojXylceLqQtQIX9QM7CHlp8ItApfKKc7GQG%2FWSH4jMMIRMTJG9tgF2U8EHjhxZEzg%3D%3D",
+        "name": "Tomatoes",
+        "pnp": {
+          "price": "26.99",
+          "updated": "2024-10-19"
+        },
+        "spar": {
+          "price": "32.99",
+          "updated": "2024-10-19"
+        },
+        "unit": "kg",
+        "woolworths": {
+          "price": "31.99",
+          "updated": "2024-10-19"
+        }
+      },
+      "-O9_RYNgRIMzU1cA5CDq": {
+        "adminDecisionDate": "2024-10-19 17:42:57",
+        "amount": "200",
+        "checkers": {
+          "price": "49.99",
+          "updated": "2024-10-19"
+        },
+        "created": "2024-10-19 17:42:57",
+        "image": "https://storage.googleapis.com/cheapr-fc010.appspot.com/product_images/1729352577908_10713084EA-checkers515Wx515H.webp?GoogleAccessId=firebase-adminsdk-61cwt%40cheapr-fc010.iam.gserviceaccount.com&Expires=1767132000&Signature=iLUeg1%2BMC2iFharuVFdoPz74ZIuEyDAyzd4tjeFDgrFWO8cBAK3OFeLa29NzDJb9F8L547eL64mSc7XaR%2FPFJgpee16G%2FEspLcBbE3mXhy9rCOaOXHOPlb8SniLpkLrsEKVMge6IUSiNBPR9%2Bk%2BLmP6rcSslFuWZW%2FU6PJ42jq2WVM%2BdzlHMSO34Z7djezl1JWVzbKa99q2GOcCZsUnbbIULhJQ6bV%2BPLtYWmaQ8TVP3CVMc1ZveY4nhMI4YbNVCrRji%2Fq03ClwkVxpC7SJA5cSj7ZlAhacNJBtrCxM1xb4f14jBXH%2FSMMdUOxA3SBdxE2EKru3l5r1AR4OpcH8ikg%3D%3D",
+        "name": "Blueberries",
+        "pnp": {
+          "price": "54.99",
+          "updated": "2024-10-19"
+        },
+        "spar": {
+          "price": "56.99",
+          "updated": "2024-10-19"
+        },
+        "unit": "g",
+        "woolworths": {
+          "price": "54.99",
+          "updated": "2024-10-19"
+        }
+      },
+      "-O9_Rz1aO9A1un8c6ZsP": {
+        "adminDecisionDate": "2024-10-19 17:44:51",
+        "amount": "1",
+        "checkers": {
+          "price": "14.99",
+          "updated": "2024-10-19"
+        },
+        "created": "2024-10-19 17:44:51",
+        "image": "https://storage.googleapis.com/cheapr-fc010.appspot.com/product_images/1729352691085_10641732EA-20190726-Media-checkers515Wx515H.webp?GoogleAccessId=firebase-adminsdk-61cwt%40cheapr-fc010.iam.gserviceaccount.com&Expires=1767132000&Signature=Ln3UeImJPqEBGWF9XK5Wj5ZiCklaOESW%2FVObtwv%2BfVvB1vTnntcyQSAeWobF4%2FCd5jwb7qb6cxM6OHykfa%2BinzLe0UUrBMnKdGF4DmZP44uRaeEMbIWeGbsyQXjyceEq0uHFeK3kqZFoGDlofD1RJTm7R3q5daOybmQWdI1Tb0RWoJR7yI%2Fu0go7gLpS5CY5QHlOtetOu5bHOKt%2BtfBTBK5H6jBSEjCjOiCPX%2FRxIsw0lYZtD9RGan3Uy%2Fpk%2FU8KHDWcKX3A9%2ByzJyJB8kj2sk1GCYxhP%2BX77%2BgbCKFG9TdlwVgicArCtcDlucXncxRddWaT3qrglORHIm%2FPlvct3Q%3D%3D",
+        "name": "Carrots",
+        "pnp": {
+          "price": "15.99",
+          "updated": "2024-10-19"
+        },
+        "spar": {
+          "price": "15.99",
+          "updated": "2024-10-19"
+        },
+        "unit": "kg",
+        "woolworths": {
+          "price": "17.99",
+          "updated": "2024-10-19"
+        }
+      },
+      "-O9_SZTEy1ufMxPnP6W7": {
+        "adminDecisionDate": "2024-10-19 17:47:24",
+        "amount": "2",
+        "checkers": {
+          "price": "27.99",
+          "updated": "2024-10-19"
+        },
+        "created": "2024-10-19 17:47:24",
+        "image": "https://storage.googleapis.com/cheapr-fc010.appspot.com/product_images/1729352844479_10136669EA-checkers515Wx515H.webp?GoogleAccessId=firebase-adminsdk-61cwt%40cheapr-fc010.iam.gserviceaccount.com&Expires=1767132000&Signature=XBp6Tzqoao1KniytuiNiSEJSfyIodiEYxk8fJI4r2PxBaglOL0Ocx%2BHbebd%2BDyD3mnqrCcwNMieyS7lAx%2BWfmDSMccoule5RuBmMvHd3RFkGSQpf5WhpA33IF4Gl3QF0DtAHblkIkhWSWDoRqHuJwY2bsc1KkINUMfABekY8Y%2Fg9vsLd6RaxuHdImsa8qFtiVoqdE%2FHUBfsSI4xYQ9cov%2BM9EZ4PhjlNp7YYbhXX05qDI4R3CuISUOD1V%2B9%2BDgR5m4cHXYELUqgH5NoZPMpukepGymBvobHiawXtZz7Q6DbV8NksIIolFPisnb1gYOKwKmDDdr%2Ba174soqslNKnZww%3D%3D",
+        "name": "Coca Cola",
+        "pnp": {
+          "price": "26.99",
+          "updated": "2024-10-19"
+        },
+        "spar": {
+          "price": 0
+        },
+        "unit": "l",
+        "woolworths": {
+          "price": "27.99",
+          "updated": "2024-10-19"
+        }
+      },
+      "-O9_T78dsZH2QZiMRaao": {
+        "adminDecisionDate": "2024-10-19 17:49:49",
+        "amount": "700",
+        "checkers": {
+          "price": "19.99",
+          "updated": "2024-10-19"
+        },
+        "created": "2024-10-19 17:49:49",
+        "image": "https://storage.googleapis.com/cheapr-fc010.appspot.com/product_images/1729352989845_10136301EA-checkers515Wx515H.webp?GoogleAccessId=firebase-adminsdk-61cwt%40cheapr-fc010.iam.gserviceaccount.com&Expires=1767132000&Signature=kVIdJK80XjHCpgx5rhzL3z5dE3C1MUlIjzT6w6TQBrE8b7p54OqzzGMCjz9F%2Bts%2FybNHy%2BcTwKEoAsLLcVOXNy%2BYkHB%2B0HDwMMJmpSWdqNdmYom3jDEwiA7MQi7%2FFLJGCyvBBO26qBYtlXlSfeE0HLZ4GV00kRoAK6XJxfEwZ5rbLR4G1i5Zoz%2BxvJJW5beBdpZwax%2BCdNdU5W9Y%2FGm6ikyCqxSVKlVzhU0wSIcvukj1rNnVSYwDASkHNN6jea8M%2FxKo9cn%2BTTGZaxJUuPf%2BIQmAmm9HPhLN65%2Ff1%2FAWPrMZFrOpdiTekeSAvDOcknD5tc8xT4jpNVBjLfqXZm%2FBSA%3D%3D",
+        "name": "Albany White Bread",
+        "pnp": {
+          "price": "18.99",
+          "updated": "2024-10-19"
+        },
+        "spar": {
+          "price": "16.99",
+          "special": "2024-10-22",
+          "updated": "2024-10-19"
+        },
+        "unit": "g",
+        "woolworths": {
+          "price": 0
+        }
+      },
+      "-O9_U696WhmCRefzJD-W": {
+        "adminDecisionDate": "2024-10-19 17:54:08",
+        "amount": "2",
+        "checkers": {
+          "price": "36.99",
+          "updated": "2024-10-19"
+        },
+        "created": "2024-10-19 17:54:08",
+        "image": "https://storage.googleapis.com/cheapr-fc010.appspot.com/product_images/1729353248424_checkers515Wx515H-medias-10136729EA-en-shopriteGlobalProductCatalog-20240723032941.webp?GoogleAccessId=firebase-adminsdk-61cwt%40cheapr-fc010.iam.gserviceaccount.com&Expires=1767132000&Signature=KIgx%2FozMfD%2FhP9cyfooHSwsb6eJVmbunRIMWg0QwmwQnfiSG3SgnhGulwsgHpRjcPBTX3YBjygG%2BjNXU4cdDgDXHme9SXIuPYSpDFY0M7DBbmH%2FvH7468FHBSTpOGewrEk8U5OpcTwt%2Bi4hmzxV%2FKL7Aml2JKsOW5Bl4RSrDg0iAjA4pVQUNN3oxY62YeObkIXRtwgKky49vgarTjqUHNvT3eRQRYuWDWac%2B1QkLVLWzsWukYainqNc3BNjVNwoCStHppkbMsVeHNfcZiBRe6vDtCKDHfxmqxgOmit%2FwXqZdAHaNHnl8EpjYCwO3hI8bouoOhYxXmLUI%2Btekv9NpkQ%3D%3D",
+        "name": "Full Cream Milk",
+        "pnp": {
+          "price": "32.99",
+          "special": "2024-11-15",
+          "updated": "2024-10-19"
+        },
+        "spar": {
+          "price": "32.99",
+          "updated": "2024-10-19"
+        },
+        "unit": "l",
+        "woolworths": {
+          "price": "45.99",
+          "updated": "2024-10-19"
+        }
+      },
+      "-O9_UyDSEUACgcCU-1KS": {
+        "adminDecisionDate": "2024-10-19 17:57:53",
+        "amount": "480",
+        "checkers": {
+          "price": "99.99",
+          "special": "2024-11-30",
+          "updated": "2024-10-19"
+        },
+        "created": "2024-10-19 17:57:53",
+        "image": "https://storage.googleapis.com/cheapr-fc010.appspot.com/product_images/1729353473630_10702236EA-checkers515Wx515H.webp?GoogleAccessId=firebase-adminsdk-61cwt%40cheapr-fc010.iam.gserviceaccount.com&Expires=1767132000&Signature=fETWHtrYnr8%2FIQw3deloPB64tvHku6mZHjgrvFA84uw8OznkkuutMd9JxnCLnVJXvIFL%2FnLqR%2BORXW2a9h0evjJvJCZOjSwaYQWZL8oyiq3MXSkwjX1VHS2zdI0G3aF8dj%2FDMqZNtKEvvvTHLrI4w2T1FjeMZ5WaQCAgHQLQ5BBf64XPXf8xuZVQFSZnHxnObbMSm5G%2BQnuG2LXCFGsp1lquEsj4p26dwymrwukJZyHIC7xr2IwUJXbQNH4U566CwjyPmSjnrMBNlb98mxVoH6nJyZ9mQXncUSX4zb8N8Oev5tg9v0jhlwBGhkiUE4PyGqGRiLGOiCVtzbrug18wmQ%3D%3D",
+        "name": "Crunchie Ice Cream",
+        "pnp": {
+          "price": "122.49",
+          "updated": "2024-10-19"
+        },
+        "spar": {
+          "price": "129.99",
+          "updated": "2024-10-19"
+        },
+        "unit": "ml",
+        "woolworths": {
+          "price": 0
+        }
+      },
+      "-O9_iC84SMha7_H5elPs": {
+        "adminDecisionDate": "2024-10-19 19:00:04",
+        "amount": "750",
+        "checkers": {
+          "price": "36.99",
+          "special": "2024-12-10",
+          "updated": "2024-10-19"
+        },
+        "created": "2024-10-19 19:00:04",
+        "image": "https://storage.googleapis.com/cheapr-fc010.appspot.com/product_images/1729357204822_10126901EA-checkers515Wx515H.webp?GoogleAccessId=firebase-adminsdk-61cwt%40cheapr-fc010.iam.gserviceaccount.com&Expires=1767132000&Signature=Oy4q5yTsTPva5QVHBV5X4nXL9SHufv4c2HhxxBa5Ol%2BMwLHhceT9tRbydeZkzQwznKZkqlYQyTDSBBOs8FieIAcXBqJ5bF7cx%2FG7bKaP1419Un2kYAnGolXL%2BEgyNF%2F0P6O5YdnUcglA4TF235yPFvf1syBJh9RatZtjcrbkIZnpaupo2Ey0Ge1z9qXqx1FnCRjXd453xdbIrKx59hhZukwNMDmQ3iGMRlwrsBmGlDkkKHCaoEBIsryISNWh0BF22G8KnAD2Qk7%2BV%2BLfcEYkJLUFy0aOQ%2BLBOhW7Wrt7gmq3CMaUlO3n23E2J3cd4dToK5HI7uRrQ7RbDE5IEq1ivA%3D%3D",
+        "name": "Sunlight Liquid",
+        "pnp": {
+          "price": "36.99",
+          "updated": "2024-10-19"
+        },
+        "spar": {
+          "price": "37.99",
+          "updated": "2024-10-19"
+        },
+        "unit": "ml",
+        "woolworths": {
+          "price": "37.99",
+          "updated": "2024-10-19"
+        }
+      },
+      "-O9_jJbWSg5dQk_SYq-J": {
+        "adminDecisionDate": "2024-10-19 19:04:57",
+        "amount": "5",
+        "checkers": {
+          "price": "169.99",
+          "updated": "2024-10-19"
+        },
+        "created": "2024-10-19 19:04:57",
+        "image": "https://storage.googleapis.com/cheapr-fc010.appspot.com/product_images/1729357497821_10382687EA-checkers515Wx515H.webp?GoogleAccessId=firebase-adminsdk-61cwt%40cheapr-fc010.iam.gserviceaccount.com&Expires=1767132000&Signature=TzM9RzFxFx7CCtg6BSuRNJHj0DTgcoCs1QS3GbpaggWSlD%2BwNF8%2BLTwwKtj%2BdIfAQ2XFsD2wIh1QuCjuW6Ed44RoYGslPJtebFSO9JuJlJbLIrAj9X044NG74jG%2BzNFw3CoyG6ELC3Nm%2Bk3IGQU3e%2BjrNoNsDjx0%2B81vFiXPlf9AdTYUgQqImT8iSz5zYfJYwF6yZ0uS5HQWTFbTK7ewpAZ5PUXuKey482pmFaSTSz2vUGZM9U1XU5Tj80nAINXByuomSZ%2FQXkH3xlEjv5aQAsmMOJa80MyCcHK85WErOaUW4ql9oquU%2Fae5mBy890UF%2F%2FpQcSEAYnzaU0E3do%2BLlw%3D%3D",
+        "name": "Namaqua Sweet Red",
+        "pnp": {
+          "price": "185.99",
+          "updated": "2024-10-19"
+        },
+        "spar": {
+          "price": 0
+        },
+        "unit": "l",
+        "woolworths": {
+          "price": 0
+        }
+      },
+      "-O9_juXZXbZuUHOd6l4m": {
+        "adminDecisionDate": "2024-10-19 19:07:32",
+        "amount": "500",
+        "checkers": {
+          "price": "25.99",
+          "updated": "2024-10-19"
+        },
+        "created": "2024-10-19 19:07:32",
+        "image": "https://storage.googleapis.com/cheapr-fc010.appspot.com/product_images/1729357652691_10137503EA-20190726-Media-checkers515Wx515H.webp?GoogleAccessId=firebase-adminsdk-61cwt%40cheapr-fc010.iam.gserviceaccount.com&Expires=1767132000&Signature=AFWmiwEAZ1N9qv2cF6ehlhvp0D7mXwxhrTQPntqkBTpWHXkLkKSszhADIIKkZ2qIo36smIzvDsesXRkACoO2%2FOzE41NkRJqeB4igpEuEC85hgbTHuMgoUFddDD8g9h8Zg%2Bgq2x1hcil7m4bYzPqikQGmsh5NiiuSG6RlgpsTBNJqYBGr9e64noI38AAgetjVwxLiwlN85lsFbp4u83Irkjngj7gikUhq%2Fwltt%2BKPT24efoOEmD0JCM2KT6NMLaJ9WywtBbr5isBLODSTFZ1Me7jnHzLkwsrEIiNjgiqHNmHAqoaO%2B11wO9QPMvXJIvaAcbmoZRLByMtxGodXnVIrVg%3D%3D",
+        "name": "Chicken Livers",
+        "pnp": {
+          "price": "27.99",
+          "updated": "2024-10-19"
+        },
+        "spar": {
+          "price": "29.99",
+          "updated": "2024-10-19"
+        },
+        "unit": "g",
+        "woolworths": {
+          "price": 0
+        }
+      },
+      "-O9_kYIrYCCy5dmw0kr3": {
+        "adminDecisionDate": "2024-10-19 19:10:19",
+        "amount": "600",
+        "checkers": {
+          "price": "34.99",
+          "updated": "2024-10-19"
+        },
+        "created": "2024-10-19 19:10:19",
+        "image": "https://storage.googleapis.com/cheapr-fc010.appspot.com/product_images/1729357819539_10459004EA-checkers515Wx515H.webp?GoogleAccessId=firebase-adminsdk-61cwt%40cheapr-fc010.iam.gserviceaccount.com&Expires=1767132000&Signature=ZKVTCD9wOiX9XgDh23jiOxmMHRLVPwRKd0DWMaKDvpzJNQ61CwkZFmuLEHrCpLhHnvTOioE8W7PqLmx%2BSpFTO5ZCGaPNh24ktm%2BX3wdelbgFRjOl1LU0ItLwkvd5F6KTugn1Fjgj7bIJ3C4uyUUxEcEHfKu%2BqPPZXdgMMdh5iiZqDV3rc5c6nslzxdI4dlBwPvZpOGV5YzlRAo%2Bd9SlL3INj4YxJfqniGMyasLjMFwyl7Da9D9Ko6TfUOC%2B1ncysOSTVvH5Nwtj6ZW2FT3FxIgxj%2Fir9YZyu35iPEFB4TSvdojG3Nf6pNXbDAtyS3tU32VRTTLs5QZnC6wdgokgY7A%3D%3D",
+        "name": "McCain Mixed Veg",
+        "pnp": {
+          "price": "53.99",
+          "updated": "2024-10-19"
+        },
+        "spar": {
+          "price": "37.99",
+          "special": "2024-11-22",
+          "updated": "2024-10-19"
+        },
+        "unit": "g",
+        "woolworths": {
+          "price": "64.99",
+          "updated": "2024-10-19"
+        }
+      },
+      "-O9_lKCtVJ6ccnv9RXFE": {
+        "adminDecisionDate": "2024-10-19 19:13:44",
+        "amount": "750",
+        "checkers": {
+          "price": "489.99",
+          "updated": "2024-10-19"
+        },
+        "created": "2024-10-19 19:13:44",
+        "image": "https://storage.googleapis.com/cheapr-fc010.appspot.com/product_images/1729358024571_10690077EA-add-checkers515Wx515H.webp?GoogleAccessId=firebase-adminsdk-61cwt%40cheapr-fc010.iam.gserviceaccount.com&Expires=1767132000&Signature=VBdXasqtavVRaQ85HMjNUfHPst4gbFokol4KDG%2B%2FB%2Fb%2FOSLN%2BHb6f7rsJ9ytYEq8yCZpBGLyHqls59IYQwQwKwy2VuT%2B4O8%2B4hP517P62vlxxyo8lg87eUuRD4yEcorInIVMwKuiJqBTl3uGbpgGVrKtr8k0w0C6%2B0IyQh3pRpZEhShJKcph8xxQnrFiHzWZIESQt%2BBIzWS2LGYg5%2BtzHm6vz8nkDtRTsw96ihrlBy5owhOxwgdaLC6utFBn0VKaFidS0vLaUSkjSoFn3GK3R8RVn5ZKtT%2BMZv0ngcyQZM5LGJy5vgUTTsVuR5i4OaIKvIHTaB3KD5QhEioyKwXLSQ%3D%3D",
+        "name": "Malfy Pink Gin",
+        "pnp": {
+          "price": "489.99",
+          "updated": "2024-10-19"
+        },
+        "spar": {
+          "price": 0
+        },
+        "unit": "ml",
+        "woolworths": {
+          "price": "499.99",
+          "updated": "2024-10-19"
+        }
+      },
+      "-O9_m3babolUhhZWVzsz": {
+        "adminDecisionDate": "2024-10-19 19:16:58",
+        "amount": "400",
+        "checkers": {
+          "price": "69.99",
+          "updated": "2024-10-19"
+        },
+        "created": "2024-10-19 19:16:58",
+        "image": "https://storage.googleapis.com/cheapr-fc010.appspot.com/product_images/1729358218868_checkers515Wx515H-medias-10139600EA-en-shopriteGlobalProductCatalog-20240607101557.webp?GoogleAccessId=firebase-adminsdk-61cwt%40cheapr-fc010.iam.gserviceaccount.com&Expires=1767132000&Signature=qixlmWzxUDyfq5%2FJdnprJKA6%2BkpddGW%2FsiAb659M25WQWy0PmzxIsXqSbenoWqj6NvqIbkCQb2B2u6NFjJcPPpWEYxK0HwUw9YBeXiSOm2Ljkrbz9MnGjnw8fGrOJydlysrdqwY88ynuFDiJCBZYegGd7lLc3zBK5xlpFp1O%2FZCpT12LA571OhOF176EjD%2BRnULiT5wPaXRqPWeLP6TAeSrDms3qrkkFVrzne8iIwx5yXMzZA03FHh20KKxtqm1tq%2FNJQQxFtzA8HtPMlyWHzYMWyDgqa2VrOeOpYbsiB%2B96J%2BVH6dxWa7w4QupwJUDbewITfbYbPzXoZjGd6fIwug%3D%3D",
+        "name": "Feta Mixed Herb",
+        "pnp": {
+          "price": "59.99",
+          "special": "2024-11-02",
+          "updated": "2024-10-19"
+        },
+        "spar": {
+          "price": "67.99",
+          "updated": "2024-10-19"
+        },
+        "unit": "g",
+        "woolworths": {
+          "price": "69.99",
+          "updated": "2024-10-19"
+        }
+      },
+      "-O9_n-gT8VI1arNIciGM": {
+        "adminDecisionDate": "2024-10-19 19:21:04",
+        "amount": "200",
+        "checkers": {
+          "price": "29.99",
+          "special": "2025-01-04",
+          "updated": "2024-10-19"
+        },
+        "created": "2024-10-19 19:21:04",
+        "image": "https://storage.googleapis.com/cheapr-fc010.appspot.com/product_images/1729358464934_10732000EA-checkers515Wx515H.webp?GoogleAccessId=firebase-adminsdk-61cwt%40cheapr-fc010.iam.gserviceaccount.com&Expires=1767132000&Signature=khtqPLSy9YjBrs5xhGL%2F9uJk%2BCjeGJf5zzhFLLVGv4g5McP8cJ29R%2Bii7VHxJwa%2F4IyilWFgm1yU%2FlSBkP4Ng8LXxcydKlO3TkHR1yJvgl0wM651nemxpCwFBpgKjLo5yHXmLn429B0qGmJjBwaKjQrvVM2g4l33hDqd1Fx1HD9%2BPKA4Dfjl%2FSWGR1V1nkfvdy49oEp%2FE9CkPlw4xK0y0MsTYbLMJS0B4juDLnqgro4raQWc73x%2FxEReFN3fuVOQBaRrjNpH7sr8FELKHoIzDvlG8k4ZBlnmm1b915QxpDnhDXvq7Bg3AsxCowg4WHpa%2F4Nx1thIpTP01oEP0g2T%2Bg%3D%3D",
+        "name": "Shoulder Bacon",
+        "pnp": {
+          "price": "42.99",
+          "updated": "2024-10-19"
+        },
+        "spar": {
+          "price": "32.99",
+          "updated": "2024-10-19"
+        },
+        "unit": "g",
+        "woolworths": {
+          "price": "62.99",
+          "special": "2024-10-31",
+          "updated": "2024-10-19"
+        }
+      },
+      "-O9_nS8tl5xE1knFbrt_": {
+        "adminDecisionDate": "2024-10-19 19:23:00",
+        "amount": "1.5",
+        "checkers": {
+          "price": "42.99",
+          "updated": "2024-10-19"
+        },
+        "created": "2024-10-19 19:23:00",
+        "image": "https://storage.googleapis.com/cheapr-fc010.appspot.com/product_images/1729358580869_10603692EA-20190726-Media-checkers515Wx515H.webp?GoogleAccessId=firebase-adminsdk-61cwt%40cheapr-fc010.iam.gserviceaccount.com&Expires=1767132000&Signature=oFfhHHg70fgHLXnB99fClM9v5vgiJLw2qVRXsR93YcpDrn8cY0ZUVsAUcy2sX9XZIgcLoXBoFb%2BX%2BEuwDLKI49hfqpI0P47oTZSmo6sUczIxIW9JuiT0RibybPJ580dCQYuMHmbHXMIf3brFCx1Mcfk4K8FFFPnBDI233N2uA3wA1cl75dU71%2F9AnpJkXpgCi5IKetpNhyrCbH6fwf1lE%2Fk46j98DklvxDzr2sLQftqEmTxBv%2B7LtqqOJVeghhC8qrB0jmWp%2F9OmB%2B%2FlxH08jdb8VhoidRgbOTdIHwTrvNh%2FjGx5Bx4rgNOGKLf1AtT%2FfH5tyxNiihVDyAMKfXwh0g%3D%3D",
+        "name": "Top Red Apples",
+        "pnp": {
+          "price": "36.99",
+          "updated": "2024-10-19"
+        },
+        "spar": {
+          "price": "34.99",
+          "updated": "2024-10-19"
+        },
+        "unit": "kg",
+        "woolworths": {
+          "price": "42.99",
+          "updated": "2024-10-19"
+        }
+      },
+      "-O9_nuFzOV96QXMzojqp": {
+        "adminDecisionDate": "2024-10-19 19:25:00",
+        "amount": "50",
+        "checkers": {
+          "price": "49.99",
+          "updated": "2024-10-19"
+        },
+        "created": "2024-10-19 19:25:00",
+        "image": "https://storage.googleapis.com/cheapr-fc010.appspot.com/product_images/1729358700758_10135333EAV2-checkers515Wx515H.webp?GoogleAccessId=firebase-adminsdk-61cwt%40cheapr-fc010.iam.gserviceaccount.com&Expires=1767132000&Signature=MOjdChMN%2FQSK1fwO9O9%2Bjq8GQlXuHvjH7caPcMKZqbpzjegOtoo4MvqvnzMW3LQxSwKU3iBl1gwQEno4ZzDjfNYP9yklIuakam0tdX7TZCmleRIiBF9QwXckYgJxDGDgj28AZvj6KjRxVom4Aq0Jr%2B3iTFaNHsD7I7MzA8j1qyM2EoPTZn7J%2BektGUw9HGpjkrnQ4jIzzTqcllwHNcsSk5pE9f%2BuY3gGA6PvM18%2B8LXwE%2B19vaiEzholG1hvJwO4dAkcTuq2I9qBTVmeVURNNUIYfoISda6Fp0Pk1fC0ruyE8vyS668DycFDKp%2BMNvr%2FrDwRiBGYy98eJ5xMMgL9YA%3D%3D",
+        "name": "Paper Plates",
+        "pnp": {
+          "price": "49.99",
+          "updated": "2024-10-19"
+        },
+        "spar": {
+          "price": "62.99",
+          "updated": "2024-10-19"
+        },
+        "unit": "pk",
+        "woolworths": {
+          "price": "49.99",
+          "updated": "2024-10-19"
+        }
+      },
+      "-O9_oUku_O157JJHsQX6": {
+        "adminDecisionDate": "2024-10-19 19:27:34",
+        "amount": "100",
+        "checkers": {
+          "price": "22.99",
+          "updated": "2024-10-19"
+        },
+        "created": "2024-10-19 19:27:34",
+        "image": "https://storage.googleapis.com/cheapr-fc010.appspot.com/product_images/1729358854180_10159231EA-20190726-Media-checkers515Wx515H.webp?GoogleAccessId=firebase-adminsdk-61cwt%40cheapr-fc010.iam.gserviceaccount.com&Expires=1767132000&Signature=pDa48fhMUZ0wIXDjFlw8YKCLzBYV3tyFRBroDfAN%2BgMkSr6gOgTs%2FNbDydflY0864hrh6Af%2BUCEBP4wuxv7C3Ssup7zf31NCV3TordHrJTVsIs6qODerusOLd53y1UOyIGTjWskAD%2BPyXHhD1EGZt88ziH1gW5kSXhA8MfC8V%2B6xybDtQISv7lRTgNIfZq7VxUAc1XPZF%2BCTLcCZ9AX%2BBKUytIc0n4F5ZFJ7tAEFCVIVKd7JD7FjUtLFZldRvB54vd4MEYYDtK4MRIXEvSQ0BHWl9DrqpfnnBPaV%2BLKoYRDlqbLlpDLZy9a3yuGhrX3sQDwHtRN23mtYT41zpxd%2BAA%3D%3D",
+        "name": "Serviettes",
+        "pnp": {
+          "price": "26.99",
+          "updated": "2024-10-19"
+        },
+        "spar": {
+          "price": "10.99",
+          "updated": "2024-10-19"
+        },
+        "unit": "pk",
+        "woolworths": {
+          "price": "32.99",
+          "updated": "2024-10-19"
+        }
+      },
+      "-O9_pwYGV9pF-tnwn9P5": {
+        "adminDecisionDate": "2024-10-19 19:33:54",
+        "amount": "6",
+        "checkers": {
+          "price": "22.99",
+          "updated": "2024-10-19"
+        },
+        "created": "2024-10-19 19:33:54",
+        "image": "https://storage.googleapis.com/cheapr-fc010.appspot.com/product_images/1729359234145_1729359159263.jpeg?GoogleAccessId=firebase-adminsdk-61cwt%40cheapr-fc010.iam.gserviceaccount.com&Expires=1767132000&Signature=UueulpUvj8IfCOHMX4lpsc7hrKE2dLLLUmiceKRbLV9FuvACH5TWKXiRd8vDRU2adpaxhUDoZzNyAfkWu%2B3S8eXMMA%2BzZodB08vO265QsHeHbI03cjbRzOAIGAkDnETFLn7k9G5oHSFx5QH9FOeGQXIm4iIfALkY3xBBs%2FZC69bBRnZgGmG%2BSfICxfiX3jWV%2BvaxQVTIQzPV9CLegmzTSMXlLCaZyRCQwmXPnDDVEnvgpXqAKJ%2FLmL%2Btihh2ghF1Wfoy4VBV9M47LbZ8kBchZDMzZsn8GEkRV2kci7yBNx8e27pEMfIzRFAYn0sdlEOFFjanDrCsQB1MpwHtYEFr7Q%3D%3D",
+        "name": "Eggs",
+        "pnp": {
+          "price": "22.99",
+          "updated": "2024-10-19"
+        },
+        "spar": {
+          "price": "27.99",
+          "updated": "2024-10-19"
+        },
+        "unit": "pk",
+        "woolworths": {
+          "price": "31.99",
+          "updated": "2024-10-19"
+        }
+      },
+      "-O9_qcJuzLOSHe1x78cn": {
+        "adminDecisionDate": "2024-10-19 19:36:53",
+        "amount": "120",
+        "checkers": {
+          "price": "23.99",
+          "special": "2024-11-22",
+          "updated": "2024-10-19"
+        },
+        "created": "2024-10-19 19:36:53",
+        "image": "https://storage.googleapis.com/cheapr-fc010.appspot.com/product_images/1729359413598_10718829EA-checkers515Wx515H.webp?GoogleAccessId=firebase-adminsdk-61cwt%40cheapr-fc010.iam.gserviceaccount.com&Expires=1767132000&Signature=VVrZaxO3E4jhZcQpCS1Ty7TA%2BGo82HmB2fYRWyKSgGR3z9WrjISKsIfZRrv%2FOL0Kg5%2FaoVBrG6PMyhQEkOAU2erIfLgTAhE%2Fq0bXPzqYydG5EvRIo4x5YU%2BjbI%2BJ5gJpRWGZcqfoE%2FYyHjJN2KOhKxgIJuSLWLHyBM1P%2FPml30PHCwHsd3LuEgFlC8w6ceFIzmXD9u0opW14%2BuirdDj0su4oZsOeXq%2B16el95N2fxXRRNmMsYyD0%2BYDcy6Kj6jlaJLCsH72XPB5gkfxyrVWg9PYdj86%2FCR3qPjN4EECS0HkGP%2FmzaedSm06H4pcD6dVjxsQ6uohuxSieuGlRMCWTMA%3D%3D",
+        "name": "Lay's Salted Chips",
+        "pnp": {
+          "price": "23.99",
+          "special": "2024-10-31",
+          "updated": "2024-10-19"
+        },
+        "spar": {
+          "price": "23.99",
+          "updated": "2024-10-19"
+        },
+        "unit": "g",
+        "woolworths": {
+          "price": "23.99",
+          "updated": "2024-10-31"
+        }
+      },
+      "-O9_r6YZmOPkTGNor5uy": {
+        "adminDecisionDate": "2024-10-19 19:39:01",
+        "amount": "145",
+        "checkers": {
+          "price": "22.99",
+          "updated": "2024-10-19"
+        },
+        "created": "2024-10-19 19:39:01",
+        "image": "https://storage.googleapis.com/cheapr-fc010.appspot.com/product_images/1729359541590_10189175EA-checkers515Wx515H.webp?GoogleAccessId=firebase-adminsdk-61cwt%40cheapr-fc010.iam.gserviceaccount.com&Expires=1767132000&Signature=U8pvQ0Cnn%2Be8ZwcaUQe3RuRQCYdHg4iKoBCaX5S20SftIbZKZzU9wdsNre%2B%2Fi2apyFbBLtAf9NULToUrIUgBItAZVAONu%2F96wew6L07kTR3JzKHLXIablS6maYaV%2F7yWHT2eQjToIKYyWhSVfqxi1meiZZ4%2BSGEuRlWyNTqz1EqwPqzGX7TBtMeaA%2Fnt1ysN11MJ8Rul5vgk5xRjq1%2B0RdKk80MXhcV6APhM8fkV8jPKpHP7xLWYufQw%2BgWQevTfU6kvxJyG0umKOaJVGH9gSigosYYNxVv%2FaNV4uolfp6DfzgSlWzGi%2BBb5Pw5VLQ%2FrxUCb%2BqwY8uMric1OWjTILg%3D%3D",
+        "name": "Doritos Sweet Chilli Chips",
+        "pnp": {
+          "price": "22.99",
+          "updated": "2024-10-19"
+        },
+        "spar": {
+          "price": "23.49",
+          "updated": "2024-10-19"
+        },
+        "unit": "g",
+        "woolworths": {
+          "price": 0
+        }
+      },
+      "-O9_s0IVvAv-mM7qZbMi": {
+        "adminDecisionDate": "2024-10-19 19:42:58",
+        "amount": "150",
+        "checkers": {
+          "price": "39.99",
+          "updated": "2024-10-19"
+        },
+        "created": "2024-10-19 19:42:58",
+        "image": "https://storage.googleapis.com/cheapr-fc010.appspot.com/product_images/1729359778227_10139393EAv2-checkers515Wx515H.webp?GoogleAccessId=firebase-adminsdk-61cwt%40cheapr-fc010.iam.gserviceaccount.com&Expires=1767132000&Signature=Z82Rl29og9oyz7%2FgmTweubwMfXxPsEVW01Gk2nGp9hX7n1bU25jFQBZndhgEsn38rYxaSInDQcbYR8dYI0x9A7ifGtR%2BGCZw6tu%2BTrJUqUOXsNIdOTbvrZFb6dX%2Fygq%2BSJgA%2FdJ54JNnOnR9zIUta88SyWDU3g0617ydz6UAmY%2BtxVDdlZ8PkzfeJM%2BwjyaPYv4TqKCY%2BMib7Oa2SQNqRqbYnrIeHoPNrVUggOIJ4mTxcDwvLsH7Zsn8IG89fhacXEzqWTUMV2ZIAkpDXOWGk01OjF43dPodi1cWsLg0%2BG%2BQzsJQoPll77NQtUU3vrMNstwzUqPZFbvHLyYSTRMtvw%3D%3D",
+        "name": "Zoo Biscuits",
+        "pnp": {
+          "price": "49.99",
+          "updated": "2024-10-19"
+        },
+        "spar": {
+          "price": "49.99",
+          "updated": "2024-10-19"
+        },
+        "unit": "g",
+        "woolworths": {
+          "price": "49.99",
+          "updated": "2024-10-19"
+        }
+      },
+      "-O9_siiPLu3p1rKTRuIH": {
+        "adminDecisionDate": "2024-10-19 19:46:04",
+        "amount": "128",
+        "checkers": {
+          "price": "18.99",
+          "updated": "2024-10-19"
+        },
+        "created": "2024-10-19 19:46:04",
+        "image": "https://storage.googleapis.com/cheapr-fc010.appspot.com/product_images/1729359964138_10739395EA-checkers515Wx515H%202.webp?GoogleAccessId=firebase-adminsdk-61cwt%40cheapr-fc010.iam.gserviceaccount.com&Expires=1767132000&Signature=OB5fTixI5Y4pj5pBOeYQp0jR8f0yMe0mFsIVENW7wkowbrRCofCFQEcCrtGDC7XCbfW49gJ7BmSE5LaK472XYxg16KGBcGeMC8BaaVjE0cNHyIKSmAt03G6Jx%2FW0Jjs5n3GyS1NJ7hayx5diXHgv4tUypqfak6z8reE9B%2FZlcZn10KzbuMktd%2F85ncPQEdrKb7n7ttAkILQodvfqu244b4v7DxsTllIvRMUEaWNeZBlqXUDcD0zLlrp%2BZJSX%2FStQKkeZgeVwtpdtmFeOXEP88l0VsOFImNNKIyOTQ9l92dKTAKZrjLQXR%2BMPBCYHPN2nqvTtQld5psYwqIZrU%2Bk2QA%3D%3D",
+        "name": "Oreo Vanilla Cookies",
+        "pnp": {
+          "price": "18.99",
+          "updated": "2024-10-19"
+        },
+        "spar": {
+          "price": "17.99",
+          "updated": "2024-10-19"
+        },
+        "unit": "g",
+        "woolworths": {
+          "price": "18.99",
+          "updated": "2024-10-19"
+        }
+      },
+      "-O9_ss70fCrVdWDMN13F": {
+        "adminDecisionDate": "2024-10-19 19:46:42",
+        "amount": "128",
+        "checkers": {
+          "price": "18.99",
+          "updated": "2024-10-19"
+        },
+        "created": "2024-10-19 19:46:42",
+        "image": "https://storage.googleapis.com/cheapr-fc010.appspot.com/product_images/1729360002699_10739397EA-checkers515Wx515H.webp?GoogleAccessId=firebase-adminsdk-61cwt%40cheapr-fc010.iam.gserviceaccount.com&Expires=1767132000&Signature=TKzij00Y09%2FERMubQ27CfBbQkCSZ5odwFdkcuQk5gcHGUuhvuk3OpyU1x0bjXOIHk%2BYrlDx1Kd%2FPCr59eVbvXY4sS%2BQf%2FnkcbQsrfo5St62uuAK6YJUMMb7my119Hoh%2FkB8jSb3OcBRKGd%2F4ygwc9cfXl%2Bew7BEwUsaGuJR2v83O%2FNmY%2Fkenj5Y5nQ2zg01Gh2jf7zgsA1dnsPLV0rXwDOn5RFW3hOC1s9w1xeICYu2IfQCDg9svkRyiK0nQq%2BXwTPVcPNy8PVrBo18gu8bkOpyh%2Bwn%2F6QpSWE%2FCj32qECQTjyeG6g9hJXBXWNuVmG7T4cXiXD%2FeZIuTkHcCbFJ01Q%3D%3D",
+        "name": "Oreo Golden Cookies",
+        "pnp": {
+          "price": "18.99",
+          "updated": "2024-10-19"
+        },
+        "spar": {
+          "price": "17.99",
+          "updated": "2024-10-19"
+        },
+        "unit": "g",
+        "woolworths": {
+          "price": "18.99",
+          "updated": "2024-10-19"
+        }
+      },
+      "-O9_tm5OELBfaUuILgQ2": {
+        "adminDecisionDate": "2024-10-19 19:50:40",
+        "amount": "1",
+        "checkers": {
+          "price": "159.99",
+          "updated": "2024-10-19"
+        },
+        "created": "2024-10-19 19:50:40",
+        "image": "https://storage.googleapis.com/cheapr-fc010.appspot.com/product_images/1729360240040_10152361KG-checkers515Wx515H.webp?GoogleAccessId=firebase-adminsdk-61cwt%40cheapr-fc010.iam.gserviceaccount.com&Expires=1767132000&Signature=lNGnhJSGG0UauCWbZSf%2FmdBd88n0TdopAaMagLAn1RkGkX9RRF6x4XmV60RBNqeFhRJTf%2FXD7NHNw7L1dW0cIIUwgkbyx5XPIvKBuTg7CnmeyKXWD4JLncgiJQ39Ylba3%2FzgMTEUscRErN9V%2BS8XhD9g8bJaqxk78UVfDD3tE7YSDZwTiJs6%2FMalfSlLuaAs9%2FFvfVjoJJqHqsYzG3T0Lz%2Fls6mkyMCgZuZWUheZ%2FfhXjt%2F2zBHwcgwSNbdtes7EUac7qozGy3MQWPHjPDqbyQ0tZ4CC9Kd2i78qJ0SHVpcV5%2FJKhw5U6P1TKj%2FUFFyayDM8yljMwy%2Bbpwl3hMCcqQ%3D%3D",
+        "name": "Steak Rump",
+        "pnp": {
+          "price": "149.99",
+          "updated": "2024-10-19"
+        },
+        "spar": {
+          "price": "131.99",
+          "special": "2024-11-19",
+          "updated": "2024-10-19"
+        },
+        "unit": "kg",
+        "woolworths": {
+          "price": "209.99",
+          "updated": "2024-10-19"
+        }
+      },
+      "-O9_ugvy9WjnUY7h6yQw": {
+        "adminDecisionDate": "2024-10-19 19:54:41",
+        "amount": "750",
+        "checkers": {
+          "price": "99.99",
+          "updated": "2024-10-19"
+        },
+        "created": "2024-10-19 19:54:41",
+        "image": "https://storage.googleapis.com/cheapr-fc010.appspot.com/product_images/1729360481052_10423789EA-checkers515Wx515H.webp?GoogleAccessId=firebase-adminsdk-61cwt%40cheapr-fc010.iam.gserviceaccount.com&Expires=1767132000&Signature=J92R0US9XRVJIW0YPLQ7DCAGx8vPHtg5682dL65nkjWi%2B1nAsOO4JDSWgZ%2BlE1PxS6khFvH3lDrDAyyEtObEBZ3NxYKtYTAwmLcPafOfDrC%2F5LbtnyOqx9Pk0hyk4Fw5Due%2FyN6oArV%2FxIs6IoPd9SVcs38oPNrSW7%2F3dPad72hwoyALgr%2B3J5ggoxvqNJgj4nZ3jMhzv4GPR070K4%2BGimCpYDNXpOT0Ye6mrOdF%2FFKb4BFxq7mMJ7Wn4kOFHE8PYQqwCF2DejuJJISWBMP2mjUwOIQe3WCmYpmvCO6rSELHsg3V29n%2B%2FlOqGajO8jDCSq4jOUC8pXC%2FIQ6I9PMJGw%3D%3D",
+        "name": "Cheddar Cheese",
+        "pnp": {
+          "price": "89.99",
+          "special": "2024-11-30",
+          "updated": "2024-10-19"
+        },
+        "spar": {
+          "price": "119.99",
+          "updated": "2024-10-19"
+        },
+        "unit": "g",
+        "woolworths": {
+          "price": "119.99",
+          "updated": "2024-10-19"
+        }
+      },
+      "-O9_vFr40YU65WPIYPm5": {
+        "adminDecisionDate": "2024-10-19 19:57:07",
+        "amount": "500",
+        "checkers": {
+          "price": "15.99",
+          "updated": "2024-10-19"
+        },
+        "created": "2024-10-19 19:57:07",
+        "image": "https://storage.googleapis.com/cheapr-fc010.appspot.com/product_images/1729360627924_10124087EA-checkers515Wx515H.webp?GoogleAccessId=firebase-adminsdk-61cwt%40cheapr-fc010.iam.gserviceaccount.com&Expires=1767132000&Signature=CWkgkWVhsdDRSgEy%2FHaYC0NiBWpEb%2BcUVzI1OrGAmMM251FFXOWXBkez5AbW2XezoEqJPd72NYHQl89TSxY7DacdIgeTvY%2F5H6lBEoLlyZDRTuLxczQQ%2BuTbW%2F%2FPFtEq5rgU27ZjrtOhH9ubUqMGmLoGdnNWHjFnrgMWxvM8rCcCLecpLuYWLc7Z8v2CuBoC%2FLJ1JCreubh2FJB%2FyVzbl6jfnvHJTXiS9dvjNd4WL2ypf9GadR4j8Rns74fdoBx4lZqWYVpUsQBpzRrO0SfxLUaceKKSbuVhHH9AJdcr2hM8xAttpMStM294UwJYDgocDfLvaQTlRgzKHFHolNv2dg%3D%3D",
+        "name": "Spaghetti Pasta",
+        "pnp": {
+          "price": "15.99",
+          "special": "2024-11-22",
+          "updated": "2024-10-19"
+        },
+        "spar": {
+          "price": "19.99",
+          "updated": "2024-10-19"
+        },
+        "unit": "g",
+        "woolworths": {
+          "price": "22.99",
+          "special": "2024-10-31",
+          "updated": "2024-10-19"
+        }
+      },
+      "-O9_w1InUef35J0RHi9z": {
+        "adminDecisionDate": "2024-10-19 20:00:30",
+        "amount": "1",
+        "checkers": {
+          "price": "37.99",
+          "updated": "2024-10-19"
+        },
+        "created": "2024-10-19 20:00:30",
+        "image": "https://storage.googleapis.com/cheapr-fc010.appspot.com/product_images/1729360830751_10133883EAv2-checkers515Wx515H.webp?GoogleAccessId=firebase-adminsdk-61cwt%40cheapr-fc010.iam.gserviceaccount.com&Expires=1767132000&Signature=qZ9cDXNkAZ8wbK0FM1kYA8%2F7CMLZZkiBmnDdGtdsH2XmGsPHTuc6cilaF6WDSNf1WdaHJFqJyEYYkdzC5%2BK8p%2FD0JawqMPq2uZfypKJQdhG5nro8w3zl3fjGa6Y%2FiLi3XrzWs94o9MHXliiiWJJg63HsB%2FJCer2xs89DLb3EgRuNsJq2AAMB07ProXKTOrdKM9ZUqLPtKm7%2By1lyFy4bKKCb4T6iqFxHpGEf0jBVKTm3b3nNZlKvDU%2Bz6wNLLH9NKN%2BBSu%2Faf9OSIM7VyyGDjg5abzlNy2PuAExROuvJRHNv4vr96oNpxlzEZyQpB%2Fo3Lg2%2F9Ik9iZRb8V6doLMAcQ%3D%3D",
+        "name": "White Rice",
+        "pnp": {
+          "price": "36.99",
+          "updated": "2024-10-19"
+        },
+        "spar": {
+          "price": "37.99",
+          "updated": "2024-10-19"
+        },
+        "unit": "kg",
+        "woolworths": {
+          "price": "41.99",
+          "updated": "2024-10-19"
+        }
+      },
+      "-O9_wdO30GoTKYAxNSmG": {
+        "adminDecisionDate": "2024-10-19 20:03:10",
+        "amount": "80",
+        "checkers": {
+          "price": "25.99",
+          "updated": "2024-10-19"
+        },
+        "created": "2024-10-19 20:03:10",
+        "image": "https://storage.googleapis.com/cheapr-fc010.appspot.com/product_images/1729360990232_checkers515Wx515H-medias-10398825EA-en-shopriteGlobalProductCatalog-20240917030303.webp?GoogleAccessId=firebase-adminsdk-61cwt%40cheapr-fc010.iam.gserviceaccount.com&Expires=1767132000&Signature=ELyxlNoHlkxOj1eHL0TjQ4%2FlJDZ%2BWi%2FUqdrkj7Iz4qFVZp5Sb%2BGiSXWpOy4X3J9oL6h76DVylW1rcej2S7J1YOmWT24%2FFWAfdKUhDsV%2F1WcxVEGcNdrKT0w%2Bo%2FaCf5qzSMlY12HiI1%2BJ8mPiYbvxAL7GLOdVaZbxRAqFPU0PZPq4XbhDSu1v10EhBwlYvkE61jr17DP4H%2Fu%2BFVRJLyG9aqYFHC9Z%2BYvCb%2F8V5UT%2BpS%2F7LIbVVOn60nEqWnmiZmImAvGYp%2BfPDj%2BUuKYxHeGv8k%2BpIjKD42w7lg%2BCdnpgMQ1Kx3%2BT7KYTkPeLNHk9JWlyyPLXWBn3ILmlyIVF%2BnbNzA%3D%3D",
+        "name": "Cadbury Dairy Milk Chocolate",
+        "pnp": {
+          "price": "22.99",
+          "updated": "2024-10-19"
+        },
+        "spar": {
+          "price": "24.99",
+          "updated": "2024-10-19"
+        },
+        "unit": "g",
+        "woolworths": {
+          "price": "23.99",
+          "updated": "2024-10-19"
+        }
+      },
+      "-O9_xGz5tnSae-802fTg": {
+        "adminDecisionDate": "2024-10-19 20:05:57",
+        "amount": "1",
+        "checkers": {
+          "price": "39.99",
+          "updated": "2024-10-19"
+        },
+        "created": "2024-10-19 20:05:57",
+        "image": "https://storage.googleapis.com/cheapr-fc010.appspot.com/product_images/1729361157190_10505072EA-checkers515Wx515H.webp?GoogleAccessId=firebase-adminsdk-61cwt%40cheapr-fc010.iam.gserviceaccount.com&Expires=1767132000&Signature=mKzLzcNerPdl28A0DbeqA0QJcuyuMGFpcMH%2F8Xug0USjFYJszWbCdfh9cGUnNcpy0YPdyffwRH6tHCHx%2FNepaakCHj04ETVUFb2JqD9SYqVlbLFg0neYc9UUWqWYOspZcdNFyHEKpkAhxtuRruyDCNAe9orJwNKRwHCHBzP2X4V5kGGmlYobSeUNbHQUYY5x6ttEnJ1v09P971Ts1Uh%2BCOD9Ddbbun2jAVDhi6%2B3bcc087iE5qUJ6HqsbJAkcj%2Bmk9CP7aOEnpYZffvlN6db2CLuwnuGP85q96%2BKUWhcPWOwy2Q1nocPD5SCwQLuCFgyyjFCpip2PXFcnopPFVoMLg%3D%3D",
+        "name": "Almond Milk",
+        "pnp": {
+          "price": "36.99",
+          "special": "2024-11-09",
+          "updated": "2024-10-19"
+        },
+        "spar": {
+          "price": "41.99",
+          "updated": "2024-10-19"
+        },
+        "unit": "l",
+        "woolworths": {
+          "price": "38.99",
+          "updated": "2024-10-19"
+        }
+      },
+      "-O9_xpJM3j79ORtwQPEJ": {
+        "adminDecisionDate": "2024-10-19 20:08:21",
+        "amount": "1",
+        "checkers": {
+          "price": "34.99",
+          "updated": "2024-10-19"
+        },
+        "created": "2024-10-19 20:08:21",
+        "image": "https://storage.googleapis.com/cheapr-fc010.appspot.com/product_images/1729361301991_checkers515Wx515H-medias-10740976EA-en-shopriteGlobalProductCatalog-20241014035820.webp?GoogleAccessId=firebase-adminsdk-61cwt%40cheapr-fc010.iam.gserviceaccount.com&Expires=1767132000&Signature=f1fVZJ7lFoVO8tstMc15B9Ok%2FMqHpwvsxZUT1d2smQap%2ByvFciQ8oOgFJwos1sPF%2F0n9rYbeTNxR2yq6%2Bey52b3%2FQb7mhlzjbE52QBaByX7z5ehvzyHyfbztWnAoe%2FOys7nBTh5pch2zaF8bKozyydsnW%2BOsVL28K08idGHT%2FLAGAtr4jQSs%2FkMUItZzgqvBm9gQXiJgUM9uSW9bGb2grc9jIRWi8qcmlp58M28pO3b2%2Fv6YG3fvnAg7mHJMalBhZwwT5EKi2wemmu%2BbZFNKtp0EMofNdwNO4wiUhhHLOdoxVqYnBo3JYBXg%2BhyX4vLeC0YgigqbJsSF0SNDSrfLzw%3D%3D",
+        "name": "Oat Milk",
+        "pnp": {
+          "price": "32.99",
+          "updated": "2024-10-19"
+        },
+        "spar": {
+          "price": "47.99",
+          "updated": "2024-10-19"
+        },
+        "unit": "l",
+        "woolworths": {
+          "price": "38.99",
+          "updated": "2024-10-19"
+        }
+      },
+      "-O9_yF9Oa-m_gYZmfVFX": {
+        "adminDecisionDate": "2024-10-19 20:10:11",
+        "amount": "1",
+        "checkers": {
+          "price": "49.99",
+          "updated": "2024-10-19"
+        },
+        "created": "2024-10-19 20:10:11",
+        "image": "https://storage.googleapis.com/cheapr-fc010.appspot.com/product_images/1729361411386_10129974EA-additionalImage-checkers515Wx515H.webp?GoogleAccessId=firebase-adminsdk-61cwt%40cheapr-fc010.iam.gserviceaccount.com&Expires=1767132000&Signature=VKmRTd6u5QBrHpgOpzLizzbf%2FNNTtMZGqhau3uoCigO3caO9Yi8XMlxAe1J3jcrWo57GecKMNRQwVddBst%2BM3i9LO%2F4NUYuWbjG6VXIzEmric65naPJC5cRQuSjC9JmlirMQcaJmn19vGIqgDii5h8%2BNdgxEiLaDNqUjxni5yMNLhmRp95Fz1xtBhANM8DMyo%2Bsa2eIYrOy3j8kuJw7qPXPGp7rICre%2FDUHZT3ec4FJNMZmpH7baWr2gzcw5BcFEo8w4jz%2BNdegK55rxUWM4%2Bv1elAWdOnkYDVe1b60cOFKghtvwpdZ%2BGyE7WX%2Fkzd9CJxNRoPRa55N71tTQJEn9eA%3D%3D",
+        "name": "Jungle Oats",
+        "pnp": {
+          "price": "39.99",
+          "updated": "2024-10-19"
+        },
+        "spar": {
+          "price": "52.99",
+          "updated": "2024-10-19"
+        },
+        "unit": "kg",
+        "woolworths": {
+          "price": "49.99",
+          "updated": "2024-10-19"
+        }
+      },
+      "-O9_ynv3lRP3DttL_DA8": {
+        "adminDecisionDate": "2024-10-19 20:12:38",
+        "amount": "1.5",
+        "checkers": {
+          "price": "36.99",
+          "updated": "2024-10-19"
+        },
+        "created": "2024-10-19 20:12:38",
+        "image": "https://storage.googleapis.com/cheapr-fc010.appspot.com/product_images/1729361558226_10665286EA-checkers515Wx515H.webp?GoogleAccessId=firebase-adminsdk-61cwt%40cheapr-fc010.iam.gserviceaccount.com&Expires=1767132000&Signature=VSGh42hk%2F%2BcCa3%2FfD3Xx42nXlA2%2FMHeZbP2iSm%2BIGxi%2BsmDtFzq%2BSs5tK%2Bqmr4ZK839HWptyvcEFmwv5dHONcZCOwTUjvMpHIAwWgCgcXccczNcWsa2Wlgpsiv0j%2ByKj05Wpr4%2FlTq1Fd%2F8xvYfDUJWP7ENa5o%2FNPZ%2BJfkLqMYhhTY9lKK8Tt5A5Pf0%2B4ulHRxgYY7V1P0niFfO%2FuwBTGcJDlY1UvSrUDWfncAJrQugpPEiGAbhXJBG5l2pDVcgeFFkrvq1PwhN2eGWgFDQd1LkY5n8lduS6p%2FV1PTGRetZbti5O9l1UWDbDAqaYOdb%2FmQS7kVG7ZYAik6ZvZ8%2FthA%3D%3D",
+        "name": "Forelle Pears",
+        "pnp": {
+          "price": "37.99",
+          "updated": "2024-10-31"
+        },
+        "spar": {
+          "price": "32.99",
+          "updated": "2024-10-19"
+        },
+        "unit": "kg",
+        "woolworths": {
+          "price": "34.99",
+          "updated": "2024-10-19"
+        }
+      },
+      "-O9_zGxqrBZQUcaYK_51": {
+        "adminDecisionDate": "2024-10-19 20:14:40",
+        "amount": "410",
+        "checkers": {
+          "price": "34.99",
+          "updated": "2024-10-19"
+        },
+        "created": "2024-10-19 20:14:40",
+        "image": "https://storage.googleapis.com/cheapr-fc010.appspot.com/product_images/1729361680807_10126823EA-add-checkers515Wx515H.webp?GoogleAccessId=firebase-adminsdk-61cwt%40cheapr-fc010.iam.gserviceaccount.com&Expires=1767132000&Signature=WMRxCo%2FMKAcdqeJOS0NJiaNIvOZE8mo4ypFSMwhQ2%2FxaH%2BMSvAD%2B28DfHdiIV5%2FogDb%2B9GiRjK2s6PgiIZPmGGprSKX%2B7dyPxFN4pfhCBNNqRvy%2BqU8q8JuBwJnhknowjFGbwvhaPKdBYPkPxEHyfPd0nSuwT3B%2BOTH%2BSXprCbL0RomCfnaTRn%2FtNQWKg3T%2BteRiAtO7Ng2G50z9Y9nX%2Bj1DfvWKAA42CGg8FZTv%2FWeGOCfHMwjW2xfZ4Za1u43bjN8tjEAs3MbpieXAoC6UU7RgdAIwb11t9JKepGk0Df6Or%2F3nMAwFqt59Xd2qwZ1N0jDesBc%2FV5OfnNrHf6UZvg%3D%3D",
+        "name": "Pear Halved Canned",
+        "pnp": {
+          "price": "33.99",
+          "updated": "2024-10-19"
+        },
+        "spar": {
+          "price": "34.99",
+          "updated": "2024-10-19"
+        },
+        "unit": "g",
+        "woolworths": {
+          "price": "36.99",
+          "updated": "2024-10-19"
+        }
+      },
+      "-O9_zqrTKQOJCnePwUqe": {
+        "adminDecisionDate": "2024-10-19 20:17:12",
+        "amount": "1",
+        "checkers": {
+          "price": "36.99",
+          "updated": "2024-10-19"
+        },
+        "created": "2024-10-19 20:17:12",
+        "image": "https://storage.googleapis.com/cheapr-fc010.appspot.com/product_images/1729361832485_10417157EA-20190726-Media-checkers515Wx515H.webp?GoogleAccessId=firebase-adminsdk-61cwt%40cheapr-fc010.iam.gserviceaccount.com&Expires=1767132000&Signature=VYpIqSnOJfhJt2KYJ6ULLF9ERzcBCL9zJ4PwJXb73fNc0x6mLrPLcPr4SR%2FLD6LxS0kUWJjllVUCtcskvA7SsiRWGiVRsgaObVhiQRpL5dhYRsZ%2BO1OuljZvRLcZ4s7LMzm%2F8lGogNYdmEcamJzPiUsx8dTWFxPzF5laenW1EaOq0riTIw317B6NK4aVrc4rV8nSBgX41o6KatxDYbSjdB1rDOqc2cL1Dt0v0mdnHN1rZbZBVbKdYuP7CRVzNR4bzi47ei3bAmaVIJh1otsqkQEWUC6PpK3aTCnvVp7qtJBWJZEpY7HQWoXjx3ur51S9ddpkm2lMCmEqqvLzt4IlPw%3D%3D",
+        "name": "Double Cream Plain Yoghurt",
+        "pnp": {
+          "price": "29.99",
+          "special": "2024-12-28",
+          "updated": "2024-10-19"
+        },
+        "spar": {
+          "price": "38.99",
+          "updated": "2024-10-19"
+        },
+        "unit": "kg",
+        "woolworths": {
+          "price": "52.99",
+          "updated": "2024-10-31"
+        }
+      },
+      "-O9a-MgEwRCb_9sy9B_0": {
+        "adminDecisionDate": "2024-10-19 20:19:27",
+        "amount": "1",
+        "checkers": {
+          "price": "22.99",
+          "updated": "2024-10-19"
+        },
+        "created": "2024-10-19 20:19:27",
+        "image": "https://storage.googleapis.com/cheapr-fc010.appspot.com/product_images/1729361967041_10135393EAV2-checkers515Wx515H.webp?GoogleAccessId=firebase-adminsdk-61cwt%40cheapr-fc010.iam.gserviceaccount.com&Expires=1767132000&Signature=a3kDy23EkjvLlQfLb7FUrHsS1KoWUJxR8wq%2F8IrmrSJIDY9RgjcHq%2BgIpV5Vm1JhH5Nod7DQOAEwphFWkAgP7PSk7Cm78W4PO2ZgPeqnnWT%2FxIZZXjzkzKABlb%2BFJjWgasucD%2BiwF7%2F9NV1sNiJw980G7aaNb8jZAzfojOV1h%2FQyU2Uv5JwUMLniVvX1C5Lz799umrZ2NiJ9hAR8FEvcKFVQUBY1Pw5CAirMSfcDLV9IMYg1MpANGYbN53%2FW2u8IC5hkVKoqmysZP8GZfAYpm3FLcvl4c82BMvINssYcBl4Sht93IrgWyEZYy5OikDIv1Bi2tx2S%2F8uOrgXqM%2FEkXw%3D%3D",
+        "name": "Aluminium Foil",
+        "pnp": {
+          "price": "23.99",
+          "updated": "2024-10-19"
+        },
+        "spar": {
+          "price": "27.99",
+          "updated": "2024-10-19"
+        },
+        "unit": "pk",
+        "woolworths": {
+          "price": 0
+        }
+      },
+      "-O9a-zoHP1cM59mvE6iA": {
+        "adminDecisionDate": "2024-10-19 20:22:10",
+        "amount": "9",
+        "checkers": {
+          "price": "89.99",
+          "updated": "2024-10-19"
+        },
+        "created": "2024-10-19 20:22:10",
+        "image": "https://storage.googleapis.com/cheapr-fc010.appspot.com/product_images/1729362130503_10182391EA-20190726-Media-checkers515Wx515H.webp?GoogleAccessId=firebase-adminsdk-61cwt%40cheapr-fc010.iam.gserviceaccount.com&Expires=1767132000&Signature=Chf7v9UgSCXheSvgreILkzUtl3u1HjC%2BZXo0sNPK3LymcdGxHjsl6R0yMEpIjYLbQ5aH%2FpqCnE3i85xKlrrXdMQj%2BGTRdEI%2B%2BJ2GrAdR1%2BGX43elAoo%2FOBC8oNET%2F56k76kM3LvKdNUPhz4q3OJz5RJFmA7gIynj5CvVe9IVc64wMljwnIa%2F0OH%2BpZSjx236areq1FGe9sBITPLfeHKQasafp%2F12xf6GMuuR5Arb1yOxAgkh2zJBZ9E2js5bm5mG0mf52cb9aGCntijf3cqUDaoslm5YRwjm0rWzeM3mVI9RbHUa5Au9OMQHRj4adLw1%2F5sHI%2BxwtLyP0qoC6XJWMQ%3D%3D",
+        "name": "Toilet Paper 2Ply",
+        "pnp": {
+          "price": "77.99",
+          "updated": "2024-10-19"
+        },
+        "spar": {
+          "price": "61.42",
+          "special": "2024-10-22",
+          "updated": "2024-10-19"
+        },
+        "unit": "pk",
+        "woolworths": {
+          "price": "89.99",
+          "updated": "2024-10-19"
+        }
+      },
+      "-O9a0cCxw2FcehWJEY4k": {
+        "adminDecisionDate": "2024-10-19 20:24:56",
+        "amount": "24",
+        "checkers": {
+          "price": "189.99",
+          "updated": "2024-10-19"
+        },
+        "created": "2024-10-19 20:24:56",
+        "flagMessage": "",
+        "image": "https://storage.googleapis.com/cheapr-fc010.appspot.com/product_images/1729362296628_10748661EA-checkers515Wx515H.webp?GoogleAccessId=firebase-adminsdk-61cwt%40cheapr-fc010.iam.gserviceaccount.com&Expires=1767132000&Signature=UOeTEfrMDZRsIUO6Uc3rGyBL1Sw4eNG1ecSVOm%2FE%2FIzfyOHArLZneiyHek4T7CQPGLmHWtGjO4uVnpGfcF6U50jexeNURw5kPGXpISoDEYMnwi9doh9tNBiGLZ3EQD8ehS4Y5ORExaHfqaHpw0N%2Fc0cakk0cHCHCoK%2FtLIM2tE3CGO2pxPDHTvrKD3BUPRSYrSLwS5NW1oCbYG7wv0dda4VUZh2rx43Bw5I8v%2F5inVSE%2B8fI4lYzmTzWrStbIiOqZ5nDGv250YdC%2FyBrK7XqkhIcvUR%2FXZXucB%2FJWP3ys%2BYUQAv%2BOrYs8BB1Aitd1e45mWLAFS5zsgtRN%2Bavonnt5g%3D%3D",
+        "name": "Toilet Paper 2Ply",
+        "pnp": {
+          "price": "199.99",
+          "updated": "2024-10-19"
+        },
+        "spar": {
+          "price": "129.99",
+          "special": "2024-11-09",
+          "updated": "2024-10-19"
+        },
+        "unit": "pk",
+        "woolworths": {
+          "price": "199.99",
+          "updated": "2024-10-19"
+        }
+      },
+      "-OAXQKr9_DvH2D1alvOp": {
+        "adminDecisionDate": "2024-10-31 13:54:30",
+        "amount": "400",
+        "checkers": {
+          "price": "47.99",
+          "updated": "2024-10-31"
+        },
+        "created": "2024-10-31 13:54:30",
+        "image": "https://storage.googleapis.com/cheapr-fc010.appspot.com/product_images/1730375670208_10126040EA-checkers515Wx515H.webp?GoogleAccessId=firebase-adminsdk-61cwt%40cheapr-fc010.iam.gserviceaccount.com&Expires=1767132000&Signature=Avgpe8ZwkuznfWcXsdD%2FxSCS5KPJLxylG4UCycs1l7gbHcRnx0BmKyI4S3C7%2FOGfFo4rqJvqwNLSW0684qMM9p8yxHbF8Od4on%2BFHwAMMfpyEsoqtMo%2FiE%2Bh0%2FyzZxI9SwN0zF3SyclP9B6IX%2Bw1te4CVgjK5nn8fG1WR9G0USJ4BwvahO1cv99GImBCI8Pd1YT%2BgHl4c%2FbNjNnwD5T5Kj9vsttE7zCex6lajXdkFP%2BSAL5nwD26pZDeA6YJmk4ht6S6mIE0r17m2bV3xTKAhv7wW6z3%2BEUpx6ruVumpDG%2Bg9p7%2BpyJmBLpypruJOYWSn%2F%2FpEw9NWeeKMFMyVkO3tg%3D%3D",
+        "name": "Marshmallows",
+        "pnp": {
+          "price": "54.99",
+          "updated": "2024-10-31"
+        },
+        "spar": {
+          "price": "47.99",
+          "updated": "2024-10-31"
+        },
+        "unit": "g",
+        "woolworths": {
+          "price": "49.99",
+          "updated": "2024-10-31"
+        }
+      },
+      "-OAbC5fwXfxnPfoScV-N": {
+        "adminDecisionDate": "2024-11-01 12:10:24",
+        "amount": "10",
+        "checkers": {
+          "price": "19.99",
+          "updated": "2024-11-01"
+        },
+        "created": "2024-11-01 12:10:24",
+        "image": "https://storage.googleapis.com/cheapr-fc010.appspot.com/product_images/1730455824326_10873722EA-checkers515Wx515H.webp?GoogleAccessId=firebase-adminsdk-61cwt%40cheapr-fc010.iam.gserviceaccount.com&Expires=1767132000&Signature=XATgRqMN4u9VNm0be6woIN6BHC0GUFD%2FMVow9UzL0iEZHplDLZadw60HjlhFkm6Rn92h3AIKSf4U9oL3a5asuMszPFzPWE6A0JbNDz57F5LTAFZ1XiDPXM%2BsVp5Eedm0BPKxcLzjwK6EzZnaxATtV2uwzO1o70%2B33umERST5%2Fwp%2FCXTKxJgWmKxBW8C6P07akkYq47jXkjxm8ywcv3DLHKQI1RecKCvU41E0sFmmjR0kGtNP6c%2B4vKdqKO6cxgEF2q%2FsFOCTqO7zcMFPZJA1oUtZKUZcnRlyQqTtsZBVC%2FL7GYyI%2F0wb5CDbIyif2KMuQzcPwbTxTMX0aI0ig27b5g%3D%3D",
+        "name": "Paper Cups",
+        "pnp": {
+          "price": "22.99",
+          "updated": "2024-11-01"
+        },
+        "spar": {
+          "price": "33.29",
+          "updated": "2024-11-01"
+        },
+        "unit": "pk",
+        "woolworths": {
+          "price": "16.99",
+          "updated": "2024-11-01"
+        }
+      },
+      "-OAbCHg8jA-dAFPr_SGV": {
+        "adminDecisionDate": "2024-11-01 12:11:13",
+        "amount": "1",
+        "checkers": {
+          "price": "28.99",
+          "special": "2024-12-20",
+          "updated": "2024-11-01"
+        },
+        "created": "2024-11-01 12:11:13",
+        "image": "https://storage.googleapis.com/cheapr-fc010.appspot.com/product_images/1730456447321_10511660EA-checkers515Wx515H.webp?GoogleAccessId=firebase-adminsdk-61cwt%40cheapr-fc010.iam.gserviceaccount.com&Expires=1767132000&Signature=qIkyyEC5NFLiIqap14%2BJQgn8oNnsJ1amJeYwbCszNpXggFhQonNR3%2BXZIYH3oqTBlQZ5ztq4%2FVagnwhsAxOgMDTCSuv%2FEtUk7bANcpR2D3BYqEgPZzLhtx%2F%2F0%2FsGNyf5JlJSR9ePWek1%2BHMXbgaM9XEeYmWsvXKqODv83p9QfKtWOzQylErPIxMZyidFwrCu95p0LJuKD7JKpf%2Bwe974%2FymU6iuxG%2B1hLUFLgh5HdSlCJ0fGquA88sCovvGNJuwnRPB6Cvm0shieztz4WOV3YEdVxaoEsrlEFvVlluwGPxl3Hw0qepbXBJb334kt5Fg8Aah5vtPGpSqDXUHjt2En0g%3D%3D",
+        "name": "Litchi Juice",
+        "pnp": {
+          "price": "25.99",
+          "updated": "2024-11-01"
+        },
+        "spar": {
+          "price": "30.14",
+          "updated": "2024-11-01"
+        },
+        "unit": "l",
+        "woolworths": {
+          "price": "39.99",
+          "updated": "2024-11-01"
+        }
+      },
+      "-OAbCX62lbz-zGOw0IEG": {
+        "adminDecisionDate": "2024-11-01 12:12:16",
+        "amount": "6",
+        "checkers": {
+          "price": "48.99",
+          "updated": "2024-11-01"
+        },
+        "created": "2024-11-01 12:12:16",
+        "image": "https://storage.googleapis.com/cheapr-fc010.appspot.com/product_images/1730455936570_10144362PK1v2-checkers515Wx515H.webp?GoogleAccessId=firebase-adminsdk-61cwt%40cheapr-fc010.iam.gserviceaccount.com&Expires=1767132000&Signature=GR1IyZL5Gdhp9qzR19ka8GQZgehBJXBlh8f33uzArC2K7OGkmWyUSUGB17U7BGueBAZvJUnWAGZI%2FuAF3B41L%2BZxinlRj5XApIDoT9CL0143zNnzmpUjM%2BZT5n1%2Fazsp44Ka%2FC%2Bnde53E8Ap%2FH3oDslx2vokbPZI%2BQEaWYyKqKdKQowGbjai23tFymj7kKi3s1fikzLCJAg%2Frb6hkwsuSJ4cx55p9qXTiQMtzQIVAfGA3CPlRB4cfchViisqyeW7wpmKTi9y%2BpLNy9S3xXdmj5fdoLhWnHWojQ2%2BIOSQBqfXADGPmDSVevHL7Aq6R8gW%2BDhTFdEHFp68C%2Fp7rB03Nw%3D%3D",
+        "name": "Sparkling Water",
+        "pnp": {
+          "price": "40.99",
+          "updated": "2024-11-01"
+        },
+        "spar": {
+          "price": "32.99",
+          "updated": "2024-11-01"
+        },
+        "unit": "pk",
+        "woolworths": {
+          "price": "69.99",
+          "special": "2025-01-01",
+          "updated": "2024-11-01"
+        }
+      },
+      "-OAbCfj8WPA_-Ho0dATm": {
+        "adminDecisionDate": "2024-11-01 12:12:55",
+        "amount": "500",
+        "checkers": {
+          "price": "114.99",
+          "updated": "2024-11-01"
+        },
+        "created": "2024-11-01 12:12:55",
+        "image": "https://storage.googleapis.com/cheapr-fc010.appspot.com/product_images/1730455975512_10132600EA-checkers515Wx515H.webp?GoogleAccessId=firebase-adminsdk-61cwt%40cheapr-fc010.iam.gserviceaccount.com&Expires=1767132000&Signature=Mcjrup8p5mzXu4favTFx73WSdvPjZ1w%2FAxx322%2FN5yv4QWeR0UpggEIApFP1fQcUY2B16tatlHSFqv7NPGRvTueBQYZLUl73vbaq82feifaluXXYwjuk3sli4MqgA9AF6LEV4XQzxkK0ZY14OchnicYdJl7x70zJ5GRqG%2BTHR76tiCrAA%2FA5U1HZpDatJDmnuVQlk%2FcOdtLkCn5DwK6iisJ0nIiXHhYBN3iymGMtMNAmoHHsP8LqHNdk%2BIapPOip8m2vk8hcaw6xctgpcdvkY34ni20ZTB9fgb%2FSUijRdaNVVsdnF8lGZgwBNiSF9PzE%2BGZ9CSjjD7AptBCsnY6owg%3D%3D",
+        "name": "Mr Muscle Drain Cleaner",
+        "pnp": {
+          "price": "119.99",
+          "updated": "2024-11-01"
+        },
+        "spar": {
+          "price": "113.39",
+          "updated": "2024-11-01"
+        },
+        "unit": "ml",
+        "woolworths": {
+          "price": "112.99",
+          "updated": "2024-11-01"
+        }
+      },
+      "-OAbCrUaBqnAD9NXmKfZ": {
+        "adminDecisionDate": "2024-11-01 12:13:44",
+        "amount": "5",
+        "checkers": {
+          "price": "28.99",
+          "updated": "2024-11-01"
+        },
+        "created": "2024-11-01 12:13:44",
+        "image": "https://storage.googleapis.com/cheapr-fc010.appspot.com/product_images/1730456024161_10134814EA-20190726-Media-checkers515Wx515H.webp?GoogleAccessId=firebase-adminsdk-61cwt%40cheapr-fc010.iam.gserviceaccount.com&Expires=1767132000&Signature=MpesLrPCzBrYYihX%2FtjrkT1kfhdwR4uEanS7l0IdP6AknbhnI%2BwD45MihYO6xwrMYApTfZ2EQxJwbpQcsu5PRHOXum2NiqwqIexg16sGxGgTf2JNJwFPKCuMhiimc%2BRRxQkfkvt5BP0AYQCqhtLqZOXBzc%2Fs8AqpcH%2B8r3k6Gw0B2bhAL04DBiU4Q3gxfc3Gia3GWtaYqCLhkyc4nxo2o%2BXtdGMpZJOt6Vbp%2FqOwx8RTNljaR0YFvowR90YHIOWojg2fEXtOAQmu0jBSsWrGJ%2B4jt8i28ftsZgRJ3Nz5LPeX4CC1qBvi4hrOvPrXPPTqJFoK5e9dz09Njr5nAhSMiQ%3D%3D",
+        "name": "Still Water",
+        "pnp": {
+          "price": "26.99",
+          "updated": "2024-11-01"
+        },
+        "spar": {
+          "price": "31.99",
+          "updated": "2024-11-01"
+        },
+        "unit": "l",
+        "woolworths": {
+          "price": "28.99",
+          "updated": "2024-11-01"
+        }
+      },
+      "-OAbD0nUYB42ZxwzgOiO": {
+        "adminDecisionDate": "2024-11-01 12:14:26",
+        "amount": "20",
+        "checkers": {
+          "price": "42.99",
+          "updated": "2024-11-01"
+        },
+        "created": "2024-11-01 12:14:26",
+        "image": "https://storage.googleapis.com/cheapr-fc010.appspot.com/product_images/1730456066364_10158238EA-20190726-Media-checkers515Wx515H.webp?GoogleAccessId=firebase-adminsdk-61cwt%40cheapr-fc010.iam.gserviceaccount.com&Expires=1767132000&Signature=W5RDVi5cdJaRsyLwaWLdjdSPA0SVtDxnftEbMk9J2ULBF2VigH2fHYW%2BTkI8fBdtmlCKdeXzjlKhyGWD%2BJE8eNTsFC0XezFDJEQaUPrzxPqREsVkWZR9V%2FUss5uZx04pzndWCYzzgG3dQ5UbD0P46An2NegSJyWmj2BtXOWN%2B0RkE3SSZkc22Ezn32FsNM8yWy7Y50A%2Bryhe6Gv14ex9uuX3XUo5Pz4d881JH90HYxh9xwiMm9OVVZRSmyVLFVjktRQ%2FKGjGYNIRd5Gr4cBBSGy2N%2B6MeSmShQHtU0t3sMUuiAJmVO9NJA%2BSv9%2FNL9CkVsEmRLs4ckU1BJv8iqCHgQ%3D%3D",
+        "name": "Rsdfvc Bags Regular",
+        "pnp": {
+          "price": "37.99",
+          "updated": "2024-11-01"
+        },
+        "spar": {
+          "price": "39.99",
+          "updated": "2024-11-01"
+        },
+        "unit": "pk",
+        "woolworths": {
+          "price": "57.99",
+          "updated": "2024-11-01"
+        }
+      },
+      "-OAbDBedXS7Cq6fUo3wF": {
+        "adminDecisionDate": "2024-11-01 12:15:10",
+        "amount": "10",
+        "checkers": {
+          "price": "19.99",
+          "updated": "2024-11-01"
+        },
+        "created": "2024-11-01 12:15:10",
+        "image": "https://storage.googleapis.com/cheapr-fc010.appspot.com/product_images/1730456110990_10458914EA-checkers515Wx515H.webp?GoogleAccessId=firebase-adminsdk-61cwt%40cheapr-fc010.iam.gserviceaccount.com&Expires=1767132000&Signature=WkI7sw4Es44MwTPg2TNL1oeRcR8ULqrg6Wk3MIVBAYmUASSsX1txGdvyo%2F1TNQ5A3OfycFv%2FwNDjHTN0AG9kyeXEDDOGsK5yuZmvibCVDgXVDfLN7anCqezhbZpjX0BNZmEWkFQByudwOOSLhsBIgY%2B5yTMZsMm%2BUkXkuQoAMoWlx6Hlx4xYw8GdgATZ%2F4%2F7TyEF2IJL%2BF9NbOSJWTxaDmw2b7Boyo1VfvHrtli4JxUJU4E0yjSlEAPN%2FTIqDJ6%2B7WsLBKXDCl9mJ11xwTVayzAhnPMmbZFobrKsYAzQWNuONm3GWiAqJax0QAXgWCj6B22n%2FTsqxgoi4B%2FIaYeKvQ%3D%3D",
+        "name": "Plastic Forks",
+        "pnp": {
+          "price": "13.99",
+          "updated": "2024-11-01"
+        },
+        "spar": {
+          "price": "18.89",
+          "updated": "2024-11-01"
+        },
+        "unit": "pk",
+        "woolworths": {
+          "price": 0
+        }
+      },
+      "-OAbDMrsbv8GqKnabhrE": {
+        "adminDecisionDate": "2024-11-01 12:15:56",
+        "amount": "1",
+        "checkers": {
+          "price": "43.99",
+          "updated": "2024-11-01"
+        },
+        "created": "2024-11-01 12:15:56",
+        "image": "https://storage.googleapis.com/cheapr-fc010.appspot.com/product_images/1730456156867_10634591EA-20190726-Media-checkers515Wx515H.webp?GoogleAccessId=firebase-adminsdk-61cwt%40cheapr-fc010.iam.gserviceaccount.com&Expires=1767132000&Signature=Y%2BLaYbOO%2FB5zTF7JxVCurvHGhVjuT8YX7tmltVYkCOd4G%2F2L911eErPl%2FEfxKIs2ioXLhv%2Fo0JI3iETgK17pT2fNj%2B%2BVdwBgX4vj0n0h1OFf2to3ld6q2FK6uDxG48bHCe5dGZthenYUd9BUBzqEBiefaUKuhtYqKrmy23ZaJP6x9jx%2FsFdZZSvL22rj9wdg92khzh73Ts9%2FcF6%2BgOWFBNK8hAaqMJRS1X4%2Fqtw%2FhcrHBqGuXNjuzmsP7eLVUWEZ1HhC4QAV2f1w2gt7Y2%2FtPVcgpz4gfcIAuAHdjU%2Fv3Gc%2F%2FW9dJxK9wWhbmN0Ms0t9PGYMNplgM54THEcwMedUqw%3D%3D",
+        "name": "Apple Juice",
+        "pnp": {
+          "price": "16.99",
+          "updated": "2024-11-01"
+        },
+        "spar": {
+          "price": "30.14",
+          "updated": "2024-11-01"
+        },
+        "unit": "l",
+        "woolworths": {
+          "price": "39.99",
+          "updated": "2024-11-01"
+        }
+      },
+      "-OAbDX6m8XUDDoO-HXwK": {
+        "adminDecisionDate": "2024-11-01 12:16:38",
+        "amount": "10",
+        "checkers": {
+          "price": "42.99",
+          "updated": "2024-11-01"
+        },
+        "created": "2024-11-01 12:16:38",
+        "image": "https://storage.googleapis.com/cheapr-fc010.appspot.com/product_images/1730456198876_10158237EAv2-checkers515Wx515H.webp?GoogleAccessId=firebase-adminsdk-61cwt%40cheapr-fc010.iam.gserviceaccount.com&Expires=1767132000&Signature=J4Tr4%2FtrpLy5n0R0iRQE1s5Wd0R8soHr1q7GRbJZyqq23CizI%2BYLIeX1Hq%2BmSkEK67SmnkhZXZ8DZBSGBI5yo3v3m%2FwoJT8VgLOeO7EObDk88h2wt8i8EViZumqC%2FBUbuhUHdi9UhFUVf5JWa4cFShOmwfgylQnvZ%2FKwILrD9iHoPtJefaxTwxaFpVG0F6RpNBeOGKPs9QsL9UyvfbZDhA6Fwn0rkvrdgSsII4diJf5Rb0f9mw2epPmsflKCjBbZ600SQ4j%2BpVrnP6udsEn00XD7RYTDukklkBeFPhk09%2Fo5cdPbaI3pctZ3ksVJah9XcvfHyIDSH2m8mJWdTFe7gA%3D%3D",
+        "name": "Refuse Bags Heavy Duty",
+        "pnp": {
+          "price": "41.99",
+          "updated": "2024-11-01"
+        },
+        "spar": {
+          "price": "44.99",
+          "updated": "2024-11-01"
+        },
+        "unit": "pk",
+        "woolworths": {
+          "price": "62.99",
+          "updated": "2024-11-01"
+        }
+      },
+      "-OAbDmyWfo4I5LafrJpq": {
+        "adminDecisionDate": "2024-11-01 12:17:47",
+        "amount": "1",
+        "checkers": {
+          "price": "35.99",
+          "special": "2024-11-30",
+          "updated": "2024-11-01"
+        },
+        "created": "2024-11-01 12:17:47",
+        "image": "https://storage.googleapis.com/cheapr-fc010.appspot.com/product_images/1730456267337_10511666EA-checkers515Wx515H.webp?GoogleAccessId=firebase-adminsdk-61cwt%40cheapr-fc010.iam.gserviceaccount.com&Expires=1767132000&Signature=ImTYW%2BX6sXqRGDYkXt8kluykbC4%2FZM8G%2FrNP5IyL2oJX3SohJFbLwc8LQoWgdYRfg8nllfh%2F8JH06%2BCafJCL8ahza3%2B%2F65nlTs%2FYbw3q92NiDu2IAjsh7QCwafJ3pONFAb59h1VXfgiCOQF1fT9IhA7p3BDR7WZQbtmlC22J2a16L2LXFt%2FFbNrPTwxrZDauZlU%2FyOD5ku6wyEl4swy2pCJ%2Fl4RGouEpwfo7NLrI4epue937mcVp7ycqejfpCEyRHsTSFBqBhcm1yywbtfxpmE4nZzUpyUtVQD8vlQu9Sk5xsAIa2wQ8xH4eFye9k8pY0joSmlW6Bnvj5xx82VNlmA%3D%3D",
+        "name": "Orange Juice",
+        "pnp": {
+          "price": "16.99",
+          "updated": "2024-11-01"
+        },
+        "spar": {
+          "price": "30.14",
+          "updated": "2024-11-01"
+        },
+        "unit": "l",
+        "woolworths": {
+          "price": "69.99",
+          "updated": "2024-11-01"
+        }
+      },
+      "-OAbDx5KUBY2MZdSTOIg": {
+        "adminDecisionDate": "2024-11-01 12:18:28",
+        "amount": "125",
+        "checkers": {
+          "price": "27.99",
+          "updated": "2024-11-01"
+        },
+        "created": "2024-11-01 12:18:28",
+        "image": "https://storage.googleapis.com/cheapr-fc010.appspot.com/product_images/1730456308738_10524793EA-checkers515Wx515H.webp?GoogleAccessId=firebase-adminsdk-61cwt%40cheapr-fc010.iam.gserviceaccount.com&Expires=1767132000&Signature=UU7uidnRzwEGX%2BS16WIOY%2BKp%2B5xG45FAuO9%2Bh7c9SmdxPy9FATYqOSL%2Ff43mH1D3PCsXUk1UT489sUzX2ZaPhbDUIMYfGWM%2BPNh20ELCXWeSLKgIP1XcMT3i0dNbNeGw0u5nkiMa03kz265CmhxkEE%2FydulN7rnVvcm5YNAAvnga0jn1GI5XT4xcRWE4kDtemxwsbwAXuXTZL1tgllBDoLgOdw2J3MhnkE%2B7azhqh%2BTcvpS00OrN8flhKmsrdIJE7BYfzI6ZKmBO8QeTI5dT81dDGa1UdxRX3wL3gW3%2BXsTCi54KqSDsr0o6jp5y2zPSn3lrWQ%2FZiBvXjnjCmk%2BmPw%3D%3D",
+        "name": "Manhattan Jelly Beans",
+        "pnp": {
+          "price": "29.99",
+          "updated": "2024-11-01"
+        },
+        "spar": {
+          "price": "31.34",
+          "updated": "2024-11-01"
+        },
+        "unit": "g",
+        "woolworths": {
+          "price": "29.99",
+          "updated": "2024-11-01"
+        }
+      }
+    },
+    "flagged": {
+      "-OAXOPgahpyrBzZ-bJzy": {
+        "adminDecisionDate": "2024-10-31 13:46:05",
+        "amount": "50",
+        "checkers": {
+          "price": "20",
+          "updated": "2024-10-31"
+        },
+        "created": "2024-10-31 13:46:05",
+        "flagMessage": "This product is not spelled correctly.",
+        "image": "https://storage.googleapis.com/cheapr-fc010.appspot.com/product_images/1730375165762_samosa.webp?GoogleAccessId=firebase-adminsdk-61cwt%40cheapr-fc010.iam.gserviceaccount.com&Expires=1767132000&Signature=kGFXO3F5K%2Bdm%2FNDxwGcPG6jvEwmDZ34Qh%2Bwr0p9G07RyYWZIGEuVHUiIWHuFrHJ7023iuDnyo7Lz%2BCAH5HZeqh%2BfjkqdKXFyDXld8JbJhnhPYxcBr%2FiPNahxGv37WpOQdbG3%2FWGUxhzXWfdHSPyQQAPJcHZ5lXItW1tYG1LqPLGaJoG45YaHfZZ9N4YcT3%2FynSYdXi1cPtpr1E3enYY2fCdI3FdkcAyw%2BnvOH7HNmPXPFl8Wzr4%2BHzUblxlCvbevgKYodBdUMKnQwQWNmJ8cw2qJn6uGKApcyAoW41pSQX4DqzUDO2LpDsHkCNuetI5fDHmRj7iLuNwA%2FhY5olWJGA%3D%3D",
+        "name": "Samomamasa",
+        "pnp": {
+          "price": "17",
+          "updated": "2024-10-31"
+        },
+        "spar": {
+          "price": "19",
+          "updated": "2024-10-31"
+        },
+        "unit": "g",
+        "woolworths": {
+          "price": "32",
+          "updated": "2024-10-31"
+        }
+      },
+      "-OAbFO-0tpgUhim17KOh": {
+        "adminDecisionDate": "2024-11-01 12:24:45",
+        "amount": "250",
+        "checkers": {
+          "price": "310",
+          "updated": "2024-11-01"
+        },
+        "created": "2024-11-01 12:24:45",
+        "flagMessage": "What is this doing here?",
+        "image": "https://storage.googleapis.com/cheapr-fc010.appspot.com/product_images/1730456685684_10655456EA-checkers515Wx515H.webp?GoogleAccessId=firebase-adminsdk-61cwt%40cheapr-fc010.iam.gserviceaccount.com&Expires=1767132000&Signature=UVICewmd0SseBrWzU7hE0s0qr%2B7kqHTn5QdkPCgJ2Zz7CNcPC2u5eBiMwcvfk%2BmRd%2Flm2iUcQX5Q9DfQxqoFNan%2BzBMnCQoGQBJQLV1JYOxaf3RESwLI4g7LAG78W5OdxhUGo0ZL1pcj4gPIEJ%2BuEBpNs4Db4UMFZycxZzvMEzwU9m6Uq3XPhNdyHFaib4nYKnU85zJPahoxrxCZXQFktxZ2kQ9jxi%2Ffkd8obXYSQM9ZfRVYfMaWhl2g%2FfN5AosXq9SwfGqh5gutgq%2Fx0euJFBK12NtUsIFg%2FJAn3MUyfOZJ1DOm1vPdSDFkEoOAXX6jKbQQNHiFjVGntBE5R7JboA%3D%3D",
+        "name": "Pink Headphones",
+        "pnp": {
+          "price": "250",
+          "updated": "2024-11-01"
+        },
+        "spar": {
+          "price": "540",
+          "updated": "2024-11-01"
+        },
+        "unit": "g",
+        "woolworths": {
+          "price": "520",
+          "updated": "2024-11-01"
+        }
+      },
+      "-OAbFWZRvSEXVIpzLPOn": {
+        "adminDecisionDate": "2024-11-01 12:25:20",
+        "amount": "60",
+        "checkers": {
+          "price": "99000",
+          "updated": "2024-11-01"
+        },
+        "created": "2024-11-01 12:25:20",
+        "flagMessage": "What is this doing here?",
+        "image": "https://storage.googleapis.com/cheapr-fc010.appspot.com/product_images/1730456720247_10781353EA-checkers515Wx515H.webp?GoogleAccessId=firebase-adminsdk-61cwt%40cheapr-fc010.iam.gserviceaccount.com&Expires=1767132000&Signature=LrAy1Zx2GwDOy4yzP1GHhlHFdmEU%2BFBJhtZ3NCPZ5awoH7SKnFr2eH3HUhuDME2JPota4DwBtktedikvOtzCrM67kO7etjLGM2AU8yQmkxNVuwOA69trM6UzNMnwVlUyfP059mt2pUYPkBOFb5geljUqNHiGbP8CIfVfIgLoi6X9M6%2BRue4a7t6PJy%2FHwkMguOLKYh4jycrIGmWfeSHn29Rzo1y2PIItFvnUD%2F5m1VSmthpW80eUtiBUEDXAFS37qBTFpo9l7jzeH%2BBe77H8eB426p3TC9ChUronzXYmZQnEb4IQXscyviahc%2FgXqedJmKYTEh0c%2FiS7HsAYZr2uDQ%3D%3D",
+        "name": "Checkers Motorbike",
+        "pnp": {
+          "price": 0
+        },
+        "spar": {
+          "price": 0
+        },
+        "unit": "kg",
+        "woolworths": {
+          "price": 0
+        }
+      }
+    },
+    "pending": {
+      "-OAXPPb9XFLSWMHuGSv4": {
+        "adminDecisionDate": "2024-10-31 13:50:27",
+        "amount": "750",
+        "checkers": {
+          "price": "269.99",
+          "updated": "2024-10-31"
+        },
+        "created": "2024-10-31 13:50:27",
+        "image": "https://storage.googleapis.com/cheapr-fc010.appspot.com/product_images/1730375427666_10141354EA-checkers515Wx515H.webp?GoogleAccessId=firebase-adminsdk-61cwt%40cheapr-fc010.iam.gserviceaccount.com&Expires=1767132000&Signature=PKrQY7CXyofaD0GCizGW16HNZkqaGSL6NPv5lEsR5x1RfG5WTwvxolXZuZk5x3ciDrhtjSHCnZyQAxh12pSUbtqBceEomkVpJFDC3V4hTSK4bBQ47HeAp%2BMH%2BZqnd%2FMcUJ2hXYbJZfhRBeXfJrpsoq9mEk%2FAIHsFkUWvmRRIw3x2W2U4G2%2BbzkDz2mxn84kxPlKlgCT4vpb7mp3eKbsoCQFGy3AIb7y3%2BVwxC%2F7MazjWzpExKlwDpn%2FRmjBouUkQnc1%2FhPvYkluVDX%2FUB8elF8ZL2PzrmoPZF56yKeXNexj5%2BYAareQaOEIHyTbMmvS3eFvxJEu5tcGtkZC%2BrdyjJQ%3D%3D",
+        "name": "Skyy Vodka Bottle",
+        "pnp": {
+          "price": 0
+        },
+        "spar": {
+          "price": "269.99",
+          "updated": "2024-10-31"
+        },
+        "unit": "ml",
+        "woolworths": {
+          "price": "274.99",
+          "updated": "2024-10-31"
+        }
+      },
+      "-OAbBj-1_nrojLiiYj_9": {
+        "adminDecisionDate": "2024-11-01 12:08:46",
+        "amount": "300",
+        "checkers": {
+          "price": "13.99",
+          "updated": "2024-11-01"
+        },
+        "created": "2024-11-01 12:08:46",
+        "image": "https://storage.googleapis.com/cheapr-fc010.appspot.com/product_images/1730455726886_checkers515Wx515H-medias-10640144EA-en-shopriteGlobalProductCatalog-20241001030856.webp?GoogleAccessId=firebase-adminsdk-61cwt%40cheapr-fc010.iam.gserviceaccount.com&Expires=1767132000&Signature=ZAPhZeVWhSxm8p9gWAZdYu4wuJhQjxb02o4lKJJUnMKq1lQJ%2BAV%2B6kI5MJAMCCt989xQxsRWIz2jRCbPnII3%2BFbQOuuYo%2FyFG7FMfSTYtvjvacZyiGX99vEK3vhZNpHE7auvVYv3DRJxsBiKSsI4Wv8hOJBAI115IjNMVELz2MQpBDPIHRd3uBUSmfL%2FgepfLIYYJp5iNj2MGajLttmm0a9wJH4UfndVU6jyEfR9nFrvNI2lSW9gY1S2qvJCtFtIwv3%2BSZJRyxXANOxgxnj1NOdy2tE%2BAkJGHoNJt0VjUXvNAulGWq73855W0vubQdXkyN7wkxoIfuCQ%2Bt6rYf5MfA%3D%3D",
+        "name": "Spite Zero",
+        "pnp": {
+          "price": "13.99",
+          "updated": "2024-11-01"
+        },
+        "spar": {
+          "price": "13.99",
+          "updated": "2024-11-01"
+        },
+        "unit": "ml",
+        "woolworths": {
+          "price": "14.99",
+          "updated": "2024-11-01"
+        }
+      },
+      "-OAbBvO_YlLtzBjI6fBv": {
+        "adminDecisionDate": "2024-11-01 12:09:38",
+        "amount": "1",
+        "checkers": {
+          "price": "299.99",
+          "updated": "2024-11-01"
+        },
+        "created": "2024-11-01 12:09:38",
+        "image": "https://storage.googleapis.com/cheapr-fc010.appspot.com/product_images/1730455778099_10604213EA-checkers515Wx515H.webp?GoogleAccessId=firebase-adminsdk-61cwt%40cheapr-fc010.iam.gserviceaccount.com&Expires=1767132000&Signature=HFqzbQ0uPV5aQawW98kGIkMe9ph4yAfr%2Fu0kgmLDRD9MuvlkOyCX5x8NxG%2Bp9%2BA8l%2FmrrKPF8T%2BuQPzFnZi6M9Db0%2BbOzLDGDWZUcILpO5PEyJb4uwHQ%2BV6NffjNqmyce%2FAwDreIrPAR1s8hNWfXVCliQyFLhDwDv%2Fwy19M6pQBHp1N5O2gKzt9wpzWAZwJAdAO89OtFAkkHYjaaUK4z0tUyuZEAbvcsYrhfPnVvT8tKeFjbZ9L3lXjIsjkxt%2Bgx%2BYkRdLIiKFVFmYIiecc84LKNA5D54PwhS0DgFcdTTYh4%2BGZvGDA1lQxctqVjEQh9tn%2FkybUI0DfSGJLuoGnQtg%3D%3D",
+        "name": "Coffee Beans",
+        "pnp": {
+          "price": "299.99",
+          "special": "2024-12-31",
+          "updated": "2024-11-01"
+        },
+        "spar": {
+          "price": "363.99",
+          "updated": "2024-11-01"
+        },
+        "unit": "kg",
+        "woolworths": {
+          "price": "293.99",
+          "updated": "2024-11-01"
+        }
+      }
+    },
+    "rejected": {
+      "-OAXQy09sjJTIiOIgE03": {
+        "adminDecisionDate": "2024-10-31 13:57:14",
+        "amount": "20",
+        "checkers": {
+          "price": "190",
+          "updated": "2024-10-31"
+        },
+        "created": "2024-10-31 13:57:14",
+        "image": "https://storage.googleapis.com/cheapr-fc010.appspot.com/product_images/1730375834600_10722131EA-checkers515Wx515H.webp?GoogleAccessId=firebase-adminsdk-61cwt%40cheapr-fc010.iam.gserviceaccount.com&Expires=1767132000&Signature=YAuDqf5YkMpuBkl0uLg1ece1JzkYI1thfz%2Fn0fckDu18ukJpttsQCLTWYFNRwVr%2B3dRcdyvJqYVRfs4tkT8ro%2F5G4K6K0H4nCC%2BcTF9QC6kltRrzV0eaGIAnUVbCB0JHzz73NofXUX2b4BqIyNYu%2Buyu4B0UBicaJJX2u4qVD3v2Z4%2FUzWmpSUfU%2BdmQ3StMkkLi%2FsjwCCpaiVTBNHcxD3LOSQl7t58gpIQkz77vAVkv0WSM%2FVf4tM14mwFwjQyZlrikEknJPPrifOQY67PAZcsFrEt%2Bgirw1ctKBJJCyi958BCaCxhDayxyWl%2B0Xbhp%2BMZNcbZi2VpQJfj8jey5Dw%3D%3D",
+        "name": "Bicycle",
+        "pnp": {
+          "price": "256",
+          "updated": "2024-10-31"
+        },
+        "spar": {
+          "price": "204",
+          "updated": "2024-10-31"
+        },
+        "unit": "kg",
+        "woolworths": {
+          "price": "360",
+          "updated": "2024-10-31"
+        }
+      },
+      "-OAbFg3lbr2RTLKNnVsd": {
+        "adminDecisionDate": "2024-11-01 12:26:03",
+        "amount": "1",
+        "checkers": {
+          "price": "2",
+          "updated": "2024-11-01"
+        },
+        "created": "2024-11-01 12:26:03",
+        "flagMessage": "Wrong category.",
+        "image": "https://storage.googleapis.com/cheapr-fc010.appspot.com/product_images/1730456763449_10723374EA-checkers515Wx515H.webp?GoogleAccessId=firebase-adminsdk-61cwt%40cheapr-fc010.iam.gserviceaccount.com&Expires=1767132000&Signature=FXMgdL7MYZRYHlcRlroUChQJ4CPmPBk0d%2B9FH%2F7CWILcZCTficUXgN0zmC2XaqyfoCp6fiDpiRIh%2FMVSJpd6LlMXR4H3bunbNRmuwAaoBCoLrIaoTdIgX2KJHnVQxgToqGfl1jWQYII8kl2ejJtS3iIq5%2FImw6yQJUX%2FYhkZCDSFI5ItTyFrCPlCUNUSHwD2FKfYherMv%2FG3ubq0i7Wv6zCEQaNt8rJl8JdPFpHoWibkSqzwNLrmv%2BRLOTSt%2Ft1alD2Y9iNXcaXWU%2B%2F5XDMskV2OmeZiUnR8Nrr8FsxN%2FBcggYwj9oOT2UpT7Idfc8PiVM3M%2FEmDmgqJqNXuhe5WkA%3D%3D",
+        "name": "Blue Balloon",
+        "pnp": {
+          "price": "1.50",
+          "updated": "2024-11-01"
+        },
+        "spar": {
+          "price": "8.50",
+          "updated": "2024-11-01"
+        },
+        "unit": "pcs",
+        "woolworths": {
+          "price": "10.10",
+          "updated": "2024-11-01"
+        }
+      }
+    }
+  },
+  "users": {
+    "Dmz8Nqu4eReFcNF1beahfgkY5rt1": {
+      "email": "mike@gmail.com",
+      "firstName": "Mike",
+      "isAdmin": false,
+      "lastName": "Du Plessis",
+      "userId": "Dmz8Nqu4eReFcNF1beahfgkY5rt1"
+    },
+    "JIBm2gR37iUga16n4zAXltlOlef2": {
+      "email": "alex@gmail.com",
+      "firstName": "Alex",
+      "isAdmin": false,
+      "lastName": "Johnson",
+      "userId": "JIBm2gR37iUga16n4zAXltlOlef2"
+    },
+    "fDNqgeAQZsWUnZFgjS6tDD2CDMD2": {
+      "cart": [
+        {
+          "productId": "-OAXQKr9_DvH2D1alvOp",
+          "quantity": 1
+        }
+      ],
+      "email": "wolf@gmail.com",
+      "firstName": "Wolf",
+      "isAdmin": false,
+      "lastName": "Botha",
+      "userId": "fDNqgeAQZsWUnZFgjS6tDD2CDMD2"
+    },
+    "lgz2ZwHRVCY5zGKTbF1MkuBKVPK2": {
+      "email": "john@gmail.com",
+      "firstName": "John",
+      "isAdmin": false,
+      "lastName": "Doe",
+      "userId": "lgz2ZwHRVCY5zGKTbF1MkuBKVPK2"
+    },
+    "w1VImCCfKkV3HtHBe5aYd8Sb2nr2": {
+      "email": "admin@cheapr.com",
+      "firstName": "Wolf",
+      "isAdmin": true,
+      "lastName": "Botha",
+      "userId": "w1VImCCfKkV3HtHBe5aYd8Sb2nr2"
+    }
+  }
+}
