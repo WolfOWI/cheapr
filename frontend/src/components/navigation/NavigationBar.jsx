@@ -105,7 +105,7 @@ function NavigationBar({ admin }) {
 
   // Render dropdown for a given category
   const renderCategoryDropdown = (title, categoryId, subcategories, productTypes) => (
-    <NavDropdown title={title} id={`${title}-nav-dropdown`} className="absolute ">
+    <NavDropdown title={title} id={`${title}-nav-dropdown`} className="absolute z-50 w-[210px]">
       {/* "All {Category}" option */}
       <NavDropdown.Item onClick={() => navigate(`/groceries/${categoryId}`)}>
         All {title}
@@ -190,7 +190,7 @@ function NavigationBar({ admin }) {
                       </Link>
                       <div className="flex space-x-4 relative">
                         {/* Dropdowns for each category */}
-                        <div className="w-14 h-11 ">
+                        <div className="w-14 h-11">
                           {renderCategoryDropdown(
                             "Food",
                             "10000",
