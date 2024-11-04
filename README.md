@@ -25,7 +25,9 @@
       <a href="https://github.com/WolfOWI/cheapr"><strong>Explore the docs »</strong></a>
    <br />
    <br />
-   <a href="https://youtu.be/K2DtZRP9LBY?si=4abhtoUpneIFh21x">View Demo</a>
+   <a href="https://main.d3vqv1xbk5be9s.amplifyapp.com/">Visit Site</a>
+   .
+   <a href="https://youtu.be/aAPpwbr8Lz8">Video Demo</a>
     ·
     <a href="https://github.com/WolfOWI/cheapr/issues">Report Bug</a>
     ·
@@ -38,6 +40,7 @@
 - [Table of Contents](#table-of-contents)
 - [About the Project](#about-the-project)
   - [What is CHEAPR?](#what-is-cheapr)
+  - [Open Brief Document](#open-brief-document)
   - [Built With](#built-with)
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
@@ -61,6 +64,7 @@
 - [Concept Process](#concept-process)
   - [Wireframing \& Old Designs](#wireframing--old-designs)
 - [Development Process](#development-process)
+- [Milestone Check Document](#milestone-check-document)
   - [Implementation Process](#implementation-process)
     - [Highlights](#highlights)
     - [Challenges](#challenges)
@@ -68,6 +72,7 @@
 - [Final Outcome](#final-outcome)
   - [Mockups](#mockups)
   - [Video Demonstration](#video-demonstration)
+  - [Deployed Links](#deployed-links)
 - [Roadmap](#roadmap)
 - [Contributing](#contributing)
 - [Authors](#authors)
@@ -85,6 +90,11 @@
 ### What is CHEAPR?
 
 CHEAPR is a community-driven grocery platform designed to help users find the best deals across four grocery stores. CHEAPR attempts to lessen the financial pressures of the rising cost of food & groceries in a post-COVID South Africa, allowing shoppers to easily browse and compare the cheapest prices of different groceries in Pick n Pay, Woolworths, Checkers and Spar.
+[Visit CHEAPR](https://main.d3vqv1xbk5be9s.amplifyapp.com/)
+
+### Open Brief Document
+
+This project was based on this [Open Brief Proposal Document](<docs/Open_Brief_Proposal_Document(Cheapr).pdf>).
 
 ### Built With
 
@@ -309,6 +319,10 @@ The `Conceptual Process` for CHEAPR involved creating a comprehensive project br
 
 The Development Process focused on building both the frontend and backend of CHEAPR, implementing essential functionality, and tackling development challenges. This section outlines key features, highlights, and solutions to the issues encountered during implementation.
 
+## Milestone Check Document
+
+During the development process, the milestone check document acted as a checklist of all functionality and features to be completed. Please note, that this document is now outdated, as all checklist items have been completed. [Milestone Check Document](docs/Milestone_Check_Document.pdf)
+
 ### Implementation Process
 
 - Integrated Firebase authentication for user sign-up and login, providing secure, role-based access to the platform.
@@ -351,7 +365,17 @@ The Development Process focused on building both the frontend and backend of CHE
 
 To see a run through of the application, click below:
 
-[View Demonstration](https:/)
+[View Demonstration](https://youtu.be/aAPpwbr8Lz8)
+
+### Deployed Links
+
+To test the website out yourself, visit these URLs:
+
+[AWS Deployment](https://main.d3vqv1xbk5be9s.amplifyapp.com/) (More Stable)
+
+[Heroku Deployment](https://cheapr-aa8d65bdb223.herokuapp.com/)
+
+Please Note: The Heroku deployment operates under a limited RAM capacity due to pricing constraints. As a result, there may be instances where the server reaches its memory limit, potentially affecting website performance. However, this occurs infrequently under normal use. For optimal and more consistent performance during testing, we recommend using the AWS Amplify deployment link.
 
 <!-- ROADMAP -->
 
