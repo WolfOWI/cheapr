@@ -319,7 +319,7 @@ The `Conceptual Process` for CHEAPR involved creating a comprehensive project br
 
 The Development Process focused on building both the frontend and backend of CHEAPR, implementing essential functionality, and tackling development challenges. This section outlines key features, highlights, and solutions to the issues encountered during implementation.
 
-## Milestone Check Document
+### Milestone Check Document
 
 During the development process, the milestone check document acted as a checklist of all functionality and features to be completed. Please note, that this document is now outdated, as all checklist items have been completed. [Milestone Check Document](docs/Milestone_Check_Document.pdf)
 
