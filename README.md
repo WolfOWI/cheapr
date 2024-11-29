@@ -25,7 +25,7 @@
       <a href="https://github.com/WolfOWI/cheapr"><strong>Explore the docs »</strong></a>
    <br />
    <br />
-   <a href="https://main.d3vqv1xbk5be9s.amplifyapp.com/">Visit Site</a>
+   <a href="https://main.d3vqv1xbk5be9s.amplifyapp.com/">Visit Site (Offline)</a>
    .
    <a href="https://youtu.be/aAPpwbr8Lz8">Video Demo</a>
     ·
@@ -90,7 +90,7 @@
 ### What is CHEAPR?
 
 CHEAPR is a community-driven grocery platform designed to help users find the best deals across four grocery stores. CHEAPR attempts to lessen the financial pressures of the rising cost of food & groceries in a post-COVID South Africa, allowing shoppers to easily browse and compare the cheapest prices of different groceries in Pick n Pay, Woolworths, Checkers and Spar.
-[Visit CHEAPR](https://main.d3vqv1xbk5be9s.amplifyapp.com/)
+[Visit CHEAPR (OFFLINE)](https://main.d3vqv1xbk5be9s.amplifyapp.com/)
 
 ### Open Brief Document
 
@@ -368,12 +368,13 @@ To see a run through of the application, click below:
 [View Demonstration](https://youtu.be/aAPpwbr8Lz8)
 
 ### Deployed Links
+Currently, the website has been set to offline to save costs.
 
 To test the website out yourself, visit these URLs:
 
-[AWS Deployment](https://main.d3vqv1xbk5be9s.amplifyapp.com/) (More Stable)
+[AWS Deployment OFFLINE](https://main.d3vqv1xbk5be9s.amplifyapp.com/) (More Stable)
 
-[Heroku Deployment](https://cheapr-aa8d65bdb223.herokuapp.com/)
+[Heroku Deployment OFFLINE](https://cheapr-aa8d65bdb223.herokuapp.com/)
 
 Please Note: The Heroku deployment operates under a limited RAM capacity due to pricing constraints. As a result, there may be instances where the server reaches its memory limit, potentially affecting website performance. However, this occurs infrequently under normal use. For optimal and more consistent performance during testing, we recommend using the AWS Amplify deployment link.
 
